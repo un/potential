@@ -1,19 +1,19 @@
-import { QueryClient } from "@tanstack/react-query";
-import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
-import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
-import superjson from "superjson";
+import { QueryClient } from '@tanstack/react-query';
+import { createTRPCClient, httpBatchLink, loggerLink } from '@trpc/client';
+import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query';
+import superjson from 'superjson';
 
-import type { AppRouter } from "@1up/api";
+import type { AppRouter } from '@1up/api';
 
-import { getBaseUrl } from "./base-url";
-import { getToken } from "./session-store";
+import { getBaseUrl } from './base-url';
+import { getToken } from './session-store';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // ...
-    },
-  },
+    }
+  }
 });
 
 /**
@@ -24,26 +24,26 @@ export const trpc = createTRPCOptionsProxy<AppRouter>({
     links: [
       loggerLink({
         enabled: (opts) =>
-          process.env.NODE_ENV === "development" ||
-          (opts.direction === "down" && opts.result instanceof Error),
-        colorMode: "ansi",
+          process.env.NODE_ENV === 'development' ||
+          (opts.direction === 'down' && opts.result instanceof Error),
+        colorMode: 'ansi'
       }),
       httpBatchLink({
         transformer: superjson,
         url: `${getBaseUrl()}/api/trpc`,
         headers() {
           const headers = new Map<string, string>();
-          headers.set("x-trpc-source", "expo-react");
+          headers.set('x-trpc-source', 'expo-react');
 
           const token = getToken();
-          if (token) headers.set("Authorization", `Bearer ${token}`);
+          if (token) headers.set('Authorization', `Bearer ${token}`);
 
           return Object.fromEntries(headers);
-        },
-      }),
-    ],
+        }
+      })
+    ]
   }),
-  queryClient,
+  queryClient
 });
 
-export { type RouterInputs, type RouterOutputs } from "@1up/api";
+export { type RouterInputs, type RouterOutputs } from '@1up/api';

@@ -1,33 +1,33 @@
-import type { ConfigContext, ExpoConfig } from "expo/config";
+import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "expo",
-  slug: "expo",
-  scheme: "expo",
-  version: "0.1.0",
-  orientation: "portrait",
-  icon: "./assets/icon-light.png",
-  userInterfaceStyle: "automatic",
+  name: '1up',
+  slug: '1up',
+  scheme: '1up',
+  version: '0.1.0',
+  orientation: 'portrait',
+  icon: './assets/icon-light.png',
+  userInterfaceStyle: 'automatic',
   updates: {
-    fallbackToCacheTimeout: 0,
+    fallbackToCacheTimeout: 0
   },
-  assetBundlePatterns: ["**/*"],
+  assetBundlePatterns: ['**/*'],
   ios: {
-    bundleIdentifier: "your.bundle.identifier",
+    bundleIdentifier: 'com.1upapp',
     supportsTablet: true,
     icon: {
-      light: "./assets/icon-light.png",
-      dark: "./assets/icon-dark.png",
+      light: './assets/icon-light.png',
+      dark: './assets/icon-dark.png'
       // tinted: "",
-    },
+    }
   },
   android: {
-    package: "your.bundle.identifier",
+    package: 'com.1upapp',
     adaptiveIcon: {
-      foregroundImage: "./assets/icon-light.png",
-      backgroundColor: "#1F104A",
-    },
+      foregroundImage: './assets/icon-light.png',
+      backgroundColor: '#1F104A'
+    }
   },
   // extra: {
   //   eas: {
@@ -36,22 +36,36 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   // },
   experiments: {
     tsconfigPaths: true,
-    typedRoutes: true,
+    typedRoutes: true
   },
   plugins: [
-    "expo-router",
-    "expo-secure-store",
-    "expo-web-browser",
+    'expo-router',
     [
-      "expo-splash-screen",
+      'expo-sqlite',
       {
-        backgroundColor: "#E4E4E7",
-        image: "./assets/icon-light.png",
-        dark: {
-          backgroundColor: "#18181B",
-          image: "./assets/icon-dark.png",
-        },
-      },
+        enableFTS: true,
+        useSQLCipher: true
+      }
     ],
-  ],
+    [
+      'expo-secure-store',
+      {
+        configureAndroidBackup: true,
+        faceIDPermission:
+          'Allow Augmented to access your Face ID biometric data.'
+      }
+    ],
+    'expo-web-browser',
+    [
+      'expo-splash-screen',
+      {
+        backgroundColor: '#E4E4E7',
+        image: './assets/icon-light.png',
+        dark: {
+          backgroundColor: '#18181B',
+          image: './assets/icon-dark.png'
+        }
+      }
+    ]
+  ]
 });
