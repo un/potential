@@ -15,6 +15,7 @@
     "db:studio": "turbo -F @1up/db studio",
     "dev": "turbo watch dev --continue",
     "dev:next": "turbo watch dev -F @1up/nextjs...",
+    "ios": "turbo run ios",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
