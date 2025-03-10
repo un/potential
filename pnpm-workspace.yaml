@@ -5,9 +5,9 @@ packages:
 
 catalog:
   # Auth
-  "@auth/core": 0.37.2
-  "@auth/drizzle-adapter": ~1.7.4
-  "next-auth": 5.0.0-beta.25
+  '@auth/core': 0.37.2
+  '@auth/drizzle-adapter': ~1.7.4
+  'next-auth': 5.0.0-beta.25
 
   # Dev tooling
   eslint: ^9.19.0
@@ -17,16 +17,22 @@ catalog:
 
   # Misc
   zod: ^3.24.1
+  '@hookform/resolvers': ^4.1.2
+  'drizzle-orm': ^0.40.0
+  'tailwind-merge': ^3.0.2
+  'drizzle-kit': ^0.30.5
+  'drizzle-zod': '^0.6.1'
+  'react-hook-form': '^7.54.2'
 
   # Tanstack & tRPC
-  "@tanstack/react-query": ^5.67.1
-  "@trpc/client": ^11.0.0-rc.824
-  "@trpc/tanstack-react-query": ^11.0.0-rc.824
-  "@trpc/server": ^11.0.0-rc.824
+  '@tanstack/react-query': ^5.67.1
+  '@trpc/client': ^11.0.0-rc.824
+  '@trpc/tanstack-react-query': ^11.0.0-rc.824
+  '@trpc/server': ^11.0.0-rc.824
 
 catalogs:
   react19:
     react: 19.0.0
     react-dom: 19.0.0
-    "@types/react": ^19.0.0
-    "@types/react-dom": ^19.0.0
+    '@types/react': ^19.0.0
+    '@types/react-dom': ^19.0.0

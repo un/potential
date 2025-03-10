@@ -9,6 +9,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: 'portrait',
   icon: './assets/icon-light.png',
   userInterfaceStyle: 'automatic',
+  jsEngine: 'hermes',
   updates: {
     fallbackToCacheTimeout: 0
   },
@@ -55,7 +56,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
           'Allow Augmented to access your Face ID biometric data.'
       }
     ],
-    'expo-web-browser',
     [
       'expo-splash-screen',
       {
