@@ -1,5 +1,5 @@
 {
-  "extends": "@1up/tsconfig/internal-package.json",
-  "include": ["src"],
+  "extends": "@acme/tsconfig/base.json",
+  "include": ["src", "*.ts"],
   "exclude": ["node_modules"]
 }

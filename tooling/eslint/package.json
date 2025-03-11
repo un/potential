@@ -1,14 +1,12 @@
 {
-  "name": "@1up/eslint-config",
+  "name": "@acme/eslint-config",
   "private": true,
   "version": "0.3.0",
   "type": "module",
   "exports": {
     "./base": "./base.js",
     "./nextjs": "./nextjs.js",
-    "./react": "./react.js",
-    "./typeid": "./typeid.js",
-    "./owneridcolumn": "./owneridcolumn.js"
+    "./react": "./react.js"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
@@ -24,14 +22,14 @@
     "eslint-plugin-react-compiler": "beta",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-turbo": "^2.3.4",
-    "typescript-eslint": "^8.26.1"
+    "typescript-eslint": "^8.21.0"
   },
   "devDependencies": {
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@acme/prettier-config": "workspace:*",
+    "@acme/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@acme/prettier-config"
 }

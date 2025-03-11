@@ -6,17 +6,6 @@ import { fileURLToPath } from "node:url";
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
-  bracketSpacing: true,
-  bracketSameLine: true,
-  singleQuote: true,
-  jsxSingleQuote: true,
-  trailingComma: "none",
-  endOfLine: "lf",
-  semi: true,
-  printWidth: 80,
-  tabWidth: 2,
-  arrowParens: "always",
-  singleAttributePerLine: true,
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
@@ -32,8 +21,8 @@ const config = {
     "^(expo(.*)$)|^(expo$)",
     "<THIRD_PARTY_MODULES>",
     "",
-    "<TYPES>^@1up",
-    "^@1up/(.*)$",
+    "<TYPES>^@acme",
+    "^@acme/(.*)$",
     "",
     "<TYPES>^[.|..|~]",
     "^~/",
