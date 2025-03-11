@@ -1,0 +1,20 @@
+{
+    "name": "@1up/consts",
+    "private": true,
+    "version": "0.3.0",
+    "type": "module",
+    "exports": {
+        "./auth": "./src/auth.ts",
+        "./consumption": "./src/consumption.ts",
+        "./integrations": "./src/integrations.ts",
+        "./uiColors": "./src/uiColors.ts"
+    },
+    "devDependencies": {
+        "@1up/prettier-config": "workspace:*",
+        "@1up/tsconfig": "workspace:*",
+        "eslint": "catalog:",
+        "prettier": "catalog:",
+        "typescript": "catalog:"
+    },
+    "prettier": "@1up/prettier-config"
+}

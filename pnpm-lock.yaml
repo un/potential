@@ -87,9 +87,6 @@ importers:
 
   apps/backend:
     dependencies:
-      '@hono/trpc-server':
-        specifier: ^0.3.4
-        version: 0.3.4(@trpc/server@11.0.0-rc.824(typescript@4.9.5))(hono@4.7.4)
       '@1up/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -99,6 +96,9 @@ importers:
       '@1up/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@hono/trpc-server':
+        specifier: ^0.3.4
+        version: 0.3.4(@trpc/server@11.0.0-rc.824(typescript@4.9.5))(hono@4.7.4)
       hono:
         specifier: ^4.7.4
         version: 4.7.4
@@ -191,15 +191,6 @@ importers:
         specifier: 2.2.2
         version: 2.2.2
     devDependencies:
-      '@babel/core':
-        specifier: ^7.26.7
-        version: 7.26.7
-      '@babel/preset-env':
-        specifier: ^7.26.7
-        version: 7.26.7(@babel/core@7.26.7)
-      '@babel/runtime':
-        specifier: ^7.26.7
-        version: 7.26.7
       '@1up/api':
         specifier: workspace:*
         version: link:../../packages/api
@@ -215,6 +206,15 @@ importers:
       '@1up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@babel/core':
+        specifier: ^7.26.7
+        version: 7.26.7
+      '@babel/preset-env':
+        specifier: ^7.26.7
+        version: 7.26.7(@babel/core@7.26.7)
+      '@babel/runtime':
+        specifier: ^7.26.7
+        version: 7.26.7
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -330,6 +330,9 @@ importers:
       '@1up/auth':
         specifier: workspace:*
         version: link:../auth
+      '@1up/consts':
+        specifier: workspace:*
+        version: link:../consts
       '@1up/db':
         specifier: workspace:*
         version: link:../db
@@ -367,9 +370,15 @@ importers:
 
   packages/auth:
     dependencies:
+      '@1up/consts':
+        specifier: workspace:*
+        version: link:../consts
       '@1up/db':
         specifier: workspace:*
         version: link:../db
+      '@1up/utils':
+        specifier: workspace:*
+        version: link:../utils
       better-auth:
         specifier: ^1.1.7
         version: 1.2.3(typescript@5.7.3)
@@ -377,18 +386,54 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
     devDependencies:
+      '@1up/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@1up/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.19.0(jiti@2.4.2)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
       tsx:
         specifier: ^4.18.0
         version: 4.19.3
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.3
+
+  packages/consts:
+    devDependencies:
+      '@1up/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@1up/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.19.0(jiti@2.4.2)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.3
 
   packages/db:
     dependencies:
+      '@1up/consts':
+        specifier: workspace:*
+        version: link:../consts
       '@1up/utils':
         specifier: workspace:*
         version: link:../utils
-      '@vercel/postgres':
-        specifier: ^0.10.0
-        version: 0.10.0(utf-8-validate@6.0.4)
+      '@planetscale/database':
+        specifier: ^1.19.0
+        version: 1.19.0
       drizzle-orm:
         specifier: 'catalog:'
         version: 0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4)
@@ -9924,6 +9969,7 @@ snapshots:
   '@neondatabase/serverless@0.9.5':
     dependencies:
       '@types/pg': 8.11.6
+    optional: true
 
   '@next/env@15.2.1': {}
 
@@ -10012,8 +10058,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@planetscale/database@1.19.0':
-    optional: true
+  '@planetscale/database@1.19.0': {}
 
   '@radix-ui/number@1.1.0': {}
 
@@ -11185,6 +11230,7 @@ snapshots:
       '@types/node': 22.10.10
       pg-protocol: 1.7.0
       pg-types: 4.0.2
+    optional: true
 
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
@@ -11410,6 +11456,7 @@ snapshots:
       ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
     transitivePeerDependencies:
       - utf-8-validate
+    optional: true
 
   '@vercel/python@4.1.0': {}
 
@@ -11924,6 +11971,7 @@ snapshots:
   bufferutil@4.0.8:
     dependencies:
       node-gyp-build: 4.8.4
+    optional: true
 
   busboy@1.6.0:
     dependencies:
@@ -14732,7 +14780,8 @@ snapshots:
       define-properties: 1.2.1
       es-object-atoms: 1.1.1
 
-  obuf@1.1.2: {}
+  obuf@1.1.2:
+    optional: true
 
   on-finished@2.3.0:
     dependencies:
@@ -14944,11 +14993,14 @@ snapshots:
 
   pend@1.2.0: {}
 
-  pg-int8@1.0.1: {}
+  pg-int8@1.0.1:
+    optional: true
 
-  pg-numeric@1.0.2: {}
+  pg-numeric@1.0.2:
+    optional: true
 
-  pg-protocol@1.7.0: {}
+  pg-protocol@1.7.0:
+    optional: true
 
   pg-types@4.0.2:
     dependencies:
@@ -14959,6 +15011,7 @@ snapshots:
       postgres-date: 2.1.0
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
+    optional: true
 
   picocolors@1.0.0: {}
 
@@ -15040,17 +15093,22 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  postgres-array@3.0.2: {}
+  postgres-array@3.0.2:
+    optional: true
 
   postgres-bytea@3.0.0:
     dependencies:
       obuf: 1.1.2
+    optional: true
 
-  postgres-date@2.1.0: {}
+  postgres-date@2.1.0:
+    optional: true
 
-  postgres-interval@3.0.0: {}
+  postgres-interval@3.0.0:
+    optional: true
 
-  postgres-range@1.1.4: {}
+  postgres-range@1.1.4:
+    optional: true
 
   postgres@3.4.4:
     optional: true

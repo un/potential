@@ -10,11 +10,19 @@
     "auth:generate": "drizzle-kit push"
   },
   "dependencies": {
+    "@1up/consts": "workspace:*",
     "@1up/db": "workspace:*",
+    "@1up/utils": "workspace:*",
     "better-auth": "^1.1.7",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
-    "tsx": "^4.18.0"
-  }
+    "@1up/prettier-config": "workspace:*",
+    "@1up/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "tsx": "^4.18.0",
+    "typescript": "catalog:"
+  },
+  "prettier": "@1up/prettier-config"
 }

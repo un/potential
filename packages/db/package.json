@@ -30,8 +30,9 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@1up/consts": "workspace:*",
     "@1up/utils": "workspace:*",
-    "@vercel/postgres": "^0.10.0",
+    "@planetscale/database": "^1.19.0",
     "drizzle-orm": "catalog:",
     "drizzle-zod": "catalog:",
     "zod": "catalog:"

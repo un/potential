@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@1up/auth": "workspace:*",
+    "@1up/consts": "workspace:*",
     "@1up/db": "workspace:*",
     "@1up/validators": "workspace:*",
     "@trpc/server": "catalog:",

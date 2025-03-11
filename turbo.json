@@ -71,12 +71,13 @@
     }
   },
   "globalEnv": [
-    "POSTGRES_URL",
-    "AUTH_DISCORD_ID",
-    "AUTH_DISCORD_SECRET",
-    "AUTH_REDIRECT_PROXY_URL",
-    "AUTH_SECRET",
-    "PORT"
+    "BASE_URL",
+    "NEXT_PUBLIC_URL",
+    "BACKEND_URL",
+    "AUTH_SECRET_KEY",
+    "DATABASE_HOST",
+    "DATABASE_USERNAME",
+    "DATABASE_PASSWORD"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",

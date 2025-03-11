@@ -1,7 +1,3 @@
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
-import {
-  INTEGRATIONS_ARRAY_AS_ENUM
-} from "@1up/utils/types/integrations";
 import {
   boolean,
   json,
@@ -9,8 +5,11 @@ import {
   mysqlTable,
   timestamp,
   tinyint,
-  varchar
+  varchar,
 } from "drizzle-orm/mysql-core";
+
+import { INTEGRATIONS_ARRAY } from "@1up/consts/integrations";
+import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
@@ -19,11 +18,11 @@ export const sleepLogs = mysqlTable("sleepLogs", {
   id: typeIdColumn("sleepLog", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("sleepLog")),
-  owner: typeIdColumn("user", "user_id")
+  ownerId: typeIdColumn("user", "user_id")
     .notNull()
     .references(() => users.id),
   rawData: json("rawData"),
-  source: mysqlEnum("type", [...INTEGRATIONS_ARRAY_AS_ENUM]).notNull(),
+  source: mysqlEnum("type", [...INTEGRATIONS_ARRAY]).notNull(),
   sourceSessionId: varchar("sourceSessionId", { length: 128 }),
   totalDuration: tinyint("totalDuration"),
   timeBed: tinyint("timeBed"),

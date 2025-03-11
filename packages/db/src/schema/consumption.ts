@@ -1,11 +1,4 @@
 import {
-  cloudTypeIdGenerator
-} from "@1up/utils/typeid";
-import {
-  MINERALS_ARRAY_AS_ENUM,
-  VITAMINS_ARRAY_AS_ENUM
-} from "@1up/utils/types/consumption";
-import {
   boolean,
   int,
   json,
@@ -14,8 +7,14 @@ import {
   text,
   timestamp,
   tinyint,
-  varchar
+  varchar,
 } from "drizzle-orm/mysql-core";
+
+import {
+  MINERALS_ARRAY_AS_ENUM,
+  VITAMINS_ARRAY_AS_ENUM,
+} from "@1up/consts/consumption";
+import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";

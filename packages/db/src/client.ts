@@ -1,10 +1,12 @@
-import { sql } from "@vercel/postgres";
-import { drizzle } from "drizzle-orm/vercel-postgres";
+import { drizzle } from "drizzle-orm/planetscale-serverless";
 
-import * as schema from "./schema";
+import { schema } from "./schema";
 
 export const db = drizzle({
-  client: sql,
+  connection: {
+    host: process.env.DATABASE_HOST,
+    username: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+  },
   schema,
-  casing: "snake_case",
 });

@@ -1,15 +1,11 @@
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
-import type { IntegrationAccessData } from "@1up/utils/types/integrations";
+import { json, mysqlEnum, mysqlTable, timestamp } from "drizzle-orm/mysql-core";
+
+import type { IntegrationAccessData } from "@1up/consts/integrations";
 import {
   INTEGRATION_ACCESS_MODE_FOR_MYSQL,
   INTEGRATIONS_ARRAY_FOR_MYSQL,
-} from "@1up/utils/types/integrations";
-import {
-  json,
-  mysqlEnum,
-  mysqlTable,
-  timestamp
-} from "drizzle-orm/mysql-core";
+} from "@1up/consts/integrations";
+import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
