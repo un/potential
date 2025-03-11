@@ -42,10 +42,10 @@
     "superjson": "2.2.2"
   },
   "devDependencies": {
-    "@1up/api": "workspace:*",
     "@1up/eslint-config": "workspace:*",
     "@1up/prettier-config": "workspace:*",
     "@1up/tailwind-config": "workspace:*",
+    "@1up/trpc": "workspace:*",
     "@1up/tsconfig": "workspace:*",
     "@babel/core": "^7.26.7",
     "@babel/preset-env": "^7.26.7",

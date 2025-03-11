@@ -14,9 +14,9 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@1up/api": "workspace:*",
     "@1up/auth": "workspace:*",
     "@1up/db": "workspace:*",
+    "@1up/trpc": "workspace:*",
     "@1up/ui": "workspace:*",
     "@1up/validators": "workspace:*",
     "@t3-oss/env-nextjs": "^0.12.0",

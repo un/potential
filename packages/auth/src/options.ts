@@ -8,6 +8,7 @@ import { passkey } from "better-auth/plugins/passkey";
 import { db } from "@1up/db";
 
 export const authOptions: BetterAuthOptions = {
+  secret: process.env.AUTH_SECRET,
   baseURL: process.env.BASE_URL,
   database: drizzleAdapter(db, { provider: "mysql" }),
   user: { modelName: "users" },
@@ -23,7 +24,23 @@ export const authOptions: BetterAuthOptions = {
       origin: process.env.BASE_URL,
     }),
   ],
-  advanced: { generateId: false },
+  advanced: {
+    generateId: false,
+    useSecureCookies: true,
+    crossSubDomainCookies: {
+      enabled: true,
+      additionalCookies: ["1up_session"],
+    },
+    cookies: {
+      session_token: {
+        name: "1up_session",
+        attributes: {
+          httpOnly: true,
+          secure: true,
+        },
+      },
+    },
+  },
 };
 
 export const authClientOptions: ClientOptions = {

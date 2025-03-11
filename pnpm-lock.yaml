@@ -93,6 +93,9 @@ importers:
       '@1up/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@1up/trpc':
+        specifier: workspace:*
+        version: link:../../packages/trpc
       '@1up/utils':
         specifier: workspace:*
         version: link:../../packages/utils
@@ -191,9 +194,6 @@ importers:
         specifier: 2.2.2
         version: 2.2.2
     devDependencies:
-      '@1up/api':
-        specifier: workspace:*
-        version: link:../../packages/api
       '@1up/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
@@ -203,6 +203,9 @@ importers:
       '@1up/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
+      '@1up/trpc':
+        specifier: workspace:*
+        version: link:../../packages/trpc
       '@1up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -236,15 +239,15 @@ importers:
 
   apps/web:
     dependencies:
-      '@1up/api':
-        specifier: workspace:*
-        version: link:../../packages/api
       '@1up/auth':
         specifier: workspace:*
         version: link:../../packages/auth
       '@1up/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@1up/trpc':
+        specifier: workspace:*
+        version: link:../../packages/trpc
       '@1up/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -321,49 +324,6 @@ importers:
       tailwindcss:
         specifier: 'catalog:'
         version: 3.4.17(ts-node@10.9.2(@types/node@22.10.10)(typescript@5.7.3))
-      typescript:
-        specifier: 'catalog:'
-        version: 5.7.3
-
-  packages/api:
-    dependencies:
-      '@1up/auth':
-        specifier: workspace:*
-        version: link:../auth
-      '@1up/consts':
-        specifier: workspace:*
-        version: link:../consts
-      '@1up/db':
-        specifier: workspace:*
-        version: link:../db
-      '@1up/validators':
-        specifier: workspace:*
-        version: link:../validators
-      '@trpc/server':
-        specifier: 'catalog:'
-        version: 11.0.0-rc.824(typescript@5.7.3)
-      superjson:
-        specifier: 2.2.2
-        version: 2.2.2
-      zod:
-        specifier: 'catalog:'
-        version: 3.24.1
-    devDependencies:
-      '@1up/eslint-config':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@1up/prettier-config':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
-      '@1up/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
-      eslint:
-        specifier: 'catalog:'
-        version: 9.19.0(jiti@2.4.2)
-      prettier:
-        specifier: 'catalog:'
-        version: 3.4.2
       typescript:
         specifier: 'catalog:'
         version: 5.7.3
@@ -470,6 +430,49 @@ importers:
         version: 5.7.3
 
   packages/local-docker: {}
+
+  packages/trpc:
+    dependencies:
+      '@1up/auth':
+        specifier: workspace:*
+        version: link:../auth
+      '@1up/consts':
+        specifier: workspace:*
+        version: link:../consts
+      '@1up/db':
+        specifier: workspace:*
+        version: link:../db
+      '@1up/validators':
+        specifier: workspace:*
+        version: link:../validators
+      '@trpc/server':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.824(typescript@5.7.3)
+      superjson:
+        specifier: 2.2.2
+        version: 2.2.2
+      zod:
+        specifier: 'catalog:'
+        version: 3.24.1
+    devDependencies:
+      '@1up/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@1up/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@1up/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.19.0(jiti@2.4.2)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.3
 
   packages/ui:
     dependencies:

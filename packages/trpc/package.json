@@ -1,5 +1,5 @@
 {
-  "name": "@1up/api",
+  "name": "@1up/trpc",
   "version": "0.1.0",
   "private": true,
   "type": "module",
