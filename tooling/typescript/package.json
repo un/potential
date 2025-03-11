@@ -1,5 +1,5 @@
 {
-  "name": "@acme/tsconfig",
+  "name": "@1up/tsconfig",
   "private": true,
   "version": "0.1.0",
   "files": [

@@ -1,0 +1,34 @@
+{
+    "name": "@1up/utils",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./index.ts",
+    "scripts": {
+        "check": "tsc --noEmit"
+    },
+    "exports": {
+        ".": "./index.ts",
+        "./typeid": "./typeid.ts",
+        "./uiColors": "./uiColors.ts",
+        "./ms": "./ms.ts",
+        "./types/*": "./types/*.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "engines": {
+        "node": ">=20",
+        "pnpm": ">=8"
+    },
+    "dependencies": {
+        "@1up/tsconfig": "workspace:*",
+        "itty-time": "^1.0.6",
+        "nanoid": "^5.1.2",
+        "typeid-js": "^1.2.0",
+        "zod": "catalog:"
+    },
+    "devDependencies": {
+        "@1up/eslint-config": "workspace:*"
+    }
+}
