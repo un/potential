@@ -2,10 +2,12 @@ import type { BetterAuthOptions } from "better-auth";
 import type { ClientOptions } from "better-auth/types";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { passkeyClient, usernameClient } from "better-auth/client/plugins";
-import { username } from "better-auth/plugins";
+import { emailOTP, username } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
 
 import { db } from "@1up/db";
+
+import { validateUsername } from "./validator";
 
 export const authOptions: BetterAuthOptions = {
   secret: process.env.AUTH_SECRET,
@@ -15,9 +17,17 @@ export const authOptions: BetterAuthOptions = {
   session: { modelName: "sessions" },
   account: { modelName: "accounts" },
   verification: { modelName: "verificationTokens" },
-  emailAndPassword: { enabled: true },
   plugins: [
-    username(),
+    username({
+      minUsernameLength: 5,
+      maxUsernameLength: 32,
+      usernameValidator: (username) => {
+        return validateUsername(username);
+      },
+    }),
+    emailOTP({
+      async sendVerificationOTP({ email, otp, type }) {},
+    }),
     passkey({
       rpID: process.env.BASE_URL,
       rpName: "flow",

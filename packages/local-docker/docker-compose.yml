@@ -16,12 +16,12 @@ services:
         "--default-authentication-plugin=mysql_native_password",
       ]
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       - ps-mysql:/var/lib/mysql
   planetscale-proxy:
     container_name: 1up-planetscale-simulator-proxy
-    image: ghcr.io/mattrobenolt/ps-http-sim:v0.0.3
+    image: ghcr.io/mattrobenolt/ps-http-sim:v0.0.12
     restart: always
     command:
       [
@@ -80,29 +80,6 @@ services:
   #     /usr/bin/mc anonymous set-json /tmp/policy.json myminio/avatars;
   #     exit 0;
   #     "
-
-  # # Soketi Pusher Server
-  # soketi:
-  #   container_name: soketi-server
-  #   image: quay.io/soketi/soketi:1.4-16-debian
-  #   restart: always
-  #   ports:
-  #     - '3904:6001'
-  #   environment:
-  #     - SOKETI_DB_REDIS_HOST=redis
-  #     - SOKETI_DB_REDIS_PORT=6379
-  #     - SOKETI_DB_REDIS_DB=0
-  #     - SOKETI_DB_REDIS_KEY_PREFIX=soketi
-  #     - SOKETI_CACHE_DRIVER=redis
-  #     - SOKETI_DEFAULT_APP_ID=default
-  #     - SOKETI_DEFAULT_APP_KEY=secretsecretsecret
-  #     - SOKETI_DEFAULT_APP_SECRET=secretsecretsecret
-  #     - SOKETI_DEFAULT_APP_USER_AUTHENTICATION=true
-  #     - SOKETI_USER_AUTHENTICATION_TIMEOUT=10000 # 10 seconds
-  #   depends_on:
-  #     - redis
-  #   links:
-  #     - redis
 
 volumes:
   ps-mysql:

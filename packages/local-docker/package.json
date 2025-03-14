@@ -1,5 +1,11 @@
 {
-  "name": "local-docker",
+  "name": "@1up/local-docker",
   "version": "0.0.0",
-  "private": true
+  "scripts": {
+    "dev": "pnpm docker:up",
+    "docker:up": "docker compose up",
+    "docker:stop": "docker compose stop",
+    "docker:clean": "docker compose down -v"
+  },
+  "node": "20"
 }

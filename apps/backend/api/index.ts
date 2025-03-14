@@ -39,7 +39,7 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
 app.use(
-  "/api/auth/*",
+  "/auth/*",
   cors({
     origin: [process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"],
     allowHeaders: [

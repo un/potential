@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   int,
@@ -46,6 +47,19 @@ export const ingredientLibrary = mysqlTable("ingredientLibrary", {
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
 });
+
+export const ingredientLibraryTableRelations = relations(
+  ingredientLibrary,
+  ({ many, one }) => ({
+    owner: one(users, {
+      fields: [ingredientLibrary.ownerId],
+      references: [users.id],
+    }),
+    ingredientNutrition: many(ingredientNutrition),
+    ingredientVitamins: many(ingredientVitamins),
+    ingredientMinerals: many(ingredientMinerals),
+  }),
+);
 
 // Nutritional data for ingredients
 export const ingredientNutrition = mysqlTable("ingredientNutrition", {
@@ -156,9 +170,7 @@ export const consumableItemIngredients = mysqlTable(
     ingredientLibraryId: typeIdColumn(
       "ingredientLibrary",
       "ingredientLibraryId",
-    )
-      .notNull()
-      .references(() => ingredientLibrary.id),
+    ).notNull(),
     quantity: int("quantity").notNull(),
     unit: varchar("unit", { length: 32 }).notNull(),
     notes: text("notes"),
@@ -265,10 +277,7 @@ export const consumptionLogIngredients = mysqlTable(
     consumptionLogId: typeIdColumn("consumptionLog", "consumptionLogId")
       .notNull()
       .references(() => consumptionLogs.id),
-    ingredientLibraryId: typeIdColumn(
-      "ingredientLibrary",
-      "ingredientLibraryId",
-    )
+    ingredientLibraryId: typeIdColumn("ingredientLibrary", "ingrLibId")
       .notNull()
       .references(() => ingredientLibrary.id),
     amount: int("amount").notNull(),

@@ -19,6 +19,7 @@ export const users = mysqlTable("users", {
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("user")),
   username: varchar("username", { length: 32 }).notNull().unique(),
+  displayUsername: varchar("display_username", { length: 32 }).notNull(),
   name: varchar("name", { length: 32 }).notNull(),
   email: varchar("email", { length: 32 }).notNull().unique(),
   emailVerified: boolean("email_verified").notNull().default(false),
@@ -57,8 +58,8 @@ export const accounts = mysqlTable("accounts", {
   id: typeIdColumn("account", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("account")),
-  accountId: varchar("account_id", { length: 32 }).notNull(),
-  providerId: varchar("provider_id", { length: 32 }).notNull(),
+  accountId: varchar("account_id", { length: 64 }).notNull(),
+  providerId: varchar("provider_id", { length: 64 }).notNull(),
   userId: typeIdColumn("user", "user_id")
     .notNull()
     .references(() => users.id),

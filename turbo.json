@@ -94,9 +94,10 @@
     "NEXT_PUBLIC_BACKEND_URL",
     "EXPO_PUBLIC_BACKEND_URL",
     "AUTH_SECRET_KEY",
-    "DATABASE_HOST",
-    "DATABASE_USERNAME",
-    "DATABASE_PASSWORD"
+    "DB_HOST",
+    "DB_USERNAME",
+    "DB_PASSWORD",
+    "DB_DATABASE"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
