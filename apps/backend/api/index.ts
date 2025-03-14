@@ -90,7 +90,47 @@ app.get("/", (c) => {
 });
 export default app;
 
-serve({
+const server = serve({
   fetch: app.fetch,
   port: 3100,
+});
+
+// Handle graceful shutdown
+process.on("SIGINT", () => {
+  console.log("Received SIGINT signal, shutting down gracefully...");
+  server.close(() => {
+    console.log("Server closed");
+    process.exit(0);
+  });
+
+  // Force close after 5 seconds if server doesn't close gracefully
+  setTimeout(() => {
+    console.log("Forcing server shutdown after timeout");
+    process.exit(1);
+  }, 5000);
+});
+
+process.on("SIGTERM", () => {
+  console.log("Received SIGTERM signal, shutting down gracefully...");
+  server.close(() => {
+    console.log("Server closed");
+    process.exit(0);
+  });
+
+  // Force close after 5 seconds if server doesn't close gracefully
+  setTimeout(() => {
+    console.log("Forcing server shutdown after timeout");
+    process.exit(1);
+  }, 5000);
+});
+
+// Handle uncaught exceptions to prevent crashes
+process.on("uncaughtException", (error) => {
+  console.error("Uncaught Exception:", error);
+  // Don't exit the process, just log the error
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  // Don't exit the process, just log the error
 });
