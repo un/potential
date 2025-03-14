@@ -8,7 +8,8 @@
     "./nextjs": "./nextjs.js",
     "./react": "./react.js",
     "./typeid": "./typeid.js",
-    "./owneridcolumn": "./owneridcolumn.js"
+    "./owneridcolumn": "./owneridcolumn.js",
+    "./rn": "./rn.js"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",

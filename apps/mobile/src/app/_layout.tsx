@@ -1,32 +1,69 @@
+import { useCallback } from "react";
+import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import * as SplashScreen from "expo-splash-screen";
+import {
+  MartianMono_100Thin,
+  MartianMono_200ExtraLight,
+  MartianMono_300Light,
+  MartianMono_400Regular,
+  MartianMono_500Medium,
+  MartianMono_600SemiBold,
+  MartianMono_700Bold,
+  MartianMono_800ExtraBold,
+} from "@expo-google-fonts/martian-mono";
 import { useColorScheme } from "nativewind";
 
 import "../styles.css";
 
 import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+// Prevent splash screen from auto-hiding
+SplashScreen.preventAutoHideAsync().catch(() => {
+  /* ignore error */
+});
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
+
+  const [fontsLoaded, error] = useFonts({
+    MartianMono_100Thin,
+    MartianMono_200ExtraLight,
+    MartianMono_300Light,
+    MartianMono_400Regular,
+    MartianMono_500Medium,
+    MartianMono_600SemiBold,
+    MartianMono_700Bold,
+    MartianMono_800ExtraBold,
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || error) {
+      await SplashScreen.hideAsync().catch(() => {
+        /* ignore error */
+      });
+    }
+  }, [fontsLoaded, error]);
+
+  if (!fontsLoaded && !error) {
+    return null;
+  }
+
   return (
-    <View>
-      {/*
-          The Stack component displays the current page.
-          It also allows you to configure your screens 
-          */}
-      <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#f472b6",
-          },
-          contentStyle: {
-            backgroundColor: colorScheme == "dark" ? "#09090B" : "#FFFFFF",
-          },
-        }}
-      />
-      <StatusBar />
-    </View>
+    <SafeAreaProvider>
+      <View className="flex-1" onLayout={onLayoutRootView}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: colorScheme === "dark" ? "#191918" : "#f9f9f8",
+            },
+          }}
+        />
+      </View>
+    </SafeAreaProvider>
   );
 }
