@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   default:
+    '@better-auth/expo':
+      specifier: 1.2.4
+      version: 1.2.4
     '@hookform/resolvers':
       specifier: ^4.1.2
       version: 4.1.3
@@ -21,6 +24,9 @@ catalogs:
     '@trpc/tanstack-react-query':
       specifier: ^11.0.0-rc.824
       version: 11.0.0-rc.824
+    better-auth:
+      specifier: 1.2.3
+      version: 1.2.3
     drizzle-kit:
       specifier: ^0.30.5
       version: 0.30.5
@@ -99,9 +105,15 @@ importers:
       '@1up/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@hono/node-server':
+        specifier: ^1.13.8
+        version: 1.13.8(hono@4.7.4)
       '@hono/trpc-server':
         specifier: ^0.3.4
         version: 0.3.4(@trpc/server@11.0.0-rc.824(typescript@4.9.5))(hono@4.7.4)
+      better-auth:
+        specifier: 'catalog:'
+        version: 1.2.3(typescript@4.9.5)
       hono:
         specifier: ^4.7.4
         version: 4.7.4
@@ -118,6 +130,12 @@ importers:
 
   apps/mobile:
     dependencies:
+      '@1up/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@better-auth/expo':
+        specifier: 'catalog:'
+        version: 1.2.4(better-auth@1.2.3(typescript@5.7.3))
       '@expo-google-fonts/martian-mono':
         specifier: 0.2.3
         version: 0.2.3
@@ -381,8 +399,11 @@ importers:
       '@1up/utils':
         specifier: workspace:*
         version: link:../utils
+      '@better-auth/expo':
+        specifier: 'catalog:'
+        version: 1.2.4(better-auth@1.2.3(typescript@5.7.3))
       better-auth:
-        specifier: ^1.1.7
+        specifier: 'catalog:'
         version: 1.2.3(typescript@5.7.3)
       dotenv:
         specifier: ^16.4.7
@@ -490,6 +511,9 @@ importers:
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.0.0-rc.824(typescript@5.7.3)
+      better-auth:
+        specifier: 'catalog:'
+        version: 1.2.3(typescript@5.7.3)
       superjson:
         specifier: 2.2.2
         version: 2.2.2
@@ -1446,6 +1470,11 @@ packages:
     resolution: {integrity: sha512-t8kDRGrKXyp6+tjUh7hw2RLyclsW4TRoRvRHtSyAX9Bb5ldlFh+90YAYY6awRXrlB4G5G2izNeGySpATlFzmOg==}
     engines: {node: '>=6.9.0'}
 
+  '@better-auth/expo@1.2.4':
+    resolution: {integrity: sha512-mPyFeRHsWP0XiZTcUjXn0+5lxta5JlRkLPxYOJGDis2kBtGeJBiA3Mz3b6BNPdSwZurph9jtk1FcmC850WKmYg==}
+    peerDependencies:
+      better-auth: 1.2.4
+
   '@better-auth/utils@0.2.3':
     resolution: {integrity: sha512-Ap1GaSmo6JYhJhxJOpUB0HobkKPTNzfta+bLV89HfpyCAHN7p8ntCrmNFHNAVD0F6v0mywFVEUg1FUhNCc81Rw==}
 
@@ -2079,6 +2108,12 @@ packages:
 
   '@hexagon/base64@1.1.28':
     resolution: {integrity: sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw==}
+
+  '@hono/node-server@1.13.8':
+    resolution: {integrity: sha512-fsn8ucecsAXUoVxrUil0m13kOEq4mkX4/4QozCqmY+HpGfKl74OYSn8JcMA8GnG0ClfdRI4/ZSeG7zhFaVg+wg==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: ^4
 
   '@hono/trpc-server@0.3.4':
     resolution: {integrity: sha512-xFOPjUPnII70FgicDzOJy1ufIoBTu8eF578zGiDOrYOrYN8CJe140s9buzuPkX+SwJRYK8LjEBHywqZtxdm8aA==}
@@ -9231,6 +9266,12 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
+  '@better-auth/expo@1.2.4(better-auth@1.2.3(typescript@5.7.3))':
+    dependencies:
+      better-auth: 1.2.3(typescript@5.7.3)
+      better-call: 1.0.4
+      zod: 3.24.1
+
   '@better-auth/utils@0.2.3':
     dependencies:
       uncrypto: 0.1.3
@@ -9902,6 +9943,10 @@ snapshots:
   '@floating-ui/utils@0.2.9': {}
 
   '@hexagon/base64@1.1.28': {}
+
+  '@hono/node-server@1.13.8(hono@4.7.4)':
+    dependencies:
+      hono: 4.7.4
 
   '@hono/trpc-server@0.3.4(@trpc/server@11.0.0-rc.824(typescript@4.9.5))(hono@4.7.4)':
     dependencies:
@@ -12083,6 +12128,24 @@ snapshots:
   base64-js@1.5.1: {}
 
   basic-ftp@5.0.5: {}
+
+  better-auth@1.2.3(typescript@4.9.5):
+    dependencies:
+      '@better-auth/utils': 0.2.3
+      '@better-fetch/fetch': 1.1.15
+      '@noble/ciphers': 0.6.0
+      '@noble/hashes': 1.7.1
+      '@simplewebauthn/browser': 13.1.0
+      '@simplewebauthn/server': 13.1.1
+      better-call: 1.0.4
+      defu: 6.1.4
+      jose: 5.9.6
+      kysely: 0.27.6
+      nanostores: 0.11.4
+      valibot: 1.0.0-beta.15(typescript@4.9.5)
+      zod: 3.24.1
+    transitivePeerDependencies:
+      - typescript
 
   better-auth@1.2.3(typescript@5.7.3):
     dependencies:
@@ -16763,6 +16826,10 @@ snapshots:
   uuid@7.0.3: {}
 
   v8-compile-cache-lib@3.0.1: {}
+
+  valibot@1.0.0-beta.15(typescript@4.9.5):
+    optionalDependencies:
+      typescript: 4.9.5
 
   valibot@1.0.0-beta.15(typescript@5.7.3):
     optionalDependencies:

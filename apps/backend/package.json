@@ -1,15 +1,22 @@
 {
   "name": "@1up/backend",
   "scripts": {
-    "start": "vercel dev",
-    "deploy": "vercel"
+    "dev": "pnpm with-env tsx watch api/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "deploy": "vercel",
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@1up/auth": "workspace:*",
     "@1up/db": "workspace:*",
     "@1up/trpc": "workspace:*",
     "@1up/utils": "workspace:*",
+    "@hono/node-server": "^1.13.8",
     "@hono/trpc-server": "^0.3.4",
+    "better-auth": "catalog:",
     "hono": "^4.7.4"
   },
   "devDependencies": {

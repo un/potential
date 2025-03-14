@@ -9,6 +9,7 @@ catalog:
   "@auth/drizzle-adapter": ~1.7.4
   "next-auth": 5.0.0-beta.25
   "better-auth": 1.2.3
+  "@better-auth/expo": 1.2.4
 
   # Dev tooling
   eslint: ^9.19.0

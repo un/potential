@@ -1,6 +1,7 @@
 "use client";
 
 import type { QueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import {
   createTRPCClient,
@@ -8,10 +9,9 @@ import {
   unstable_httpBatchStreamLink,
 } from "@trpc/client";
 import { createTRPCContext } from "@trpc/tanstack-react-query";
-import { useState } from "react";
 import SuperJSON from "superjson";
 
-import type { AppRouter } from "@1up/api";
+import type { AppRouter } from "@1up/trpc";
 
 import { env } from "~/env";
 import { createQueryClient } from "./query-client";
@@ -42,11 +42,17 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
         }),
         unstable_httpBatchStreamLink({
           transformer: SuperJSON,
-          url: getBaseUrl() + "/api/trpc",
+          url: getBaseUrl() + "/trpc",
           headers() {
             const headers = new Headers();
             headers.set("x-trpc-source", "nextjs-react");
             return headers;
+          },
+          fetch: (url, options) => {
+            return fetch(url, {
+              ...options,
+              credentials: "include", // This is important for cookies
+            });
           },
         }),
       ],
@@ -63,8 +69,15 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 }
 
 const getBaseUrl = () => {
-  if (typeof window !== "undefined") return window.location.origin;
+  // For browser, use the backend URL directly to avoid CORS issues
+  if (typeof window !== "undefined") {
+    const backendUrl = env.NEXT_PUBLIC_BACKEND_URL as string | undefined;
+    return backendUrl ?? "http://localhost:3100";
+  }
+
+  // SSR should use vercel url
   if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
-  // eslint-disable-next-line no-restricted-properties
-  return `http://localhost:${process.env.PORT ?? 3000}`;
+
+  // Fallback for development
+  return "http://localhost:3100";
 };

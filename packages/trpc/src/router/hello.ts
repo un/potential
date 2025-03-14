@@ -2,15 +2,16 @@ import type { TRPCRouterRecord } from "@trpc/server";
 
 // import { invalidateSessionToken } from "@1up/auth";
 
-import { protectedProcedure, publicProcedure } from "../trpc";
+import { publicProcedure } from "../trpc";
 
-export const authRouter = {
-  getSession: publicProcedure.query(({ ctx }) => {
-    return ctx.auth.session;
+export const helloRouter = {
+  hello: publicProcedure.query(() => {
+    console.log("🔥 hello from hello router");
+    return ["hello"];
   }),
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can see this secret message!";
-  }),
+  // getSecretMessage: protectedProcedure.query(() => {
+  //   return "you can see this secret message!";
+  // }),
   // signOut: protectedProcedure.mutation(async (opts) => {
   //   if (!opts.ctx.token) {
   //     return { success: false };

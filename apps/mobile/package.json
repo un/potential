@@ -5,16 +5,20 @@
   "main": "index.ts",
   "scripts": {
     "clean": "git clean -xdf .cache .expo .turbo android ios node_modules",
-    "dev": "expo start",
-    "dev:android": "expo start --android",
-    "dev:ios": "expo start --ios",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
+    "dev:mobile": "pnpm with-env expo start",
+    "dev:android": "pnpm with-env expo start --android",
+    "dev:ios": "pnpm with-env expo start --ios",
+    "android": "pnpm with-env expo run:android",
+    "ios": "pnpm with-env expo run:ios",
+    "device": "pnpm with-env expo run:ios --device",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path .prettierignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@1up/auth": "workspace:*",
+    "@better-auth/expo": "catalog:",
     "@expo-google-fonts/martian-mono": "0.2.3",
     "@expo/metro-config": "^0.19.9",
     "@rn-primitives/hooks": "^1.1.0",

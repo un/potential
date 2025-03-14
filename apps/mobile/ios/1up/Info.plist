@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>1up</string>
-          <string>com.1upapp</string>
+          <string>xyz.1up</string>
         </array>
       </dict>
       <dict>

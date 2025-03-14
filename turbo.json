@@ -1,6 +1,9 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "ui": "tui",
+  "globalDependencies": [
+    ".env"
+  ],
   "tasks": {
     "topo": {
       "dependsOn": [
@@ -21,7 +24,18 @@
         "^dev"
       ],
       "cache": false,
-      "persistent": false
+      "persistent": false,
+      "env": [
+        "BASE_URL",
+        "NEXT_PUBLIC_URL",
+        "BACKEND_URL",
+        "NEXT_PUBLIC_BACKEND_URL",
+        "EXPO_PUBLIC_BACKEND_URL",
+        "AUTH_SECRET_KEY",
+        "DATABASE_HOST",
+        "DATABASE_USERNAME",
+        "DATABASE_PASSWORD"
+      ]
     },
     "format": {
       "outputs": [
@@ -59,7 +73,10 @@
     },
     "ios": {
       "cache": false,
-      "interactive": true
+      "interactive": true,
+      "env": [
+        "EXPO_PUBLIC_BACKEND_URL"
+      ]
     },
     "studio": {
       "cache": false,
@@ -74,6 +91,8 @@
     "BASE_URL",
     "NEXT_PUBLIC_URL",
     "BACKEND_URL",
+    "NEXT_PUBLIC_BACKEND_URL",
+    "EXPO_PUBLIC_BACKEND_URL",
     "AUTH_SECRET_KEY",
     "DATABASE_HOST",
     "DATABASE_USERNAME",

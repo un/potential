@@ -2,9 +2,10 @@
   "name": "@1up/auth",
   "private": true,
   "type": "module",
-  "exports": {
-    ".": "./src/index.ts"
-  },
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": "./src/index.ts",
   "scripts": {
     "check": "tsc --noEmit",
     "auth:generate": "drizzle-kit push"
@@ -13,7 +14,8 @@
     "@1up/consts": "workspace:*",
     "@1up/db": "workspace:*",
     "@1up/utils": "workspace:*",
-    "better-auth": "^1.1.7",
+    "@better-auth/expo": "catalog:",
+    "better-auth": "catalog:",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {

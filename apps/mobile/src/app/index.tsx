@@ -1,10 +1,11 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getLoadedFonts } from "expo-font";
 import { Stack } from "expo-router";
 
 import { Text } from "~/components/ui/text";
+import { getApiUrl } from "~/utils/base-url";
 
 // import { useQueryClient } from "@tanstack/react-query";
 
@@ -12,6 +13,8 @@ export default function Index() {
   // const queryClient = useQueryClient();
 
   const loadedFonts = getLoadedFonts();
+
+  const apiUrl = getApiUrl();
 
   return (
     <SafeAreaView className="flex-1">
@@ -27,14 +30,15 @@ export default function Index() {
         <Text className="pb-2 text-center text-5xl font-bold">
           Create <Text className="text-pink-400">T3</Text> Turbo
         </Text>
-        <View className="flex-1 p-4">
+        <ScrollView className="flex-1 overflow-scroll p-4">
           <View className="py-2">
             <Text className="font-semibold italic">Press on a post</Text>
+
             <Text className="font-semibold italic">
-              {loadedFonts.map((font) => font).join(", ")}
+              API: {JSON.stringify(apiUrl)}
             </Text>
           </View>
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

@@ -1,31 +1,38 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
 
+const env = Object.fromEntries(
+  Object.entries(process.env).filter(([key]) => key.startsWith("EXPO_")),
+);
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: "1up",
+  extra: {
+    env,
+  },
   slug: "1up",
   scheme: "1up",
   version: "0.1.0",
   orientation: "portrait",
-  icon: "./assets/icon-light.png",
+  icon: "./assets/app/icon-light.png",
   userInterfaceStyle: "automatic",
   updates: {
     fallbackToCacheTimeout: 0,
   },
   assetBundlePatterns: ["**/*"],
   ios: {
-    bundleIdentifier: "com.1upapp",
+    bundleIdentifier: "xyz.1up",
     supportsTablet: true,
     icon: {
-      light: "./assets/icon-light.png",
-      dark: "./assets/icon-dark.png",
+      light: "./assets/app/icon-light.png",
+      dark: "./assets/app/icon-light.png",
       // tinted: "",
     },
   },
   android: {
-    package: "com.1upapp",
+    package: "xyz.1up",
     adaptiveIcon: {
-      foregroundImage: "./assets/icon-light.png",
+      foregroundImage: "./assets/app/icon-light.png",
       backgroundColor: "#1F104A",
     },
   },
@@ -45,11 +52,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       "expo-splash-screen",
       {
-        backgroundColor: "#E4E4E7",
-        image: "./assets/icon-light.png",
+        backgroundColor: "#f1f0ef",
+        image: "./assets/app/splash-light.png",
         dark: {
-          backgroundColor: "#18181B",
-          image: "./assets/icon-dark.png",
+          backgroundColor: "#222221",
+          image: "./assets/app/splash-dark.png",
         },
       },
     ],
