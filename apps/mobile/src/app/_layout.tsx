@@ -18,6 +18,9 @@ import "../styles.css";
 
 import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { QueryClientProvider } from "@tanstack/react-query";
+
+import { queryClient } from "~/utils/api";
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -53,17 +56,19 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaProvider>
-      <View className="flex-1" onLayout={onLayoutRootView}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: {
-              backgroundColor: colorScheme === "dark" ? "#191918" : "#f9f9f8",
-            },
-          }}
-        />
-      </View>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <View className="flex-1" onLayout={onLayoutRootView}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: {
+                backgroundColor: colorScheme === "dark" ? "#191918" : "#f9f9f8",
+              },
+            }}
+          />
+        </View>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }

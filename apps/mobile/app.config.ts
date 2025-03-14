@@ -1,6 +1,9 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
 
-const env = Object.fromEntries(
+interface ExpoEnv {
+  EXPO_PUBLIC_BACKEND_URL?: string;
+}
+const env: ExpoEnv = Object.fromEntries(
   Object.entries(process.env).filter(([key]) => key.startsWith("EXPO_")),
 );
 

@@ -1,10 +1,11 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { getLoadedFonts } from "expo-font";
 import { Stack } from "expo-router";
+import { useQuery } from "@tanstack/react-query";
 
 import { Text } from "~/components/ui/text";
+import { trpc } from "~/utils/api";
 import { getApiUrl } from "~/utils/base-url";
 
 // import { useQueryClient } from "@tanstack/react-query";
@@ -12,10 +13,9 @@ import { getApiUrl } from "~/utils/base-url";
 export default function Index() {
   // const queryClient = useQueryClient();
 
-  const loadedFonts = getLoadedFonts();
-
   const apiUrl = getApiUrl();
 
+  const postQuery = useQuery(trpc.hello.hello.queryOptions());
   return (
     <SafeAreaView className="flex-1">
       {/* Changes page title visible on the header */}
@@ -36,6 +36,9 @@ export default function Index() {
 
             <Text className="font-semibold italic">
               API: {JSON.stringify(apiUrl)}
+            </Text>
+            <Text className="font-semibold italic">
+              response: {JSON.stringify(postQuery.data)}
             </Text>
           </View>
         </ScrollView>
