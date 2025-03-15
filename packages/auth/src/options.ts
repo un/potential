@@ -6,6 +6,7 @@ import { emailOTP, username } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
 
 import { db } from "@1up/db";
+import { sendEmail } from "@1up/email";
 
 import { validateUsername } from "./validator";
 
@@ -26,7 +27,14 @@ export const authOptions: BetterAuthOptions = {
       },
     }),
     emailOTP({
-      async sendVerificationOTP({ email, otp, type }) {},
+      async sendVerificationOTP({ email, otp, type }) {
+        void (await sendEmail({
+          to: email,
+          type: "auth-otp",
+
+          otpCode: otp,
+        }));
+      },
     }),
     passkey({
       rpID: process.env.BASE_URL,
