@@ -110,62 +110,62 @@ app.get("/", (c) => {
 
 // Server initialization with error handling
 let server: ServerType | undefined;
-try {
-  server = serve(
-    {
-      fetch: app.fetch,
-      port: 3100,
-    },
-    (info) => {
-      console.log("✅ Server is running on http://localhost:" + info.port);
-    },
-  );
+let isShuttingDown = false;
 
-  // Test database connection
-  db.execute("SELECT 1")
-    .then(() => {
-      console.log("✅ Database connection successful");
-    })
-    .catch((error) => {
-      console.error("❌ Database connection failed:", error);
-      // @ts-expect-error its possible that the server is not running
-      server.close(() => {
-        process.exit(1);
-      });
+const startServer = async () => {
+  try {
+    // Test database connection first
+    await db.execute("SELECT 1");
+    console.log("✅ Database connection successful");
+
+    server = serve(
+      {
+        fetch: app.fetch,
+        port: 3100,
+      },
+      (info) => {
+        console.log("✅ Server is running on http://localhost:" + info.port);
+      },
+    );
+
+    return true;
+  } catch (error) {
+    console.error("❌ Failed to start server:", error);
+    return false;
+  }
+};
+
+const shutdownServer = async (signal: string) => {
+  if (isShuttingDown) {
+    console.log("Shutdown already in progress...");
+    return;
+  }
+
+  isShuttingDown = true;
+  console.log(`Received ${signal} signal, shutting down gracefully...`);
+
+  if (server) {
+    server.close(() => {
+      console.log("Server closed");
+      process.exit(0);
     });
-} catch (error) {
-  console.error("❌ Failed to start server:", error);
-  process.exit(1);
-}
+
+    // Force close after 5 seconds if server doesn't close gracefully
+    setTimeout(() => {
+      console.log("Forcing server shutdown after timeout");
+      process.exit(1);
+    }, 5000);
+  } else {
+    process.exit(0);
+  }
+};
+
+// Start the server
+void startServer();
 
 // Handle graceful shutdown
-process.on("SIGINT", () => {
-  console.log("Received SIGINT signal, shutting down gracefully...");
-  server?.close(() => {
-    console.log("Server closed");
-    process.exit(0);
-  });
-
-  // Force close after 5 seconds if server doesn't close gracefully
-  setTimeout(() => {
-    console.log("Forcing server shutdown after timeout");
-    process.exit(1);
-  }, 5000);
-});
-
-process.on("SIGTERM", () => {
-  console.log("Received SIGTERM signal, shutting down gracefully...");
-  server?.close(() => {
-    console.log("Server closed");
-    process.exit(0);
-  });
-
-  // Force close after 5 seconds if server doesn't close gracefully
-  setTimeout(() => {
-    console.log("Forcing server shutdown after timeout");
-    process.exit(1);
-  }, 5000);
-});
+process.once("SIGINT", () => void shutdownServer("SIGINT"));
+process.once("SIGTERM", () => void shutdownServer("SIGTERM"));
 
 // Handle uncaught exceptions to prevent crashes
 process.on("uncaughtException", (error) => {
