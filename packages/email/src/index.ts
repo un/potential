@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-import AuthOtpEmail from "./templates/auth-otp";
+import AuthOtpEmail from "./emails/auth-otp";
 
 type StandardEmailProps = {
   to: string;

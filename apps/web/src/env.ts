@@ -13,9 +13,6 @@ export const env = createEnv({
     BASE_URL: z.string(),
     EXPO_PUBLIC_BACKEND_URL: z.string(),
     AUTH_SECRET: z.string(),
-    DATABASE_HOST: z.string(),
-    DATABASE_USERNAME: z.string(),
-    DATABASE_PASSWORD: z.string(),
   },
   client: {
     NEXT_PUBLIC_URL: z.string(),
