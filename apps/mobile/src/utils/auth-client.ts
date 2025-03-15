@@ -1,0 +1,19 @@
+import type { BetterAuthClientPlugin } from "better-auth";
+import * as SecureStore from "expo-secure-store";
+import { expoClient } from "@better-auth/expo/client";
+import { createAuthClient } from "better-auth/react";
+
+import { getApiUrl } from "./base-url";
+
+const authUrl = getApiUrl() + "/auth";
+
+export const authClient = createAuthClient({
+  baseURL: authUrl,
+  plugins: [
+    expoClient({
+      scheme: "1up",
+      storagePrefix: "1up",
+      storage: SecureStore,
+    }) as unknown as BetterAuthClientPlugin,
+  ],
+});

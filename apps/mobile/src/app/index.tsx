@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
+import { authClient } from "~/utils/auth-client";
 import { getApiUrl } from "~/utils/base-url";
 
 // import { useQueryClient } from "@tanstack/react-query";
@@ -16,6 +17,8 @@ export default function Index() {
   const apiUrl = getApiUrl();
 
   const postQuery = useQuery(trpc.hello.hello.queryOptions());
+  const { data: session } = authClient.useSession();
+
   return (
     <SafeAreaView className="flex-1">
       {/* Changes page title visible on the header */}
@@ -40,6 +43,7 @@ export default function Index() {
             <Text className="font-semibold italic">
               response: {JSON.stringify(postQuery.data)}
             </Text>
+            <Text>Welcome, {session?.user.name ?? "Guest"}</Text>
           </View>
         </ScrollView>
       </View>

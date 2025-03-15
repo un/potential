@@ -14,6 +14,7 @@ let auth;
 try {
   auth = betterAuth({
     ...authOptions,
+    trustedOrigins: ["1up://"],
   });
   console.log("✅ Auth initialized successfully");
 } catch (error) {
