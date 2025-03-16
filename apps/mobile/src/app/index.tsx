@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
+import { Loading } from "~/components/loading";
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
 import { authClient } from "~/utils/auth-client";
@@ -23,7 +24,7 @@ export default function Index() {
     <SafeAreaView className="flex-1">
       {/* Changes page title visible on the header */}
       <Stack.Screen options={{ title: "Home Page" }} />
-      <View className="bg-green-5 flex-1 p-4">
+      <View className="flex-1 p-4">
         <Text className="pb-2 text-center text-3xl">
           Create <Text className="text-red-9">T3</Text> Turbo
         </Text>
@@ -40,10 +41,12 @@ export default function Index() {
             <Text className="font-semibold italic">
               API: {JSON.stringify(apiUrl)}
             </Text>
-            <Text className="font-semibold italic">
+            <Text className="size- font-semibold italic">
               response: {JSON.stringify(postQuery.data)}
             </Text>
             <Text>Welcome, {session?.user.name ?? "Guest"}</Text>
+
+            <Loading size="mega" />
           </View>
         </ScrollView>
       </View>

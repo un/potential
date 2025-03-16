@@ -1,16 +1,11 @@
 import { Suspense } from "react";
 
+import { Heart } from "~/app/_components/heart";
 import { HydrateClient } from "~/trpc/server";
-import { MsgList } from "./_components/posts";
 
 // import { PostCardSkeleton } from "./_components/posts";
 
 export default function HomePage() {
-  // prefetch(trpc.hello.hello.queryOptions());
-  // console.log("🔥", {
-  //   env: process.env,
-  // });
-
   return (
     <HydrateClient>
       <main className="container h-screen py-16">
@@ -33,7 +28,8 @@ export default function HomePage() {
             >
               {/* <PostList /> */}
             </Suspense>
-            <MsgList />
+
+            <Heart />
           </div>
         </div>
       </main>
