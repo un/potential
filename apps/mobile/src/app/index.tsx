@@ -25,15 +25,6 @@ export default function Index() {
       {/* Changes page title visible on the header */}
       <Stack.Screen options={{ title: "Home Page" }} />
       <View className="flex-1 p-4">
-        <Text className="pb-2 text-center text-3xl">
-          Create <Text className="text-red-9">T3</Text> Turbo
-        </Text>
-        <Text className="pb-2 text-center text-3xl font-light">
-          Create <Text className="text-pink-400">T3</Text> Turbo
-        </Text>
-        <Text className="pb-2 text-center text-5xl font-bold">
-          Create <Text className="text-pink-400">T3</Text> Turbo
-        </Text>
         <ScrollView className="flex-1 overflow-scroll p-4">
           <View className="py-2">
             <Text className="font-semibold italic">Press on a post</Text>
@@ -45,6 +36,9 @@ export default function Index() {
               response: {JSON.stringify(postQuery.data)}
             </Text>
             <Text>Welcome, {session?.user.name ?? "Guest"}</Text>
+            <Text className="text-5xl" style={"title"}>
+              Welcome 1up
+            </Text>
 
             <Loading size="mega" />
           </View>

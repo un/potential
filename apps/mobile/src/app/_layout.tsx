@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+// Fonts
 import {
   MartianMono_100Thin,
   MartianMono_200ExtraLight,
@@ -41,6 +42,8 @@ export default function RootLayout() {
     MartianMono_600SemiBold,
     MartianMono_700Bold,
     MartianMono_800ExtraBold,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-require-imports
+    Monocraft: require("assets/fonts/Monocraft.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

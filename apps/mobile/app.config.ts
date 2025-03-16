@@ -63,5 +63,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         },
       },
     ],
+    [
+      "expo-font",
+      {
+        fonts: ["./assets/fonts/Monocraft.ttf"],
+      },
+    ],
   ],
 });
