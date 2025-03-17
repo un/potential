@@ -29,7 +29,7 @@
         "^dev:package"
       ],
       "cache": false,
-      "persistent": false,
+      "persistent": true,
       "env": [
         "BASE_URL",
         "NEXT_PUBLIC_URL",
