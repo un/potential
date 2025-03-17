@@ -19,7 +19,9 @@ type WelcomeEmailProps = {
 type EmailProps = StandardEmailProps & (AuthEmailOTPProps | WelcomeEmailProps);
 
 export async function sendEmail({ to, type, ...props }: EmailProps) {
-  if (process.env.NODE_ENV === "development") {
+  // TODO: FIX react import to HONO to send emails
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (!resendApiKey) {
     console.log("💌========================================💌");
     console.log("Sending email to", to);
     console.log("Email type", type);
@@ -58,7 +60,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
     return false;
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(resendApiKey);
   const { error } = await resend.emails.send({
     from: "1up Health Auth <no-reply@1up.xyz>",
     to,
