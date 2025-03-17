@@ -127,7 +127,6 @@ const ownerIdColumnRule = {
         // Check for .notNull() in the chain
         let currentNode = ownerIdProperty.value;
         let hasNotNull = false;
-        let hasReferences = false;
 
         // Traverse the method chain to find .notNull() and .references()
         while (currentNode && currentNode.type === "CallExpression") {
@@ -140,11 +139,6 @@ const ownerIdColumnRule = {
             if (methodName === "notNull") {
               hasNotNull = true;
               console.log(`ownerIdColumnRule: Found .notNull() in the chain`);
-            } else if (methodName === "references") {
-              hasReferences = true;
-              console.log(
-                `ownerIdColumnRule: Found .references() in the chain`,
-              );
             }
           }
 
@@ -162,15 +156,6 @@ const ownerIdColumnRule = {
         // Check if both .notNull() and .references() are present
         if (!hasNotNull) {
           console.log(`ownerIdColumnRule: ownerId is missing .notNull()`);
-          context.report({
-            node: ownerIdProperty.value,
-            messageId: "missingOwnerId",
-          });
-          return;
-        }
-
-        if (!hasReferences) {
-          console.log(`ownerIdColumnRule: ownerId is missing .references()`);
           context.report({
             node: ownerIdProperty.value,
             messageId: "missingOwnerId",

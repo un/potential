@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   json,
   mysqlEnum,
@@ -17,9 +18,7 @@ export const airReadings = mysqlTable("airReadings", {
   id: typeIdColumn("airReading", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("airReading")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
   rawData: json("rawData"),
   source: mysqlEnum("type", INTEGRATIONS_ARRAY_FOR_MYSQL).notNull(),
   sourceSessionId: varchar("sourceSessionId", { length: 128 }),
@@ -30,3 +29,10 @@ export const airReadings = mysqlTable("airReadings", {
   timezoneOffset: tinyint("timezoneOffset"),
   createdAt: timestamp("created_at").notNull(),
 });
+
+export const airReadingsRelations = relations(airReadings, ({ one }) => ({
+  owner: one(users, {
+    fields: [airReadings.ownerId],
+    references: [users.id],
+  }),
+}));

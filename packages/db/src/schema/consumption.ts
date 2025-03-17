@@ -25,9 +25,7 @@ export const ingredientLibrary = mysqlTable("ingredientLibrary", {
   id: typeIdColumn("ingredientLibrary", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("ingredientLibrary")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
   name: varchar("name", { length: 128 }).notNull(),
   description: text("description"),
   type: mysqlEnum("type", [
@@ -66,12 +64,11 @@ export const ingredientNutrition = mysqlTable("ingredientNutrition", {
   id: typeIdColumn("ingredientNutrition", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("ingredientNutrition")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  ingredientLibraryId: typeIdColumn("ingredientLibrary", "ingredientLibraryId")
-    .notNull()
-    .references(() => ingredientLibrary.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  ingredientLibraryId: typeIdColumn(
+    "ingredientLibrary",
+    "ingredientLibraryId",
+  ).notNull(),
   type: mysqlEnum("type", [
     "CALORIES",
     "PROTEIN",
@@ -89,17 +86,30 @@ export const ingredientNutrition = mysqlTable("ingredientNutrition", {
   perServing: boolean("perServing").default(false),
 });
 
+export const ingredientNutritionRelations = relations(
+  ingredientNutrition,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [ingredientNutrition.ownerId],
+      references: [users.id],
+    }),
+    ingredientLibrary: one(ingredientLibrary, {
+      fields: [ingredientNutrition.ingredientLibraryId],
+      references: [ingredientLibrary.id],
+    }),
+  }),
+);
+
 // Vitamins in ingredients
 export const ingredientVitamins = mysqlTable("ingredientVitamins", {
   id: typeIdColumn("ingredientVitamin", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("ingredientVitamin")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  ingredientLibraryId: typeIdColumn("ingredientLibrary", "ingredientLibraryId")
-    .notNull()
-    .references(() => ingredientLibrary.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  ingredientLibraryId: typeIdColumn(
+    "ingredientLibrary",
+    "ingredientLibraryId",
+  ).notNull(),
   type: mysqlEnum("type", [...VITAMINS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
@@ -107,17 +117,30 @@ export const ingredientVitamins = mysqlTable("ingredientVitamins", {
   perServing: boolean("perServing").default(false),
 });
 
+export const ingredientVitaminsRelations = relations(
+  ingredientVitamins,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [ingredientVitamins.ownerId],
+      references: [users.id],
+    }),
+    ingredientLibrary: one(ingredientLibrary, {
+      fields: [ingredientVitamins.ingredientLibraryId],
+      references: [ingredientLibrary.id],
+    }),
+  }),
+);
+
 // Minerals in ingredients
 export const ingredientMinerals = mysqlTable("ingredientMinerals", {
   id: typeIdColumn("ingredientMineral", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("ingredientMineral")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  ingredientLibraryId: typeIdColumn("ingredientLibrary", "ingredientLibraryId")
-    .notNull()
-    .references(() => ingredientLibrary.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  ingredientLibraryId: typeIdColumn(
+    "ingredientLibrary",
+    "ingredientLibraryId",
+  ).notNull(),
   type: mysqlEnum("type", [...MINERALS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
@@ -125,14 +148,26 @@ export const ingredientMinerals = mysqlTable("ingredientMinerals", {
   perServing: boolean("perServing").default(false),
 });
 
+export const ingredientMineralsRelations = relations(
+  ingredientMinerals,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [ingredientMinerals.ownerId],
+      references: [users.id],
+    }),
+    ingredientLibrary: one(ingredientLibrary, {
+      fields: [ingredientMinerals.ingredientLibraryId],
+      references: [ingredientLibrary.id],
+    }),
+  }),
+);
+
 // Consumable items (foods, drinks, supplement stacks, etc.)
 export const consumableItems = mysqlTable("consumableItems", {
   id: typeIdColumn("consumableItem", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumableItem")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
   name: varchar("name", { length: 128 }).notNull(),
   type: mysqlEnum("type", [
     "FOOD",
@@ -154,6 +189,16 @@ export const consumableItems = mysqlTable("consumableItems", {
   updatedAt: timestamp("updated_at").notNull(),
 });
 
+export const consumableItemsRelations = relations(
+  consumableItems,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumableItems.ownerId],
+      references: [users.id],
+    }),
+  }),
+);
+
 // Link between consumable items and their ingredients
 export const consumableItemIngredients = mysqlTable(
   "consumableItemIngredients",
@@ -161,12 +206,11 @@ export const consumableItemIngredients = mysqlTable(
     id: typeIdColumn("consumableItemIngredient", "id")
       .primaryKey()
       .$default(() => cloudTypeIdGenerator("consumableItemIngredient")),
-    ownerId: typeIdColumn("user", "user_id")
-      .notNull()
-      .references(() => users.id),
-    consumableItemId: typeIdColumn("consumableItem", "consumableItemId")
-      .notNull()
-      .references(() => consumableItems.id),
+    ownerId: typeIdColumn("user", "user_id").notNull(),
+    consumableItemId: typeIdColumn(
+      "consumableItem",
+      "consumableItemId",
+    ).notNull(),
     ingredientLibraryId: typeIdColumn(
       "ingredientLibrary",
       "ingredientLibraryId",
@@ -178,17 +222,34 @@ export const consumableItemIngredients = mysqlTable(
   },
 );
 
+export const consumableItemIngredientsRelations = relations(
+  consumableItemIngredients,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumableItemIngredients.ownerId],
+      references: [users.id],
+    }),
+    consumableItem: one(consumableItems, {
+      fields: [consumableItemIngredients.consumableItemId],
+      references: [consumableItems.id],
+    }),
+    ingredientLibrary: one(ingredientLibrary, {
+      fields: [consumableItemIngredients.ingredientLibraryId],
+      references: [ingredientLibrary.id],
+    }),
+  }),
+);
+
 // Optional direct nutritional overrides for consumable items
 export const consumableItemNutrition = mysqlTable("consumableItemNutrition", {
   id: typeIdColumn("consumableItemNutrition", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumableItemNutrition")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumableItemId: typeIdColumn("consumableItem", "consumableItemId")
-    .notNull()
-    .references(() => consumableItems.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumableItemId: typeIdColumn(
+    "consumableItem",
+    "consumableItemId",
+  ).notNull(),
   type: mysqlEnum("type", [
     "CALORIES",
     "PROTEIN",
@@ -206,17 +267,30 @@ export const consumableItemNutrition = mysqlTable("consumableItemNutrition", {
   perServing: boolean("perServing").default(false),
 });
 
+export const consumableItemNutritionRelations = relations(
+  consumableItemNutrition,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumableItemNutrition.ownerId],
+      references: [users.id],
+    }),
+    consumableItem: one(consumableItems, {
+      fields: [consumableItemNutrition.consumableItemId],
+      references: [consumableItems.id],
+    }),
+  }),
+);
+
 // Optional direct vitamin overrides for consumable items
 export const consumableItemVitamins = mysqlTable("consumableItemVitamins", {
   id: typeIdColumn("consumableItemVitamin", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumableItemVitamin")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumableItemId: typeIdColumn("consumableItem", "consumableItemId")
-    .notNull()
-    .references(() => consumableItems.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumableItemId: typeIdColumn(
+    "consumableItem",
+    "consumableItemId",
+  ).notNull(),
   type: mysqlEnum("type", [...VITAMINS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
@@ -224,17 +298,30 @@ export const consumableItemVitamins = mysqlTable("consumableItemVitamins", {
   perServing: boolean("perServing").default(false),
 });
 
+export const consumableItemVitaminsRelations = relations(
+  consumableItemVitamins,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumableItemVitamins.ownerId],
+      references: [users.id],
+    }),
+    consumableItem: one(consumableItems, {
+      fields: [consumableItemVitamins.consumableItemId],
+      references: [consumableItems.id],
+    }),
+  }),
+);
+
 // Optional direct mineral overrides for consumable items
 export const consumableItemMinerals = mysqlTable("consumableItemMinerals", {
   id: typeIdColumn("consumableItemMineral", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumableItemMineral")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumableItemId: typeIdColumn("consumableItem", "consumableItemId")
-    .notNull()
-    .references(() => consumableItems.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumableItemId: typeIdColumn(
+    "consumableItem",
+    "consumableItemId",
+  ).notNull(),
   type: mysqlEnum("type", [...MINERALS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
@@ -242,17 +329,29 @@ export const consumableItemMinerals = mysqlTable("consumableItemMinerals", {
   perServing: boolean("perServing").default(false),
 });
 
+export const consumableItemMineralsRelations = relations(
+  consumableItemMinerals,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumableItemMinerals.ownerId],
+      references: [users.id],
+    }),
+    consumableItem: one(consumableItems, {
+      fields: [consumableItemMinerals.consumableItemId],
+      references: [consumableItems.id],
+    }),
+  }),
+);
 // Consumption logs
 export const consumptionLogs = mysqlTable("consumptionLogs", {
   id: typeIdColumn("consumptionLog", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumptionLog")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumableItemId: typeIdColumn("consumableItem", "consumableItemId")
-    .notNull()
-    .references(() => consumableItems.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumableItemId: typeIdColumn(
+    "consumableItem",
+    "consumableItemId",
+  ).notNull(),
   quantity: int("quantity").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
   notes: text("notes"),
@@ -264,6 +363,20 @@ export const consumptionLogs = mysqlTable("consumptionLogs", {
   createdAt: timestamp("created_at").notNull(),
 });
 
+export const consumptionLogsRelations = relations(
+  consumptionLogs,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumptionLogs.ownerId],
+      references: [users.id],
+    }),
+    consumableItem: one(consumableItems, {
+      fields: [consumptionLogs.consumableItemId],
+      references: [consumableItems.id],
+    }),
+  }),
+);
+
 // Derived ingredient consumption (calculated from consumption logs)
 export const consumptionLogIngredients = mysqlTable(
   "consumptionLogIngredients",
@@ -271,19 +384,37 @@ export const consumptionLogIngredients = mysqlTable(
     id: typeIdColumn("consumptionLogIngredient", "id")
       .primaryKey()
       .$default(() => cloudTypeIdGenerator("consumptionLogIngredient")),
-    ownerId: typeIdColumn("user", "user_id")
-      .notNull()
-      .references(() => users.id),
-    consumptionLogId: typeIdColumn("consumptionLog", "consumptionLogId")
-      .notNull()
-      .references(() => consumptionLogs.id),
-    ingredientLibraryId: typeIdColumn("ingredientLibrary", "ingrLibId")
-      .notNull()
-      .references(() => ingredientLibrary.id),
+    ownerId: typeIdColumn("user", "user_id").notNull(),
+    consumptionLogId: typeIdColumn(
+      "consumptionLog",
+      "consumptionLogId",
+    ).notNull(),
+    ingredientLibraryId: typeIdColumn(
+      "ingredientLibrary",
+      "ingrLibId",
+    ).notNull(),
     amount: int("amount").notNull(),
     unit: varchar("unit", { length: 32 }).notNull(),
     createdAt: timestamp("created_at").notNull(),
   },
+);
+
+export const consumptionLogIngredientsRelations = relations(
+  consumptionLogIngredients,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumptionLogIngredients.ownerId],
+      references: [users.id],
+    }),
+    consumptionLog: one(consumptionLogs, {
+      fields: [consumptionLogIngredients.consumptionLogId],
+      references: [consumptionLogs.id],
+    }),
+    ingredientLibrary: one(ingredientLibrary, {
+      fields: [consumptionLogIngredients.ingredientLibraryId],
+      references: [ingredientLibrary.id],
+    }),
+  }),
 );
 
 // Derived nutritional breakdown for each consumption log
@@ -291,12 +422,11 @@ export const consumptionLogNutrition = mysqlTable("consumptionLogNutrition", {
   id: typeIdColumn("consumptionLogNutrition", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumptionLogNutrition")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumptionLogId: typeIdColumn("consumptionLog", "consumptionLogId")
-    .notNull()
-    .references(() => consumptionLogs.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumptionLogId: typeIdColumn(
+    "consumptionLog",
+    "consumptionLogId",
+  ).notNull(),
   type: mysqlEnum("type", [
     "CALORIES",
     "PROTEIN",
@@ -313,36 +443,76 @@ export const consumptionLogNutrition = mysqlTable("consumptionLogNutrition", {
   createdAt: timestamp("created_at").notNull(),
 });
 
+export const consumptionLogNutritionRelations = relations(
+  consumptionLogNutrition,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumptionLogNutrition.ownerId],
+      references: [users.id],
+    }),
+    consumptionLog: one(consumptionLogs, {
+      fields: [consumptionLogNutrition.consumptionLogId],
+      references: [consumptionLogs.id],
+    }),
+  }),
+);
+
 // Derived vitamin breakdown for each consumption log
 export const consumptionLogVitamins = mysqlTable("consumptionLogVitamins", {
   id: typeIdColumn("consumptionLogVitamin", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumptionLogVitamin")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumptionLogId: typeIdColumn("consumptionLog", "consumptionLogId")
-    .notNull()
-    .references(() => consumptionLogs.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumptionLogId: typeIdColumn(
+    "consumptionLog",
+    "consumptionLogId",
+  ).notNull(),
   type: mysqlEnum("type", [...VITAMINS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
   createdAt: timestamp("created_at").notNull(),
 });
 
+export const consumptionLogVitaminsRelations = relations(
+  consumptionLogVitamins,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumptionLogVitamins.ownerId],
+      references: [users.id],
+    }),
+    consumptionLog: one(consumptionLogs, {
+      fields: [consumptionLogVitamins.consumptionLogId],
+      references: [consumptionLogs.id],
+    }),
+  }),
+);
+
 // Derived mineral breakdown for each consumption log
 export const consumptionLogMinerals = mysqlTable("consumptionLogMinerals", {
   id: typeIdColumn("consumptionLogMineral", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("consumptionLogMineral")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  consumptionLogId: typeIdColumn("consumptionLog", "consumptionLogId")
-    .notNull()
-    .references(() => consumptionLogs.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+  consumptionLogId: typeIdColumn(
+    "consumptionLog",
+    "consumptionLogId",
+  ).notNull(),
   type: mysqlEnum("type", [...MINERALS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
   createdAt: timestamp("created_at").notNull(),
 });
+
+export const consumptionLogMineralsRelations = relations(
+  consumptionLogMinerals,
+  ({ one }) => ({
+    owner: one(users, {
+      fields: [consumptionLogMinerals.ownerId],
+      references: [users.id],
+    }),
+    consumptionLog: one(consumptionLogs, {
+      fields: [consumptionLogMinerals.consumptionLogId],
+      references: [consumptionLogs.id],
+    }),
+  }),
+);

@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   json,
@@ -18,9 +19,7 @@ export const sleepLogs = mysqlTable("sleepLogs", {
   id: typeIdColumn("sleepLog", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("sleepLog")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
   rawData: json("rawData"),
   source: mysqlEnum("type", [...INTEGRATIONS_ARRAY]).notNull(),
   sourceSessionId: varchar("sourceSessionId", { length: 128 }),
@@ -39,3 +38,10 @@ export const sleepLogs = mysqlTable("sleepLogs", {
   timezoneOffset: tinyint("timezoneOffset"),
   createdAt: timestamp("created_at").notNull(),
 });
+
+export const sleepLogsRelations = relations(sleepLogs, ({ one }) => ({
+  owner: one(users, {
+    fields: [sleepLogs.ownerId],
+    references: [users.id],
+  }),
+}));

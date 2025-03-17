@@ -1,14 +1,13 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   int,
-  mysqlEnum,
   mysqlTable,
   text,
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
 
-import { UserRoles } from "@1up/consts/auth";
 import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
@@ -18,15 +17,15 @@ export const users = mysqlTable("users", {
   id: typeIdColumn("user", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("user")),
-  username: varchar("username", { length: 32 }).notNull().unique(),
-  displayUsername: varchar("display_username", { length: 32 }).notNull(),
-  name: varchar("name", { length: 32 }).notNull(),
+  username: varchar("username", { length: 32 }).unique(),
+  displayUsername: varchar("display_username", { length: 32 }),
+  name: varchar("name", { length: 32 }),
   email: varchar("email", { length: 32 }).notNull().unique(),
   emailVerified: boolean("email_verified").notNull().default(false),
   image: text("image"),
   // role: text("role").notNull().default(UserRoles.USER),
   //! TODO: convert type enum to array as string
-  role: mysqlEnum("role", [UserRoles.USER]).notNull().default(UserRoles.USER),
+  // role: mysqlEnum("role", [UserRoles.USER]).notNull().default(UserRoles.USER),
   banned: boolean("banned").notNull().default(false),
   banReason: text("ban_reason"),
   banExpires: timestamp("ban_expires_at"),
@@ -43,15 +42,22 @@ export const sessions = mysqlTable("sessions", {
   ipAddress: varchar("ipAddress", { length: 255 }),
   userAgent: varchar("userAgent", { length: 255 }),
   token: varchar("token", { length: 255 }).notNull(),
-  userId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  impersonatedBy: typeIdColumn("user", "impersonated_by").references(
-    () => users.id,
-  ),
+  userId: typeIdColumn("user", "user_id").notNull(),
+  impersonatedBy: typeIdColumn("user", "impersonated_by"),
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
 });
+
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
+  }),
+  impersonator: one(users, {
+    fields: [sessions.impersonatedBy],
+    references: [users.id],
+  }),
+}));
 
 //! TODO: check betterauth docs for correct column lengths
 export const accounts = mysqlTable("accounts", {
@@ -60,9 +66,7 @@ export const accounts = mysqlTable("accounts", {
     .$default(() => cloudTypeIdGenerator("account")),
   accountId: varchar("accountId", { length: 255 }).notNull(),
   providerId: varchar("providerId", { length: 255 }).notNull(),
-  userId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  userId: typeIdColumn("user", "user_id").notNull(),
   accessToken: text("access_token"),
   refreshToken: text("refresh_token"),
   idToken: text("id_token"),
@@ -73,6 +77,13 @@ export const accounts = mysqlTable("accounts", {
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
 });
+
+export const accountsRelations = relations(accounts, ({ one }) => ({
+  user: one(users, {
+    fields: [accounts.userId],
+    references: [users.id],
+  }),
+}));
 
 // eslint-disable-next-line @1up/every-db-table-needs-ownerid-column
 export const verificationTokens = mysqlTable("verification_tokens", {
@@ -93,9 +104,7 @@ export const passkeys = mysqlTable("passkeys", {
     .$default(() => cloudTypeIdGenerator("passkey")),
   name: text("name"),
   publicKey: text("public_key"),
-  userId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  userId: typeIdColumn("user", "user_id").notNull(),
   credentialID: text("credential_id"),
   counter: int("counter", { unsigned: true }),
   deviceType: text("device_type"),
@@ -103,3 +112,10 @@ export const passkeys = mysqlTable("passkeys", {
   transports: text("transports"),
   createdAt: timestamp("created_at"),
 });
+
+export const passkeysRelations = relations(passkeys, ({ one }) => ({
+  user: one(users, {
+    fields: [passkeys.userId],
+    references: [users.id],
+  }),
+}));

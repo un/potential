@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { json, mysqlEnum, mysqlTable, timestamp } from "drizzle-orm/mysql-core";
 
 import type { IntegrationAccessData } from "@1up/consts/integrations";
@@ -16,12 +17,7 @@ export const integrations = mysqlTable("integrations", {
   id: typeIdColumn("integration", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("integration")),
-  owner: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
   type: mysqlEnum("type", INTEGRATIONS_ARRAY_FOR_MYSQL).notNull(),
   accessMode: mysqlEnum(
     "accessMode",
@@ -31,3 +27,10 @@ export const integrations = mysqlTable("integrations", {
   createdAt: timestamp("created_at").notNull(),
   lastSync: timestamp("last_sync"),
 });
+
+export const integrationsRelations = relations(integrations, ({ one }) => ({
+  owner: one(users, {
+    fields: [integrations.ownerId],
+    references: [users.id],
+  }),
+}));
