@@ -29,11 +29,9 @@ export const typeIdColumn = <const T extends CloudIdTypePrefixNames>(
         typeName,
         new Uint8Array(input as unknown as ArrayBuffer),
       );
-      console.log("🔥5", { typedId, prefix: typeName });
       return typedId as CloudTypeId<T>;
     },
     toDriver(input: CloudTypeId<T>): SQL<unknown> {
-      console.log("🔥", { input });
       const buffer = new Uint8Array(cloudTypeIdToUUIDBytes(input).uuid);
       const hex = bytesToHex(buffer);
       return sql.raw(`x'${hex}'`);
