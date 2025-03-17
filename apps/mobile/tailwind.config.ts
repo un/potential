@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 // @ts-expect-error - no types
 import nativewind from "nativewind/preset";
-import { platformSelect } from "nativewind/theme";
 import { radixColors, tailwindSafelist } from "radi-color-css";
 
 import baseConfig from "@1up/tailwind-config/native";
@@ -51,14 +50,6 @@ export default {
         DEFAULT: "var(--card)",
         foreground: "var(--card-foreground)",
       },
-    },
-    fontFamily: {
-      sans: ["AnonymousPro-Regular"],
-      system: platformSelect({
-        ios: "AnonymousPro-Regular",
-        android: "AnonymousPro-Regular",
-        default: "AnonymousPro-Regular",
-      }),
     },
     extend: {
       keyframes: {

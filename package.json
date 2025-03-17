@@ -14,6 +14,7 @@
     "db:push": "turbo -F @1up/db push  --env-mode=loose",
     "db:studio": "turbo -F @1up/db studio  --env-mode=loose",
     "dev": "turbo watch dev --continue  --env-mode=loose",
+    "dev:package": "turbo watch dev:package --continue  --env-mode=loose",
     "dev:next": "turbo watch dev -F @1up/nextjs...",
     "ios": "turbo run ios  --env-mode=loose",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",

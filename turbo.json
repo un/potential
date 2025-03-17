@@ -19,9 +19,14 @@
         "dist/**"
       ]
     },
+    "dev:package": {
+      "dependsOn": [],
+      "cache": false,
+      "persistent": false
+    },
     "dev": {
       "dependsOn": [
-        "^dev"
+        "^dev:package"
       ],
       "cache": false,
       "persistent": false,
