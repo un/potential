@@ -93,10 +93,12 @@ export const cloudTypeIdToUUID = <const T extends CloudIdTypePrefixNames>(
 export const cloudTypeIdFromUUIDBytes = <
   const T extends CloudIdTypePrefixNames,
 >(
-  prefix: T,
+  typeName: T,
   uuid: Uint8Array<ArrayBufferLike>,
 ) => {
-  return fromUUIDBytes(prefix, uuid) as CloudTypeId<T>;
+  const truePrefix = cloudIdTypesMapNameToPrefix[typeName];
+  const id = fromUUIDBytes(truePrefix, uuid);
+  return id;
 };
 
 export const cloudTypeIdToUUIDBytes = <const T extends CloudIdTypePrefixNames>(

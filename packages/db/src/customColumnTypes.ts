@@ -1,22 +1,41 @@
+import type { SQL } from "drizzle-orm";
+import { sql } from "drizzle-orm";
+import { customType } from "drizzle-orm/mysql-core";
+
 import type { CloudIdTypePrefixNames, CloudTypeId } from "@1up/utils/typeid";
 import {
   cloudTypeIdFromUUIDBytes,
   cloudTypeIdToUUIDBytes,
 } from "@1up/utils/typeid";
-import { customType } from "drizzle-orm/mysql-core";
+
+function bytesToHex(bytes: Uint8Array): string {
+  let hex = "";
+  for (const byte of bytes) {
+    hex += ("0" + (byte & 0xff).toString(16)).slice(-2);
+  }
+  return hex;
+}
 
 export const typeIdColumn = <const T extends CloudIdTypePrefixNames>(
-  prefix: T,
+  typeName: T,
   columnName: string,
 ) =>
   customType<{ data: CloudTypeId<T>; driverData: string }>({
     dataType() {
-      return "binary";
+      return "BINARY(16)";
     },
     fromDriver(input: string): CloudTypeId<T> {
-      return cloudTypeIdFromUUIDBytes(prefix, Buffer.from(input));
+      const typedId = cloudTypeIdFromUUIDBytes(
+        typeName,
+        new Uint8Array(input as unknown as ArrayBuffer),
+      );
+      console.log("🔥5", { typedId, prefix: typeName });
+      return typedId as CloudTypeId<T>;
     },
-    toDriver(input: CloudTypeId<T>): string {
-      return cloudTypeIdToUUIDBytes(input).uuid.toString();
+    toDriver(input: CloudTypeId<T>): SQL<unknown> {
+      console.log("🔥", { input });
+      const buffer = new Uint8Array(cloudTypeIdToUUIDBytes(input).uuid);
+      const hex = bytesToHex(buffer);
+      return sql.raw(`x'${hex}'`);
     },
   })(columnName);
