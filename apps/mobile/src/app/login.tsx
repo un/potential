@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 
@@ -20,8 +20,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSwitchingFormMode, setIsSwitchingFormMode] = useState(false);
   const [formMode, setFormMode] = useState<"login" | "join">("login");
-  const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<any>(null);
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -36,26 +35,16 @@ export default function Login() {
         email: value.email,
         type: "sign-in",
       });
-
-      setData(data);
-      setError(error);
-
-      if (error) {
-        setError(error.message);
-      }
+      router.push({
+        pathname: "/otp",
+        params: {
+          email: value.email,
+        },
+      });
 
       setIsLoading(false);
     },
   });
-
-  //   const handleLogin = async () => {
-  //     try {
-
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error("Login failed:", error);
-  //     }
-  //   };
 
   const handleToggleFormMode = () => {
     setIsSwitchingFormMode(true);
@@ -84,13 +73,6 @@ export default function Login() {
               Start your 1up journey now
             </Text>
           )}
-          {/* <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              void form.handleSubmit();
-            }}
-          > */}
           <View className="flex w-full max-w-sm flex-col gap-8">
             <form.Field
               name="email"

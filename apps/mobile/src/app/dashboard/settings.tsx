@@ -16,7 +16,7 @@ export default function Settings() {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1 p-6">
-        <Text className="mb-4 text-3xl" style={"title"}>
+        <Text className="mb-4 text-3xl" type={"title"}>
           Settings
         </Text>
 

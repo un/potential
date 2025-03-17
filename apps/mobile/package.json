@@ -45,6 +45,7 @@
     "expo-splash-screen": "0.29.23-canary-20250304-f08e984",
     "expo-status-bar": "2.0.2-canary-20250304-f08e984",
     "expo-web-browser": "14.1.0-canary-20250304-f08e984",
+    "input-otp-native": "^0.4.0",
     "nativewind": "~4.1.23",
     "phosphor-react-native": "^2.3.1",
     "radi-color-css": "^1.0.5",
