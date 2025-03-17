@@ -45,7 +45,7 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
         )}
         {error && error.length > 0 && (
           <Text type={"paragraph"} className="text-red-10 ml-0.5">
-            {error[0].message}
+            {error[0].message ?? "Error"}
           </Text>
         )}
       </View>
