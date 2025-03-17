@@ -10,13 +10,13 @@ import { cn } from "~/utils/ui";
 
 const textVariants = cva("web:select-text text-sand-12 text-base", {
   variants: {
-    style: {
+    type: {
       paragraph: "font-['MartianMono-Regular']",
       title: "font-['Monocraft']",
     },
   },
   defaultVariants: {
-    style: "paragraph",
+    type: "paragraph",
   },
 });
 
@@ -25,12 +25,12 @@ type TextVariants = VariantProps<typeof textVariants>;
 const TextClassContext = React.createContext<string | undefined>(undefined);
 
 const Text = React.forwardRef<TextRef, SlottableTextProps & TextVariants>(
-  ({ className, asChild = false, style, ...props }, ref) => {
+  ({ className, asChild = false, type, ...props }, ref) => {
     const textClass = React.useContext(TextClassContext);
     const Component = asChild ? Slot.Text : RNText;
     return (
       <Component
-        className={cn(textVariants({ style }), textClass, className)}
+        className={cn(textVariants({ type }), textClass, className)}
         ref={ref}
         {...props}
       />
