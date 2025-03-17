@@ -1,12 +1,13 @@
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 import {
   boolean,
   int,
   mysqlTable,
   text,
   timestamp,
-  varchar
+  varchar,
 } from "drizzle-orm/mysql-core";
+
+import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
@@ -37,9 +38,8 @@ export const userTags = mysqlTable("userTags", {
   id: typeIdColumn("userTag", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("userTag")),
-  ownerId: typeIdColumn("user", "user_id")
-    .notNull()
-    .references(() => users.id),
+  ownerId: typeIdColumn("user", "user_id").notNull(),
+
   name: varchar("name", { length: 64 }).notNull(),
   color: varchar("color", { length: 7 }),
   createdAt: timestamp("created_at").notNull(),

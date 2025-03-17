@@ -40,9 +40,9 @@ export const sessions = mysqlTable("sessions", {
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("session")),
   expiresAt: timestamp("expires_at").notNull(),
-  token: varchar("token", { length: 64 }).notNull().unique(),
-  ipAddress: varchar("ip_address", { length: 36 }),
-  userAgent: varchar("user_agent", { length: 256 }),
+  ipAddress: varchar("ipAddress", { length: 255 }),
+  userAgent: varchar("userAgent", { length: 255 }),
+  token: varchar("token", { length: 255 }).notNull(),
   userId: typeIdColumn("user", "user_id")
     .notNull()
     .references(() => users.id),
@@ -58,8 +58,8 @@ export const accounts = mysqlTable("accounts", {
   id: typeIdColumn("account", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("account")),
-  accountId: varchar("account_id", { length: 64 }).notNull(),
-  providerId: varchar("provider_id", { length: 64 }).notNull(),
+  accountId: varchar("accountId", { length: 255 }).notNull(),
+  providerId: varchar("providerId", { length: 255 }).notNull(),
   userId: typeIdColumn("user", "user_id")
     .notNull()
     .references(() => users.id),
@@ -79,8 +79,8 @@ export const verificationTokens = mysqlTable("verification_tokens", {
   id: typeIdColumn("verification", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("verification")),
-  identifier: text("identifier").notNull(),
-  value: text("value").notNull(),
+  identifier: varchar("identifier", { length: 255 }).notNull(),
+  value: varchar("value", { length: 255 }).notNull(),
   expiresAt: timestamp("expires_at").notNull(),
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
