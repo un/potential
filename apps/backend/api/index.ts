@@ -10,17 +10,15 @@ import { db } from "@1up/db";
 import { appRouter } from "@1up/trpc";
 
 // Initialize auth with error handling
-let auth;
-try {
-  auth = betterAuth({
-    ...authOptions,
-    trustedOrigins: ["1up://"],
-  });
-  console.log("✅ Auth initialized successfully");
-} catch (error) {
-  console.error("❌ Failed to initialize auth:", error);
+const auth = betterAuth({
+  ...authOptions,
+  trustedOrigins: ["1up://"],
+});
+if (!auth) {
+  console.error("❌ Failed to initialize auth");
   process.exit(1);
 }
+console.log("✅ Auth initialized successfully");
 
 const app = new Hono<{
   Variables: {
@@ -56,12 +54,13 @@ app.use("*", async (c, next) => {
   }
 });
 
-app.on(["POST", "GET"], "/api/auth/*", (c) => {
-  return auth.handler(c.req.raw);
+app.use("/api/auth/*", async (c) => {
+  const authResult = await auth.handler(c.req.raw);
+  return authResult;
 });
 
 app.use(
-  "/auth/*",
+  "/api/auth/*",
   cors({
     origin: [process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"],
     allowHeaders: [
@@ -105,7 +104,7 @@ app.use(
 );
 
 // Health Check
-app.get("/", (c) => {
+app.get("/", async (c) => {
   return c.json({ message: "im alive!" });
 });
 

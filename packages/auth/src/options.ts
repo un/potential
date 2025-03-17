@@ -1,11 +1,15 @@
-import type { BetterAuthOptions } from "better-auth";
 import type { ClientOptions } from "better-auth/types";
+import { type BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { passkeyClient, usernameClient } from "better-auth/client/plugins";
+import {
+  emailOTPClient,
+  passkeyClient,
+  usernameClient,
+} from "better-auth/client/plugins";
 import { emailOTP, username } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
 
-import { db } from "@1up/db";
+import { accounts, db, sessions, users, verificationTokens } from "@1up/db";
 import { sendEmail } from "@1up/email";
 
 import { validateUsername } from "./validator";
@@ -13,11 +17,15 @@ import { validateUsername } from "./validator";
 export const authOptions: BetterAuthOptions = {
   secret: process.env.AUTH_SECRET,
   baseURL: process.env.BASE_URL,
-  database: drizzleAdapter(db, { provider: "mysql" }),
-  user: { modelName: "users" },
-  session: { modelName: "sessions" },
-  account: { modelName: "accounts" },
-  verification: { modelName: "verificationTokens" },
+  database: drizzleAdapter(db, {
+    provider: "mysql",
+    schema: {
+      user: users,
+      session: sessions,
+      account: accounts,
+      verification: verificationTokens,
+    },
+  }),
   plugins: [
     username({
       minUsernameLength: 5,
@@ -63,5 +71,5 @@ export const authOptions: BetterAuthOptions = {
 
 export const authClientOptions: ClientOptions = {
   baseURL: process.env.BASE_URL,
-  plugins: [usernameClient(), passkeyClient()],
+  plugins: [usernameClient(), passkeyClient(), emailOTPClient()],
 };
