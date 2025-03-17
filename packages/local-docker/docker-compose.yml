@@ -5,7 +5,7 @@ services:
   ps-mysql:
     container_name: 1up-mysql-primary-db
     image: mysql:8.0
-    restart: unless-stopped
+    restart: always
     environment:
       MYSQL_DATABASE: planetscale
       MYSQL_ROOT_HOST: "%"
@@ -22,7 +22,7 @@ services:
   planetscale-proxy:
     container_name: 1up-planetscale-simulator-proxy
     image: ghcr.io/mattrobenolt/ps-http-sim:v0.0.12
-    restart: unless-stopped
+    restart: always
     command:
       [
         "-mysql-no-pass",
@@ -41,7 +41,7 @@ services:
   redis:
     container_name: 1up-redis-cache-db
     image: redis:7.2-alpine
-    restart: unless-stopped
+    restart: always
     ports:
       - "3901:6379" # expose redis on port 3102 to not collide with redis from elswhere and match memostash 310X ports
     command: redis-server --save 20 1 --loglevel warning
@@ -52,7 +52,7 @@ services:
   # minio:
   #   container_name: minio-storage
   #   image: 'bitnami/minio:latest'
-  #   restart: unless-stopped
+  #   restart: always
   #   ports:
   #     - '3902:3902'
   #     - '3903:3903'
