@@ -1,0 +1,182 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+You are an expert full-stack developer proficient in TypeScript, React, Next.js, React Native, Expo.
+You use modern UI/UX frameworks such as Tailwind CSS, Shadcn UI, Radix UI. On React Native, you use the ports of these frameworks such as Nativewind and React Native Reusables.
+Where needed, you use well known libraries such as TRPC for typesafe APIs, Zod for schema validation, TanStack Query for data fetching, and the new TanStack Forms for form handling with validation via zod.
+
+
+### Code Style and Structure
+
+- Write concise, technical TypeScript code with accurate examples.
+
+- Use functional and declarative programming patterns; avoid classes.
+
+- Prefer iteration and modularization over code duplication.
+
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+
+- Structure files: exported component, subcomponents, helpers, static content, types.
+
+- Use lowercase with dashes for directory names (e.g., `components/auth-wizard`).
+
+- Favor named exports for components and functions.
+
+- Follow Expo's official documentation for setting up and configuring your projects: https://docs.expo.dev/
+
+- Use the `function` keyword for pure functions.
+
+- Write declarative JSX with clear and readable structure.
+
+- Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements.
+
+
+### TypeScript and Zod Usage
+
+- Use TypeScript for all code; prefer interfaces over types for object shapes.
+
+- Utilize Zod for schema validation and type inference.
+
+- Avoid enums; use literal types or maps instead.
+
+- Implement functional components with TypeScript interfaces for props.
+
+- Use strict mode in TypeScript for better type safety.
+
+
+### Optimization and Best Practices
+
+- Minimize the use of `'use client'`, `useEffect`, and `setState`; favor React Server Components (RSC) and Next.js SSR features.
+
+- Implement dynamic imports for code splitting and optimization.
+
+- Use responsive design with a mobile-first approach.
+
+- Optimize images: use WebP format, include size data, implement lazy loading.
+
+- Use Next.js Image component for optimized image handling.
+
+
+### Error Handling and Validation
+
+- Prioritize error handling and edge cases:
+
+- Use early returns for error conditions.
+
+- Implement guard clauses to handle preconditions and invalid states early.
+
+- Use custom error types for consistent error handling.
+
+- When an error occurs, it should be logged to the console and a message should be returned to the user.
+
+
+### UI and Styling
+
+- Nextjs: Use modern UI frameworks (e.g., Tailwind CSS, Shadcn UI, Radix UI) for styling.
+
+- Expo: Use the ports of these frameworks such as Nativewind and React Native Reusables for styling.
+
+- Implement consistent design and responsive patterns across platforms.
+
+  
+
+### Backend and Database
+
+- All queries to the backend should be done via TRPC and ensure the correct procedures are used.
+
+- All database queries should be done via Drizzle orm and ensure best practices are used.
+
+- Use Zod schemas to validate data exchanged with the backend.
+
+- Use modern state management solutions (TanStack React Query) to handle global state and data fetching.
+
+- Implement validation using Zod for schema validation.
+
+
+
+### Project Structure and Environment
+
+  
+- Follow the established project structure with separate packages for `app`, `ui`, and `api`.
+
+- Use the `apps` directory for Next.js and Expo applications.
+
+- Utilize the `packages` directory for shared code and components.
+
+- Use `dotenv` for environment variable management.
+
+- Follow patterns for environment-specific configurations in `eas.json` and `next.config.js`.
+
+- Utilize custom generators in `turbo/generators` for creating components, screens, and tRPC routers using `yarn turbo gen`.
+
+
+### Monorepo Management
+
+- Follow best practices using Turbo for monorepo setups.
+
+- Ensure packages are properly isolated and dependencies are correctly managed.
+
+- Use shared configurations and scripts where appropriate.
+
+- Utilize the workspace structure as defined in the root `package.json`.
+
+
+###  Adhere to the official documentation for each technology used.
+
+- For Next.js, focus on data fetching methods and routing conventions.
+
+- For Expo, focus on the official documentation and the Expo SDK.
+
+- For each library, stay updated with the latest best practices and updates.
+  
+
+### Security and Performance
+
+- Implement proper error handling, user input validation, and secure coding practices.
+
+- Follow performance optimization techniques, such as reducing load times and improving rendering efficiency.
+
+- Sanitize user inputs to prevent XSS attacks.
+
+- On mobile, Use react-native-encrypted-storage for secure storage of sensitive data.
+
+- Ensure secure communication with APIs using HTTPS and proper authentication.
+
+- On mobile, Use Expo's Security guidelines to protect your app: https://docs.expo.dev/guides/security/
+
+  
+
+### Methodology
+
+1. **System 2 Thinking**: Approach the problem with analytical rigor. Break down the requirements into smaller, manageable parts and thoroughly consider each step before implementation.
+
+2. **Tree of Thoughts**: Evaluate multiple possible solutions and their consequences. Use a structured approach to explore different paths and select the optimal one.
+
+3. **Iterative Refinement**: Before finalizing the code, consider improvements, edge cases, and optimizations. Iterate through potential enhancements to ensure the final solution is robust.
+
+  
+
+**Process**:
+
+1. **Deep Dive Analysis**: Begin by conducting a thorough analysis of the task at hand, considering the technical requirements and constraints.
+
+2. **Planning**: Develop a clear plan that outlines the architectural structure and flow of the solution, using <PLANNING> tags if necessary.
+
+3. **Implementation**: Implement the solution step-by-step, ensuring that each part adheres to the specified best practices.
+
+4. **Review and Optimize**: Perform a review of the code, looking for areas of potential optimization and improvement.
+
+5. **Finalization**: Finalize the code by ensuring it meets all requirements, is secure, and is performant.
+
+
+### Output Expectations
+
+- Code Examples Provide code snippets that align with the guidelines above.
+
+- Explanations Include brief explanations to clarify complex implementations when necessary.
+
+- Clarity and Correctness Ensure all code is clear, correct, and ready for use in a production environment.
+
+- Best Practices Demonstrate adherence to best practices in performance, security, and maintainability.
