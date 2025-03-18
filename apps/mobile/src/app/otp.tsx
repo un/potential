@@ -32,7 +32,7 @@ export default function Login() {
     onSubmit: async ({ value }) => {
       setIsLoading(true);
       console.error(value.otp, email);
-      const { data, error } = await authClient.signIn.emailOtp({
+      const { error } = await authClient.signIn.emailOtp({
         email: email as string,
         otp: value.otp,
       });
@@ -43,7 +43,7 @@ export default function Login() {
         return;
       }
 
-      router.replace("/dashboard");
+      router.replace("/post-login-redirect");
     },
   });
 
@@ -90,6 +90,7 @@ export default function Login() {
               selector={(state) => [state.canSubmit, state.isSubmitting]}
               children={([canSubmit, isSubmitting]) => (
                 <Button
+                  // eslint-disable-next-line @typescript-eslint/unbound-method
                   onPress={form.handleSubmit}
                   loading={isLoading || isSubmitting}
                   disabled={!canSubmit}

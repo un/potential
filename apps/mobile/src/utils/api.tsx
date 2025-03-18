@@ -5,8 +5,8 @@ import superjson from "superjson";
 
 import type { AppRouter } from "@1up/trpc";
 
+import { authClient } from "./auth-client";
 import { getApiUrl } from "./base-url";
-import { getToken } from "./session-store";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,9 +16,6 @@ export const queryClient = new QueryClient({
   },
 });
 
-/**
- * A set of typesafe hooks for consuming your API.
- */
 export const trpc = createTRPCOptionsProxy<AppRouter>({
   client: createTRPCClient({
     links: [
@@ -33,11 +30,13 @@ export const trpc = createTRPCOptionsProxy<AppRouter>({
         url: `${getApiUrl()}/trpc`,
         headers() {
           const headers = new Map<string, string>();
-          headers.set("x-trpc-source", "expo-react");
 
-          const token = getToken();
-          if (token) headers.set("Authorization", `Bearer ${token}`);
-
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+          const cookies = authClient.getCookie();
+          if (cookies) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            headers.set("Cookie", cookies);
+          }
           return Object.fromEntries(headers);
         },
       }),

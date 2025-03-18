@@ -18,7 +18,7 @@ export default function Index() {
         if (session?.user.id) {
           // User is logged in, redirect to dashboard
 
-          router.replace("/dashboard");
+          router.replace("/post-login-redirect");
         } else {
           // User is not logged in, redirect to login
           router.replace("/login");
