@@ -12,14 +12,16 @@ import { z } from "zod";
 export const TYPE_ID_LENGTH = 26;
 
 export const cloudIdTypesMapNameToPrefix = {
-  //air
-  airReading: "ar",
   //auth ACX
   user: "acu",
   session: "acs",
   account: "aca",
   verification: "acv",
   passkey: "acp",
+
+  //user uXX
+  userProfile: "up",
+  userXpLog: "uxp",
 
   //consumption CXX
   ingredientLibrary: "cil",
@@ -40,10 +42,9 @@ export const cloudIdTypesMapNameToPrefix = {
   integration: "i",
   //sleep sXX
   sleepLog: "sl",
+  //air
+  airReading: "ar",
 
-  //user uXX
-  userProfile: "up",
-  userTag: "ut",
   // Consumption related items
 } as const;
 

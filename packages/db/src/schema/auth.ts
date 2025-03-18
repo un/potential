@@ -23,9 +23,6 @@ export const users = mysqlTable("users", {
   email: varchar("email", { length: 32 }).notNull().unique(),
   emailVerified: boolean("email_verified").notNull().default(false),
   image: text("image"),
-  // role: text("role").notNull().default(UserRoles.USER),
-  //! TODO: convert type enum to array as string
-  // role: mysqlEnum("role", [UserRoles.USER]).notNull().default(UserRoles.USER),
   banned: boolean("banned").notNull().default(false),
   banReason: text("ban_reason"),
   banExpires: timestamp("ban_expires_at"),
