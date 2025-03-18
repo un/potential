@@ -22,7 +22,7 @@ export const typeIdColumn = <const T extends CloudIdTypePrefixNames>(
 ) =>
   customType<{ data: CloudTypeId<T>; driverData: string }>({
     dataType() {
-      return "BINARY(16)";
+      return "binary(16)";
     },
     fromDriver(input: string): CloudTypeId<T> {
       const typedId = cloudTypeIdFromUUIDBytes(
