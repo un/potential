@@ -136,6 +136,9 @@ importers:
       '@1up/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@1up/consts':
+        specifier: workspace:*
+        version: link:../../packages/consts
       '@better-auth/expo':
         specifier: 'catalog:'
         version: 1.2.4(better-auth@1.2.3(typescript@5.7.3))
@@ -566,6 +569,9 @@ importers:
       '@1up/db':
         specifier: workspace:*
         version: link:../db
+      '@1up/utils':
+        specifier: workspace:*
+        version: link:../utils
       '@1up/validators':
         specifier: workspace:*
         version: link:../validators

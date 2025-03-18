@@ -1,7 +1,8 @@
 {
   "extends": "@1up/tsconfig/internal-package.json",
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "."
   },
   "include": ["src"],
   "exclude": ["node_modules"]

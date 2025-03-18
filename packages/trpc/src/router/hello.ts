@@ -2,10 +2,11 @@ import type { TRPCRouterRecord } from "@trpc/server";
 
 // import { invalidateSessionToken } from "@1up/auth";
 
-import { publicProcedure } from "../trpc";
+import { protectedProcedure } from "../trpc";
 
 export const helloRouter = {
-  hello: publicProcedure.query(() => {
+  hello: protectedProcedure.query(({ ctx }) => {
+    console.log("router context", { auth: ctx.auth });
     console.log("🔥 hello from hello router");
     return ["hello"];
   }),

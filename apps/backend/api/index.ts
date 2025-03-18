@@ -8,6 +8,7 @@ import { cors } from "hono/cors";
 import { authOptions } from "@1up/auth";
 import { db } from "@1up/db";
 import { appRouter } from "@1up/trpc";
+import { CloudTypeId } from "@1up/utils";
 
 // Initialize auth with error handling
 const auth = betterAuth({
@@ -20,12 +21,24 @@ if (!auth) {
 }
 console.log("✅ Auth initialized successfully");
 
+// auth types SYNC WITH CHANGES in packages/trpc/src/trpc.ts
+type InferredAuthUser = Omit<typeof auth.$Infer.Session.user, "id"> & {
+  id: CloudTypeId<"user">;
+};
+type InferredAuthSession = Omit<
+  typeof auth.$Infer.Session.session,
+  "id" | "userId"
+> & {
+  id: CloudTypeId<"session">;
+  userId: CloudTypeId<"user">;
+};
+
 const app = new Hono<{
   Variables: {
     db: typeof db;
     auth: {
-      user: typeof auth.$Infer.Session.user | null;
-      session: typeof auth.$Infer.Session.session | null;
+      user: InferredAuthUser | null;
+      session: InferredAuthSession | null;
     };
   };
 }>();
@@ -46,7 +59,10 @@ app.use("*", async (c, next) => {
       return next();
     }
 
-    c.set("auth", { user: session.user, session: session.session });
+    c.set("auth", {
+      user: session.user as InferredAuthUser,
+      session: session.session as InferredAuthSession,
+    });
     return next();
   } catch (error) {
     console.error("❌ Middleware error:", error);
