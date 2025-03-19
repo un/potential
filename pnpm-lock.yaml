@@ -457,6 +457,9 @@ importers:
       '@1up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@1up/utils':
+        specifier: workspace:*
+        version: link:../utils
       eslint:
         specifier: 'catalog:'
         version: 9.19.0(jiti@2.4.2)

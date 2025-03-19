@@ -7,12 +7,14 @@
         "./auth": "./src/auth.ts",
         "./consumption": "./src/consumption.ts",
         "./integrations": "./src/integrations.ts",
+        "./trackables": "./src/trackables.ts",
         "./uiColors": "./src/uiColors.ts",
         "./users": "./src/users.ts"
     },
     "devDependencies": {
         "@1up/prettier-config": "workspace:*",
         "@1up/tsconfig": "workspace:*",
+        "@1up/utils": "workspace:*",
         "eslint": "catalog:",
         "prettier": "catalog:",
         "typescript": "catalog:"

@@ -23,6 +23,11 @@ export const cloudIdTypesMapNameToPrefix = {
   userProfile: "up",
   userXpLog: "uxp",
 
+  // tracking TXX
+  trackable: "t",
+  trackableLog: "tl",
+  trackingGroup: "tg",
+
   //consumption CXX
   ingredientLibrary: "cil",
   ingredientNutrition: "cni",
