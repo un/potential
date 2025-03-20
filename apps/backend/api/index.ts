@@ -4,6 +4,7 @@ import { trpcServer } from "@hono/trpc-server";
 import { betterAuth } from "better-auth";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { logger } from "hono/logger";
 
 import { authOptions } from "@1up/auth";
 import { db } from "@1up/db";
@@ -33,6 +34,7 @@ type InferredAuthSession = Omit<
   userId: CloudTypeId<"user">;
 };
 
+// Hono App
 const app = new Hono<{
   Variables: {
     db: typeof db;
@@ -42,6 +44,10 @@ const app = new Hono<{
     };
   };
 }>();
+
+if (process.env.ENVIRONMENT === "development") {
+  app.use(logger());
+}
 
 // Add error handling middleware
 app.onError((err, c) => {
@@ -53,6 +59,11 @@ app.use("*", async (c, next) => {
   try {
     c.set("db", db);
     const session = await auth.api.getSession({ headers: c.req.raw.headers });
+
+    const path = c.req.path;
+    const method = c.req.method;
+
+    const lala = c.req;
 
     if (!session) {
       c.set("auth", { user: null, session: null });

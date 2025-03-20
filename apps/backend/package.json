@@ -1,7 +1,7 @@
 {
   "name": "@1up/backend",
   "scripts": {
-    "dev": "pnpm with-env tsx watch api/index.ts",
+    "dev": "ENVIRONMENT=development pnpm with-env tsx watch api/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint .",
