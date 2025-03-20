@@ -26,7 +26,6 @@ export const cloudIdTypesMapNameToPrefix = {
   // tracking TXX
   trackable: "t",
   trackableLog: "tl",
-  trackingGroup: "tg",
 
   //consumption CXX
   ingredientLibrary: "cil",
