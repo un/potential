@@ -60,11 +60,6 @@ app.use("*", async (c, next) => {
     c.set("db", db);
     const session = await auth.api.getSession({ headers: c.req.raw.headers });
 
-    const path = c.req.path;
-    const method = c.req.method;
-
-    const lala = c.req;
-
     if (!session) {
       c.set("auth", { user: null, session: null });
       return next();

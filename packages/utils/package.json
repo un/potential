@@ -12,7 +12,8 @@
         "./typeid": "./typeid.ts",
         "./uiColors": "./uiColors.ts",
         "./ms": "./ms.ts",
-        "./types/*": "./types/*.ts"
+        "./types/*": "./types/*.ts",
+        "./convert": "./convert.ts"
     },
     "keywords": [],
     "author": "",
@@ -23,6 +24,7 @@
     },
     "dependencies": {
         "@1up/tsconfig": "workspace:*",
+        "convert-units": "3.0.0-beta.7",
         "itty-time": "^1.0.6",
         "nanoid": "^5.1.2",
         "typeid-js": "^1.2.0",

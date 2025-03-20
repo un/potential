@@ -673,6 +673,9 @@ importers:
       '@1up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      convert-units:
+        specifier: 3.0.0-beta.7
+        version: 3.0.0-beta.7
       itty-time:
         specifier: ^1.0.6
         version: 1.0.6
@@ -4751,6 +4754,9 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+
+  convert-units@3.0.0-beta.7:
+    resolution: {integrity: sha512-14vv/OqGP/i70i0BICzGDHWVkgwoXG2ZBphsyhYdwUTEdl6x0NJJClC6hhxlu15kRNTTbkAF6xORdsdNQPBCiw==}
 
   cookie-signature@1.2.2:
     resolution: {integrity: sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==}
@@ -13597,6 +13603,8 @@ snapshots:
   convert-hrtime@3.0.0: {}
 
   convert-source-map@2.0.0: {}
+
+  convert-units@3.0.0-beta.7: {}
 
   cookie-signature@1.2.2: {}
 
