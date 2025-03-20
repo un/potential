@@ -6,7 +6,6 @@ import {
   mysqlTable,
   smallint,
   text,
-  timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
 
@@ -17,6 +16,7 @@ import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
+import { timestamps } from "./helpers";
 
 export type TrackableCustomConfig =
   | ({
@@ -75,8 +75,7 @@ export const trackables = mysqlTable("trackables", {
   color: mysqlEnum("color", [...uiColors]).notNull(),
   type: mysqlEnum("type", [...TRACKABLE_TYPES_ARRAY]).notNull(),
   customConfig: json("customConfig").$type<TrackableCustomConfig>(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
+  ...timestamps.createUpdate,
 });
 
 export const trackablesRelations = relations(trackables, ({ one, many }) => ({
@@ -105,9 +104,7 @@ export const trackableLogs = mysqlTable("trackable_logs", {
   textValue: text("textValue"),
   jsonValue: json("jsonValue").$type<TrackableLogJsonValue>(),
   source: mysqlEnum("source", ["app", "api", "integration"]),
-  loggedAt: timestamp("loggedAt").notNull().defaultNow(),
-  createdAt: timestamp("createdAt").notNull().defaultNow(),
-  updatedAt: timestamp("updatedAt").notNull().defaultNow().onUpdateNow(),
+  ...timestamps.createUpdateLogged,
 });
 
 export const trackableLogsRelations = relations(trackableLogs, ({ one }) => ({

@@ -10,6 +10,7 @@ import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
+import { timestamps } from "./helpers";
 
 import "./user";
 
@@ -24,8 +25,8 @@ export const integrations = mysqlTable("integrations", {
     INTEGRATION_ACCESS_MODE_FOR_MYSQL,
   ).notNull(),
   accessData: json("accessData").$type<IntegrationAccessData>().default({}),
-  createdAt: timestamp("created_at").notNull(),
   lastSync: timestamp("last_sync"),
+  ...timestamps.createUpdate,
 });
 
 export const integrationsRelations = relations(integrations, ({ one }) => ({

@@ -13,6 +13,7 @@ import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
+import { timestamps } from "./helpers";
 
 export const airReadings = mysqlTable("airReadings", {
   id: typeIdColumn("airReading", "id")
@@ -27,7 +28,7 @@ export const airReadings = mysqlTable("airReadings", {
   temperature: tinyint("temperature"),
   humidity: tinyint("humidity"),
   timezoneOffset: tinyint("timezoneOffset"),
-  createdAt: timestamp("created_at").notNull(),
+  ...timestamps.createUpdateLogged,
 });
 
 export const airReadingsRelations = relations(airReadings, ({ one }) => ({

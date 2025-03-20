@@ -19,6 +19,7 @@ import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./auth";
+import { timestamps } from "./helpers";
 
 // Ingredient library
 export const ingredientLibrary = mysqlTable("ingredientLibrary", {
@@ -42,8 +43,7 @@ export const ingredientLibrary = mysqlTable("ingredientLibrary", {
   alternativeNames: json("alternativeNames").$type<string[]>(),
   brand: varchar("brand", { length: 128 }),
   barcode: varchar("barcode", { length: 64 }),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  ...timestamps.createUpdate,
 });
 
 export const ingredientLibraryTableRelations = relations(
@@ -84,6 +84,7 @@ export const ingredientNutrition = mysqlTable("ingredientNutrition", {
   unit: varchar("unit", { length: 32 }).notNull(),
   per100g: boolean("per100g").default(false),
   perServing: boolean("perServing").default(false),
+  ...timestamps.createUpdate,
 });
 
 export const ingredientNutritionRelations = relations(
@@ -115,6 +116,7 @@ export const ingredientVitamins = mysqlTable("ingredientVitamins", {
   unit: varchar("unit", { length: 32 }).notNull(),
   per100g: boolean("per100g").default(false),
   perServing: boolean("perServing").default(false),
+  ...timestamps.createUpdate,
 });
 
 export const ingredientVitaminsRelations = relations(
@@ -146,6 +148,7 @@ export const ingredientMinerals = mysqlTable("ingredientMinerals", {
   unit: varchar("unit", { length: 32 }).notNull(),
   per100g: boolean("per100g").default(false),
   perServing: boolean("perServing").default(false),
+  ...timestamps.createUpdate,
 });
 
 export const ingredientMineralsRelations = relations(
@@ -185,8 +188,7 @@ export const consumableItems = mysqlTable("consumableItems", {
   isVerified: boolean("isVerified").default(false),
   alternativeNames: json("alternativeNames").$type<string[]>(),
   brand: varchar("brand", { length: 128 }),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  ...timestamps.createUpdate,
 });
 
 export const consumableItemsRelations = relations(
@@ -218,7 +220,7 @@ export const consumableItemIngredients = mysqlTable(
     quantity: int("quantity").notNull(),
     unit: varchar("unit", { length: 32 }).notNull(),
     notes: text("notes"),
-    createdAt: timestamp("created_at").notNull(),
+    ...timestamps.createUpdate,
   },
 );
 
@@ -265,6 +267,7 @@ export const consumableItemNutrition = mysqlTable("consumableItemNutrition", {
   unit: varchar("unit", { length: 32 }).notNull(),
   per100g: boolean("per100g").default(false),
   perServing: boolean("perServing").default(false),
+  ...timestamps.createUpdate,
 });
 
 export const consumableItemNutritionRelations = relations(
@@ -296,6 +299,7 @@ export const consumableItemVitamins = mysqlTable("consumableItemVitamins", {
   unit: varchar("unit", { length: 32 }).notNull(),
   per100g: boolean("per100g").default(false),
   perServing: boolean("perServing").default(false),
+  ...timestamps.createUpdate,
 });
 
 export const consumableItemVitaminsRelations = relations(
@@ -327,6 +331,7 @@ export const consumableItemMinerals = mysqlTable("consumableItemMinerals", {
   unit: varchar("unit", { length: 32 }).notNull(),
   per100g: boolean("per100g").default(false),
   perServing: boolean("perServing").default(false),
+  ...timestamps.createUpdate,
 });
 
 export const consumableItemMineralsRelations = relations(
@@ -360,7 +365,7 @@ export const consumptionLogs = mysqlTable("consumptionLogs", {
   mood: tinyint("mood"),
   tags: json("tags").$type<string[]>(),
   imageUrl: text("imageUrl"),
-  createdAt: timestamp("created_at").notNull(),
+  ...timestamps.createUpdateLogged,
 });
 
 export const consumptionLogsRelations = relations(
@@ -395,7 +400,7 @@ export const consumptionLogIngredients = mysqlTable(
     ).notNull(),
     amount: int("amount").notNull(),
     unit: varchar("unit", { length: 32 }).notNull(),
-    createdAt: timestamp("created_at").notNull(),
+    ...timestamps.createUpdateLogged,
   },
 );
 
@@ -440,7 +445,7 @@ export const consumptionLogNutrition = mysqlTable("consumptionLogNutrition", {
   ]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
-  createdAt: timestamp("created_at").notNull(),
+  ...timestamps.createUpdateLogged,
 });
 
 export const consumptionLogNutritionRelations = relations(
@@ -470,7 +475,7 @@ export const consumptionLogVitamins = mysqlTable("consumptionLogVitamins", {
   type: mysqlEnum("type", [...VITAMINS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
-  createdAt: timestamp("created_at").notNull(),
+  ...timestamps.createUpdateLogged,
 });
 
 export const consumptionLogVitaminsRelations = relations(
@@ -500,7 +505,7 @@ export const consumptionLogMinerals = mysqlTable("consumptionLogMinerals", {
   type: mysqlEnum("type", [...MINERALS_ARRAY_AS_ENUM]).notNull(),
   amount: int("amount").notNull(),
   unit: varchar("unit", { length: 32 }).notNull(),
-  createdAt: timestamp("created_at").notNull(),
+  ...timestamps.createUpdateLogged,
 });
 
 export const consumptionLogMineralsRelations = relations(
