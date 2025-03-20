@@ -10,6 +10,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
+import type { CloudTypeId } from "@1up/utils/typeid";
 import { TRACKABLE_TYPES_ARRAY } from "@1up/consts/trackables";
 import { uiColors } from "@1up/consts/uiColors";
 import { cloudTypeIdGenerator } from "@1up/utils/typeid";
@@ -51,6 +52,15 @@ export type TrackableCustomConfig =
       rangeStepLabels: Record<number, string>[];
     }
   | {
+      type: "rating";
+      // used to limit inputs
+      ratingMax: number;
+      // Labels for range extremes
+      ratingUnit?: string;
+      ratingIcon?: string;
+      ratingEmoji?: string;
+    }
+  | {
       type: "note";
       // For text-based tracking
       maxLength?: number;
@@ -77,6 +87,13 @@ export const trackablesRelations = relations(trackables, ({ one, many }) => ({
   logs: many(trackableLogs),
 }));
 
+export type TrackableLogJsonValue = {
+  integrationId?: CloudTypeId<"integration">;
+} & {
+  imageUrl: string;
+  voiceClipUrl: string;
+};
+
 export const trackableLogs = mysqlTable("trackable_logs", {
   id: typeIdColumn("trackableLog", "id")
     .primaryKey()
@@ -84,12 +101,10 @@ export const trackableLogs = mysqlTable("trackable_logs", {
   trackableId: typeIdColumn("trackable", "id").notNull(),
   ownerId: typeIdColumn("user", "user_id").notNull(),
   checked: boolean("checked"),
-  // Store numeric values for measure-type trackables
   numericValue: smallint("numericValue"),
-  // Store text values for note-type trackables
   textValue: text("textValue"),
-  // Store JSON for more complex data
-  jsonValue: json("jsonValue"),
+  jsonValue: json("jsonValue").$type<TrackableLogJsonValue>(),
+  source: mysqlEnum("source", ["app", "api", "integration"]),
   loggedAt: timestamp("loggedAt").notNull().defaultNow(),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
   updatedAt: timestamp("updatedAt").notNull().defaultNow().onUpdateNow(),
