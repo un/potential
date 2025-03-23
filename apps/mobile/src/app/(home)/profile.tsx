@@ -9,8 +9,8 @@ import { authClient } from "~/utils/auth-client";
 export default function Profile() {
   const { data: session } = authClient.useSession();
 
-  const handleLogout = () => {
-    authClient.signOut();
+  const handleLogout = async () => {
+    await authClient.signOut();
     router.replace("/");
   };
 

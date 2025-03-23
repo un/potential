@@ -6,6 +6,7 @@ import { useColorScheme } from "nativewind";
 import { Text } from "~/components/ui/text";
 
 export default function Settings() {
+  //! TODO: add delete account
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const isDarkMode = colorScheme === "dark";
 

@@ -40,7 +40,7 @@ export default function Login() {
             pathname: "/(onboarding)",
           });
         } else {
-          router.push("/dashboard");
+          router.push("/(home)");
         }
       }, 2000); // 2 seconds delay
     }

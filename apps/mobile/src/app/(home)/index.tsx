@@ -1,7 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
+import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { authClient } from "~/utils/auth-client";
 
@@ -26,6 +28,11 @@ export default function DashboardHome() {
         {/* <View className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
          <Text>aa{JSON.stringify(postQuery.data)}</Text>
         </View> */}
+        <Link href="/(home)/profile" asChild>
+          <Button>
+            <Text>Profile</Text>
+          </Button>
+        </Link>
       </View>
     </SafeAreaView>
   );
