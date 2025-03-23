@@ -31,7 +31,7 @@ export default function Profile() {
           className="mt-4 items-center rounded-lg bg-red-500 px-4 py-3"
           onPress={handleLogout}
         >
-          <Text className="font-semibold text-white">Sign Out</Text>
+          <Text className="font-semibold">Sign Out</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

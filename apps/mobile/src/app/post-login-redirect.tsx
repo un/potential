@@ -37,7 +37,7 @@ export default function Login() {
         if (profileData.lastOnboardingVersion < latestOnboardingVersion) {
           // Use href instead of push for the path pattern
           router.replace({
-            pathname: "/(onboarding)",
+            pathname: "/(updates)",
           });
         } else {
           router.push("/(home)");
