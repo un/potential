@@ -42,7 +42,7 @@ const buttonTextVariants = cva("text-sand-1 font-['Monocraft'] text-lg", {
         "text-sand-1 dark:text-sand-12 group-active:text-secondary-foreground",
       outline: "text-sand-12 group-active:text-accent-foreground",
       ghost: "text-sand-12 group-active:text-accent-foreground",
-      link: "text-primary group-active:underline",
+      link: "text-sand-12 group-active:underline",
     },
     size: {
       default: "",
