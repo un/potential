@@ -27,6 +27,9 @@ export const cloudIdTypesMapNameToPrefix = {
   trackable: "t",
   trackableLog: "tl",
 
+  //ai AXX
+  aiInputLog: "ail",
+
   //consumption CXX
   ingredientLibrary: "cil",
   ingredientNutrition: "cni",

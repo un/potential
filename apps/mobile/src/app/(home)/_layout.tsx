@@ -69,7 +69,7 @@ export default function DashboardLayout() {
       <Stack.Screen
         name="log"
         options={{
-          title: "Log something",
+          title: "New Log",
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>

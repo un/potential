@@ -2,18 +2,25 @@ import type { TextInputProps } from "react-native";
 import * as React from "react";
 import { TextInput, View } from "react-native";
 
+import type { InputProps } from "./input";
 import { cn } from "~/utils/ui";
 import { Text } from "./text";
 
-export type InputProps = TextInputProps & {
-  label?: string;
-  helperText?: string;
-  error?: string | object[];
-};
-
-const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
+const Textarea = React.forwardRef<
+  React.ElementRef<typeof TextInput>,
+  TextInputProps & InputProps
+>(
   (
-    { className, placeholderClassName, label, helperText, error, ...props },
+    {
+      className,
+      multiline = true,
+      numberOfLines = 4,
+      placeholderClassName,
+      label,
+      helperText,
+      error,
+      ...props
+    },
     ref,
   ) => {
     return (
@@ -26,11 +33,14 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
         <TextInput
           ref={ref}
           className={cn(
-            "native:leading-[1.25] border-sand-7 text-sand-12 placeholder:text-sand-10 bg-sand-1 h-12 rounded-md border px-3 font-['MartianMono-Regular'] text-base",
-            props.editable === false && "web:cursor-not-allowed opacity-50",
+            "border-sand-7 bg-sand-1 text-sand-12 placeholder:text-sand-10 min-h-[80px] w-full rounded-md border px-3 py-3 font-['MartianMono-Regular'] text-lg",
+            props.editable === false && "opacity-50",
             className,
           )}
           placeholderClassName={cn("text-sand-10", placeholderClassName)}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
+          textAlignVertical="center"
           {...props}
         />
         {helperText && !error && (
@@ -53,6 +63,6 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
   },
 );
 
-Input.displayName = "Input";
+Textarea.displayName = "Textarea";
 
-export { Input };
+export { Textarea };
