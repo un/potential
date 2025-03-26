@@ -1,5 +1,4 @@
 export * from "./schema/aiLog";
-export * from "./schema/air";
 export * from "./schema/auth";
 export * from "./schema/consumption";
 export * from "./schema/integration";

@@ -23,18 +23,29 @@ export default function DashboardHome() {
               Dashboard
             </Text>
 
-            <Text className="mb-4">
+            {/* <Text className="mb-4">
               Welcome, {session?.user.name ?? "User"}!
             </Text>
 
             <View className="rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
               <Text>Your dashboard content goes here</Text>
-            </View>
+            </View> */}
           </View>
         </ScrollView>
         <View>
-          <Button onPress={() => router.push("/(home)/log")}>
-            <Text>Log something</Text>
+          <Button
+            onPress={() => router.push("/(home)/log")}
+            className="flex flex-row gap-2"
+          >
+            <Text>Log</Text>
+          </Button>
+        </View>
+        <View>
+          <Button
+            onPress={() => router.push("/(home)/log2")}
+            className="flex flex-row gap-2"
+          >
+            <Text>Log2</Text>
           </Button>
         </View>
       </View>

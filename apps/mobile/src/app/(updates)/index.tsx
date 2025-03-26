@@ -17,20 +17,22 @@ export default function Updates() {
     <SafeAreaView className="flex-1 p-6">
       <View className="flex flex-1 flex-col gap-6">
         <Text className="text-3xl" type={"title"}>
-          Latest Updates
+          Latest{" "}
+          <Text type="title" className="text-3xl">
+            1up
+          </Text>{" "}
+          Updates
         </Text>
         <Text className="">Welcome back {session?.user.name}!</Text>
         <ScrollView>
-          <View className="flex flex-col gap-8">
-            <Text>
-              Heres whats new in <Text type="title">1up</Text> version 0.0.3
+          <View className="flex flex-col gap-4">
+            <Text className="font-bold">
+              🚀 Heres whats new in version 0.0.1
             </Text>
-            <Text>
-              Heres whats new in <Text type="title">1up</Text> version 0.0.2
-            </Text>
-            <Text>
-              Heres whats new in <Text type="title">1up</Text> version 0.0.1
-            </Text>
+            <Text>- added nutrients and macros to food/drink logging</Text>
+            <Text>- manual sleep logging</Text>
+            <Text>- manual activity logging</Text>
+            <Text>- basic supplement tracking</Text>
           </View>
         </ScrollView>
         <Link href="/(home)" asChild>

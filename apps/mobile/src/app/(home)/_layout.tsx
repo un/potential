@@ -78,6 +78,18 @@ export default function DashboardLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="log2"
+        options={{
+          title: "New Log",
+          presentation: "modal",
+          headerRight: () => (
+            <Button variant="link" size="icon" onPress={() => router.back()}>
+              <X size={24} />
+            </Button>
+          ),
+        }}
+      />
     </Stack>
   );
 }
