@@ -34,7 +34,9 @@
     "@1up/db": "workspace:*",
     "@1up/utils": "workspace:*",
     "@1up/validators": "workspace:*",
+    "@ai-sdk/anthropic": "^1.2.1",
     "@trpc/server": "catalog:",
+    "ai": "^4.2.2",
     "better-auth": "catalog:",
     "superjson": "2.2.2",
     "zod": "catalog:"
