@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useForm } from "@tanstack/react-form";
@@ -54,7 +54,11 @@ export default function Login() {
   return (
     <SafeAreaView className="flex-1">
       <Stack.Screen options={{ title: "Login" }} />
-      <View className="flex-1 items-center justify-center gap-8 p-8">
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        className="flex h-full flex-1 flex-col items-center justify-center gap-8 p-8"
+      >
+        {/* <View className="flex-1 items-center justify-center gap-8 p-8"> */}
         <Logo />
         <Text className="text-xl" type={"title"}>
           We sent a code to your email
@@ -105,7 +109,8 @@ export default function Login() {
             />
           </View>
         </View>
-      </View>
+        {/* </View> */}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

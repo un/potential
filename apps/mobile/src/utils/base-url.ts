@@ -5,7 +5,6 @@ const getBaseUrl = () => {
   const localhost = debuggerHost?.split(":")[0];
 
   if (!localhost) {
-    // return "https://turbo.t3.gg";
     throw new Error(
       "Failed to get localhost. Please point to your production server.",
     );
@@ -20,7 +19,14 @@ export const getApiUrl = (): string => {
 
   // Cast the env object to the defined type
   const env = Constants.expoConfig?.extra?.env as ExpoEnv | undefined;
-  const backendUrl = env?.EXPO_PUBLIC_BACKEND_URL;
 
-  return backendUrl ?? getBaseUrl();
+  if (
+    env?.EXPO_PUBLIC_BACKEND_URL &&
+    env.EXPO_PUBLIC_BACKEND_URL !== "" &&
+    env.EXPO_PUBLIC_BACKEND_URL.length > 0
+  ) {
+    return env.EXPO_PUBLIC_BACKEND_URL;
+  }
+
+  return getBaseUrl();
 };
