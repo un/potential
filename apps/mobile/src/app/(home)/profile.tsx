@@ -1,18 +1,18 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 
 import { Text } from "~/components/ui/text";
-import { authClient } from "~/utils/auth-client";
+import { authClient, doAuthLogout } from "~/utils/auth-client";
 
 export default function Profile() {
   const { data: session } = authClient.useSession();
-
-  const handleLogout = async () => {
-    await authClient.signOut();
-    router.replace("/");
-  };
+  const router = useRouter();
+  async function handleLogout() {
+    await doAuthLogout();
+    router.replace("../../login");
+  }
 
   return (
     <SafeAreaView className="flex-1">
@@ -29,7 +29,7 @@ export default function Profile() {
 
         <TouchableOpacity
           className="mt-4 items-center rounded-lg bg-red-500 px-4 py-3"
-          onPress={handleLogout}
+          onPress={() => handleLogout()}
         >
           <Text className="font-semibold">Sign Out</Text>
         </TouchableOpacity>

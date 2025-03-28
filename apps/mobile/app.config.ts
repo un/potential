@@ -70,5 +70,19 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         fonts: ["./assets/fonts/Monocraft.ttf"],
       },
     ],
+    [
+      "expo-camera",
+      {
+        cameraPermission: "Allow 1up Health to access your camera",
+        microphonePermission: "Allow 1up Health to access your microphone",
+        recordAudioAndroid: true,
+      },
+    ],
+    [
+      "expo-av",
+      {
+        microphonePermission: "Allow 1up Health to access your microphone.",
+      },
+    ],
   ],
 });

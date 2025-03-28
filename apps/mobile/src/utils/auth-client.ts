@@ -19,3 +19,10 @@ export const authClient = createAuthClient({
     }) as unknown as BetterAuthClientPlugin,
   ],
 });
+
+export const doAuthLogout = async () => {
+  await authClient.signOut();
+  await SecureStore.deleteItemAsync("1up_cookie");
+  await SecureStore.deleteItemAsync("1up_session_data");
+  return;
+};

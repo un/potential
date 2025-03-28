@@ -62,6 +62,8 @@ export const userXpLogs = mysqlTable("userXpLogs", {
     .$default(() => cloudTypeIdGenerator("userXpLog")),
   ownerId: typeIdColumn("user", "user_id").notNull(),
   points: int("points", { unsigned: true }).notNull(),
+  originalPoints: int("originalPoints", { unsigned: true }).notNull(),
+  multiplier: int("multiplier", { unsigned: true }).notNull(),
   actionId: varchar("actionId", { length: 64 }).notNull(),
   friendlyName: varchar("friendlyName", { length: 64 }).notNull(),
   createdAt: timestamp("created_at").notNull(),

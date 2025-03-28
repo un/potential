@@ -18,7 +18,7 @@ const loginSignupSchema = z.object({
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
-
+  const [otpError, setOtpError] = useState<string | null>(null);
   const router = useRouter();
   const { email } = useLocalSearchParams();
 
@@ -31,26 +31,29 @@ export default function Login() {
     },
     onSubmit: async ({ value }) => {
       setIsLoading(true);
-      console.error(value.otp, email);
-      const { error } = await authClient.signIn.emailOtp({
+      const { error, data } = await authClient.signIn.emailOtp({
         email: email as string,
         otp: value.otp,
       });
 
       if (error?.status) {
+        setIsLoading(false);
+        setOtpError(error.message ?? "An error occurred, try again.");
         console.error(error);
         // TODO: Add error toast
         return;
       }
-
-      router.replace("/post-login-redirect");
+      if (data) {
+        router.replace("/post-login-redirect");
+      }
+      setOtpError("Something went wrong, try again.");
+      setIsLoading(false);
     },
   });
 
   return (
     <SafeAreaView className="flex-1">
       <Stack.Screen options={{ title: "Login" }} />
-
       <View className="flex-1 items-center justify-center gap-8 p-8">
         <Logo />
         <Text className="text-xl" type={"title"}>
@@ -81,6 +84,7 @@ export default function Login() {
                       </View>
                     )}
                   />
+                  {otpError && <Text className="text-red-10">{otpError}</Text>}
                 </View>
               );
             }}

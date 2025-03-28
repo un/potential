@@ -31,10 +31,15 @@ export default function Login() {
     },
     onSubmit: async ({ value }) => {
       setIsLoading(true);
-      const { data, error } = await authClient.emailOtp.sendVerificationOtp({
+      const { error } = await authClient.emailOtp.sendVerificationOtp({
         email: value.email,
         type: "sign-in",
       });
+      if (error) {
+        setIsLoading(false);
+        console.error(error);
+        return;
+      }
       router.push({
         pathname: "/otp",
         params: {
@@ -100,6 +105,7 @@ export default function Login() {
                 selector={(state) => [state.canSubmit, state.isSubmitting]}
                 children={([canSubmit, isSubmitting]) => (
                   <Button
+                    // eslint-disable-next-line @typescript-eslint/unbound-method
                     onPress={form.handleSubmit}
                     loading={isLoading || isSubmitting}
                     disabled={!canSubmit}

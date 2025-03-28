@@ -5,10 +5,8 @@ import { useRouter } from "expo-router";
 
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
-import { authClient } from "~/utils/auth-client";
 
 export default function DashboardHome() {
-  const { data: session } = authClient.useSession();
   const router = useRouter();
   // const queryClient = useQueryClient();
 
@@ -38,14 +36,6 @@ export default function DashboardHome() {
             className="flex flex-row gap-2"
           >
             <Text>Log</Text>
-          </Button>
-        </View>
-        <View>
-          <Button
-            onPress={() => router.push("/(home)/log2")}
-            className="flex flex-row gap-2"
-          >
-            <Text>Log2</Text>
           </Button>
         </View>
       </View>

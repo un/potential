@@ -1,6 +1,9 @@
 PODS:
   - boost (1.84.0)
   - DoubleConversion (1.1.6)
+  - EXAV (15.0.3-canary-20250304-f08e984):
+    - ExpoModulesCore
+    - ReactCommon/turbomodule/core
   - EXConstants (18.0.0-canary-20250304-f08e984):
     - ExpoModulesCore
   - EXJSONUtils (0.14.1-canary-20250304-f08e984)
@@ -221,6 +224,10 @@ PODS:
     - Yoga
   - ExpoAsset (12.0.0-canary-20250304-f08e984):
     - ExpoModulesCore
+  - ExpoCamera (16.1.0-canary-20250304-f08e984):
+    - ExpoModulesCore
+    - ZXingObjC/OneD
+    - ZXingObjC/PDF417
   - ExpoFileSystem (19.0.0-canary-20250304-f08e984):
     - ExpoModulesCore
   - ExpoFont (14.0.0-canary-20250304-f08e984):
@@ -1975,10 +1982,16 @@ PODS:
     - React-Core
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
+  - ZXingObjC/Core (3.6.9)
+  - ZXingObjC/OneD (3.6.9):
+    - ZXingObjC/Core
+  - ZXingObjC/PDF417 (3.6.9):
+    - ZXingObjC/Core
 
 DEPENDENCIES:
   - boost (from `../../../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - EXAV (from `../../../node_modules/expo-av/ios`)
   - EXConstants (from `../../../node_modules/expo-constants/ios`)
   - EXJSONUtils (from `../../../node_modules/expo-json-utils/ios`)
   - EXManifests (from `../../../node_modules/expo-manifests/ios`)
@@ -1988,6 +2001,7 @@ DEPENDENCIES:
   - expo-dev-menu (from `../../../node_modules/expo-dev-menu`)
   - expo-dev-menu-interface (from `../../../node_modules/expo-dev-menu-interface/ios`)
   - ExpoAsset (from `../../../node_modules/expo-asset/ios`)
+  - ExpoCamera (from `../../../node_modules/expo-camera/ios`)
   - ExpoFileSystem (from `../../../node_modules/expo-file-system/ios`)
   - ExpoFont (from `../../../node_modules/expo-font/ios`)
   - ExpoHead (from `../../../node_modules/expo-router/ios`)
@@ -2074,12 +2088,15 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - SocketRocket
+    - ZXingObjC
 
 EXTERNAL SOURCES:
   boost:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  EXAV:
+    :path: "../../../node_modules/expo-av/ios"
   EXConstants:
     :path: "../../../node_modules/expo-constants/ios"
   EXJSONUtils:
@@ -2098,6 +2115,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/expo-dev-menu-interface/ios"
   ExpoAsset:
     :path: "../../../node_modules/expo-asset/ios"
+  ExpoCamera:
+    :path: "../../../node_modules/expo-camera/ios"
   ExpoFileSystem:
     :path: "../../../node_modules/expo-file-system/ios"
   ExpoFont:
@@ -2263,6 +2282,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
+  EXAV: 624d33de7b956433117693e737bac77a1ba5aa38
   EXConstants: 7b75661a962523d0787be64686418225e34a3e36
   EXJSONUtils: e666e14aa24dd2851f734aaf53dc3e76786feb5f
   EXManifests: 42b208668376452c9b2655a0122490245db9fd73
@@ -2272,6 +2292,7 @@ SPEC CHECKSUMS:
   expo-dev-menu: b7ea1c1d0fc9652a77e31aac436dea4f62bdd9c0
   expo-dev-menu-interface: a750bce59cf65904d5a9b88e8b26cdd7cb9804ca
   ExpoAsset: 4e648c6f1e5926e45132daefc1cb59db04951652
+  ExpoCamera: 4b37c012d9916b93b911e9e92e0ffad849410b77
   ExpoFileSystem: 86f07793baf5d572588019f4ab4bcf9b5d672406
   ExpoFont: 60f2a66fdb18048fbb62ee71bc4b999c0c1f21d6
   ExpoHead: 34e96e3df811f948e6b9d910c52fd155104e3f65
@@ -2353,6 +2374,7 @@ SPEC CHECKSUMS:
   RNSVG: 4c63b12b7b5761063bca4f20dd228f6a8370f614
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: afd04ff05ebe0121a00c468a8a3c8080221cb14c
+  ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
 PODFILE CHECKSUM: 3d57511620d118434a37a23b2ab6b4aa1cc1f3b8
 

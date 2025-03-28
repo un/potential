@@ -1,122 +1,245 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useState } from "react";
+import { Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
-import { useForm } from "@tanstack/react-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { z } from "zod";
+import {
+  ArrowsClockwise,
+  Barcode,
+  Bed,
+  Brain,
+  Camera,
+  Drop,
+  Lightning,
+  MagnifyingGlass,
+  Microphone,
+  PersonArmsSpread,
+  PersonSimpleRun,
+  Pill,
+  TextAa,
+  Virus,
+} from "phosphor-react-native";
 
-import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
-import { Textarea } from "~/components/ui/textarea";
-import { trpc } from "~/utils/api";
+import {
+  AudioStep,
+  PhotoStep,
+  ScanStep,
+  SearchStep,
+  TextStep,
+} from "./logSteps/fooddrink";
+import { BloodStep, BodyStep, SymptomsStep } from "./logSteps/medical";
+import { ActivitiesStep, EnergyStep, SleepStep } from "./logSteps/physical";
+import { CyclesStep, MindStep, SupplementsStep } from "./logSteps/prevention";
 
-const logTextSchema = z.object({
-  text: z
-    .string()
-    .min(4, { message: "Keep writing!" })
-    .max(1024, { message: "Sorry, we can't log that much text... Yet!" }),
-});
+// Button component for consistent styling and behavior
+function LogButton({
+  icon,
+  label,
+  onPress,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      className="bg-sand-3 flex h-28 w-[31%] flex-col items-center justify-center gap-4 rounded-md"
+      onPress={onPress}
+      android_ripple={{ color: "rgba(0, 0, 0, 0.1)" }}
+    >
+      {icon}
+      <Text className="text-sm">{label}</Text>
+    </Pressable>
+  );
+}
+
+// Variant for the wider buttons
+function WideLogButton({
+  icon,
+  label,
+  onPress,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      className="bg-sand-3 flex h-14 w-[48%] flex-row items-center justify-center gap-2 rounded-md"
+      onPress={onPress}
+      android_ripple={{ color: "rgba(0, 0, 0, 0.1)" }}
+    >
+      {icon}
+      <Text className="text-sm">{label}</Text>
+    </Pressable>
+  );
+}
+
+// Define step types for our state management
+type StepType =
+  | null
+  | "photo"
+  | "audio"
+  | "text"
+  | "scan"
+  | "search"
+  | "activities"
+  | "energy"
+  | "sleep"
+  | "supplements"
+  | "cycles"
+  | "mind"
+  | "symptoms"
+  | "blood"
+  | "body";
 
 export default function Logger() {
-  const router = useRouter();
-  const queryClient = useQueryClient();
+  // State to track which step we're on
+  const [currentStep, setCurrentStep] = useState<StepType>(null);
 
-  const textAreaPlaceholders = [
-    "Ate a BrandName protein bar",
-    "Went for a 45 minute walk",
-    "Drank 2 cups of coffee",
-    "Took my daily supplements",
-    "Finished a 30 min mediation",
-    "Drank a tall glass of water",
-  ];
+  // Handler to go back to main screen
+  const handleBack = () => setCurrentStep(null);
 
-  const [placeholder, setPlaceholder] = React.useState(textAreaPlaceholders[0]);
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(
-        Math.random() * textAreaPlaceholders.length,
-      );
-      setPlaceholder(textAreaPlaceholders[randomIndex]);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [textAreaPlaceholders]);
-
-  const { mutateAsync, error } = useMutation(
-    trpc.log.createTextLog.mutationOptions({
-      async onSuccess() {
-        // setTitle("");
-        // setContent("");
-        // await queryClient.invalidateQueries(trpc.post.all.queryFilter());
-      },
-    }),
-  );
-
-  //  const postQuery = useQuery(trpc.post.all.queryOptions());
-
-  const form = useForm({
-    defaultValues: {
-      text: "",
-    },
-    validators: {
-      onChange: logTextSchema,
-    },
-    onSubmit: async ({ value }) => {
-      await mutateAsync({
-        text: value.text,
-      });
-      if (error) {
-        console.error(error);
-      }
-      // router.back();
-    },
-  });
+  // Render the current step component
+  const renderStep = () => {
+    switch (currentStep) {
+      case "photo":
+        return <PhotoStep onBack={handleBack} />;
+      case "audio":
+        return <AudioStep onBack={handleBack} />;
+      case "text":
+        return <TextStep onBack={handleBack} />;
+      case "scan":
+        return <ScanStep onBack={handleBack} />;
+      case "search":
+        return <SearchStep onBack={handleBack} />;
+      case "activities":
+        return <ActivitiesStep onBack={handleBack} />;
+      case "energy":
+        return <EnergyStep onBack={handleBack} />;
+      case "sleep":
+        return <SleepStep onBack={handleBack} />;
+      case "supplements":
+        return <SupplementsStep onBack={handleBack} />;
+      case "cycles":
+        return <CyclesStep onBack={handleBack} />;
+      case "mind":
+        return <MindStep onBack={handleBack} />;
+      case "symptoms":
+        return <SymptomsStep onBack={handleBack} />;
+      case "blood":
+        return <BloodStep onBack={handleBack} />;
+      case "body":
+        return <BodyStep onBack={handleBack} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
-      <View className="flex flex-col gap-6 p-6">
-        <form.Field
-          name="text"
-          validators={{
-            onChangeAsyncDebounceMs: 1500,
-          }}
-          children={(field) => {
-            // Avoid hasty abstractions. Render props are great!
-            return (
-              <Textarea
-                id={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChangeText={field.handleChange}
-                error={field.state.meta.errors as object[]}
-                label="What do you want to log?"
-                placeholder={placeholder}
-                editable={!form.state.isSubmitting}
+      <ScrollView>
+        <View className="flex w-full flex-col gap-6 p-6">
+          <View className="border-sand-3 flex flex-col gap-4 border-b-2 pb-4">
+            <Text type="title" className="-mb-2">
+              Food and Drink
+            </Text>
+            <View className="flex w-full flex-row items-center justify-between gap-2">
+              <LogButton
+                icon={<Camera size={24} weight="bold" />}
+                label="Photo"
+                onPress={() => setCurrentStep("photo")}
               />
-            );
-          }}
-        />
-        <Text className="text-sand-11 text-sm">
-          Tips: Be as detailed as possible. We'll automagically detect if you're
-          already tracking this item, and create a new tracking category if
-          you're not.
-        </Text>
+              <LogButton
+                icon={<Microphone size={24} weight="bold" />}
+                label="Audio"
+                onPress={() => setCurrentStep("audio")}
+              />
+              <LogButton
+                icon={<TextAa size={24} weight="bold" />}
+                label="Text"
+                onPress={() => setCurrentStep("text")}
+              />
+            </View>
+            <View className="flex w-full flex-row items-center justify-between gap-2">
+              <WideLogButton
+                icon={<Barcode size={24} weight="bold" />}
+                label="Scan"
+                onPress={() => setCurrentStep("scan")}
+              />
+              <WideLogButton
+                icon={<MagnifyingGlass size={24} weight="bold" />}
+                label="Search"
+                onPress={() => setCurrentStep("search")}
+              />
+            </View>
+          </View>
+          <View className="border-sand-3 flex flex-col gap-6 border-b-2 pb-4">
+            <Text type="title" className="-mb-4">
+              Physical
+            </Text>
+            <View className="flex w-full flex-row items-center justify-between gap-2">
+              <LogButton
+                icon={<PersonSimpleRun size={24} weight="bold" />}
+                label="Activities"
+                onPress={() => setCurrentStep("activities")}
+              />
+              <LogButton
+                icon={<Lightning size={24} weight="bold" />}
+                label="Energy"
+                onPress={() => setCurrentStep("energy")}
+              />
+              <LogButton
+                icon={<Bed size={24} weight="bold" />}
+                label="Sleep"
+                onPress={() => setCurrentStep("sleep")}
+              />
+            </View>
+            <Text type="title" className="-mb-4">
+              Prevention & Monitoring
+            </Text>
+            <View className="flex w-full flex-row items-center justify-between gap-2">
+              <LogButton
+                icon={<Pill size={24} weight="bold" />}
+                label="Supplements"
+                onPress={() => setCurrentStep("supplements")}
+              />
+              <LogButton
+                icon={<ArrowsClockwise size={24} weight="bold" />}
+                label="Cycles"
+                onPress={() => setCurrentStep("cycles")}
+              />
+              <LogButton
+                icon={<Brain size={24} weight="bold" />}
+                label="Mind"
+                onPress={() => setCurrentStep("mind")}
+              />
+            </View>
+            <Text type="title" className="-mb-4">
+              Medical
+            </Text>
+            <View className="flex w-full flex-row items-center justify-between gap-2">
+              <LogButton
+                icon={<Virus size={24} weight="bold" />}
+                label="Symptoms"
+                onPress={() => setCurrentStep("symptoms")}
+              />
+              <LogButton
+                icon={<Drop size={24} weight="bold" />}
+                label="Blood"
+                onPress={() => setCurrentStep("blood")}
+              />
+              <LogButton
+                icon={<PersonArmsSpread size={24} weight="bold" />}
+                label="Body"
+                onPress={() => setCurrentStep("body")}
+              />
+            </View>
+          </View>
+        </View>
+      </ScrollView>
 
-        <form.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting]}
-          children={([canSubmit, isSubmitting]) => (
-            <Button
-              onPress={() => form.handleSubmit()}
-              loading={isSubmitting}
-              disabled={!canSubmit}
-              className="mt-6"
-            >
-              <Text>Log it</Text>
-            </Button>
-          )}
-        />
-      </View>
+      {/* Render the current step as an overlay */}
+      {renderStep()}
     </SafeAreaView>
   );
 }
