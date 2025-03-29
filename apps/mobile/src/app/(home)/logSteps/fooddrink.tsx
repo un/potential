@@ -1,8 +1,15 @@
 import React from "react";
+import { View } from "react-native";
+import { useForm } from "@tanstack/react-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { z } from "zod";
 
 import AudioRecorderComponent from "~/components/app/audioRecorder";
 import { CameraComponent } from "~/components/app/camera";
+import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
+import { Textarea } from "~/components/ui/textarea";
+import { trpc } from "~/utils/api";
 import { LogStepWrapper } from "./LogStepWrapper";
 
 // Step components for each button
@@ -21,13 +28,111 @@ export const AudioStep = ({ onBack }: { onBack: () => void }) => (
   </LogStepWrapper>
 );
 
+const foodDrinkTextSchema = z.object({
+  text: z
+    .string()
+    .min(4, { message: "Keep writing!" })
+    .max(1024, { message: "Sorry, we can't log that much text... Yet!" }),
+});
+
 // Add new text step
-export const TextStep = ({ onBack }: { onBack: () => void }) => (
-  <LogStepWrapper title="Text Log" onBack={onBack}>
-    <Text>Text logging content goes here</Text>
-    {/* Add your text logging UI here */}
-  </LogStepWrapper>
-);
+export const TextStep = ({ onBack }: { onBack: () => void }) => {
+  const queryClient = useQueryClient();
+
+  const textAreaPlaceholders = [
+    "Ate a BrandName protein bar",
+    "Tall frappeCaraMatcha coffee",
+    "Large bowl of Katsu curry",
+    "I'll just have the salad",
+    "Drank a tall glass of water",
+  ];
+
+  const [placeholder, setPlaceholder] = React.useState(textAreaPlaceholders[0]);
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const randomIndex = Math.floor(
+        Math.random() * textAreaPlaceholders.length,
+      );
+      setPlaceholder(textAreaPlaceholders[randomIndex]);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [textAreaPlaceholders]);
+
+  const { mutateAsync, error } = useMutation(
+    trpc.log.createTextLog.mutationOptions({
+      async onSuccess() {
+        // setTitle("");
+        // setContent("");
+        // await queryClient.invalidateQueries(trpc.post.all.queryFilter());
+      },
+    }),
+  );
+
+  //  const postQuery = useQuery(trpc.post.all.queryOptions());
+
+  const form = useForm({
+    defaultValues: {
+      text: "",
+    },
+    validators: {
+      onChange: foodDrinkTextSchema,
+    },
+    onSubmit: async ({ value }) => {
+      await mutateAsync({
+        text: value.text,
+      });
+      if (error) {
+        console.error(error);
+      }
+      // router.back();
+    },
+  });
+  return (
+    <LogStepWrapper title="Text Log" onBack={onBack}>
+      <View className="flex flex-col gap-6">
+        <form.Field
+          name="text"
+          validators={{
+            onChangeAsyncDebounceMs: 1500,
+          }}
+          children={(field) => {
+            return (
+              <Textarea
+                id={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChangeText={field.handleChange}
+                error={field.state.meta.errors as object[]}
+                label="What did you eat or drink?"
+                placeholder={placeholder}
+                editable={!form.state.isSubmitting}
+              />
+            );
+          }}
+        />
+        <Text className="text-sand-11 text-sm">
+          Tips: Be as detailed as possible about the components and size of this
+          meal/drink.
+        </Text>
+
+        <form.Subscribe
+          selector={(state) => [state.canSubmit, state.isSubmitting]}
+          children={([canSubmit, isSubmitting]) => (
+            <Button
+              onPress={() => form.handleSubmit()}
+              loading={isSubmitting}
+              disabled={!canSubmit}
+              className="mt-6"
+            >
+              <Text>Log it</Text>
+            </Button>
+          )}
+        />
+      </View>
+    </LogStepWrapper>
+  );
+};
 
 // Add scan step
 export const ScanStep = ({ onBack }: { onBack: () => void }) => (

@@ -26,26 +26,28 @@ export function CameraComponent() {
   }
 
   return (
-    <View className="bg-red-5 h-full w-full items-center justify-center">
+    <View className="bg-red-5 -mb-12 w-full flex-1">
       <CameraView
-        className="bg-green-5 flex h-full w-full flex-col items-end rounded-3xl p-8"
+        className="mb-0"
         facing={facing}
         mode={"picture"}
         flash={"auto"}
       >
-        <View className="m-4 flex w-full flex-row items-center justify-between bg-transparent p-12">
-          <TouchableOpacity
-            className="bg-sand-11 rounded-3xl p-4"
-            onPress={toggleCameraFacing}
-          >
-            <ArrowsClockwise size={24} weight="bold" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="bg-sand-11 rounded-3xl p-4"
-            onPress={toggleCameraFacing}
-          >
-            <Camera size={24} weight="bold" />
-          </TouchableOpacity>
+        <View className="flex h-full flex-col items-center justify-end rounded-xl">
+          <View className="flex w-full flex-row items-center justify-between rounded-xl p-14 pb-16">
+            <TouchableOpacity
+              className="bg-sand-10 rounded-3xl p-4"
+              onPress={toggleCameraFacing}
+            >
+              <ArrowsClockwise size={24} weight="bold" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="bg-sand-10 rounded-3xl p-4"
+              onPress={toggleCameraFacing}
+            >
+              <Camera size={24} weight="bold" />
+            </TouchableOpacity>
+          </View>
         </View>
       </CameraView>
     </View>

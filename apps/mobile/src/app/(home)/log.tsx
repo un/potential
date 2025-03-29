@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
+  ArrowCounterClockwise,
   ArrowsClockwise,
   Barcode,
   Bed,
@@ -9,7 +10,6 @@ import {
   Camera,
   Drop,
   Lightning,
-  MagnifyingGlass,
   Microphone,
   PersonArmsSpread,
   PersonSimpleRun,
@@ -77,20 +77,20 @@ function WideLogButton({
 // Define step types for our state management
 type StepType =
   | null
-  | "photo"
-  | "audio"
-  | "text"
-  | "scan"
-  | "search"
-  | "activities"
-  | "energy"
-  | "sleep"
-  | "supplements"
-  | "cycles"
-  | "mind"
-  | "symptoms"
-  | "blood"
-  | "body";
+  | "food:photo"
+  | "food:audio"
+  | "food:text"
+  | "food:scan"
+  | "food:search"
+  | "physical:activities"
+  | "physical:energy"
+  | "physical:sleep"
+  | "prevention:supplements"
+  | "prevention:cycles"
+  | "prevention:mind"
+  | "medical:symptoms"
+  | "medical:blood"
+  | "medical:body";
 
 export default function Logger() {
   // State to track which step we're on
@@ -102,33 +102,33 @@ export default function Logger() {
   // Render the current step component
   const renderStep = () => {
     switch (currentStep) {
-      case "photo":
+      case "food:photo":
         return <PhotoStep onBack={handleBack} />;
-      case "audio":
+      case "food:audio":
         return <AudioStep onBack={handleBack} />;
-      case "text":
+      case "food:text":
         return <TextStep onBack={handleBack} />;
-      case "scan":
+      case "food:scan":
         return <ScanStep onBack={handleBack} />;
-      case "search":
+      case "food:search":
         return <SearchStep onBack={handleBack} />;
-      case "activities":
+      case "physical:activities":
         return <ActivitiesStep onBack={handleBack} />;
-      case "energy":
+      case "physical:energy":
         return <EnergyStep onBack={handleBack} />;
-      case "sleep":
+      case "physical:sleep":
         return <SleepStep onBack={handleBack} />;
-      case "supplements":
+      case "prevention:supplements":
         return <SupplementsStep onBack={handleBack} />;
-      case "cycles":
+      case "prevention:cycles":
         return <CyclesStep onBack={handleBack} />;
-      case "mind":
+      case "prevention:mind":
         return <MindStep onBack={handleBack} />;
-      case "symptoms":
+      case "medical:symptoms":
         return <SymptomsStep onBack={handleBack} />;
-      case "blood":
+      case "medical:blood":
         return <BloodStep onBack={handleBack} />;
-      case "body":
+      case "medical:body":
         return <BodyStep onBack={handleBack} />;
       default:
         return null;
@@ -147,29 +147,29 @@ export default function Logger() {
               <LogButton
                 icon={<Camera size={24} weight="bold" />}
                 label="Photo"
-                onPress={() => setCurrentStep("photo")}
+                onPress={() => setCurrentStep("food:photo")}
               />
               <LogButton
                 icon={<Microphone size={24} weight="bold" />}
                 label="Audio"
-                onPress={() => setCurrentStep("audio")}
+                onPress={() => setCurrentStep("food:audio")}
               />
               <LogButton
                 icon={<TextAa size={24} weight="bold" />}
                 label="Text"
-                onPress={() => setCurrentStep("text")}
+                onPress={() => setCurrentStep("food:text")}
               />
             </View>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <WideLogButton
                 icon={<Barcode size={24} weight="bold" />}
                 label="Scan"
-                onPress={() => setCurrentStep("scan")}
+                onPress={() => setCurrentStep("food:scan")}
               />
               <WideLogButton
-                icon={<MagnifyingGlass size={24} weight="bold" />}
-                label="Search"
-                onPress={() => setCurrentStep("search")}
+                icon={<ArrowCounterClockwise size={24} weight="bold" />}
+                label="Recent"
+                onPress={() => setCurrentStep("food:search")}
               />
             </View>
           </View>
@@ -181,17 +181,17 @@ export default function Logger() {
               <LogButton
                 icon={<PersonSimpleRun size={24} weight="bold" />}
                 label="Activities"
-                onPress={() => setCurrentStep("activities")}
+                onPress={() => setCurrentStep("physical:activities")}
               />
               <LogButton
                 icon={<Lightning size={24} weight="bold" />}
                 label="Energy"
-                onPress={() => setCurrentStep("energy")}
+                onPress={() => setCurrentStep("physical:energy")}
               />
               <LogButton
                 icon={<Bed size={24} weight="bold" />}
                 label="Sleep"
-                onPress={() => setCurrentStep("sleep")}
+                onPress={() => setCurrentStep("physical:sleep")}
               />
             </View>
             <Text type="title" className="-mb-4">
@@ -201,17 +201,17 @@ export default function Logger() {
               <LogButton
                 icon={<Pill size={24} weight="bold" />}
                 label="Supplements"
-                onPress={() => setCurrentStep("supplements")}
+                onPress={() => setCurrentStep("prevention:supplements")}
               />
               <LogButton
                 icon={<ArrowsClockwise size={24} weight="bold" />}
                 label="Cycles"
-                onPress={() => setCurrentStep("cycles")}
+                onPress={() => setCurrentStep("prevention:cycles")}
               />
               <LogButton
                 icon={<Brain size={24} weight="bold" />}
                 label="Mind"
-                onPress={() => setCurrentStep("mind")}
+                onPress={() => setCurrentStep("prevention:mind")}
               />
             </View>
             <Text type="title" className="-mb-4">
@@ -221,17 +221,17 @@ export default function Logger() {
               <LogButton
                 icon={<Virus size={24} weight="bold" />}
                 label="Symptoms"
-                onPress={() => setCurrentStep("symptoms")}
+                onPress={() => setCurrentStep("medical:symptoms")}
               />
               <LogButton
                 icon={<Drop size={24} weight="bold" />}
                 label="Blood"
-                onPress={() => setCurrentStep("blood")}
+                onPress={() => setCurrentStep("medical:blood")}
               />
               <LogButton
                 icon={<PersonArmsSpread size={24} weight="bold" />}
                 label="Body"
-                onPress={() => setCurrentStep("body")}
+                onPress={() => setCurrentStep("medical:body")}
               />
             </View>
           </View>
