@@ -1,23 +1,11 @@
 import Constants from "expo-constants";
 
-const getBaseUrl = () => {
-  const debuggerHost = Constants.expoConfig?.hostUri;
-  const localhost = debuggerHost?.split(":")[0];
-
-  if (!localhost) {
-    throw new Error(
-      "Failed to get localhost. Please point to your production server.",
-    );
-  }
-  return `http://${localhost}:3100`;
-};
 export const getApiUrl = (): string => {
-  // Define the type for the environment variables
   interface ExpoEnv {
     EXPO_PUBLIC_BACKEND_URL?: string;
   }
 
-  // Cast the env object to the defined type
+  // get backend api url from env
   const env = Constants.expoConfig?.extra?.env as ExpoEnv | undefined;
 
   if (
@@ -28,5 +16,15 @@ export const getApiUrl = (): string => {
     return env.EXPO_PUBLIC_BACKEND_URL;
   }
 
-  return getBaseUrl();
+  // if backend env is not set, assume localhost, fetch and use IP address
+
+  const debuggerHost = Constants.expoConfig?.hostUri;
+  const localhost = debuggerHost?.split(":")[0];
+
+  if (!localhost) {
+    throw new Error(
+      "Failed to get localhost. Please point to your production server.",
+    );
+  }
+  return `http://${localhost}:3100`;
 };
