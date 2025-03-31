@@ -11,6 +11,11 @@ import { db } from "@1up/db";
 import { appRouter } from "@1up/trpc";
 import { CloudTypeId } from "@1up/utils";
 
+import { 
+  createSignedImageUrl,
+  doesUserOwnImage
+} from "@1up/storage";
+
 // Initialize auth with error handling
 const auth = betterAuth({
   ...authOptions,
@@ -128,6 +133,41 @@ app.use(
 // Health Check
 app.get("/", async (c) => {
   return c.json({ message: "im alive!" });
+});
+
+// Image proxy endpoint for Cloudflare Images
+app.get("/images/:imageId/:variant?", async (c) => {
+  try {
+    // Get image ID from params
+    const imageId = c.req.param("imageId");
+    
+    // Get variant (optional, defaults to "public")
+    const variant = c.req.param("variant") || "public";
+    
+    // Get user session
+    const session = c.get("auth");
+    
+    if (!session.user) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+    
+    // Check if user owns the image
+    const userId = session.user.id;
+    const isOwner = await doesUserOwnImage(imageId, userId);
+    
+    if (!isOwner) {
+      return c.json({ error: "Forbidden - you don't have access to this image" }, 403);
+    }
+    
+    // Generate a signed URL for accessing the image
+    const url = await createSignedImageUrl(imageId, variant);
+    
+    // Redirect to the signed URL
+    return c.redirect(url);
+  } catch (error) {
+    console.error("Error serving image:", error);
+    return c.json({ error: "Internal Server Error" }, 500);
+  }
 });
 
 // Server initialization with error handling

@@ -19,6 +19,7 @@
   "dependencies": {
     "@1up/auth": "workspace:*",
     "@1up/consts": "workspace:*",
+    "@1up/storage": "workspace:*",
     "@better-auth/expo": "catalog:",
     "@expo-google-fonts/martian-mono": "0.2.3",
     "@expo/metro-config": "^0.19.9",

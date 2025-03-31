@@ -13,7 +13,8 @@
         "./uiColors": "./uiColors.ts",
         "./ms": "./ms.ts",
         "./types/*": "./types/*.ts",
-        "./convert": "./convert.ts"
+        "./convert": "./convert.ts",
+        "./storage": "./storage.ts"
     },
     "keywords": [],
     "author": "",

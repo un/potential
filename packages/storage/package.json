@@ -1,0 +1,32 @@
+{
+  "name": "@1up/storage",
+  "version": "1.0.0",
+  "description": "Shared storage utilities for 1up",
+  "type": "module",
+  "main": "./index.ts",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "exports": {
+    ".": "./index.ts",
+    "./s3": "./s3.ts",
+    "./utils": "./utils.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  },
+  "dependencies": {
+    "@1up/tsconfig": "workspace:*",
+    "@aws-sdk/client-s3": "^3.532.0",
+    "@aws-sdk/s3-request-presigner": "^3.532.0",
+    "date-fns": "^3.0.0",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@1up/eslint-config": "workspace:*"
+  }
+}
