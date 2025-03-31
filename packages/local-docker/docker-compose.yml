@@ -48,41 +48,41 @@ services:
     volumes:
       - redis-data:/data
 
-  # # Local S3 Strorage
-  # minio:
-  #   container_name: minio-storage
-  #   image: 'bitnami/minio:latest'
-  #   restart: always
-  #   ports:
-  #     - '3902:3902'
-  #     - '3903:3903'
-  #   environment:
-  #     - MINIO_ROOT_USER=minioroot
-  #     - MINIO_ROOT_PASSWORD=minioroot
-  #     - MINIO_API_PORT_NUMBER=3902
-  #     - MINIO_CONSOLE_PORT_NUMBER=3903
-  #   volumes:
-  #     - minio-data:/bitnami/minio/data
-  #     - minio-certs:/certs
+  # Local S3 Strorage
+  minio:
+    container_name: minio-storage
+    image: "bitnami/minio:latest"
+    restart: always
+    ports:
+      - "3902:3902"
+      - "3903:3903"
+    environment:
+      - MINIO_ROOT_USER=minioroot
+      - MINIO_ROOT_PASSWORD=minioroot
+      - MINIO_API_PORT_NUMBER=3902
+      - MINIO_CONSOLE_PORT_NUMBER=3903
+    volumes:
+      - minio-data:/bitnami/minio/data
+      - minio-certs:/certs
 
-  # createbuckets:
-  #   container_name: minio-bucket-creation
-  #   image: minio/mc
-  #   depends_on:
-  #     - minio
-  #   entrypoint: >
-  #     /bin/sh -c "
-  #     sleep 10;
-  #     /usr/bin/mc alias set myminio http://minio:3902 minioroot minioroot;
-  #     /usr/bin/mc mb myminio/avatars;
-  #     /usr/bin/mc mb myminio/attachments;
-  #     echo '{\"Version\": \"2012-10-17\",\"Statement\": [{\"Effect\": \"Allow\",\"Principal\": {\"AWS\": [\"*\"]},\"Action\": [\"s3:GetObject\"],\"Resource\": [\"arn:aws:s3:::avatars/*\"]}]}' > /tmp/policy.json;
-  #     /usr/bin/mc anonymous set-json /tmp/policy.json myminio/avatars;
-  #     exit 0;
-  #     "
+  createbuckets:
+    container_name: minio-bucket-creation
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 10;
+      /usr/bin/mc alias set myminio http://minio:3902 minioroot minioroot;
+      /usr/bin/mc mb myminio/avatars;
+      /usr/bin/mc mb myminio/uploads;
+      echo '{\"Version\": \"2012-10-17\",\"Statement\": [{\"Effect\": \"Allow\",\"Principal\": {\"AWS\": [\"*\"]},\"Action\": [\"s3:GetObject\"],\"Resource\": [\"arn:aws:s3:::avatars/*\"]}]}' > /tmp/policy.json;
+      /usr/bin/mc anonymous set-json /tmp/policy.json myminio/avatars;
+      exit 0;
+      "
 
 volumes:
   ps-mysql:
   redis-data:
-  # minio-data:
-  # minio-certs:
+  minio-data:
+  minio-certs:
