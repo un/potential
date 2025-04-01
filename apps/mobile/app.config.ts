@@ -84,5 +84,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         microphonePermission: "Allow 1up Health to access your microphone.",
       },
     ],
+    [
+      "expo-image-picker",
+      {
+        photosPermission:
+          "Allow 1up Health to access your photos and let you upload them.",
+      },
+    ],
   ],
 });

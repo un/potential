@@ -11,5 +11,5 @@
   },
 
   "eslint.useFlatConfig": true,
-  "cSpell.words": ["trackables"]
+  "cSpell.words": ["Pressable", "trackables"]
 }
