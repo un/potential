@@ -31,14 +31,15 @@ const database = createEnv({
 
 const email = createEnv({
   server: {
-    RESEND_API_KEY: z.string().min(1),
+    RESEND_API_KEY: z.string().optional(),
   },
   runtimeEnv: process.env,
 });
 
 const storage = createEnv({
   server: {
-    STORAGE_S3_BUCKET: z.string().min(1),
+    STORAGE_S3_BUCKET_UPLOADS: z.string().min(1),
+    STORAGE_S3_BUCKET_AVATARS: z.string().min(1),
     STORAGE_S3_REGION: z.string().min(1),
     STORAGE_S3_ENDPOINT: z.string().min(1),
     STORAGE_S3_ACCESS_KEY_ID: z.string().min(1),

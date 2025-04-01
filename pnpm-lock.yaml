@@ -102,6 +102,9 @@ importers:
       '@1up/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@1up/env':
+        specifier: workspace:*
+        version: link:../../packages/env
       '@1up/storage':
         specifier: workspace:*
         version: link:../../packages/storage

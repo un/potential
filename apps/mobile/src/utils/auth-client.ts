@@ -9,7 +9,8 @@ import { getApiUrl } from "./base-url";
 const authUrl = getApiUrl();
 
 export const authClient = createAuthClient({
-  baseURL: authUrl,
+  baseURL: authUrl + "/auth",
+
   plugins: [
     emailOTPClient(),
     expoClient({

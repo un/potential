@@ -4,7 +4,7 @@ import { z } from "zod";
 export const shared = createEnv({
   clientPrefix: "PUBLIC_",
   client: {
-    PUBLIC_BACKEND_URL: z.string().min(1),
+    PUBLIC_BACKEND_URL: z.string().min(1).optional(),
   },
   runtimeEnv: process.env,
 });
@@ -12,7 +12,7 @@ export const shared = createEnv({
 export const expo = createEnv({
   clientPrefix: "EXPO_PUBLIC_",
   client: {
-    EXPO_PUBLIC_BACKEND_URL: z.string().min(1),
+    EXPO_PUBLIC_BACKEND_URL: z.string().optional(),
   },
   runtimeEnv: process.env,
 });
@@ -21,6 +21,7 @@ export const web = createEnv({
   clientPrefix: "NEXT_PUBLIC_",
   client: {
     NEXT_PUBLIC_URL: z.string().min(1),
+    NEXT_PUBLIC_BACKEND_URL: z.string().min(1),
   },
   runtimeEnv: process.env,
 });

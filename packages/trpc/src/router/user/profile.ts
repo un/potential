@@ -35,6 +35,8 @@ export const profileRouter = {
         friendlyName: "Onboarding",
         points: 50,
         createdAt: new Date(),
+        originalPoints: 50,
+        multiplier: 1,
       });
     }
 
