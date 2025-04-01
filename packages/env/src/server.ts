@@ -41,7 +41,7 @@ const storage = createEnv({
     STORAGE_S3_BUCKET_UPLOADS: z.string().min(1),
     STORAGE_S3_BUCKET_AVATARS: z.string().min(1),
     STORAGE_S3_REGION: z.string().min(1),
-    STORAGE_S3_ENDPOINT: z.string().min(1),
+    STORAGE_S3_ENDPOINT: z.string().optional(),
     STORAGE_S3_ACCESS_KEY_ID: z.string().min(1),
     STORAGE_S3_SECRET_ACCESS_KEY: z.string().min(1),
   },

@@ -120,12 +120,18 @@ importers:
       '@hono/trpc-server':
         specifier: ^0.3.4
         version: 0.3.4(@trpc/server@11.0.0-rc.824(typescript@4.9.5))(hono@4.7.4)
+      '@hono/zod-validator':
+        specifier: ^0.4.3
+        version: 0.4.3(hono@4.7.4)(zod@3.24.1)
       better-auth:
         specifier: 'catalog:'
         version: 1.2.3(typescript@4.9.5)
       hono:
         specifier: ^4.7.4
         version: 4.7.4
+      zod:
+        specifier: 'catalog:'
+        version: 3.24.1
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -2636,6 +2642,12 @@ packages:
     peerDependencies:
       '@trpc/server': ^10.10.0 || >11.0.0-rc
       hono: '>=4.*'
+
+  '@hono/zod-validator@0.4.3':
+    resolution: {integrity: sha512-xIgMYXDyJ4Hj6ekm9T9Y27s080Nl9NXHcJkOvkXPhubOLj8hZkOL8pDnnXfvCf5xEE8Q4oMFenQUZZREUY2gqQ==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
 
   '@hookform/resolvers@4.1.3':
     resolution: {integrity: sha512-Jsv6UOWYTrEFJ/01ZrnwVXs7KDvP8XIo115i++5PWvNkNvkrsTfGiLS6w+eJ57CYtUtDQalUWovCZDHFJ8u1VQ==}
@@ -11144,7 +11156,7 @@ snapshots:
     dependencies:
       better-auth: 1.2.3(typescript@5.7.3)
       better-call: 1.0.4
-      zod: 3.24.1
+      zod: 3.24.2
 
   '@better-auth/utils@0.2.3':
     dependencies:
@@ -11898,6 +11910,11 @@ snapshots:
     dependencies:
       '@trpc/server': 11.0.0-rc.824(typescript@4.9.5)
       hono: 4.7.4
+
+  '@hono/zod-validator@0.4.3(hono@4.7.4)(zod@3.24.1)':
+    dependencies:
+      hono: 4.7.4
+      zod: 3.24.1
 
   '@hookform/resolvers@4.1.3(react-hook-form@7.54.2(react@19.0.0))':
     dependencies:
@@ -14681,7 +14698,7 @@ snapshots:
       kysely: 0.27.6
       nanostores: 0.11.4
       valibot: 1.0.0-beta.15(typescript@4.9.5)
-      zod: 3.24.1
+      zod: 3.24.2
     transitivePeerDependencies:
       - typescript
 
@@ -14699,7 +14716,7 @@ snapshots:
       kysely: 0.27.6
       nanostores: 0.11.4
       valibot: 1.0.0-beta.15(typescript@5.7.3)
-      zod: 3.24.1
+      zod: 3.24.2
     transitivePeerDependencies:
       - typescript
 

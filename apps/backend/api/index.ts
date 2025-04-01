@@ -1,16 +1,19 @@
 import type { ServerType } from "@hono/node-server";
 import { serve } from "@hono/node-server";
 import { trpcServer } from "@hono/trpc-server";
+import { zValidator } from "@hono/zod-validator";
 import { betterAuth } from "better-auth";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { z } from "zod";
 
 import { authOptions } from "@1up/auth";
 import { db } from "@1up/db";
 import { clientEnv, serverEnv } from "@1up/env";
+import { GetObjectCommand, getSignedUrl, s3Client } from "@1up/storage";
 import { appRouter } from "@1up/trpc";
-import { CloudTypeId } from "@1up/utils";
+import { CloudTypeId, cloudTypeIdValidator } from "@1up/utils";
 
 // Initialize auth with error handling
 const auth = betterAuth({
@@ -126,47 +129,48 @@ app.use(
   }),
 );
 
-// Health Check
-app.get("/", async (c) => {
-  return c.json({ message: "im alive!" });
-});
+// Redirect to image uploads
+app.get(
+  "/uploads",
+  zValidator(
+    "param",
+    z.object({
+      userId: cloudTypeIdValidator("user"),
+      uploadId: cloudTypeIdValidator("userUpload"),
+    }),
+  ),
+  async (c) => {
+    const { user } = c.get("auth");
+    const userIdParam = c.req.param("userId");
+    const uploadIdParam = c.req.param("uploadId");
 
-// Image proxy endpoint for Cloudflare Images
-app.get("/images/:imageId/:variant?", async (c) => {
-  try {
-    // Get image ID from params
-    const imageId = c.req.param("imageId");
-
-    // Get variant (optional, defaults to "public")
-    const variant = c.req.param("variant") || "public";
-
-    // Get user session
-    const session = c.get("auth");
-
-    if (!session.user) {
+    if (!user) {
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    // Check if user owns the image
-    const userId = session.user.id;
-    const isOwner = await doesUserOwnImage(imageId, userId);
-
-    if (!isOwner) {
-      return c.json(
-        { error: "Forbidden - you don't have access to this image" },
-        403,
-      );
+    if (user.id !== userIdParam) {
+      return c.json({ error: "Forbidden" }, 403);
     }
 
-    // Generate a signed URL for accessing the image
-    const url = await createSignedImageUrl(imageId, variant);
+    const command = new GetObjectCommand({
+      Bucket: serverEnv.storage.STORAGE_S3_BUCKET_UPLOADS,
+      Key: `${userIdParam}/${uploadIdParam}`,
+    });
 
-    // Redirect to the signed URL
-    return c.redirect(url);
-  } catch (error) {
-    console.error("Error serving image:", error);
-    return c.json({ error: "Internal Server Error" }, 500);
-  }
+    const signedUrl = await getSignedUrl(s3Client, command, {
+      expiresIn: 3600,
+    });
+    if (!signedUrl || !signedUrl.startsWith("http")) {
+      return c.json({ error: "Upload not found" }, 404);
+    }
+
+    return c.redirect(signedUrl);
+  },
+);
+
+// Health Check
+app.get("/", async (c) => {
+  return c.json({ message: "im alive!" });
 });
 
 // Server initialization with error handling

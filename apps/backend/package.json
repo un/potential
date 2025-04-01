@@ -18,8 +18,10 @@
     "@1up/utils": "workspace:*",
     "@hono/node-server": "^1.13.8",
     "@hono/trpc-server": "^0.3.4",
+    "@hono/zod-validator": "^0.4.3",
     "better-auth": "catalog:",
-    "hono": "^4.7.4"
+    "hono": "^4.7.4",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@1up/eslint-config": "workspace:*",
