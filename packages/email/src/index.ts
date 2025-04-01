@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 
+import { serverEnv } from "@1up/env";
+
 import AuthOtpEmail from "./emails/auth-otp";
 
 type StandardEmailProps = {
@@ -20,7 +22,7 @@ type EmailProps = StandardEmailProps & (AuthEmailOTPProps | WelcomeEmailProps);
 
 export async function sendEmail({ to, type, ...props }: EmailProps) {
   // TODO: FIX react import to HONO to send emails
-  const resendApiKey = process.env.RESEND_API_KEY;
+  const resendApiKey = serverEnv.email.RESEND_API_KEY;
   if (!resendApiKey) {
     console.log("💌========================================💌");
     console.log("Sending email to", to);

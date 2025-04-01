@@ -8,13 +8,9 @@ import { logger } from "hono/logger";
 
 import { authOptions } from "@1up/auth";
 import { db } from "@1up/db";
+import { clientEnv, serverEnv } from "@1up/env";
 import { appRouter } from "@1up/trpc";
 import { CloudTypeId } from "@1up/utils";
-
-import { 
-  createSignedImageUrl,
-  doesUserOwnImage
-} from "@1up/storage";
 
 // Initialize auth with error handling
 const auth = betterAuth({
@@ -50,7 +46,7 @@ const app = new Hono<{
   };
 }>();
 
-if (process.env.ENVIRONMENT === "development") {
+if (serverEnv.shared.NODE_ENV === "development") {
   app.use(logger());
 }
 
@@ -89,7 +85,7 @@ app.use("/api/auth/*", async (c) => {
 app.use(
   "/api/auth/*",
   cors({
-    origin: [process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"],
+    origin: [clientEnv.web.NEXT_PUBLIC_URL ?? "http://localhost:3000"],
     allowHeaders: [
       "Content-Type",
       "Authorization",
@@ -140,28 +136,31 @@ app.get("/images/:imageId/:variant?", async (c) => {
   try {
     // Get image ID from params
     const imageId = c.req.param("imageId");
-    
+
     // Get variant (optional, defaults to "public")
     const variant = c.req.param("variant") || "public";
-    
+
     // Get user session
     const session = c.get("auth");
-    
+
     if (!session.user) {
       return c.json({ error: "Unauthorized" }, 401);
     }
-    
+
     // Check if user owns the image
     const userId = session.user.id;
     const isOwner = await doesUserOwnImage(imageId, userId);
-    
+
     if (!isOwner) {
-      return c.json({ error: "Forbidden - you don't have access to this image" }, 403);
+      return c.json(
+        { error: "Forbidden - you don't have access to this image" },
+        403,
+      );
     }
-    
+
     // Generate a signed URL for accessing the image
     const url = await createSignedImageUrl(imageId, variant);
-    
+
     // Redirect to the signed URL
     return c.redirect(url);
   } catch (error) {

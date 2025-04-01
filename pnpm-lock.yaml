@@ -432,6 +432,9 @@ importers:
       '@1up/email':
         specifier: workspace:*
         version: link:../email
+      '@1up/env':
+        specifier: workspace:*
+        version: link:../env
       '@1up/utils':
         specifier: workspace:*
         version: link:../utils
@@ -496,6 +499,9 @@ importers:
       '@1up/consts':
         specifier: workspace:*
         version: link:../consts
+      '@1up/env':
+        specifier: workspace:*
+        version: link:../env
       '@1up/utils':
         specifier: workspace:*
         version: link:../utils
@@ -542,6 +548,9 @@ importers:
       '@1up/consts':
         specifier: workspace:*
         version: link:../consts
+      '@1up/env':
+        specifier: workspace:*
+        version: link:../env
       '@react-email/components':
         specifier: ^0.0.33
         version: 0.0.33(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -580,10 +589,41 @@ importers:
         specifier: 'catalog:'
         version: 5.7.3
 
+  packages/env:
+    dependencies:
+      '@t3-oss/env-core':
+        specifier: ^0.12.0
+        version: 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.1)
+      zod:
+        specifier: 'catalog:'
+        version: 3.24.1
+    devDependencies:
+      '@1up/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@1up/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@1up/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: 'catalog:'
+        version: 9.19.0(jiti@2.4.2)
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.3
+
   packages/local-docker: {}
 
   packages/storage:
     dependencies:
+      '@1up/env':
+        specifier: workspace:*
+        version: link:../env
       '@1up/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
@@ -615,6 +655,9 @@ importers:
       '@1up/db':
         specifier: workspace:*
         version: link:../db
+      '@1up/env':
+        specifier: workspace:*
+        version: link:../env
       '@1up/storage':
         specifier: workspace:*
         version: link:../storage
@@ -9636,6 +9679,9 @@ packages:
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
 
+  zod@3.24.2:
+    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
+
   zustand@4.5.6:
     resolution: {integrity: sha512-ibr/n1hBzLLj5Y+yUcU7dYw8p6WnIVzdJbnX+1YpaScvZVF2ziugqHs+LAmHw4lWO9c/zRj+K1ncgWDQuthEdQ==}
     engines: {node: '>=12.7.0'}
@@ -15761,8 +15807,8 @@ snapshots:
       '@babel/plugin-proposal-private-methods': 7.18.6(@babel/core@7.26.7)
       eslint: 9.19.0(jiti@2.4.2)
       hermes-parser: 0.25.1
-      zod: 3.24.1
-      zod-validation-error: 3.4.0(zod@3.24.1)
+      zod: 3.24.2
+      zod-validation-error: 3.4.0(zod@3.24.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -19916,11 +19962,13 @@ snapshots:
     dependencies:
       zod: 3.24.1
 
-  zod-validation-error@3.4.0(zod@3.24.1):
+  zod-validation-error@3.4.0(zod@3.24.2):
     dependencies:
-      zod: 3.24.1
+      zod: 3.24.2
 
   zod@3.24.1: {}
+
+  zod@3.24.2: {}
 
   zustand@4.5.6(@types/react@19.0.10)(react@19.0.0):
     dependencies:

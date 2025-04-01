@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@1up/consts": "workspace:*",
+    "@1up/env": "workspace:*",
     "@1up/utils": "workspace:*",
     "@planetscale/database": "^1.19.0",
     "drizzle-orm": "catalog:",

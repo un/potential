@@ -12,6 +12,7 @@
   "dependencies": {
     "@1up/auth": "workspace:*",
     "@1up/db": "workspace:*",
+    "@1up/env": "workspace:*",
     "@1up/storage": "workspace:*",
     "@1up/trpc": "workspace:*",
     "@1up/utils": "workspace:*",

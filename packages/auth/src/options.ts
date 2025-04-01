@@ -11,12 +11,13 @@ import { passkey } from "better-auth/plugins/passkey";
 
 import { accounts, db, sessions, users, verificationTokens } from "@1up/db";
 import { sendEmail } from "@1up/email";
+import { serverEnv } from "@1up/env";
 
 import { validateUsername } from "./validator";
 
 export const authOptions: BetterAuthOptions = {
-  secret: process.env.AUTH_SECRET,
-  baseURL: process.env.BASE_URL,
+  secret: serverEnv.auth.AUTH_SECRET,
+  baseURL: serverEnv.shared.BASE_URL,
   database: drizzleAdapter(db, {
     provider: "mysql",
     schema: {
@@ -45,9 +46,9 @@ export const authOptions: BetterAuthOptions = {
       },
     }),
     passkey({
-      rpID: process.env.BASE_URL,
+      rpID: serverEnv.shared.BASE_URL,
       rpName: "flow",
-      origin: process.env.BASE_URL,
+      origin: serverEnv.shared.BASE_URL,
     }),
   ],
   advanced: {
@@ -70,6 +71,6 @@ export const authOptions: BetterAuthOptions = {
 };
 
 export const authClientOptions: ClientOptions = {
-  baseURL: process.env.BASE_URL,
+  baseURL: serverEnv.shared.BASE_URL,
   plugins: [usernameClient(), passkeyClient(), emailOTPClient()],
 };

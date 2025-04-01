@@ -14,6 +14,7 @@
     "@1up/consts": "workspace:*",
     "@1up/db": "workspace:*",
     "@1up/email": "workspace:*",
+    "@1up/env": "workspace:*",
     "@1up/utils": "workspace:*",
     "@1up/validators": "workspace:*",
     "@better-auth/expo": "catalog:",
