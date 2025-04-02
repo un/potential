@@ -17,7 +17,7 @@ import { validateUsername } from "./validator";
 
 export const authOptions: BetterAuthOptions = {
   secret: serverEnv.auth.AUTH_SECRET,
-  baseURL: serverEnv.shared.BASE_URL,
+  baseURL: serverEnv.shared.BASE_URL + "/auth",
   database: drizzleAdapter(db, {
     provider: "mysql",
     schema: {

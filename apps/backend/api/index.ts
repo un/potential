@@ -80,13 +80,13 @@ app.use("*", async (c, next) => {
   }
 });
 
-app.use("/api/auth/*", async (c) => {
+app.use("/auth/*", async (c) => {
   const authResult = await auth.handler(c.req.raw);
   return authResult;
 });
 
 app.use(
-  "/api/auth/*",
+  "/auth/*",
   cors({
     origin: [clientEnv.web.NEXT_PUBLIC_URL ?? "http://localhost:3000"],
     allowHeaders: [
