@@ -14,11 +14,10 @@ export interface UploadedImage {
 export function useImageUpload() {
   const [uploadLoading, setUploadLoading] = useState(false);
   const [uploadError, setUploadError] = useState<Error | null>(null);
-  const trpcUtils = trpc;
 
   // Create mutation options using the proper tRPC v11 pattern
   const uploadPresignedUrlMutation = useMutation(
-    trpcUtils.storage.getUploadPresignedUrl.mutationOptions({
+    trpc.storage.getUploadPresignedUrl.mutationOptions({
       onError: (error) => {
         console.error("Error getting presigned URLs:", error);
       },
@@ -46,15 +45,16 @@ export function useImageUpload() {
       await Promise.all(
         images.map(async (image) => {
           const { id: uploadId, url: uploadUrl } =
-            await uploadPresignedUrlMutation.mutateAsync();
-
+            await uploadPresignedUrlMutation.mutateAsync({
+              fileType: image.type,
+            });
           const { uri, type } = image;
 
           const response = await fetch(uri);
-          const blob = await response.blob();
 
+          const blob = await response.blob();
           const uploadResponse = await fetch(uploadUrl, {
-            method: "POST",
+            method: "PUT",
             body: blob,
             headers: {
               "Content-Type": type,
@@ -67,6 +67,7 @@ export function useImageUpload() {
             );
           }
           uploads.push({ imageId: uploadId });
+          console.log("🔥", { response });
         }),
       );
       setUploadLoading(false);
