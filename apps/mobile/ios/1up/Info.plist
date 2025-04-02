@@ -57,6 +57,8 @@
     <string>Allow $(PRODUCT_NAME) to access your Face ID biometric data.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Allow 1up Health to access your microphone</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow 1up Health to access your photos and let you upload them.</string>
     <key>NSUserActivityTypes</key>
     <array>
       <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>

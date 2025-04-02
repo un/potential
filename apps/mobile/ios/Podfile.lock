@@ -6,6 +6,9 @@ PODS:
     - ReactCommon/turbomodule/core
   - EXConstants (18.0.0-canary-20250304-f08e984):
     - ExpoModulesCore
+  - EXImageLoader (5.0.1-canary-20250304-f08e984):
+    - ExpoModulesCore
+    - React-Core
   - EXJSONUtils (0.14.1-canary-20250304-f08e984)
   - EXManifests (0.15.8-canary-20250304-f08e984):
     - ExpoModulesCore
@@ -234,6 +237,12 @@ PODS:
     - ExpoModulesCore
   - ExpoHead (4.0.18-canary-20250304-f08e984):
     - ExpoModulesCore
+  - ExpoImageManipulator (13.0.7-canary-20250304-f08e984):
+    - EXImageLoader
+    - ExpoModulesCore
+    - SDWebImageWebPCoder
+  - ExpoImagePicker (16.1.0-canary-20250304-f08e984):
+    - ExpoModulesCore
   - ExpoKeepAwake (15.0.0-canary-20250304-f08e984):
     - ExpoModulesCore
   - ExpoLinking (7.1.0-canary-20250304-f08e984):
@@ -276,6 +285,18 @@ PODS:
   - hermes-engine (0.78.0):
     - hermes-engine/Pre-built (= 0.78.0)
   - hermes-engine/Pre-built (0.78.0)
+  - libwebp (1.5.0):
+    - libwebp/demux (= 1.5.0)
+    - libwebp/mux (= 1.5.0)
+    - libwebp/sharpyuv (= 1.5.0)
+    - libwebp/webp (= 1.5.0)
+  - libwebp/demux (1.5.0):
+    - libwebp/webp
+  - libwebp/mux (1.5.0):
+    - libwebp/demux
+  - libwebp/sharpyuv (1.5.0)
+  - libwebp/webp (1.5.0):
+    - libwebp/sharpyuv
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -1980,6 +2001,10 @@ PODS:
     - Yoga
   - RNSVG (15.11.2):
     - React-Core
+  - SDWebImage/Core (5.21.0)
+  - SDWebImageWebPCoder (0.14.6):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.17)
   - SocketRocket (0.7.1)
   - Yoga (0.0.0)
   - ZXingObjC/Core (3.6.9)
@@ -1993,6 +2018,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAV (from `../../../node_modules/expo-av/ios`)
   - EXConstants (from `../../../node_modules/expo-constants/ios`)
+  - EXImageLoader (from `../../../node_modules/expo-image-loader/ios`)
   - EXJSONUtils (from `../../../node_modules/expo-json-utils/ios`)
   - EXManifests (from `../../../node_modules/expo-manifests/ios`)
   - Expo (from `../../../node_modules/expo`)
@@ -2005,6 +2031,8 @@ DEPENDENCIES:
   - ExpoFileSystem (from `../../../node_modules/expo-file-system/ios`)
   - ExpoFont (from `../../../node_modules/expo-font/ios`)
   - ExpoHead (from `../../../node_modules/expo-router/ios`)
+  - ExpoImageManipulator (from `../../../node_modules/expo-image-manipulator/ios`)
+  - ExpoImagePicker (from `../../../node_modules/expo-image-picker/ios`)
   - ExpoKeepAwake (from `../../../node_modules/expo-keep-awake/ios`)
   - ExpoLinking (from `../../../node_modules/expo-linking/ios`)
   - ExpoModulesCore (from `../../../node_modules/expo-modules-core`)
@@ -2087,6 +2115,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - libwebp
+    - SDWebImage
+    - SDWebImageWebPCoder
     - SocketRocket
     - ZXingObjC
 
@@ -2099,6 +2130,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/expo-av/ios"
   EXConstants:
     :path: "../../../node_modules/expo-constants/ios"
+  EXImageLoader:
+    :path: "../../../node_modules/expo-image-loader/ios"
   EXJSONUtils:
     :path: "../../../node_modules/expo-json-utils/ios"
   EXManifests:
@@ -2123,6 +2156,10 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/expo-font/ios"
   ExpoHead:
     :path: "../../../node_modules/expo-router/ios"
+  ExpoImageManipulator:
+    :path: "../../../node_modules/expo-image-manipulator/ios"
+  ExpoImagePicker:
+    :path: "../../../node_modules/expo-image-picker/ios"
   ExpoKeepAwake:
     :path: "../../../node_modules/expo-keep-awake/ios"
   ExpoLinking:
@@ -2284,6 +2321,7 @@ SPEC CHECKSUMS:
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   EXAV: 624d33de7b956433117693e737bac77a1ba5aa38
   EXConstants: 7b75661a962523d0787be64686418225e34a3e36
+  EXImageLoader: 508ddf45ddc052ffd5bd34e6572516a9514bb2ef
   EXJSONUtils: e666e14aa24dd2851f734aaf53dc3e76786feb5f
   EXManifests: 42b208668376452c9b2655a0122490245db9fd73
   Expo: 48282b9aa33bc5ec889860e003dd4b78bee04a52
@@ -2296,6 +2334,8 @@ SPEC CHECKSUMS:
   ExpoFileSystem: 86f07793baf5d572588019f4ab4bcf9b5d672406
   ExpoFont: 60f2a66fdb18048fbb62ee71bc4b999c0c1f21d6
   ExpoHead: 34e96e3df811f948e6b9d910c52fd155104e3f65
+  ExpoImageManipulator: 1800ba14fef8c2fd3bda0e1d1ab32ec640bcb16f
+  ExpoImagePicker: f8eb56f72993b53d0df633873a03244f6563813a
   ExpoKeepAwake: 17d2e8ce831522dfa3c0602f292ada8150cd495b
   ExpoLinking: dc85b4adbd3ed55d893ad36c1d50e4aaad5e82cb
   ExpoModulesCore: 91edb18138594ab5dd6872e5598aaf8d2fd24419
@@ -2308,6 +2348,7 @@ SPEC CHECKSUMS:
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: eb93e2f488219332457c3c4eafd2738ddc7e80b8
   hermes-engine: b417d2b2aee3b89b58e63e23a51e02be91dc876d
+  libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: b2eecf2d60216df56bc5e6be5f063826d3c1ee35
   RCTRequired: 78522de7dc73b81f3ed7890d145fa341f5bb32ea
@@ -2372,10 +2413,12 @@ SPEC CHECKSUMS:
   RNReanimated: e59d2f743bf272f4f50ad7fd447f6e6a43987e4d
   RNScreens: c11a9eb1e6df43890cd572ba68805b123defe8d1
   RNSVG: 4c63b12b7b5761063bca4f20dd228f6a8370f614
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: afd04ff05ebe0121a00c468a8a3c8080221cb14c
   ZXingObjC: 8898711ab495761b2dbbdec76d90164a6d7e14c5
 
-PODFILE CHECKSUM: 3d57511620d118434a37a23b2ab6b4aa1cc1f3b8
+PODFILE CHECKSUM: 07fe2b2b80937787e7faa13e27ebd755bff79121
 
 COCOAPODS: 1.16.2
