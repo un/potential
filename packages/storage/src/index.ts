@@ -6,8 +6,8 @@ import { serverEnv } from "@1up/env";
 // dynamically work out the endpoint based on the environment or localhost ip
 const getS3Endpoint = (): string => {
   const endpointEnv = serverEnv.storage.STORAGE_S3_ENDPOINT;
-
   if (endpointEnv && endpointEnv.length > 0) {
+    console.log("💿 using S3 endpoint from env", { endpointEnv });
     return endpointEnv;
   }
 
@@ -21,14 +21,21 @@ const getS3Endpoint = (): string => {
         }
       }
     }
+    return null;
   };
 
-  if (!localhostIP) {
+  const ip = localhostIP();
+  if (!ip) {
+    console.error(
+      "🚨 💿 Failed to get the s3 endpoint from ENV or via local IP",
+    );
     throw new Error(
       "Failed to get localhost. Please point to your production server.",
     );
   }
-  return `http://${localhostIP}:3902`;
+  console.log("💿 using S3 endpoint from IP address", { ip });
+
+  return `http://${ip}:3902`;
 };
 
 export const s3Client = new S3Client({
