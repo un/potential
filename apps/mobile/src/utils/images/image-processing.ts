@@ -18,11 +18,9 @@ export interface ProcessedImage {
  * @returns boolean indicating if the image is HEIC/HEIF
  */
 export const isHeicImage = (uri: string, mimeType?: string | null): boolean => {
-  // Check file extension
   const extension = uri.split(".").pop()?.toLowerCase();
   const isHeicExtension = extension === "heic" || extension === "heif";
 
-  // Check URI for HEIC string (iOS often has URIs without clear extensions)
   const uriContainsHeic =
     Platform.OS === "ios" &&
     (uri.includes("HEIC") ||
@@ -30,7 +28,6 @@ export const isHeicImage = (uri: string, mimeType?: string | null): boolean => {
       uri.includes("HEIF") ||
       uri.includes("heif"));
 
-  // Check MIME type if available
   const isHeicMimeType = mimeType === "image/heic" || mimeType === "image/heif";
 
   return isHeicExtension || uriContainsHeic || isHeicMimeType;
@@ -49,7 +46,6 @@ export const convertHeicToJpeg = async (
     // This is especially important for iOS HEIC images from the photo library
     let fileUri = uri;
 
-    // If the URI is a remote or asset URI, copy it to local filesystem first
     if (uri.startsWith("ph://") || uri.startsWith("asset://")) {
       const filename = `temp_${Date.now()}.jpg`;
       const destinationUri = `${FileSystem.cacheDirectory}${filename}`;
@@ -76,8 +72,7 @@ export const convertHeicToJpeg = async (
     };
   } catch (error) {
     console.error("🚨 Error converting HEIC to JPEG:", error);
-    // Return an object that matches the expected interface, but with the original URI
-    // The caller will need to handle this gracefully
+
     return {
       uri: uri,
       type: "image/jpeg", // Assume JPEG as fallback

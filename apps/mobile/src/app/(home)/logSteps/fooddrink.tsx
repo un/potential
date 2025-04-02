@@ -1,24 +1,65 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { View } from "react-native";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 
+import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
 import AudioRecorderComponent from "~/components/app/audioRecorder";
-import { CameraComponent } from "~/components/app/camera";
 import { Button } from "~/components/ui/button";
+import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { trpc } from "~/utils/api";
 import { LogStepWrapper } from "./LogStepWrapper";
 
 // Step components for each button
-export const PhotoStep = ({ onBack }: { onBack: () => void }) => (
-  <LogStepWrapper title="Photo Log" onBack={onBack} zeroPadding noSafeArea>
-    <CameraComponent />
-    {/* Add your photo logging UI here */}
-  </LogStepWrapper>
-);
+export const PhotoStep = ({ onBack }: { onBack: () => void }) => {
+  const [imageState, setImageState] = useState<{
+    pendingUpload: boolean;
+    imageIds: string[];
+  }>({
+    pendingUpload: false,
+    imageIds: [],
+  });
+  const [isUploading, setIsUploading] = useState(false);
+  const imagePickerRef = useRef<ImagePickerUploaderRef>(null);
+
+  const handleUpload = async () => {
+    if (imagePickerRef.current) {
+      const result = await imagePickerRef.current.uploadPendingImages();
+      if (result.success) {
+        console.log("Images uploaded successfully:", result.imageIds);
+      } else {
+        console.error("Upload failed:", result.error);
+      }
+    }
+  };
+
+  return (
+    <LogStepWrapper title="Photo Log" onBack={onBack} zeroPadding noSafeArea>
+      <ImagePickerUploader
+        ref={imagePickerRef}
+        onImagesChanged={setImageState}
+        onUploadStateChange={setIsUploading}
+      />
+      {imageState.pendingUpload && (
+        <View className="px-6 pb-6">
+          <Button
+            onPress={handleUpload}
+            disabled={isUploading}
+            className="w-full"
+          >
+            <Text>{isUploading ? "Uploading..." : "Upload Images"}</Text>
+          </Button>
+        </View>
+      )}
+      {imageState.imageIds.map((imageId) => (
+        <Text key={imageId}>{imageId}</Text>
+      ))}
+    </LogStepWrapper>
+  );
+};
 
 // Create similar components for each step
 export const AudioStep = ({ onBack }: { onBack: () => void }) => (

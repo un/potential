@@ -4,11 +4,11 @@ import { TouchableOpacity, View } from "react-native";
 import { CameraView } from "expo-camera";
 import { ArrowsClockwise, Camera } from "phosphor-react-native";
 
-import type { ProcessedImage } from "../../utils/image-processing";
-import { usePermission } from "../../lib/hooks/usePermission";
-import { processCameraPicture } from "../../utils/image-processing";
-import { RequestPermission } from "../ui/request-permission";
-import { Text } from "../ui/text";
+import type { ProcessedImage } from "~/utils/images/image-processing";
+import { RequestPermission } from "~/components/ui/request-permission";
+import { Text } from "~/components/ui/text";
+import { usePermission } from "~/lib/hooks/usePermission";
+import { processCameraPicture } from "~/utils/images/image-processing";
 
 interface CameraComponentProps {
   onPictureTaken?: (processedImage: ProcessedImage) => void;

@@ -19,7 +19,7 @@ export const storageRouter = createTRPCRouter({
 
       const uploadId = cloudTypeIdGenerator("userUpload");
       const command = new PutObjectCommand({
-        Bucket: serverEnv.storage.STORAGE_S3_BUCKET_AVATARS,
+        Bucket: serverEnv.storage.STORAGE_S3_BUCKET_UPLOADS,
         Key: `${userId}/${uploadId}`,
         ContentType: fileType,
       });
