@@ -62,7 +62,8 @@ export const userProfileRouter = router({
       })
     )
     .query(async ({ ctx, input }) => {
-      const { db } = ctx;
+      const { db, auth } = ctx;
+      const user = auth.user;
       
       try {
         const userId = input.userId || ctx.user.id;

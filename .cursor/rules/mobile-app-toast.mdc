@@ -1,0 +1,164 @@
+---
+description: Guidelines for using sonner-native for toast notifications in the mobile app
+globs: 
+alwaysApply: false
+---
+ ---
+description: Guidelines for using sonner-native for toast notifications in the mobile app
+globs: apps/mobile/**/*
+alwaysApply: false
+---
+# Mobile App Toast Notifications
+
+Use the `sonner-native` library for displaying toast notifications in the mobile app. The Toaster component is already configured in the root layout with proper styling.
+
+## Basic Usage
+
+Import the toast function from sonner-native:
+
+```typescript
+import { toast } from 'sonner-native';
+```
+
+## Toast Variations
+
+### Basic Toast
+
+```typescript
+toast('This is a basic toast message');
+```
+
+### Success Toast
+
+Use for successful operations:
+
+```typescript
+toast.success('Operation completed successfully');
+```
+
+### Error Toast
+
+Use for error notifications:
+
+```typescript
+toast.error('An error occurred');
+```
+
+### Warning Toast
+
+Use for warning notifications:
+
+```typescript
+toast.warning('Warning: This action cannot be undone');
+```
+
+### Loading Toast
+
+Use for async operations that need loading indicators:
+
+```typescript
+toast.loading('Loading data...');
+```
+
+### Promise Toast
+
+Use for handling promises with different states:
+
+```typescript
+toast.promise(fetchData(), {
+  loading: 'Fetching data...',
+  success: (data) => `Successfully fetched ${data.length} items`,
+  error: 'Failed to fetch data'
+});
+```
+
+## Advanced Usage
+
+### With Description
+
+Add more context with a description:
+
+```typescript
+toast('User updated', {
+  description: 'User profile has been updated successfully'
+});
+```
+
+### With Custom Duration
+
+Default duration is 4000ms. Override it:
+
+```typescript
+toast('Quick notification', { duration: 2000 });
+// Or for persistent toast:
+toast('Important message', { duration: Infinity });
+```
+
+### With Action Buttons
+
+Add action buttons to toasts:
+
+```typescript
+toast('New message received', {
+  action: {
+    label: 'View',
+    onClick: () => navigateToMessages()
+  }
+});
+```
+
+### With Cancel Option
+
+Add a cancel option to toasts:
+
+```typescript
+toast('Changes applied', {
+  cancel: {
+    label: 'Undo',
+    onClick: () => revertChanges()
+  }
+});
+```
+
+### Updating Existing Toasts
+
+```typescript
+const toastId = toast.loading('Processing...');
+
+// Later update the same toast:
+toast.success('Completed!', { id: toastId });
+```
+
+### Dismissing Toasts
+
+```typescript
+// Dismiss a specific toast
+const id = toast('Hello');
+toast.dismiss(id);
+
+// Dismiss all toasts
+toast.dismiss();
+```
+
+## Custom JSX Content
+
+For more complex toast content:
+
+```typescript
+toast.custom(
+  <View className="flex-row items-center">
+    <Icon name="info" size={20} />
+    <Text className="ml-2">Custom toast content</Text>
+  </View>
+);
+```
+
+## Best Practices
+
+1. Keep toast messages concise and meaningful
+2. Use appropriate toast types for different scenarios
+3. Include actionable information when possible
+4. For critical errors that require user action, consider using modals instead
+5. Don't overuse toasts - they should be for important notifications only
+6. Use the same toast ID when updating an existing toast to avoid multiple toasts
+7. Set appropriate durations based on the importance and length of the message

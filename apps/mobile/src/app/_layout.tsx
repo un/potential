@@ -14,6 +14,7 @@ import {
   MartianMono_800ExtraBold,
 } from "@expo-google-fonts/martian-mono";
 import { useColorScheme } from "nativewind";
+import { Toaster } from "sonner-native";
 
 import "../styles.css";
 
@@ -78,6 +79,25 @@ export default function RootLayout() {
               }}
             />
           </View>
+          <Toaster
+            position="top-center"
+            closeButton
+            pauseWhenPageIsHidden
+            autoWiggleOnUpdate={"always"}
+            toastOptions={{
+              toastContainerStyle: {
+                backgroundColor: colorScheme === "dark" ? "#191918" : "#f9f9f8",
+                borderColor: colorScheme === "dark" ? "#292928" : "#e0e0e0",
+                borderWidth: 1,
+              },
+              titleStyle: {
+                color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
+              },
+              descriptionStyle: {
+                color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
+              },
+            }}
+          />
         </IconContext.Provider>
       </SafeAreaProvider>
     </QueryClientProvider>
