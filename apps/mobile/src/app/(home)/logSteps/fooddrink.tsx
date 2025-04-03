@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner-native";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
 import { Button } from "~/components/ui/button";
@@ -31,16 +32,16 @@ export const FoodDrinkStep = ({ onBack }: { onBack: () => void }) => {
     imageIds: [],
   });
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
+  const [_isUploading, setIsUploading] = useState(false);
 
   const router = useRouter();
 
-  const { mutateAsync, error } = useMutation(
+  const { mutateAsync } = useMutation(
     trpc.log.createFoodDrinkLog.mutationOptions({
-      async onSuccess() {
-        // setTitle("");
-        // setContent("");
-        // await queryClient.invalidateQueries(trpc.post.all.queryFilter());
+      onError: (err) => {
+        console.error("Mutation error:", err);
+        toast.error(err.message || "Failed to save food/drink log");
+        setIsFormSubmitting(false);
       },
     }),
   );
@@ -68,41 +69,46 @@ export const FoodDrinkStep = ({ onBack }: { onBack: () => void }) => {
         return result.imageIds;
       } else {
         console.error("Upload failed:", result.error);
+        toast.error("Failed to upload image. Please try again.");
+        setIsFormSubmitting(false);
+        return undefined;
       }
     }
   };
 
   async function handleSubmit() {
     setIsFormSubmitting(true);
+
     const textValue = form.getFieldValue("text");
     if (
       !textValue &&
       imageState.imageIds.length === 0 &&
       !imageState.pendingUpload
     ) {
-      console.error("Missing required fields");
+      toast.error("Please add text or an image to continue");
       setIsFormSubmitting(false);
       return;
     }
+
     console.log("imageState", imageState);
     const imageIds: string[] = [];
     imageIds.push(...imageState.imageIds);
+
     if (imageState.pendingUpload) {
       const uploadedImageIds = await handleUpload();
       if (uploadedImageIds) {
         imageIds.push(...uploadedImageIds);
       }
     }
+
     // Send both text and imageIds to match the API requirements
     await mutateAsync({
       text: textValue,
       imageIds,
     });
-    setIsFormSubmitting(false);
-    if (error) {
-      console.error(error);
-    }
+    toast.success("Food/drink logged successfully");
     router.back();
+    setIsFormSubmitting(false);
   }
 
   return (
@@ -118,7 +124,7 @@ export const FoodDrinkStep = ({ onBack }: { onBack: () => void }) => {
                 onBlur={field.handleBlur}
                 onChangeText={field.handleChange}
                 error={
-                  field.state.meta.errors && field.state.meta.errors.length
+                  field.state.meta.errors.length
                     ? [{ message: JSON.stringify(field.state.meta.errors) }]
                     : undefined
                 }

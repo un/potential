@@ -24,7 +24,8 @@ export default function Index() {
           router.replace("/login");
         }
       }
-    }, 2000);
+      // hacky workaround due to "route not found" error when splash screen is hidden, otherwise set to 2000
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [session, isPending, router]);

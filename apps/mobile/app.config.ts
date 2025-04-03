@@ -12,7 +12,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   name: "1up",
   extra: {
     env,
-    onboardingVersion: 1,
+    onboardingVersion: "0.0.1",
   },
   slug: "1up",
   scheme: "1up",

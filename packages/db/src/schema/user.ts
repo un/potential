@@ -20,9 +20,11 @@ export const userProfiles = mysqlTable("user_profiles", {
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("userProfile")),
   ownerId: typeIdColumn("user", "user_id").notNull(),
-  lastOnboardingVersion: smallint("lastOnboardingVersion", {
-    unsigned: true,
-  }).notNull(),
+  lastOnboardingVersion: varchar("lastOnboardingVersion", {
+    length: 12,
+  })
+    .notNull()
+    .default("0.0.0"),
 
   // Health
   healthDateOfBirth: date("healthDateOfBirth"),

@@ -20,7 +20,7 @@ export default function Login() {
   } = useQuery(trpc.user.profile.getUserProfileOverview.queryOptions());
 
   const latestOnboardingVersion = Constants.expoConfig?.extra
-    ?.onboardingVersion as number;
+    ?.onboardingVersion as string;
 
   // Only redirect after profile data is loaded
   React.useEffect(() => {
@@ -32,17 +32,15 @@ export default function Login() {
     }
 
     if (profileData) {
-      // Add setTimeout to delay redirect by 2 seconds
       setTimeout(() => {
         if (profileData.lastOnboardingVersion < latestOnboardingVersion) {
-          // Use href instead of push for the path pattern
           router.replace({
-            pathname: "/(updates)",
+            pathname: "/(home)/updates",
           });
         } else {
-          router.push("/(home)");
+          router.replace("/(home)");
         }
-      }, 2000); // 2 seconds delay
+      }, 1000);
     }
   }, [
     profileLoading,

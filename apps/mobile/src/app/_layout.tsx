@@ -1,6 +1,7 @@
 import { useCallback } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 // Fonts
 import {
@@ -30,6 +31,12 @@ SplashScreen.preventAutoHideAsync().catch(() => {
   /* ignore error */
 });
 
+// hacky workaround due to "route not found" error when splash screen is hidden
+SplashScreen.setOptions({
+  duration: 2000,
+  fade: true,
+});
+
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
@@ -48,10 +55,13 @@ export default function RootLayout() {
     Monocraft: require("assets/fonts/Monocraft.ttf"),
   });
 
+  const router = useRouter();
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || error) {
-      await SplashScreen.hideAsync().catch(() => {
-        /* ignore error */
+      // hacky workaround due to "route not found" error when splash screen is hidden
+      router.push("/");
+      await SplashScreen.hideAsync().catch((error) => {
+        console.error(error);
       });
     }
   }, [fontsLoaded, error]);
@@ -62,44 +72,47 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <IconContext.Provider
-          value={{
-            color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
-          }}
-        >
-          <View className="flex-1" onLayout={onLayoutRootView}>
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: {
+      <GestureHandlerRootView>
+        <SafeAreaProvider>
+          <IconContext.Provider
+            value={{
+              color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
+            }}
+          >
+            <View className="flex-1" onLayout={onLayoutRootView}>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: {
+                    backgroundColor:
+                      colorScheme === "dark" ? "#191918" : "#f9f9f8",
+                  },
+                }}
+              />
+            </View>
+            <Toaster
+              position="top-center"
+              closeButton
+              pauseWhenPageIsHidden
+              autoWiggleOnUpdate={"always"}
+              toastOptions={{
+                toastContainerStyle: {
                   backgroundColor:
                     colorScheme === "dark" ? "#191918" : "#f9f9f8",
+                  borderColor: colorScheme === "dark" ? "#292928" : "#e0e0e0",
+                  borderWidth: 1,
+                },
+                titleStyle: {
+                  color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
+                },
+                descriptionStyle: {
+                  color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
                 },
               }}
             />
-          </View>
-          <Toaster
-            position="top-center"
-            closeButton
-            pauseWhenPageIsHidden
-            autoWiggleOnUpdate={"always"}
-            toastOptions={{
-              toastContainerStyle: {
-                backgroundColor: colorScheme === "dark" ? "#191918" : "#f9f9f8",
-                borderColor: colorScheme === "dark" ? "#292928" : "#e0e0e0",
-                borderWidth: 1,
-              },
-              titleStyle: {
-                color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
-              },
-              descriptionStyle: {
-                color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
-              },
-            }}
-          />
-        </IconContext.Provider>
-      </SafeAreaProvider>
+          </IconContext.Provider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
     </QueryClientProvider>
   );
 }

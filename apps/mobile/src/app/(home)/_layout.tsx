@@ -31,6 +31,10 @@ export default function DashboardLayout() {
         options={{ title: "Home", header: () => <UserHeader /> }}
       />
       <Stack.Screen
+        name="updates"
+        options={{ title: "Updates", header: () => null }}
+      />
+      <Stack.Screen
         name="settings"
         options={{
           title: "Settings",
