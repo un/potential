@@ -64,7 +64,7 @@ export function CameraComponent({ onPictureTaken }: CameraComponentProps) {
   }
 
   return (
-    <View className="bg-sand-9 -mb-12 w-full flex-1">
+    <View className="bg-sand-9 w-full flex-1">
       <CameraView
         className="mb-0"
         facing={facing}

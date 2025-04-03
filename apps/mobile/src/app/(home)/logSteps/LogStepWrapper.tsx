@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 import React from "react";
-import { Pressable, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  View,
+} from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeft } from "phosphor-react-native";
@@ -35,15 +41,27 @@ export const LogStepWrapper = ({
         className="h-full w-full flex-1"
         edges={noSafeArea ? [] : ["bottom"]}
       >
-        <View className="border-sand-3 flex-row items-center border-b p-4">
-          <Pressable onPress={onBack} className="pr-4">
-            <ArrowLeft size={24} weight="bold" />
-          </Pressable>
-          <Text type="title">{title}</Text>
-        </View>
-        <View className={cn("h-full w-full flex-1", !zeroPadding && "p-6")}>
-          {children}
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={100}
+          className="flex h-full w-full flex-1 flex-col gap-0"
+        >
+          <View className="border-sand-3 border-b p-4">
+            <Pressable
+              onPress={onBack}
+              className="flex flex-row items-center gap-4"
+            >
+              <ArrowLeft size={24} weight="bold" />
+              <Text type="title">{title}</Text>
+            </Pressable>
+          </View>
+          <ScrollView
+            className={cn("h-full w-full flex-1", !zeroPadding && "p-6")}
+            contentContainerStyle={{ flexGrow: 1 }}
+          >
+            {children}
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </Animated.View>
   );

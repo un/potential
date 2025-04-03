@@ -8,6 +8,8 @@ import { Image, Modal, Pressable, ScrollView, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { XCircle } from "phosphor-react-native";
 
+import type { CloudTypeId } from "@1up/utils";
+
 import type { ProcessedImage } from "~/utils/images/image-processing";
 import type { UploadedImage } from "~/utils/images/image-upload";
 import { CameraComponent } from "~/components/app/camera";
@@ -38,7 +40,7 @@ export interface ImagePickerUploaderProps {
 export interface ImagePickerUploaderRef {
   uploadPendingImages: () => Promise<{
     success: boolean;
-    imageIds: string[];
+    imageIds: CloudTypeId<"userUpload">[];
     error?: string;
   }>;
 }
@@ -240,7 +242,13 @@ export const ImagePickerUploader = forwardRef<
     useImperativeHandle(
       ref,
       () => ({
-        uploadPendingImages,
+        uploadPendingImages: async () => {
+          const result = await uploadPendingImages();
+          return {
+            ...result,
+            imageIds: result.imageIds as `upl_${string}`[],
+          };
+        },
       }),
       [pendingImages, uploadedImages],
     );
@@ -249,7 +257,7 @@ export const ImagePickerUploader = forwardRef<
     const isMaxImagesReached = totalImages >= maxImages;
 
     return (
-      <View className="flex w-full flex-col gap-6 p-6" style={style}>
+      <View className="flex w-full flex-col gap-6" style={style}>
         {(pendingImages.length > 0 || uploadedImages.length > 0) && (
           <View className="flex flex-col gap-6">
             <Text type={"title"}>

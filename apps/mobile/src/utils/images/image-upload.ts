@@ -54,7 +54,6 @@ export function useImageUpload() {
               "Content-Type": type,
             },
           });
-          console.log("🔥 image upload map", { uploadResponse });
 
           if (!uploadResponse.ok) {
             throw new Error(
