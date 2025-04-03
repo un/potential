@@ -21,6 +21,7 @@
     "@hono/zod-validator": "^0.4.3",
     "better-auth": "catalog:",
     "hono": "^4.7.4",
+    "nanoid": "^5.1.2",
     "zod": "catalog:"
   },
   "devDependencies": {

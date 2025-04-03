@@ -6,6 +6,7 @@ import { betterAuth } from "better-auth";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { customAlphabet } from "nanoid";
 import { z } from "zod";
 
 import { authOptions } from "@1up/auth";
@@ -41,6 +42,7 @@ type InferredAuthSession = Omit<
 // Hono App
 const app = new Hono<{
   Variables: {
+    reqId: string;
     db: typeof db;
     auth: {
       user: InferredAuthUser | null;
@@ -62,6 +64,9 @@ app.onError((err, c) => {
 app.use("*", async (c, next) => {
   try {
     c.set("db", db);
+    const reqId = customAlphabet("0123456789abcdefghjkmnpqrstvwxyz", 12)();
+    c.set("reqId", reqId);
+
     const session = await auth.api.getSession({ headers: c.req.raw.headers });
 
     if (!session) {
