@@ -1,0 +1,267 @@
+---
+description: This rule is for when working with the database, especially when creating new columns and tables
+globs: 
+alwaysApply: false
+---
+ ---
+description: Guidelines for creating and modifying database schema with Drizzle ORM
+globs: packages/db/src/schema/**/*
+alwaysApply: false
+---
+# Database Schema Guidelines
+
+## Core Principles
+
+- Use Drizzle ORM for all database operations
+- PlanetScale is our database provider (MySQL-compatible)
+- Follow existing schema patterns
+- Include timestamps and owner information on all tables
+- Use TypeID for all primary keys and relations
+
+## Schema Organization
+
+1. Place schema files in the `packages/db/src/schema/` directory
+2. Organize tables by product/feature area (one file per area)
+3. Export all schema from `packages/db/src/schema.ts`
+4. When adding a new schema file:
+   - Check if it fits in an existing file first
+   - If not, create a new file with a descriptive name
+   - Add the export to `schema.ts`
+
+## Table Structure
+
+### Basic Table Template
+
+```typescript
+import { relations } from "drizzle-orm";
+import { int, json, mysqlEnum, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
+
+import { cloudTypeIdGenerator } from "@1up/utils/typeid";
+import { timestamps } from "../schema/helpers";
+import { typeIdColumn } from "../customColumnTypes";
+import { users } from "./user";
+
+export const myFeatureTable = mysqlTable(
+  "my_feature_table",
+  {
+    // Primary key with TypeID
+    id: typeIdColumn("myFeature", "id")
+      .primaryKey()
+      .$default(() => cloudTypeIdGenerator("myFeature")),
+    
+    // Owner reference (required for all tables)
+    ownerId: typeIdColumn("user", "owner_id").notNull(),
+    
+    // Table-specific columns
+    name: varchar("name", { length: 255 }).notNull(),
+    description: varchar("description", { length: 1000 }),
+    type: mysqlEnum("type", ["type_a", "type_b", "type_c"]),
+    
+    // For numeric values, use appropriate size and constraints
+    count: int("count").unsigned().default(0),
+    amount: int("amount", { unsigned: true }).default(0),
+    
+    // For JSON data with type safety
+    metadata: json("metadata").$type<MyFeatureMetadata>(),
+    
+    // Timestamps (add to every table)
+    ...timestamps.createUpdate,
+  }
+);
+
+// Define TypeScript types for JSON columns
+export type MyFeatureMetadata = {
+  version: number;
+  settings: {
+    enabled: boolean;
+    threshold: number;
+  };
+};
+
+// Set up relations
+export const myFeatureTableRelations = relations(
+  myFeatureTable,
+  ({ many, one }) => ({
+    owner: one(users, {
+      fields: [myFeatureTable.ownerId],
+      references: [users.id],
+    }),
+    relatedItems: many(someOtherTable),
+  })
+);
+
+// Zod schemas for validation
+export const insertMyFeatureSchema = createInsertSchema(myFeatureTable);
+export const selectMyFeatureSchema = createSelectSchema(myFeatureTable);
+```
+
+## Column Types
+
+### IDs and Relations
+
+- Use `typeIdColumn` for all ID columns
+- Example ID configuration:
+
+```typescript
+// Primary key
+id: typeIdColumn("featureName", "id")
+  .primaryKey()
+  .$default(() => cloudTypeIdGenerator("featureName")),
+
+// Foreign key
+userId: typeIdColumn("user", "user_id").notNull(),
+```
+
+### Owner References
+
+Every table must include an owner reference:
+
+```typescript
+ownerId: typeIdColumn("user", "owner_id").notNull(),
+```
+
+### Timestamps
+
+Always add timestamps to tables using the helper:
+
+```typescript
+// For tables with created/updated timestamps
+...timestamps.createUpdate,
+
+// For tables with only created timestamp
+...timestamps.create,
+
+// For tables with created/updated/logged timestamps
+...timestamps.createUpdateLogged,
+```
+
+### Numeric Columns
+
+Select the appropriate integer size based on expected values:
+
+```typescript
+// For small numbers (0-255)
+smallValue: tinyint("small_value").unsigned(),
+
+// For medium numbers (0-65,535)
+mediumValue: smallint("medium_value").unsigned(),
+
+// For larger numbers (0-16,777,215)
+largeValue: mediumint("large_value").unsigned(),
+
+// For very large numbers (0-4,294,967,295)
+veryLargeValue: int("very_large_value").unsigned(),
+```
+
+### String Columns
+
+```typescript
+// Short text
+name: varchar("name", { length: 255 }).notNull(),
+
+// Medium text
+description: varchar("description", { length: 1000 }),
+
+// Long text
+content: text("content"),
+```
+
+### Enum Columns
+
+```typescript
+status: mysqlEnum("status", ["active", "inactive", "pending"]).notNull().default("pending"),
+```
+
+### JSON Columns
+
+- Always define TypeScript types for JSON columns
+- Export types for reuse across the codebase
+- For client-shared types, place them in `packages/consts`
+
+```typescript
+// Define the type
+export type FeatureSettings = {
+  enabled: boolean;
+  options: {
+    key: string;
+    value: number;
+  }[];
+};
+
+// Use with the column
+settings: json("settings").$type<FeatureSettings>(),
+```
+
+## TypeID Management
+
+When adding a new entity type that needs a TypeID:
+
+1. Add a new entry to `cloudIdTypesMapNameToPrefix` in `packages/utils/typeid.ts`
+2. Follow the existing prefix patterns:
+   - Auth: `acX`
+   - User: `uX`
+   - Tracking: `tX`
+   - AI: `aX`
+   - Consumption: `cX`
+   - Integration: `iX`
+   - Sleep: `sX`
+
+Example:
+
+```typescript
+export const cloudIdTypesMapNameToPrefix = {
+  // existing entries...
+  
+  // New entry - follow existing patterns
+  myFeature: "mf",  // Add new entity with appropriate prefix
+};
+```
+
+## Relations
+
+Always define relations for your tables:
+
+```typescript
+export const tableRelations = relations(
+  myTable,
+  ({ many, one }) => ({
+    // One-to-many relation
+    owner: one(users, {
+      fields: [myTable.ownerId],
+      references: [users.id],
+    }),
+    
+    // One-to-one relation
+    profile: one(profiles, {
+      fields: [myTable.profileId],
+      references: [profiles.id],
+    }),
+    
+    // Many-to-one relation (from the "many" side)
+    category: one(categories, {
+      fields: [myTable.categoryId],
+      references: [categories.id],
+    }),
+    
+    // Many-to-many relation (need a junction table)
+    tags: many(tagToItemTable),
+  })
+);
+```
+
+## Schemas and Validation
+
+- Create Zod schemas for your tables to enable validation:
+
+```typescript
+export const insertMyTableSchema = createInsertSchema(myTable);
+export const selectMyTableSchema = createSelectSchema(myTable);
+
+// Customize schema with additional validation
+export const customInsertSchema = insertMyTableSchema.extend({
+  name: z.string().min(3).max(50),
+  email: z.string().email(),
+});
+```

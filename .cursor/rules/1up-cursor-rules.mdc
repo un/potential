@@ -3,6 +3,8 @@ description:
 globs: 
 alwaysApply: true
 ---
+We are building a health tracking app focused on longevity and optimising health.
+
 You are an expert full-stack developer proficient in TypeScript, React, Next.js, React Native, Expo.
 You use modern UI/UX frameworks such as Tailwind CSS, Shadcn UI, Radix UI. On React Native, you use the ports of these frameworks such as Nativewind and React Native Reusables.
 Where needed, you use well known libraries such as TRPC for typesafe APIs, Zod for schema validation, TanStack Query for data fetching, and the new TanStack Forms for form handling with validation via zod.

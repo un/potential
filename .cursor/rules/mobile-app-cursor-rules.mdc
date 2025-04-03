@@ -1,0 +1,203 @@
+---
+description: Use this rule when working in the mobile app
+globs: 
+alwaysApply: false
+---
+## Mobile App Development Guidelines
+
+### Component Organization
+
+- Organize components by usage pattern:
+  - `/components/ui/` - Reusable UI components (buttons, inputs, cards, etc.)
+  - `/components/app/` - Larger application components used in multiple places
+  - `/(home)/pathToTsxRoute/components/` - Route-specific components
+
+- Never inline components in route TSX pages - extract them to proper component files
+
+### Styling & UI
+
+- Use NativeWind for all styling:
+```tsx
+// Good
+<View className="flex-1 items-center justify-center bg-background p-4">
+  <Text className="text-lg font-medium text-foreground">Hello World</Text>
+</View>
+
+// Avoid
+<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+  <Text style={{ fontSize: 18, fontWeight: '500' }}>Hello World</Text>
+</View>
+```
+
+- Import UI components rather than React Native primitives:
+```tsx
+// Good
+import { Text, Button, Input } from "~/components/ui";
+
+// Avoid
+import { Text } from "react-native";
+```
+
+- Leverage existing components before creating custom ones:
+```tsx
+// Good
+import { Button } from "~/components/ui";
+
+// Avoid creating custom buttons when the existing one works
+```
+
+### Loading States
+
+- Use the Loading component from `~/components/loading` for all loading states:
+```tsx
+import { Loading } from "~/components/loading";
+
+// Use with appropriate size
+<Loading size="md" />
+```
+
+- Available sizes: tiny, sm, md, lg, xl, 2xl, 3xl, mega
+
+### Lists & Scrolling
+
+- Always use FlatList instead of mapping items in a ScrollView:
+```tsx
+// Good
+<FlatList
+  data={items}
+  renderItem={({ item }) => <ItemComponent item={item} />}
+  keyExtractor={(item) => item.id}
+/>
+
+// Avoid
+<ScrollView>
+  {items.map(item => (
+    <ItemComponent key={item.id} item={item} />
+  ))}
+</ScrollView>
+```
+
+- Ensure every screen has a scroll container (either FlatList, ScrollView, or a parent with one)
+- Avoid nested ScrollViews unless absolutely necessary for specific use cases
+
+### Hooks & Utilities
+
+- Place reusable hooks in `~/lib/hooks/` with descriptive names:
+```tsx
+// ~/lib/hooks/usePermission.ts
+export function usePermission() {
+  // Implementation
+}
+```
+
+- Place utility functions in `~/utils/` with descriptive names:
+```tsx
+// ~/utils/format-date.ts
+export function formatDate(date: Date): string {
+  // Implementation
+}
+```
+
+### Imports & Path Aliases
+
+- Always use the `~/` path alias for local imports, never use relative paths:
+```tsx
+// Good
+import { Button } from "~/components/ui/button";
+import { usePermission } from "~/lib/hooks/usePermission";
+
+// Avoid
+import { Button } from "../../components/ui/button";
+import { usePermission } from "../../../lib/hooks/usePermission";
+```
+
+### Navigation
+
+- Use Expo Router for all navigation
+- Organize routes in the `app/` directory with the appropriate folder structure
+- Use route params for passing minimal data between screens
+
+### Error Handling
+
+- Implement proper error boundaries at the route level
+- Display user-friendly error messages
+- Log errors for debugging purposes
+- Use try/catch blocks for handling async operations
+
+### Performance Considerations
+
+- Properly memoize components, callbacks, and values with `useMemo` and `useCallback`
+- Optimize images for mobile:
+  - Use appropriate image formats (WebP when possible)
+  - Implement lazy loading where appropriate
+  - Consider implementing a image caching strategy
+
+### Component Structure Pattern
+
+```tsx
+// ~/components/ui/example-component.tsx
+import React from "react";
+import { View } from "react-native";
+import { Text } from "~/components/ui/text";
+import { cn } from "~/utils/ui";
+
+interface ExampleComponentProps {
+  title: string;
+  description?: string;
+  className?: string;
+}
+
+export function ExampleComponent({ 
+  title, 
+  description, 
+  className 
+}: ExampleComponentProps) {
+  return (
+    <View className={cn("p-4 bg-card rounded-lg", className)}>
+      <Text className="text-lg font-medium">{title}</Text>
+      {description && (
+        <Text className="text-sm text-muted-foreground mt-1">
+          {description}
+        </Text>
+      )}
+    </View>
+  );
+}
+```
+
+### Screen Structure Pattern
+
+```tsx
+// app/(home)/example/screen.tsx
+import React from "react";
+import { View, ScrollView } from "react-native";
+import { Text } from "~/components/ui/text";
+import { usePermission } from "~/lib/hooks/usePermission";
+import { ExampleComponent } from "./components/example-component";
+import { Loading } from "~/components/loading";
+
+export default function ExampleScreen() {
+  const { hasPermission, isLoading } = usePermission("camera");
+  
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <Loading size="lg" />
+      </View>
+    );
+  }
+  
+  return (
+    <ScrollView className="flex-1 bg-background">
+      <View className="p-4">
+        <Text className="text-2xl font-bold mb-4">Example Screen</Text>
+        <ExampleComponent 
+          title="Example Component" 
+          description="This is an example component" 
+        />
+        {/* More content */}
+      </View>
+    </ScrollView>
+  );
+}
+```

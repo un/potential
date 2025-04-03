@@ -1,0 +1,236 @@
+---
+description: applied to all backend trpc procedures
+globs: 
+alwaysApply: false
+---
+## tRPC v11 Backend Procedures
+
+### Core Principles
+
+- Use `protectedProcedure` by default for all procedures
+- Organize procedures using merged routers by feature domain
+- Follow descriptive, hierarchical naming conventions for routers
+- Use Zod for all input validation
+- Standardize error handling with error objects from a central location
+- Leverage the context for database access and user authentication
+
+### Router Structure
+
+```typescript
+// Structure routers by feature domain
+import { router } from "../trpc";
+import { userProfileRouter } from "./user/profile";
+import { userSettingsRouter } from "./user/settings";
+import { healthCheckRouter } from "./system/health";
+
+export const appRouter = router({
+  user: router({
+    profile: userProfileRouter,
+    settings: userSettingsRouter,
+  }),
+  system: router({
+    health: healthCheckRouter,
+  }),
+});
+
+export type AppRouter = typeof appRouter;
+```
+
+### Router Naming Conventions
+
+- Use descriptive, hierarchical names that reflect the feature domain
+- Follow a consistent pattern: `domain.entity.action`
+- Examples:
+  - `user.profile.getDetails`
+  - `user.profile.health.checkStatus`
+  - `payment.subscription.cancel`
+  - `content.article.publish`
+
+### Procedure Implementation
+
+```typescript
+// Example procedure in user/profile.ts
+import { router, protectedProcedure } from "../../trpc";
+import { z } from "zod";
+import { PROFILE_ERRORS } from "@1up/consts/errors";
+
+export const userProfileRouter = router({
+  getDetails: protectedProcedure
+    .input(
+      z.object({
+        userId: z.string().optional(), // Optional - defaults to current user
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { db } = ctx;
+      
+      try {
+        const userId = input.userId || ctx.user.id;
+        const profile = await db.user.findUnique({
+          where: { id: userId },
+          select: {
+            id: true,
+            name: true,
+            // Select other fields
+          },
+        });
+        
+        if (!profile) {
+          throw PROFILE_ERRORS.PROFILE_NOT_FOUND;
+        }
+        
+        return profile;
+      } catch (error) {
+        // Handle error, returning request ID
+        if (error === PROFILE_ERRORS.PROFILE_NOT_FOUND) {
+          throw {
+            code: "NOT_FOUND",
+            message: error.message,
+            requestId: ctx.requestId,
+          };
+        }
+        
+        throw {
+          code: "INTERNAL_SERVER_ERROR",
+          message: PROFILE_ERRORS.UNKNOWN_ERROR.message,
+          requestId: ctx.requestId,
+        };
+      }
+    }),
+    
+  updateDetails: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().min(2).optional(),
+        bio: z.string().max(500).optional(),
+        // Other fields
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { db } = ctx;
+      
+      try {
+        const updatedProfile = await db.user.update({
+          where: { id: ctx.user.id },
+          data: input,
+        });
+        
+        return updatedProfile;
+      } catch (error) {
+        throw {
+          code: "INTERNAL_SERVER_ERROR",
+          message: PROFILE_ERRORS.UPDATE_FAILED.message,
+          requestId: ctx.requestId,
+        };
+      }
+    }),
+});
+```
+
+### Context Setup
+
+```typescript
+// server/trpc.ts
+import { initTRPC, TRPCError } from '@trpc/server';
+import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
+import { getServerSession } from 'next-auth/next';
+import { nanoid } from 'nanoid';
+import { db } from '@1up/db';
+
+export const createTRPCContext = async (opts: CreateNextContextOptions) => {
+  const requestId = nanoid();
+  const session = await getServerSession(opts.req, opts.res);
+  
+  return {
+    db,
+    user: session?.user,
+    requestId,
+  };
+};
+
+const t = initTRPC.context<typeof createTRPCContext>().create();
+
+export const router = t.router;
+export const procedure = t.procedure;
+
+// Define middleware to check authentication
+const isAuthed = t.middleware(({ ctx, next }) => {
+  if (!ctx.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  return next({
+    ctx: {
+      user: ctx.user,
+    },
+  });
+});
+
+export const protectedProcedure = procedure.use(isAuthed);
+```
+
+### Error Handling
+
+- Define standardized error objects in a central location:
+
+```typescript
+// packages/consts/backend/errors/routerName.ts
+export const ROUTERNAME = {
+    PROCEDURENAME: {
+        PROFILE_NOT_FOUND: {
+            code: 'PROFILE_NOT_FOUND',
+            message: 'The requested profile could not be found',
+        },
+        UPDATE_FAILED: {
+            code: 'UPDATE_FAILED',
+            message: 'Failed to update profile information',
+        },
+        UNKNOWN_ERROR: {
+            code: 'UNKNOWN_ERROR',
+            message: 'An unexpected error occurred',
+        },
+      }
+};
+
+export const AUTH_ERRORS = {
+  // Auth related errors
+};
+
+// Other error categories
+```
+
+- Always return the requestId with the error:
+
+```typescript
+try {
+  // Procedure logic
+} catch (error) {
+  throw {
+    code: error.code || 'INTERNAL_SERVER_ERROR',
+    message: error.message || 'An unexpected error occurred',
+    requestId: ctx.requestId,
+  };
+}
+```
+
+### Input Validation with Zod
+
+- Always use Zod for input validation
+- Create reusable schemas for common data structures
+- Provide helpful error messages in schema definitions
+
+```typescript
+// Common schemas
+export const userSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email format"),
+});
+
+// Procedure input
+.input(
+  z.object({
+    userId: z.string().uuid("Invalid user ID format"),
+    data: userSchema.partial().omit({ id: true }),
+  })
+)
+```
