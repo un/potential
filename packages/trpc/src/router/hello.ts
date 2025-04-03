@@ -2,7 +2,7 @@ import type { TRPCRouterRecord } from "@trpc/server";
 
 // import { invalidateSessionToken } from "@1up/auth";
 
-import { protectedProcedure } from "../trpc";
+import { protectedProcedure } from "~/trpc";
 
 export const helloRouter = {
   hello: protectedProcedure.query(({ ctx }) => {

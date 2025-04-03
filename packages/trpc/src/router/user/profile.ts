@@ -1,8 +1,9 @@
 import type { TRPCRouterRecord } from "@trpc/server";
+import { z } from "zod";
 
 import { eq, userProfiles, userXpLogs } from "@1up/db";
 
-import { protectedProcedure } from "../../trpc";
+import { protectedProcedure } from "~/trpc";
 
 export const profileRouter = {
   getUserProfileOverview: protectedProcedure.query(async ({ ctx }) => {
@@ -22,7 +23,6 @@ export const profileRouter = {
         streakCurrentStartDate: new Date(),
         streakCurrentEndDate: null,
         xpTotal: 50,
-        lastOnboardingVersion: 0,
         healthDateOfBirth: null,
         healthGenderAtBirth: null,
         healthHeight: null,
@@ -45,7 +45,26 @@ export const profileRouter = {
       streakCurrentStartDate:
         userProfileResponse?.streakCurrentStartDate ?? new Date(),
       xpTotal: userProfileResponse?.xpTotal ?? 50,
-      lastOnboardingVersion: userProfileResponse?.lastOnboardingVersion ?? 0,
+      lastOnboardingVersion:
+        userProfileResponse?.lastOnboardingVersion ?? "0.0.1",
     };
   }),
+  updateOnboardingVersion: protectedProcedure
+    .input(
+      z.object({
+        version: z.string().min(5),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { db, auth } = ctx;
+      const user = auth.user;
+
+      await db
+        .update(userProfiles)
+        .set({
+          lastOnboardingVersion: input.version,
+        })
+        .where(eq(userProfiles.ownerId, user.id));
+      return;
+    }),
 } satisfies TRPCRouterRecord;

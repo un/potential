@@ -4,7 +4,7 @@ import { serverEnv } from "@1up/env";
 import { getSignedUrl, PutObjectCommand, s3Client } from "@1up/storage";
 import { cloudTypeIdGenerator } from "@1up/utils";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure } from "~/trpc";
 
 export const storageRouter = createTRPCRouter({
   getUploadPresignedUrl: protectedProcedure
