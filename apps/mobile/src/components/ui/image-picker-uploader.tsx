@@ -112,7 +112,9 @@ export const ImagePickerUploader = forwardRef<
           await ImagePicker.requestMediaLibraryPermissionsAsync();
 
         if (!permissionResult.granted) {
-          setError("Permission to access camera roll is required!");
+          setError(
+            "Permission to access camera roll was previously denied! Please go to phone Settings > Apps > 1up > Photos",
+          );
           return;
         }
 
