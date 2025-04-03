@@ -1,6 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createTRPCClient, httpBatchLink, loggerLink } from "@trpc/client";
 import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import { toast } from "sonner-native";
 import superjson from "superjson";
 
 import type { AppRouter } from "@1up/trpc";
@@ -11,7 +12,11 @@ import { getApiUrl } from "./base-url";
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // ...
+      retry: false,
+      refetchOnWindowFocus: true,
+    },
+    mutations: {
+      onError: (err) => toast.error(err.message),
     },
   },
 });
@@ -30,7 +35,6 @@ export const trpc = createTRPCOptionsProxy<AppRouter>({
         url: `${getApiUrl()}/trpc`,
         headers() {
           const headers = new Map<string, string>();
-
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
           const cookies = authClient.getCookie();
           if (cookies) {
