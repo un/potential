@@ -10,7 +10,7 @@ import {
 
 import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
-import { typeIdColumn } from "../customColumnTypes";
+import { typeIdColumn } from "../columns/custom/typeId";
 
 // Auth related tables
 export const users = mysqlTable("users", {

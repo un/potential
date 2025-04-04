@@ -10,13 +10,17 @@ import {
 } from "drizzle-orm/mysql-core";
 
 import type { CloudTypeId } from "@1up/utils/typeid";
-import { TRACKABLE_TYPES_ARRAY } from "@1up/consts/trackables";
-import { uiColors } from "@1up/consts/uiColors";
 import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
-import { typeIdColumn } from "../customColumnTypes";
+import { colorsColumn } from "../columns/custom/color";
+import {
+  trackableSubTypeColumn,
+  trackableTypeColumn,
+} from "../columns/custom/trackable";
+import { typeIdColumn } from "../columns/custom/typeId";
+import { timestamps } from "../columns/timestamps";
 import { users } from "./auth";
-import { timestamps } from "./helpers";
+import { ingredientLogs } from "./ingredients";
 
 export type TrackableCustomConfig =
   | ({
@@ -71,10 +75,14 @@ export const trackables = mysqlTable("trackables", {
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("trackable")),
   ownerId: typeIdColumn("user", "user_id").notNull(),
-  name: varchar("name", { length: 255 }).notNull(),
-  color: mysqlEnum("color", [...uiColors]).notNull(),
-  type: mysqlEnum("type", [...TRACKABLE_TYPES_ARRAY]).notNull(),
+  name: varchar("name", { length: 32 }).notNull(),
+  description: varchar("description", { length: 255 }),
+  color: colorsColumn("color"),
+  type: trackableTypeColumn("type"),
+  subType: trackableSubTypeColumn("subType"),
+  subTypeCustomName: varchar("subTypeCustomName", { length: 64 }),
   customConfig: json("customConfig").$type<TrackableCustomConfig>(),
+  public: boolean("public").default(false),
   ...timestamps.createUpdate,
 });
 
@@ -98,6 +106,7 @@ export const trackableLogs = mysqlTable("trackable_logs", {
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("trackableLog")),
   trackableId: typeIdColumn("trackable", "id").notNull(),
+  parentLogId: typeIdColumn("trackableLog", "id"),
   ownerId: typeIdColumn("user", "user_id").notNull(),
   checked: boolean("checked"),
   numericValue: smallint("numericValue"),
@@ -107,13 +116,25 @@ export const trackableLogs = mysqlTable("trackable_logs", {
   ...timestamps.createUpdateLogged,
 });
 
-export const trackableLogsRelations = relations(trackableLogs, ({ one }) => ({
-  trackable: one(trackables, {
-    fields: [trackableLogs.trackableId],
-    references: [trackables.id],
+export const trackableLogsRelations = relations(
+  trackableLogs,
+  ({ one, many }) => ({
+    trackable: one(trackables, {
+      fields: [trackableLogs.trackableId],
+      references: [trackables.id],
+    }),
+    parent: one(trackableLogs, {
+      fields: [trackableLogs.parentLogId],
+      references: [trackableLogs.id],
+      relationName: "parent",
+    }),
+    children: many(trackableLogs, {
+      relationName: "children",
+    }),
+    owner: one(users, {
+      fields: [trackableLogs.ownerId],
+      references: [users.id],
+    }),
+    ingredientLogs: many(ingredientLogs),
   }),
-  owner: one(users, {
-    fields: [trackableLogs.ownerId],
-    references: [users.id],
-  }),
-}));
+);

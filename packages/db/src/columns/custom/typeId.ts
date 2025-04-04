@@ -8,6 +8,7 @@ import {
   cloudTypeIdToUUIDBytes,
 } from "@1up/utils/typeid";
 
+// TypeId Column
 function bytesToHex(bytes: Uint8Array): string {
   let hex = "";
   for (const byte of bytes) {

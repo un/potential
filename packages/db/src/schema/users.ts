@@ -2,17 +2,16 @@ import { relations } from "drizzle-orm";
 import {
   date,
   int,
-  mysqlEnum,
   mysqlTable,
   smallint,
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
 
-import { genderAtBirthValues } from "@1up/consts/users";
 import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
-import { typeIdColumn } from "../customColumnTypes";
+import { typeIdColumn } from "../columns/custom/typeId";
+import { genderAtBirthColumn } from "../columns/custom/user";
 import { users } from "./auth";
 
 export const userProfiles = mysqlTable("user_profiles", {
@@ -28,10 +27,7 @@ export const userProfiles = mysqlTable("user_profiles", {
 
   // Health
   healthDateOfBirth: date("healthDateOfBirth"),
-  healthGenderAtBirth: mysqlEnum(
-    "healthGenderAtBirth",
-    genderAtBirthValues as [string, ...string[]],
-  ),
+  healthGenderAtBirth: genderAtBirthColumn("healthGenderAtBirth"),
   healthHeight: smallint("healthHeight", { unsigned: true }), //in cm
   healthWeight: smallint("healthWeight", { unsigned: true }), //in kg
 

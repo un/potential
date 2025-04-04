@@ -32,20 +32,8 @@ export const cloudIdTypesMapNameToPrefix = {
   aiInputLog: "ail",
 
   //consumption CXX
-  ingredientLibrary: "cil",
-  ingredientNutrition: "cni",
-  ingredientVitamin: "cvi",
-  ingredientMineral: "cmi",
-  consumableItem: "ci",
-  consumableItemIngredient: "cii",
-  consumableItemNutrition: "cin",
-  consumableItemVitamin: "civ",
-  consumableItemMineral: "cim",
-  consumptionLog: "cl",
-  consumptionLogIngredient: "cli",
-  consumptionLogNutrition: "cln",
-  consumptionLogVitamin: "clv",
-  consumptionLogMineral: "clm",
+  ingredientLibrary: "ilb",
+  ingredientLog: "il",
   //integration iXX
   integration: "i",
   //sleep sXX

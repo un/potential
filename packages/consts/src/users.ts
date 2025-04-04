@@ -1,8 +1,11 @@
-export const genderAtBirth = {
+export const GENDER_AT_BIRTH = {
   male: "Male",
   female: "Female",
+  other: "Other",
 } as const;
 
-export const genderAtBirthValues = Object.keys(genderAtBirth);
-
-export type GenderAtBirth = keyof typeof genderAtBirth;
+export type GenderAtBirthMap = typeof GENDER_AT_BIRTH;
+export type GenderAtBirthKey = keyof GenderAtBirthMap;
+export function getGenderAtBirthDisplayValue(key: GenderAtBirthKey): string {
+  return GENDER_AT_BIRTH[key];
+}
