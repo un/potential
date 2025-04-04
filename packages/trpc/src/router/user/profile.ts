@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { eq, userProfiles, userXpLogs } from "@1up/db";
 
-import { protectedProcedure } from "~/trpc";
+import { protectedProcedure } from "../../trpc";
 
 export const profileRouter = {
   getUserProfileOverview: protectedProcedure.query(async ({ ctx }) => {

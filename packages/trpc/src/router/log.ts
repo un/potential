@@ -2,7 +2,7 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { protectedProcedure } from "~/trpc";
+import { protectedProcedure } from "../trpc";
 
 export const logRouter = {
   createFoodDrinkLog: protectedProcedure
