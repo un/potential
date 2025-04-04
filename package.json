@@ -23,13 +23,14 @@
     "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
     "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
     "lint:ws": "pnpm dlx sherif@latest",
-    "postinstall": "pnpm lint:ws",
+    "postinstall": "pnpm lint:ws && patch-package",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add"
   },
   "devDependencies": {
     "@1up/prettier-config": "workspace:*",
     "@turbo/gen": "^2.3.4",
+    "patch-package": "^8.0.0",
     "prettier": "catalog:",
     "turbo": "^2.3.4",
     "typescript": "catalog:"
