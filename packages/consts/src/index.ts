@@ -1,14 +1,24 @@
 import { UserRoles } from "./auth";
-import { COLORS, ColorsKey, ColorsMap, getColorDisplayValue } from "./colors";
+import {
+  COLORS,
+  ColorsKey,
+  ColorsMap,
+  ColorsSchema,
+  colorsSchema,
+  getColorDisplayValue,
+} from "./colors";
 import {
   getIntegrationAccessModeDisplayValue,
   getIntegrationDisplayValue,
   INTEGRATION_ACCESS_MODE,
   IntegrationAccessModeKey,
   IntegrationAccessModeMap,
+  IntegrationAccessModeSchema,
   INTEGRATIONS,
   IntegrationsKey,
   IntegrationsMap,
+  IntegrationsSchema,
+  integrationsSchema,
 } from "./integrations";
 import {
   getSubTypeDisplayValue,
@@ -17,13 +27,19 @@ import {
   TRACKABLE_TYPES,
   TrackableSubTypesKey,
   TrackableSubTypesMap,
+  trackableSubTypesSchema,
+  TrackableSubTypesSchema,
   TrackableTypesKey,
   TrackableTypesMap,
+  TrackableTypesSchema,
+  trackableTypesSchema,
 } from "./trackables";
 import {
   GENDER_AT_BIRTH,
   GenderAtBirthKey,
   GenderAtBirthMap,
+  GenderAtBirthSchema,
+  genderAtBirthSchema,
   getGenderAtBirthDisplayValue,
 } from "./users";
 
@@ -33,22 +49,27 @@ export const CONSTS = {
     ACCESS_MODE: INTEGRATION_ACCESS_MODE,
     getDisplayValue: getIntegrationDisplayValue,
     getAccessModeDisplayValue: getIntegrationAccessModeDisplayValue,
+    SCHEMA: integrationsSchema,
   },
   TRACKABLE: {
     TYPES: TRACKABLE_TYPES,
     SUB_TYPES: TRACKABLE_SUB_TYPES,
     getTypeDisplayValue,
     getSubTypeDisplayValue,
+    TYPES_SCHEMA: trackableTypesSchema,
+    SUB_TYPES_SCHEMA: trackableSubTypesSchema,
   },
   COLORS: {
     TYPES: COLORS,
     getDisplayValue: getColorDisplayValue,
+    SCHEMA: colorsSchema,
   },
   USERS: {
     GENDER_AT_BIRTH: GENDER_AT_BIRTH,
     getGenderAtBirthDisplayValue: getGenderAtBirthDisplayValue,
+    SCHEMA: genderAtBirthSchema,
   },
-} as const;
+};
 
 export type ConstsTypes = {
   AUTH: {
@@ -59,11 +80,13 @@ export type ConstsTypes = {
       KEY: IntegrationsKey;
       VALUES: IntegrationsMap;
       DISPLAY_VALUE: (key: IntegrationsKey) => string;
+      SCHEMA: IntegrationsSchema;
     };
     ACCESS_MODE: {
       KEY: IntegrationAccessModeKey;
       VALUES: IntegrationAccessModeMap;
       DISPLAY_VALUE: (key: IntegrationAccessModeKey) => string;
+      SCHEMA: IntegrationAccessModeSchema;
     };
   };
   TRACKABLE: {
@@ -71,11 +94,13 @@ export type ConstsTypes = {
       KEY: TrackableTypesKey;
       VALUES: TrackableTypesMap;
       DISPLAY_VALUE: (key: TrackableTypesKey) => string;
+      SCHEMA: TrackableTypesSchema;
     };
     SUB_TYPES: {
       KEY: TrackableSubTypesKey;
       VALUES: TrackableSubTypesMap;
       DISPLAY_VALUE: (key: TrackableSubTypesKey) => string;
+      SCHEMA: TrackableSubTypesSchema;
     };
   };
   COLORS: {
@@ -83,6 +108,7 @@ export type ConstsTypes = {
       KEY: ColorsKey;
       VALUES: ColorsMap;
       DISPLAY_VALUE: (key: ColorsKey) => string;
+      SCHEMA: ColorsSchema;
     };
   };
   USERS: {
@@ -90,6 +116,7 @@ export type ConstsTypes = {
       KEY: GenderAtBirthKey;
       VALUES: GenderAtBirthMap;
       DISPLAY_VALUE: (key: GenderAtBirthKey) => string;
+      SCHEMA: GenderAtBirthSchema;
     };
   };
 };

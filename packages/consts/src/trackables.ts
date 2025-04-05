@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export const TRACKABLE_TYPES = {
   consumption: "Consumption",
   supplement: "Supplement",
@@ -14,6 +16,12 @@ export const TRACKABLE_TYPES = {
 
 export type TrackableTypesMap = typeof TRACKABLE_TYPES;
 export type TrackableTypesKey = keyof TrackableTypesMap;
+
+export const trackableTypesSchema = z.enum(
+  Object.keys(TRACKABLE_TYPES) as [TrackableTypesKey, ...TrackableTypesKey[]],
+);
+export type TrackableTypesSchema = z.infer<typeof trackableTypesSchema>;
+
 export function getTypeDisplayValue(key: TrackableTypesKey): string {
   return TRACKABLE_TYPES[key];
 }
@@ -69,10 +77,14 @@ export const TRACKABLE_SUB_TYPES = {
   "energy.calories.net": "Calories Net",
   "energy.calories.intake": "Calories Intake",
   "energy.calories.burn": "Calories Burn",
+  "supplement.generic": "Supplement",
+  "symptom.generic": "Symptom",
+  "blood.generic": "Blood",
   "body.weight": "Weight",
   "body.height": "Height",
   "body.bodyFat": "Body Fat",
   "body.muscle": "Muscle",
+  "body.generic": "Body",
   "custom.generic": "Custom",
 } as const;
 
@@ -80,47 +92,14 @@ export const TRACKABLE_SUB_TYPES = {
 export type TrackableSubTypesMap = typeof TRACKABLE_SUB_TYPES;
 export type TrackableSubTypesKey = keyof TrackableSubTypesMap;
 
+export const trackableSubTypesSchema = z.enum(
+  Object.keys(TRACKABLE_SUB_TYPES) as [
+    TrackableSubTypesKey,
+    ...TrackableSubTypesKey[],
+  ],
+);
+export type TrackableSubTypesSchema = z.infer<typeof trackableSubTypesSchema>;
+
 export function getSubTypeDisplayValue(key: TrackableSubTypesKey): string {
   return TRACKABLE_SUB_TYPES[key];
 }
-// export enum TRACKABLE_TYPES {
-//   consumption = "consumption",
-//   supplement = "supplement",
-//   medication = "medication",
-//   energy = "energy",
-//   blood = "blood",
-//   body = "body",
-//   sleep = "sleep",
-//   activity = "activity",
-//   mind = "mind",
-//   symptom = "symptom",
-//   custom = "custom",
-// }
-
-// export const TRACKABLE_TYPES_ARRAY = [
-//   TRACKABLE_TYPES.consumption,
-//   TRACKABLE_TYPES.supplement,
-//   TRACKABLE_TYPES.medication,
-//   TRACKABLE_TYPES.energy,
-//   TRACKABLE_TYPES.blood,
-//   TRACKABLE_TYPES.body,
-//   TRACKABLE_TYPES.sleep,
-//   TRACKABLE_TYPES.activity,
-//   TRACKABLE_TYPES.mind,
-//   TRACKABLE_TYPES.symptom,
-//   TRACKABLE_TYPES.custom,
-// ] as const;
-
-// export const trackableTypesToNameMap: { [I in TRACKABLE_TYPES]: string } = {
-//   [TRACKABLE_TYPES.consumption]: "Food and Drink",
-//   [TRACKABLE_TYPES.supplement]: "Supplements",
-//   [TRACKABLE_TYPES.medication]: "Medication",
-//   [TRACKABLE_TYPES.energy]: "Energy",
-//   [TRACKABLE_TYPES.blood]: "Blood",
-//   [TRACKABLE_TYPES.body]: "Body",
-//   [TRACKABLE_TYPES.sleep]: "Sleep",
-//   [TRACKABLE_TYPES.activity]: "Activity",
-//   [TRACKABLE_TYPES.mind]: "Mind",
-//   [TRACKABLE_TYPES.symptom]: "Symptoms",
-//   [TRACKABLE_TYPES.custom]: "Custom",
-// };

@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export const INTEGRATIONS = {
   "1up_AIR": "1upAir",
   oura: "Oura Ring",
@@ -7,6 +9,12 @@ export const INTEGRATIONS = {
 
 export type IntegrationsMap = typeof INTEGRATIONS;
 export type IntegrationsKey = keyof IntegrationsMap;
+
+export const integrationsSchema = z.enum(
+  Object.keys(INTEGRATIONS) as [IntegrationsKey, ...IntegrationsKey[]],
+);
+export type IntegrationsSchema = z.infer<typeof integrationsSchema>;
+
 export function getIntegrationDisplayValue(key: IntegrationsKey): string {
   return INTEGRATIONS[key];
 }
@@ -20,6 +28,17 @@ export const INTEGRATION_ACCESS_MODE = {
 
 export type IntegrationAccessModeMap = typeof INTEGRATION_ACCESS_MODE;
 export type IntegrationAccessModeKey = keyof IntegrationAccessModeMap;
+
+export const integrationAccessModeSchema = z.enum(
+  Object.keys(INTEGRATION_ACCESS_MODE) as [
+    IntegrationAccessModeKey,
+    ...IntegrationAccessModeKey[],
+  ],
+);
+export type IntegrationAccessModeSchema = z.infer<
+  typeof integrationAccessModeSchema
+>;
+
 export function getIntegrationAccessModeDisplayValue(
   key: IntegrationAccessModeKey,
 ): string {

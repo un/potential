@@ -12,7 +12,8 @@
         "@1up/utils": "workspace:*",
         "eslint": "catalog:",
         "prettier": "catalog:",
-        "typescript": "catalog:"
+        "typescript": "catalog:",
+        "zod": "catalog:"
     },
     "prettier": "@1up/prettier-config"
 }

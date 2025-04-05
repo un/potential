@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export const COLORS = {
   bronze: "Bronze",
   gold: "Gold",
@@ -23,6 +25,12 @@ export const COLORS = {
 
 export type ColorsMap = typeof COLORS;
 export type ColorsKey = keyof ColorsMap;
+
+export const colorsSchema = z.enum(
+  Object.keys(COLORS) as [ColorsKey, ...ColorsKey[]],
+);
+export type ColorsSchema = z.infer<typeof colorsSchema>;
+
 export function getColorDisplayValue(key: ColorsKey): string {
   return COLORS[key];
 }
