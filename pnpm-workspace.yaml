@@ -5,8 +5,8 @@ packages:
 
 catalog:
   # Auth
-  "better-auth": 1.2.3
-  "@better-auth/expo": 1.2.4
+  "better-auth": 1.2.5
+  "@better-auth/expo": 1.2.5
 
   # Dev tooling
   eslint: ^9.19.0

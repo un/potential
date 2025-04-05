@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@better-auth/expo':
-      specifier: 1.2.4
-      version: 1.2.4
+      specifier: 1.2.5
+      version: 1.2.5
     '@hookform/resolvers':
       specifier: ^4.1.2
       version: 4.1.3
@@ -28,8 +28,8 @@ catalogs:
       specifier: ^11.0.0-rc.824
       version: 11.0.0-rc.824
     better-auth:
-      specifier: 1.2.3
-      version: 1.2.3
+      specifier: 1.2.5
+      version: 1.2.5
     drizzle-kit:
       specifier: ^0.30.5
       version: 0.30.5
@@ -59,7 +59,7 @@ catalogs:
       version: 5.7.3
     zod:
       specifier: ^3.24.1
-      version: 3.24.1
+      version: 3.24.2
   react19:
     '@types/react':
       specifier: ^19.0.0
@@ -74,6 +74,11 @@ catalogs:
       specifier: 19.0.0
       version: 19.0.0
 
+patchedDependencies:
+  better-auth:
+    hash: d2e3mihboacrcwytvagews5dqe
+    path: patches/better-auth.patch
+
 importers:
 
   .:
@@ -84,9 +89,6 @@ importers:
       '@turbo/gen':
         specifier: ^2.3.4
         version: 2.3.4(@types/node@22.10.10)(typescript@5.7.3)
-      patch-package:
-        specifier: ^8.0.0
-        version: 8.0.0
       prettier:
         specifier: 'catalog:'
         version: 3.4.2
@@ -125,10 +127,10 @@ importers:
         version: 0.3.4(@trpc/server@11.0.0-rc.824(typescript@4.9.5))(hono@4.7.4)
       '@hono/zod-validator':
         specifier: ^0.4.3
-        version: 0.4.3(hono@4.7.4)(zod@3.24.1)
+        version: 0.4.3(hono@4.7.4)(zod@3.24.2)
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.3(typescript@4.9.5)
+        version: 1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@4.9.5)
       hono:
         specifier: ^4.7.4
         version: 4.7.4
@@ -137,7 +139,7 @@ importers:
         version: 5.1.3
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -165,7 +167,7 @@ importers:
         version: link:../../packages/utils
       '@better-auth/expo':
         specifier: 'catalog:'
-        version: 1.2.4(better-auth@1.2.3(typescript@5.7.3))
+        version: 1.2.5(better-auth@1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3))
       '@expo-google-fonts/martian-mono':
         specifier: 0.2.3
         version: 0.2.3
@@ -207,7 +209,7 @@ importers:
         version: 11.0.0-rc.824(@tanstack/react-query@5.67.1(react@19.0.0))(@trpc/client@11.0.0-rc.824(@trpc/server@11.0.0-rc.824(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.824(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.3(typescript@5.7.3)
+        version: 1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -370,7 +372,7 @@ importers:
         version: link:../../packages/validators
       '@t3-oss/env-nextjs':
         specifier: ^0.12.0
-        version: 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.1)
+        version: 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.2)
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.67.1(react@19.0.0)
@@ -400,7 +402,7 @@ importers:
         version: 2.2.2
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -464,16 +466,16 @@ importers:
         version: link:../validators
       '@better-auth/expo':
         specifier: 'catalog:'
-        version: 1.2.4(better-auth@1.2.3(typescript@5.7.3))
+        version: 1.2.5(better-auth@1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3))
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.3(typescript@5.7.3)
+        version: 1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3)
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/prettier-config':
         specifier: workspace:*
@@ -534,10 +536,10 @@ importers:
         version: 0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4)
       drizzle-zod:
         specifier: 'catalog:'
-        version: 0.6.1(drizzle-orm@0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4))(zod@3.24.1)
+        version: 0.6.1(drizzle-orm@0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4))(zod@3.24.2)
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -614,10 +616,10 @@ importers:
     dependencies:
       '@t3-oss/env-core':
         specifier: ^0.12.0
-        version: 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.1)
+        version: 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.2)
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -659,7 +661,7 @@ importers:
         version: 3.6.0
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -690,22 +692,22 @@ importers:
         version: link:../validators
       '@ai-sdk/anthropic':
         specifier: ^1.2.1
-        version: 1.2.1(zod@3.24.1)
+        version: 1.2.1(zod@3.24.2)
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.0.0-rc.824(typescript@5.7.3)
       ai:
         specifier: ^4.2.2
-        version: 4.2.2(react@19.0.0)(zod@3.24.1)
+        version: 4.2.2(react@19.0.0)(zod@3.24.2)
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.3(typescript@5.7.3)
+        version: 1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3)
       superjson:
         specifier: 2.2.2
         version: 2.2.2
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -782,7 +784,7 @@ importers:
         version: 5.7.3
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
 
   packages/utils:
     dependencies:
@@ -803,7 +805,7 @@ importers:
         version: 1.2.0
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -813,7 +815,7 @@ importers:
     dependencies:
       zod:
         specifier: 'catalog:'
-        version: 3.24.1
+        version: 3.24.2
     devDependencies:
       '@1up/eslint-config':
         specifier: workspace:*
@@ -1859,16 +1861,16 @@ packages:
     resolution: {integrity: sha512-t8kDRGrKXyp6+tjUh7hw2RLyclsW4TRoRvRHtSyAX9Bb5ldlFh+90YAYY6awRXrlB4G5G2izNeGySpATlFzmOg==}
     engines: {node: '>=6.9.0'}
 
-  '@better-auth/expo@1.2.4':
-    resolution: {integrity: sha512-mPyFeRHsWP0XiZTcUjXn0+5lxta5JlRkLPxYOJGDis2kBtGeJBiA3Mz3b6BNPdSwZurph9jtk1FcmC850WKmYg==}
+  '@better-auth/expo@1.2.5':
+    resolution: {integrity: sha512-rHddnBX192YHtJfhegWihowz5VWebKwlwyqVcSmzCIhOnxvYRo2aEPfIB5qci87hivEOXIiDubul9vsoWJjXnA==}
     peerDependencies:
-      better-auth: 1.2.4
+      better-auth: 1.2.5
 
-  '@better-auth/utils@0.2.3':
-    resolution: {integrity: sha512-Ap1GaSmo6JYhJhxJOpUB0HobkKPTNzfta+bLV89HfpyCAHN7p8ntCrmNFHNAVD0F6v0mywFVEUg1FUhNCc81Rw==}
+  '@better-auth/utils@0.2.4':
+    resolution: {integrity: sha512-ayiX87Xd5sCHEplAdeMgwkA0FgnXsEZBgDn890XHHwSWNqqRZDYOq3uj2Ei2leTv1I2KbG5HHn60Ah1i2JWZjQ==}
 
-  '@better-fetch/fetch@1.1.15':
-    resolution: {integrity: sha512-0Bl8YYj1f8qCTNHeSn5+1DWv2hy7rLBrQ8rS8Y9XYloiwZEfc3k4yspIG0llRxafxqhGCwlGRg+F8q1HZRCMXA==}
+  '@better-fetch/fetch@1.1.18':
+    resolution: {integrity: sha512-rEFOE1MYIsBmoMJtQbl32PGHHXuG2hDxvEd7rUHE0vCBoFQVSDqaVs9hkZEtHCxRoY+CljXKFCOuJ8uxqw1LcA==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -4638,9 +4640,6 @@ packages:
     resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
     engines: {node: '>=10.0.0'}
 
-  '@yarnpkg/lockfile@1.1.0':
-    resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
-
   '@zxing/text-encoding@0.9.0':
     resolution: {integrity: sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==}
 
@@ -4971,11 +4970,11 @@ packages:
     resolution: {integrity: sha512-4Bcg1P8xhUuqcii/S0Z9wiHIrQVPMermM1any+MX5GeGD7faD3/msQUDGLol9wOcz4/jbg/WJnGqoJF6LiBdtg==}
     engines: {node: '>=10.0.0'}
 
-  better-auth@1.2.3:
-    resolution: {integrity: sha512-y97/ah2SOWaW81IRg36m7xMSMVl7ATaHie/nhQ0in/reVlEX/6juVPszNqq0gcTwQtFsB8oe15wQKgdf4yHP9Q==}
+  better-auth@1.2.5:
+    resolution: {integrity: sha512-Tz2aKImkvaT7P9qHQ67Vhw/Slo6zpvE0jG7GoDQM+dd5tWuC3lP0OGjjWkNCZdToVlWB193i5nSHeZT90sFqEw==}
 
-  better-call@1.0.4:
-    resolution: {integrity: sha512-NdAihYdkS0IOz1mtz8mw1gWacCxR9r921U8YqB+VB6++rt8edMG13vVL16Y4TBL4XkjMK/DUewEsOOFkw9LJYQ==}
+  better-call@1.0.5:
+    resolution: {integrity: sha512-rAT73GWIJ8LbSP8Y3BdJnY1hwAiQPRRmUJ4R3YVhcVGS927l3eTXG5o5TD6Bv6je6ygjdx6iVq3/BU49eGUCHg==}
 
   better-opn@3.0.2:
     resolution: {integrity: sha512-aVNobHnJqLiUelTaHat9DZ1qM2w0C0Eym4LPI/3JxOnSokGVdsl1T1kN7TFvsEAD8G47A6VKQ0TVHqbBnYMJlQ==}
@@ -6371,9 +6370,6 @@ packages:
     resolution: {integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng==}
     engines: {node: '>=10'}
 
-  find-yarn-workspace-root@2.0.0:
-    resolution: {integrity: sha512-1IMnbjt4KzsQfnhnzNd8wUEgXZ44IzZaZmnLYx7D5FZlaHt2gW20Cri8Q+E/t5tIj4+epTBub+2Zxu/vNILzqQ==}
-
   flat-cache@4.0.1:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
@@ -7102,10 +7098,6 @@ packages:
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
 
-  json-stable-stringify@1.2.1:
-    resolution: {integrity: sha512-Lp6HbbBgosLmJbjx0pBLbgvx68FaFU1sdkmBuckmhhJ88kL13OA51CDtR2yJB50eCNMH9wRqtQNNiAqQH4YXnA==}
-    engines: {node: '>= 0.4'}
-
   json5@1.0.2:
     resolution: {integrity: sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA==}
     hasBin: true
@@ -7126,9 +7118,6 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
-  jsonify@0.0.1:
-    resolution: {integrity: sha512-2/Ki0GcmuqSrgFyelQq9M05y7PS0mEwuIzrf3f1fPqkVDVRvZrPZtVSMHxdgo8Aq0sxAOb/cr2aqqA3LeWHVPg==}
-
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
@@ -7139,9 +7128,6 @@ packages:
   kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
-
-  klaw-sync@6.0.0:
-    resolution: {integrity: sha512-nIeuVSzdCCs6TDPTqI8w1Yre34sSq7AkZ4B3sfOBbI2CgVSB4Du4aLQijFU2+lhAFCwt9+42Hel6lQNIv6AntQ==}
 
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
@@ -7960,11 +7946,6 @@ packages:
   password-prompt@1.1.3:
     resolution: {integrity: sha512-HkrjG2aJlvF0t2BMH0e2LB/EHf3Lcq3fNMzy4GYHcQblAvOl+QQji1Lx7WRBMqpVK8p+KR7bCg7oqAMXtdgqyw==}
 
-  patch-package@8.0.0:
-    resolution: {integrity: sha512-da8BVIhzjtgScwDJ2TtKsfT5JFWz1hYoBl9rUQ1f38MC2HwnEIkK8VN3dKMKcP7P7bvvgzNDbfNHtx3MsQb5vA==}
-    engines: {node: '>=14', npm: '>5'}
-    hasBin: true
-
   path-browserify@1.0.1:
     resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
 
@@ -8628,11 +8609,6 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rimraf@2.7.1:
-    resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
-    deprecated: Rimraf versions prior to v4 are no longer supported
-    hasBin: true
-
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     deprecated: Rimraf versions prior to v4 are no longer supported
@@ -8829,10 +8805,6 @@ packages:
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
-
-  slash@2.0.0:
-    resolution: {integrity: sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==}
-    engines: {node: '>=6'}
 
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -9343,6 +9315,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   ua-parser-js@1.0.40:
     resolution: {integrity: sha512-z6PJ8Lml+v3ichVojCiB8toQJBuwR42ySM4ezjXIqXK3M0HczmKQ3LF4rhU55PfD99KEEXQG6yb7iOMyvYuHew==}
     hasBin: true
@@ -9744,9 +9721,6 @@ packages:
     peerDependencies:
       zod: ^3.18.0
 
-  zod@3.24.1:
-    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
-
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
@@ -9771,39 +9745,39 @@ snapshots:
     optionalDependencies:
       graphql: 15.8.0
 
-  '@ai-sdk/anthropic@1.2.1(zod@3.24.1)':
+  '@ai-sdk/anthropic@1.2.1(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider': 1.1.0
-      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.1)
-      zod: 3.24.1
+      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.2)
+      zod: 3.24.2
 
-  '@ai-sdk/provider-utils@2.2.1(zod@3.24.1)':
+  '@ai-sdk/provider-utils@2.2.1(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider': 1.1.0
       nanoid: 3.3.8
       secure-json-parse: 2.7.0
-      zod: 3.24.1
+      zod: 3.24.2
 
   '@ai-sdk/provider@1.1.0':
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.2.1(react@19.0.0)(zod@3.24.1)':
+  '@ai-sdk/react@1.2.1(react@19.0.0)(zod@3.24.2)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.1)
-      '@ai-sdk/ui-utils': 1.2.1(zod@3.24.1)
+      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.2)
+      '@ai-sdk/ui-utils': 1.2.1(zod@3.24.2)
       react: 19.0.0
       swr: 2.3.3(react@19.0.0)
       throttleit: 2.1.0
     optionalDependencies:
-      zod: 3.24.1
+      zod: 3.24.2
 
-  '@ai-sdk/ui-utils@1.2.1(zod@3.24.1)':
+  '@ai-sdk/ui-utils@1.2.1(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider': 1.1.0
-      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.1)
-      zod: 3.24.1
-      zod-to-json-schema: 3.24.5(zod@3.24.1)
+      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.2)
+      zod: 3.24.2
+      zod-to-json-schema: 3.24.5(zod@3.24.2)
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -11205,17 +11179,19 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@better-auth/expo@1.2.4(better-auth@1.2.3(typescript@5.7.3))':
+  '@better-auth/expo@1.2.5(better-auth@1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3))':
     dependencies:
-      better-auth: 1.2.3(typescript@5.7.3)
-      better-call: 1.0.4
+      '@better-fetch/fetch': 1.1.18
+      better-auth: 1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3)
+      better-call: 1.0.5
       zod: 3.24.2
 
-  '@better-auth/utils@0.2.3':
+  '@better-auth/utils@0.2.4':
     dependencies:
+      typescript: 5.8.3
       uncrypto: 0.1.3
 
-  '@better-fetch/fetch@1.1.15': {}
+  '@better-fetch/fetch@1.1.18': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -11964,10 +11940,10 @@ snapshots:
       '@trpc/server': 11.0.0-rc.824(typescript@4.9.5)
       hono: 4.7.4
 
-  '@hono/zod-validator@0.4.3(hono@4.7.4)(zod@3.24.1)':
+  '@hono/zod-validator@0.4.3(hono@4.7.4)(zod@3.24.2)':
     dependencies:
       hono: 4.7.4
-      zod: 3.24.1
+      zod: 3.24.2
 
   '@hookform/resolvers@4.1.3(react-hook-form@7.54.2(react@19.0.0))':
     dependencies:
@@ -13870,19 +13846,19 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  '@t3-oss/env-core@0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.1)':
+  '@t3-oss/env-core@0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.2)':
     optionalDependencies:
       typescript: 5.7.3
       valibot: 1.0.0-beta.15(typescript@5.7.3)
-      zod: 3.24.1
+      zod: 3.24.2
 
-  '@t3-oss/env-nextjs@0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.1)':
+  '@t3-oss/env-nextjs@0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.2)':
     dependencies:
-      '@t3-oss/env-core': 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.1)
+      '@t3-oss/env-core': 0.12.0(typescript@5.7.3)(valibot@1.0.0-beta.15(typescript@5.7.3))(zod@3.24.2)
     optionalDependencies:
       typescript: 5.7.3
       valibot: 1.0.0-beta.15(typescript@5.7.3)
-      zod: 3.24.1
+      zod: 3.24.2
 
   '@tanstack/form-core@1.1.0':
     dependencies:
@@ -14350,8 +14326,6 @@ snapshots:
 
   '@xmldom/xmldom@0.8.10': {}
 
-  '@yarnpkg/lockfile@1.1.0': {}
-
   '@zxing/text-encoding@0.9.0':
     optional: true
 
@@ -14391,15 +14365,15 @@ snapshots:
       clean-stack: 2.2.0
       indent-string: 4.0.0
 
-  ai@4.2.2(react@19.0.0)(zod@3.24.1):
+  ai@4.2.2(react@19.0.0)(zod@3.24.2):
     dependencies:
       '@ai-sdk/provider': 1.1.0
-      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.1)
-      '@ai-sdk/react': 1.2.1(react@19.0.0)(zod@3.24.1)
-      '@ai-sdk/ui-utils': 1.2.1(zod@3.24.1)
+      '@ai-sdk/provider-utils': 2.2.1(zod@3.24.2)
+      '@ai-sdk/react': 1.2.1(react@19.0.0)(zod@3.24.2)
+      '@ai-sdk/ui-utils': 1.2.1(zod@3.24.2)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
-      zod: 3.24.1
+      zod: 3.24.2
     optionalDependencies:
       react: 19.0.0
 
@@ -14739,15 +14713,15 @@ snapshots:
 
   basic-ftp@5.0.5: {}
 
-  better-auth@1.2.3(typescript@4.9.5):
+  better-auth@1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@4.9.5):
     dependencies:
-      '@better-auth/utils': 0.2.3
-      '@better-fetch/fetch': 1.1.15
+      '@better-auth/utils': 0.2.4
+      '@better-fetch/fetch': 1.1.18
       '@noble/ciphers': 0.6.0
       '@noble/hashes': 1.7.1
       '@simplewebauthn/browser': 13.1.0
       '@simplewebauthn/server': 13.1.1
-      better-call: 1.0.4
+      better-call: 1.0.5
       defu: 6.1.4
       jose: 5.9.6
       kysely: 0.27.6
@@ -14757,15 +14731,15 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  better-auth@1.2.3(typescript@5.7.3):
+  better-auth@1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3):
     dependencies:
-      '@better-auth/utils': 0.2.3
-      '@better-fetch/fetch': 1.1.15
+      '@better-auth/utils': 0.2.4
+      '@better-fetch/fetch': 1.1.18
       '@noble/ciphers': 0.6.0
       '@noble/hashes': 1.7.1
       '@simplewebauthn/browser': 13.1.0
       '@simplewebauthn/server': 13.1.1
-      better-call: 1.0.4
+      better-call: 1.0.5
       defu: 6.1.4
       jose: 5.9.6
       kysely: 0.27.6
@@ -14775,9 +14749,9 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  better-call@1.0.4:
+  better-call@1.0.5:
     dependencies:
-      '@better-fetch/fetch': 1.1.15
+      '@better-fetch/fetch': 1.1.18
       rou3: 0.5.1
       set-cookie-parser: 2.7.1
       uncrypto: 0.1.3
@@ -15405,10 +15379,10 @@ snapshots:
       mysql2: 3.11.3
       postgres: 3.4.4
 
-  drizzle-zod@0.6.1(drizzle-orm@0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4))(zod@3.24.1):
+  drizzle-zod@0.6.1(drizzle-orm@0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4))(zod@3.24.2):
     dependencies:
       drizzle-orm: 0.40.0(@neondatabase/serverless@0.10.0)(@opentelemetry/api@1.9.0)(@planetscale/database@1.19.0)(@types/pg@8.11.10)(@vercel/postgres@0.10.0(utf-8-validate@6.0.4))(gel@2.0.0)(kysely@0.27.6)(mysql2@3.11.3)(postgres@3.4.4)
-      zod: 3.24.1
+      zod: 3.24.2
 
   dunder-proto@1.0.1:
     dependencies:
@@ -16363,10 +16337,6 @@ snapshots:
       locate-path: 6.0.0
       path-exists: 4.0.0
 
-  find-yarn-workspace-root@2.0.0:
-    dependencies:
-      micromatch: 4.0.8
-
   flat-cache@4.0.1:
     dependencies:
       flatted: 3.3.2
@@ -17189,14 +17159,6 @@ snapshots:
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 
-  json-stable-stringify@1.2.1:
-    dependencies:
-      call-bind: 1.0.8
-      call-bound: 1.0.3
-      isarray: 2.0.5
-      jsonify: 0.0.1
-      object-keys: 1.1.1
-
   json5@1.0.2:
     dependencies:
       minimist: 1.2.8
@@ -17219,8 +17181,6 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsonify@0.0.1: {}
-
   jsx-ast-utils@3.3.5:
     dependencies:
       array-includes: 3.1.8
@@ -17233,10 +17193,6 @@ snapshots:
       json-buffer: 3.0.1
 
   kind-of@6.0.3: {}
-
-  klaw-sync@6.0.0:
-    dependencies:
-      graceful-fs: 4.2.11
 
   kleur@3.0.3: {}
 
@@ -18138,24 +18094,6 @@ snapshots:
       ansi-escapes: 4.3.2
       cross-spawn: 7.0.6
 
-  patch-package@8.0.0:
-    dependencies:
-      '@yarnpkg/lockfile': 1.1.0
-      chalk: 4.1.2
-      ci-info: 3.9.0
-      cross-spawn: 7.0.6
-      find-yarn-workspace-root: 2.0.0
-      fs-extra: 9.1.0
-      json-stable-stringify: 1.2.1
-      klaw-sync: 6.0.0
-      minimist: 1.2.8
-      open: 7.4.2
-      rimraf: 2.7.1
-      semver: 7.6.3
-      slash: 2.0.0
-      tmp: 0.0.33
-      yaml: 2.6.0
-
   path-browserify@1.0.1: {}
 
   path-case@2.1.1:
@@ -18897,10 +18835,6 @@ snapshots:
 
   reusify@1.0.4: {}
 
-  rimraf@2.7.1:
-    dependencies:
-      glob: 7.2.3
-
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
@@ -19155,8 +19089,6 @@ snapshots:
       is-arrayish: 0.3.2
 
   sisteransi@1.0.5: {}
-
-  slash@2.0.0: {}
 
   slash@3.0.0: {}
 
@@ -19720,6 +19652,8 @@ snapshots:
 
   typescript@5.7.3: {}
 
+  typescript@5.8.3: {}
+
   ua-parser-js@1.0.40: {}
 
   uglify-js@3.19.3:
@@ -20085,15 +20019,13 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.24.5(zod@3.24.1):
+  zod-to-json-schema@3.24.5(zod@3.24.2):
     dependencies:
-      zod: 3.24.1
+      zod: 3.24.2
 
   zod-validation-error@3.4.0(zod@3.24.2):
     dependencies:
       zod: 3.24.2
-
-  zod@3.24.1: {}
 
   zod@3.24.2: {}
 

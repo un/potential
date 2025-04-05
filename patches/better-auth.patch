@@ -1,0 +1,38 @@
+diff --git a/dist/adapters/drizzle-adapter/index.cjs b/dist/adapters/drizzle-adapter/index.cjs
+index 0a020de01469f6fd50b5c1f3b2d6fffe2c266c2c..d64203c49f25b67cd564ffb9b92c1267e0ccd44a 100644
+--- a/dist/adapters/drizzle-adapter/index.cjs
++++ b/dist/adapters/drizzle-adapter/index.cjs
+@@ -173,8 +173,30 @@ const createTransform = (db, config, options) => {
+         return res[0];
+       } else if (builderVal) {
+-        const tId = builderVal[0]?.id.value;
+-        const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.id, tId));
+-        return res[0];
++        const tId = builderVal[0]?.id?.value;  
++        // const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.id, tId));
++        // return res[0];
++        if (tId) {
++          const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.id, tId));
++          return res[0];
++        }
++        const email = builderVal[0]?.email?.value;
++        if (email) {
++          const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.email, email));
++          return res[0];
++        }
++        const identifier = builderVal[0]?.identifier?.value;
++        if (identifier) {
++          const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.identifier, identifier));
++          return res[0];
++        }
++        const token = builderVal[0]?.token?.value;
++        if (token) {
++          const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.token, token));
++          return res[0];
++        }
++        console.error("🚨 couldnt find the id column for the BetterAuth model", { builderVal: builderVal[0] });
++        return null;
++      
+       } else if (data.id) {
+         const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.id, data.id));
+         return res[0];
