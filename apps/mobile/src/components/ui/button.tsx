@@ -20,10 +20,12 @@ const buttonVariants = cva(
         link: "",
       },
       size: {
-        default: "native:h-12 h-10",
-        sm: "h-9 rounded-md",
-        lg: "native:h-14 h-11",
-        icon: "h-10 w-10",
+        default: "native:h-12 h-10 px-4",
+        sm: "h-9 rounded-md px-3",
+        lg: "native:h-14 h-11 px-5",
+        icon: "h-12 w-12",
+        "icon-sm": "h-9 w-9",
+        "icon-lg": "h-14 w-14",
       },
     },
     defaultVariants: {
@@ -49,6 +51,8 @@ const buttonTextVariants = cva("text-sand-1 font-['Monocraft'] text-lg", {
       sm: "",
       lg: "native:text-lg",
       icon: "",
+      "icon-sm": "",
+      "icon-lg": "",
     },
   },
   defaultVariants: {
