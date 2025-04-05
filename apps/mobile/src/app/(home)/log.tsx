@@ -14,11 +14,8 @@ import {
   Virus,
 } from "phosphor-react-native";
 
+import { TrackableLogStep } from "~/components/app/trackableLogStep";
 import { Text } from "~/components/ui/text";
-import { FoodDrinkStep } from "./logSteps/fooddrink";
-import { BloodStep, BodyStep, SymptomsStep } from "./logSteps/medical";
-import { ActivitiesStep, EnergyStep, SleepStep } from "./logSteps/physical";
-import { CyclesStep, MindStep, SupplementsStep } from "./logSteps/prevention";
 
 // Button component for consistent styling and behavior
 function LogButton({
@@ -43,26 +40,26 @@ function LogButton({
 }
 
 // Variant for the wider buttons
-function WideLogButton({
-  icon,
-  label,
-  onPress,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      className="bg-sand-3 flex h-14 w-[48%] flex-row items-center justify-center gap-2 rounded-md"
-      onPress={onPress}
-      android_ripple={{ color: "rgba(0, 0, 0, 0.1)" }}
-    >
-      {icon}
-      <Text className="text-sm">{label}</Text>
-    </Pressable>
-  );
-}
+// function WideLogButton({
+//   icon,
+//   label,
+//   onPress,
+// }: {
+//   icon: React.ReactNode;
+//   label: string;
+//   onPress: () => void;
+// }) {
+//   return (
+//     <Pressable
+//       className="bg-sand-3 flex h-14 w-[48%] flex-row items-center justify-center gap-2 rounded-md"
+//       onPress={onPress}
+//       android_ripple={{ color: "rgba(0, 0, 0, 0.1)" }}
+//     >
+//       {icon}
+//       <Text className="text-sm">{label}</Text>
+//     </Pressable>
+//   );
+// }
 
 // Define step types for our state management
 type StepType =
@@ -89,25 +86,85 @@ export default function Logger() {
   const renderStep = () => {
     switch (currentStep) {
       case "food":
-        return <FoodDrinkStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="consumption"
+            trackableSubType="consumption.parent.food"
+          />
+        );
       case "activities":
-        return <ActivitiesStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="activity"
+            trackableSubType="custom.generic"
+          />
+        );
       case "energy":
-        return <EnergyStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="energy"
+            trackableSubType="energy.calories.net"
+          />
+        );
       case "sleep":
-        return <SleepStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="sleep"
+            trackableSubType="custom.generic"
+          />
+        );
       case "supplements":
-        return <SupplementsStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="supplement"
+            trackableSubType="supplement.generic"
+          />
+        );
       case "cycles":
-        return <CyclesStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="body"
+            trackableSubType="body.generic"
+          />
+        );
       case "mind":
-        return <MindStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="mind"
+            trackableSubType="custom.generic"
+          />
+        );
       case "symptoms":
-        return <SymptomsStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="symptom"
+            trackableSubType="symptom.generic"
+          />
+        );
       case "blood":
-        return <BloodStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="blood"
+            trackableSubType="blood.generic"
+          />
+        );
       case "body":
-        return <BodyStep onBack={handleBack} />;
+        return (
+          <TrackableLogStep
+            onBack={handleBack}
+            trackableParentType="body"
+            trackableSubType="body.generic"
+          />
+        );
       default:
         return null;
     }

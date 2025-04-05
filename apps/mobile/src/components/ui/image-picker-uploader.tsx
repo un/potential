@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { Image, Modal, Pressable, ScrollView, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { XCircle } from "phosphor-react-native";
+import { Camera, Image as ImageIcon, X, XCircle } from "phosphor-react-native";
 
 import type { CloudTypeId } from "@1up/utils";
 
@@ -35,6 +35,8 @@ export interface ImagePickerUploaderProps {
   variant?: string;
   style?: React.ComponentProps<typeof View>["style"];
   onUploadStateChange?: (uploading: boolean) => void;
+  onSubmit?: () => void;
+  submitting?: boolean;
 }
 
 export interface ImagePickerUploaderRef {
@@ -61,6 +63,8 @@ export const ImagePickerUploader = forwardRef<
       variant: _variant = "public",
       style,
       onUploadStateChange,
+      onSubmit,
+      submitting = false,
     },
     ref,
   ) => {
@@ -261,14 +265,14 @@ export const ImagePickerUploader = forwardRef<
     return (
       <View className="flex w-full flex-col gap-6" style={style}>
         {(pendingImages.length > 0 || uploadedImages.length > 0) && (
-          <View className="flex flex-col gap-6">
+          <View className="flex flex-col gap-0">
             <Text type={"title"}>
               {totalImages} {totalImages === 1 ? "Image" : "Images"} Selected
             </Text>
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              className="flex flex-row gap-2"
+              className="flex flex-row gap-4"
             >
               <View className="flex flex-row gap-6">
                 {pendingImages.map((image, index) => (
@@ -327,22 +331,32 @@ export const ImagePickerUploader = forwardRef<
           </View>
         )}
 
-        <View className="flex w-full flex-col justify-between gap-4">
+        <View className="flex w-full flex-row items-center gap-4">
           <Button
-            className="grow"
+            size="icon-lg"
             onPress={() => setShowCamera(true)}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Text>Take {pendingImages.length ? "another" : "a"} photo</Text>
+            <Camera size={24} />
           </Button>
           <Button
-            variant="default"
-            className="grow"
+            size="icon-lg"
             onPress={handlePickImages}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Text>Choose from Gallery</Text>
+            <ImageIcon size={24} />
           </Button>
+          {onSubmit && (
+            <Button
+              className="grow"
+              size="lg"
+              onPress={onSubmit}
+              loading={submitting}
+              disabled={submitting || isUploading}
+            >
+              <Text>Log it</Text>
+            </Button>
+          )}
         </View>
 
         {error && (
@@ -361,12 +375,12 @@ export const ImagePickerUploader = forwardRef<
           presentationStyle="fullScreen"
         >
           <CameraComponent onPictureTaken={handleCameraCapture} />
-          <View className="absolute left-5 top-[50] z-10">
+          <View className="absolute right-10 top-[70] z-10">
             <Pressable
-              className="rounded-lg bg-black/50 p-2.5"
+              className="bg-red-9 rounded-2xl p-3"
               onPress={() => setShowCamera(false)}
             >
-              <Text className="font-bold text-white">Cancel</Text>
+              <X size={24} />
             </Pressable>
           </View>
         </Modal>
