@@ -2,14 +2,18 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import { CONSTS } from "@1up/consts";
+
 import { protectedProcedure } from "../trpc";
 
 export const logRouter = {
-  createFoodDrinkLog: protectedProcedure
+  createLog: protectedProcedure
     .input(
       z.object({
         text: z.string(),
         imageIds: z.array(z.string()),
+        trackableParentType: CONSTS.TRACKABLE.TYPES_SCHEMA,
+        trackableSubType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
       }),
     )
     .mutation(async ({ ctx, input }) => {
