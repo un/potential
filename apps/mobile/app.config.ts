@@ -13,6 +13,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     env,
     onboardingVersion: "0.0.1",
+    eas: {
+      projectId: "473dc1d3-c667-41e9-a543-508b4ec62250",
+    },
   },
   slug: "1up",
   scheme: "1up",
@@ -40,11 +43,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       backgroundColor: "#1F104A",
     },
   },
-  // extra: {
-  //   eas: {
-  //     projectId: "your-eas-project-id",
-  //   },
-  // },
   experiments: {
     tsconfigPaths: true,
     typedRoutes: true,

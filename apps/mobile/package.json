@@ -8,6 +8,7 @@
     "dev:mobile": "pnpm with-env expo start",
     "dev:android": "pnpm with-env expo start --android",
     "dev:ios": "pnpm with-env expo start --ios",
+    "build:ios": "pnpm with-env eas build --platform ios --local",
     "android": "pnpm with-env expo run:android",
     "ios": "pnpm with-env expo run:ios",
     "device": "pnpm with-env expo run:ios --device",
