@@ -5,6 +5,7 @@ import {
   ColorsMap,
   ColorsSchema,
   colorsSchema,
+  ColorsValues,
   getColorDisplayValue,
 } from "./colors";
 import {
@@ -14,11 +15,13 @@ import {
   IntegrationAccessModeKey,
   IntegrationAccessModeMap,
   IntegrationAccessModeSchema,
+  IntegrationAccessModeValues,
   INTEGRATIONS,
   IntegrationsKey,
   IntegrationsMap,
   IntegrationsSchema,
   integrationsSchema,
+  IntegrationsValues,
 } from "./integrations";
 import {
   getSubTypeDisplayValue,
@@ -29,10 +32,12 @@ import {
   TrackableSubTypesMap,
   trackableSubTypesSchema,
   TrackableSubTypesSchema,
+  TrackableSubTypesValues,
   TrackableTypesKey,
   TrackableTypesMap,
   TrackableTypesSchema,
   trackableTypesSchema,
+  TrackableTypesValues,
 } from "./trackables";
 import {
   GENDER_AT_BIRTH,
@@ -40,6 +45,7 @@ import {
   GenderAtBirthMap,
   GenderAtBirthSchema,
   genderAtBirthSchema,
+  GenderAtBirthValues,
   getGenderAtBirthDisplayValue,
 } from "./users";
 
@@ -80,13 +86,15 @@ export type ConstsTypes = {
   INTEGRATIONS: {
     TYPES: {
       KEY: IntegrationsKey;
-      VALUES: IntegrationsMap;
+      VALUES: IntegrationsValues;
+      MAP: IntegrationsMap;
       DISPLAY_VALUE: (key: IntegrationsKey) => string;
       SCHEMA: IntegrationsSchema;
     };
     ACCESS_MODE: {
       KEY: IntegrationAccessModeKey;
-      VALUES: IntegrationAccessModeMap;
+      VALUES: IntegrationAccessModeValues;
+      MAP: IntegrationAccessModeMap;
       DISPLAY_VALUE: (key: IntegrationAccessModeKey) => string;
       SCHEMA: IntegrationAccessModeSchema;
     };
@@ -94,13 +102,15 @@ export type ConstsTypes = {
   TRACKABLE: {
     TYPES: {
       KEY: TrackableTypesKey;
-      VALUES: TrackableTypesMap;
+      VALUES: TrackableTypesValues;
+      MAP: TrackableTypesMap;
       DISPLAY_VALUE: (key: TrackableTypesKey) => string;
       SCHEMA: TrackableTypesSchema;
     };
     SUB_TYPES: {
       KEY: TrackableSubTypesKey;
-      VALUES: TrackableSubTypesMap;
+      VALUES: TrackableSubTypesValues;
+      MAP: TrackableSubTypesMap;
       DISPLAY_VALUE: (key: TrackableSubTypesKey) => string;
       SCHEMA: TrackableSubTypesSchema;
     };
@@ -108,7 +118,8 @@ export type ConstsTypes = {
   COLORS: {
     TYPES: {
       KEY: ColorsKey;
-      VALUES: ColorsMap;
+      VALUES: ColorsValues;
+      MAP: ColorsMap;
       DISPLAY_VALUE: (key: ColorsKey) => string;
       SCHEMA: ColorsSchema;
     };
@@ -116,7 +127,8 @@ export type ConstsTypes = {
   USERS: {
     GENDER_AT_BIRTH: {
       KEY: GenderAtBirthKey;
-      VALUES: GenderAtBirthMap;
+      VALUES: GenderAtBirthValues;
+      MAP: GenderAtBirthMap;
       DISPLAY_VALUE: (key: GenderAtBirthKey) => string;
       SCHEMA: GenderAtBirthSchema;
     };

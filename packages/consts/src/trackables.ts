@@ -16,6 +16,7 @@ export const TRACKABLE_TYPES = {
 
 export type TrackableTypesMap = typeof TRACKABLE_TYPES;
 export type TrackableTypesKey = keyof TrackableTypesMap;
+export type TrackableTypesValues = TrackableTypesMap[TrackableTypesKey];
 
 export const trackableTypesSchema = z.enum(
   Object.keys(TRACKABLE_TYPES) as [TrackableTypesKey, ...TrackableTypesKey[]],
@@ -91,6 +92,8 @@ export const TRACKABLE_SUB_TYPES = {
 // Then derive the types from the object
 export type TrackableSubTypesMap = typeof TRACKABLE_SUB_TYPES;
 export type TrackableSubTypesKey = keyof TrackableSubTypesMap;
+export type TrackableSubTypesValues =
+  TrackableSubTypesMap[TrackableSubTypesKey];
 
 export const trackableSubTypesSchema = z.enum(
   Object.keys(TRACKABLE_SUB_TYPES) as [

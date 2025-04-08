@@ -25,6 +25,7 @@ export const COLORS = {
 
 export type ColorsMap = typeof COLORS;
 export type ColorsKey = keyof ColorsMap;
+export type ColorsValues = ColorsMap[ColorsKey];
 
 export const colorsSchema = z.enum(
   Object.keys(COLORS) as [ColorsKey, ...ColorsKey[]],

@@ -9,6 +9,7 @@ export const INTEGRATIONS = {
 
 export type IntegrationsMap = typeof INTEGRATIONS;
 export type IntegrationsKey = keyof IntegrationsMap;
+export type IntegrationsValues = IntegrationsMap[IntegrationsKey];
 
 export const integrationsSchema = z.enum(
   Object.keys(INTEGRATIONS) as [IntegrationsKey, ...IntegrationsKey[]],
@@ -28,6 +29,8 @@ export const INTEGRATION_ACCESS_MODE = {
 
 export type IntegrationAccessModeMap = typeof INTEGRATION_ACCESS_MODE;
 export type IntegrationAccessModeKey = keyof IntegrationAccessModeMap;
+export type IntegrationAccessModeValues =
+  IntegrationAccessModeMap[IntegrationAccessModeKey];
 
 export const integrationAccessModeSchema = z.enum(
   Object.keys(INTEGRATION_ACCESS_MODE) as [

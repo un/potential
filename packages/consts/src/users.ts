@@ -8,6 +8,7 @@ export const GENDER_AT_BIRTH = {
 
 export type GenderAtBirthMap = typeof GENDER_AT_BIRTH;
 export type GenderAtBirthKey = keyof GenderAtBirthMap;
+export type GenderAtBirthValues = GenderAtBirthMap[GenderAtBirthKey];
 
 export const genderAtBirthSchema = z.enum(
   Object.keys(GENDER_AT_BIRTH) as [GenderAtBirthKey, ...GenderAtBirthKey[]],
