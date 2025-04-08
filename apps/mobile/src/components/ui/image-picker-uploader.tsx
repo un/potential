@@ -6,7 +6,8 @@ import React, {
 } from "react";
 import { Image, Modal, Pressable, ScrollView, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { Camera, Image as ImageIcon, X, XCircle } from "phosphor-react-native";
+import { useColorScheme } from "nativewind";
+import { Camera, Images, X, XCircle } from "phosphor-react-native";
 
 import type { CloudTypeId } from "@1up/utils";
 
@@ -76,6 +77,7 @@ export const ImagePickerUploader = forwardRef<
     const [error, setError] = useState<string | null>(null);
 
     const { uploadImages, isLoading: isUploading } = useImageUpload();
+    const { colorScheme } = useColorScheme();
 
     // Notify parent about state changes
     const updateParent = useCallback(() => {
@@ -337,14 +339,14 @@ export const ImagePickerUploader = forwardRef<
             onPress={() => setShowCamera(true)}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Camera size={24} />
+            <Camera size={24} color={"#f9f9f8"} />
           </Button>
           <Button
             size="icon-lg"
             onPress={handlePickImages}
             disabled={isUploading || isMaxImagesReached}
           >
-            <ImageIcon size={24} />
+            <Images size={24} color={"#f9f9f8"} />
           </Button>
           {onSubmit && (
             <Button
