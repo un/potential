@@ -9,6 +9,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
+import type { TrackableCustomConfig } from "@1up/consts";
 import type { CloudTypeId } from "@1up/utils/typeid";
 import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
@@ -21,54 +22,6 @@ import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";
 import { users } from "./auth";
 import { ingredientLogs } from "./ingredients";
-
-export type TrackableCustomConfig =
-  | ({
-      cumulative: boolean;
-      limitOnePerDay: boolean;
-    } & {
-      type: "measure";
-      // used to display input and logs
-      measureUnit: string;
-      measureTarget: number | null;
-      // Additional flexibility
-      measureMin?: number;
-      measureMax?: number;
-      cumulative: boolean;
-      // For aggregation and reporting
-      aggregationType?: "sum" | "average" | "latest";
-    })
-  | {
-      type: "checkbox";
-      // used to display input and logs
-      checkboxName: string;
-    }
-  | {
-      type: "range";
-      // used to limit inputs
-      rangeMin: number;
-      rangeMax: number;
-      // Labels for range extremes
-      rangeUnit?: string;
-      rangeMinLabel?: string;
-      rangeMaxLabel?: string;
-      // Step for input control
-      rangeStepLabels: Record<number, string>[];
-    }
-  | {
-      type: "rating";
-      // used to limit inputs
-      ratingMax: number;
-      // Labels for range extremes
-      ratingUnit?: string;
-      ratingIcon?: string;
-      ratingEmoji?: string;
-    }
-  | {
-      type: "note";
-      // For text-based tracking
-      maxLength?: number;
-    };
 
 export const trackables = mysqlTable("trackables", {
   id: typeIdColumn("trackable", "id")

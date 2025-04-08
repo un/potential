@@ -43,6 +43,8 @@ import {
   getGenderAtBirthDisplayValue,
 } from "./users";
 
+export type { TrackableCustomConfig } from "./trackables";
+
 export const CONSTS = {
   INTEGRATIONS: {
     TYPES: INTEGRATIONS,
