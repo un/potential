@@ -1,19 +1,9 @@
 // packages/templates/src/templates/index.ts
-import type { TrackableTemplateRegistry } from "../types";
 import { bodyTemplates } from "./body";
+import { TRACKABLE_TEMPLATES } from "./templates-registry";
 
-export const TRACKABLE_TEMPLATES: TrackableTemplateRegistry = {
-  body: bodyTemplates,
-  sleep: {},
-  consumption: {},
-  supplement: {},
-  medication: {},
-  energy: {},
-  blood: {},
-  activity: {},
-  mind: {},
-  symptom: {},
-  custom: {},
-} as const;
+// Populate the registry
+TRACKABLE_TEMPLATES.body = bodyTemplates;
 
 export * from "./body";
+export { TRACKABLE_TEMPLATES };

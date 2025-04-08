@@ -33,7 +33,7 @@ export type BaseTemplate = z.infer<typeof baseTemplateSchema>;
 
 export type TrackableTemplateRegistry = Record<
   TrackableTypesKey,
-  Partial<Record<TrackableSubTypesKey, BaseTemplate[]>>
+  Partial<Record<TrackableSubTypesKey, BaseTemplate>>
 >;
 
 export interface TrackableTemplateGroup {

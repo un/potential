@@ -11,11 +11,9 @@ This package contains all trackable templates and template groups for the 1up he
 
 ## Adding New Templates
 
-1. Choose the appropriate category in `/trackables`
-2. Create a new file for your template(s)
+1. Choose the appropriate category in `/templates`
+2. Follow the pattern in the template file
 3. Export your templates using the `defineTemplate` helper
-4. Add your templates to the category's index file
-5. Update tests if necessary
 
 Example:
 
@@ -36,23 +34,3 @@ export const customTemplates = [
 1. Choose or create an appropriate category in `/groups`
 2. Create your group definition
 3. Add it to the groups index
-
-## Running Tests
-
-```bash
-yarn workspace @1up/templates test
-```
-
-```
-
-This organization provides several benefits:
-
-1. **Clear Structure**: Easy to find and modify templates
-2. **Separation of Concerns**: Templates are separate from application logic
-3. **Type Safety**: Maintained across the entire template system
-4. **Contributor Friendly**: Clear organization and documentation
-5. **Scalability**: Easy to add new templates and groups
-6. **Maintainability**: Each template and group is in its own file
-
-Would you like me to expand on any part of this structure or show more implementation details?
-```

@@ -1,6 +1,8 @@
 // packages/templates/src/utils.ts
+import type { ConstsTypes } from "@1up/consts";
+
 import type { BaseTemplate, TrackableConfigWithMeta } from "./types";
-import { TRACKABLE_TEMPLATES } from "./templates";
+import { TRACKABLE_TEMPLATES } from "./templates/templates-registry";
 
 // Helper function to create templates with type checking
 export function defineTemplate(template: BaseTemplate): BaseTemplate {
@@ -10,10 +12,8 @@ export function defineTemplate(template: BaseTemplate): BaseTemplate {
 // Template retrieval and manipulation functions
 export function getTemplateById(id: string): BaseTemplate | undefined {
   for (const typeTemplates of Object.values(TRACKABLE_TEMPLATES)) {
-    for (const templates of Object.values(typeTemplates)) {
-      const found = templates.find((template) => template.id === id);
-      if (found) return found;
-    }
+    const found = typeTemplates[id as keyof typeof typeTemplates];
+    if (found) return found;
   }
   return undefined;
 }
@@ -38,4 +38,14 @@ export function hasTemplateUpdates(config: TrackableConfigWithMeta): boolean {
   return currentTemplate
     ? currentTemplate.version > config._meta.templateVersion
     : false;
+}
+
+export function filterTemplatesByType(
+  type: ConstsTypes["TRACKABLE"]["TYPES"]["KEY"],
+): BaseTemplate[] {
+  const templates: BaseTemplate[] = [];
+  for (const typeTemplates of Object.values(TRACKABLE_TEMPLATES[type])) {
+    templates.push(typeTemplates);
+  }
+  return templates;
 }

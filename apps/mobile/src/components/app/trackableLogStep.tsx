@@ -12,6 +12,7 @@ import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { trpc } from "~/utils/api";
+import { TemplateList } from "../trackables/TemplateList";
 import { Button } from "../ui/button";
 import { LogStepWrapper } from "./logStepWrapper";
 
@@ -384,11 +385,9 @@ export const TrackableLogStep = ({
             );
           }}
         />
-
         <Text className="text-sand-11 text-sm">
           Tips: {lookupValues.tipText}
         </Text>
-
         <ImagePickerUploader
           ref={imagePickerRef}
           onImagesChanged={setImageState}
@@ -396,7 +395,6 @@ export const TrackableLogStep = ({
           onSubmit={handleSubmit}
           submitting={isFormSubmitting}
         />
-
         <Text className="text-sand-11 text-sm">
           Existing TRACKERS {parentTrackableTypes?.length}
         </Text>
@@ -405,7 +403,6 @@ export const TrackableLogStep = ({
             {trackable.name}
           </Text>
         ))}
-
         {lookupValues.new.length > 0 && (
           <Text className="text-sand-11 text-sm">
             Track something new with a template
@@ -423,6 +420,7 @@ export const TrackableLogStep = ({
             <Text>{newTrackable.name}</Text>
           </Button>
         ))}
+        <TemplateList typeFilter={trackableParentType} />
       </View>
     </LogStepWrapper>
   );

@@ -162,6 +162,9 @@ importers:
       '@1up/storage':
         specifier: workspace:*
         version: link:../../packages/storage
+      '@1up/templates':
+        specifier: workspace:*
+        version: link:../../packages/templates
       '@1up/utils':
         specifier: workspace:*
         version: link:../../packages/utils

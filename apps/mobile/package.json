@@ -21,6 +21,7 @@
     "@1up/auth": "workspace:*",
     "@1up/consts": "workspace:*",
     "@1up/storage": "workspace:*",
+    "@1up/templates": "workspace:*",
     "@1up/utils": "workspace:*",
     "@better-auth/expo": "catalog:",
     "@expo-google-fonts/martian-mono": "0.2.3",
