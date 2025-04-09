@@ -30,7 +30,7 @@ const Text = React.forwardRef<TextRef, SlottableTextProps & TextVariants>(
     const Component = asChild ? Slot.Text : RNText;
     return (
       <Component
-        className={cn(textVariants({ type }), textClass, className)}
+        className={cn(textVariants({ type }), !type && textClass, className)}
         ref={ref}
         {...props}
       />

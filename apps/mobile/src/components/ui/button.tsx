@@ -62,7 +62,9 @@ const buttonTextVariants = cva("text-sand-1 font-['Monocraft'] text-lg", {
 });
 
 type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
-  VariantProps<typeof buttonVariants> & { loading?: boolean };
+  VariantProps<typeof buttonVariants> & {
+    loading?: boolean;
+  };
 
 const Button = React.forwardRef<
   React.ElementRef<typeof Pressable>,
