@@ -1,46 +1,76 @@
-import { Pressable, ScrollView, View } from "react-native";
+import { useEffect, useState } from "react";
+import { View } from "react-native";
+import { Gear, Star, ThumbsUp } from "phosphor-react-native";
 
 import type { ConstsTypes } from "@1up/consts";
+import type { BaseTemplate } from "@1up/templates";
 import { filterTemplatesByType } from "@1up/templates";
 
 import { Text } from "~/components/ui/text";
+import { Button } from "../ui/button";
 
 export function TemplateList({
   typeFilter,
 }: {
   typeFilter: ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
 }) {
-  const typeTemplates = filterTemplatesByType(typeFilter);
+  const [templates, setTemplates] = useState<BaseTemplate[]>([]);
+
+  useEffect(() => {
+    const typeTemplates = filterTemplatesByType(typeFilter);
+    setTemplates(typeTemplates);
+  }, [typeFilter]);
+
   return (
-    <View className="flex-1">
-      <ScrollView className="flex-1 px-4">
-        <View className="gap-4 pb-4">
-          {typeTemplates.map((template) => (
-            <Pressable
+    <View className="flex flex-col gap-2">
+      <Text type={"title"}>New</Text>
+      <View className="flex flex-col gap-4">
+        <Button
+          variant={"outline"}
+          className="flex w-full flex-col gap-2"
+
+          //   onPress={() => onSelectTemplate(template)}
+        >
+          <View className="flex w-full flex-row items-center justify-between">
+            <Text className="text-base font-medium" type={"title"}>
+              Custom
+            </Text>
+
+            <View className="flex flex-row gap-2">
+              <Gear size={16} />
+            </View>
+          </View>
+
+          <Text className="text-sand-11 w-full text-sm" type={"paragraph"}>
+            Track something new and configure how you want to track it
+          </Text>
+        </Button>
+        {templates.map((template) => {
+          return (
+            <Button
+              variant={"outline"}
               key={template.id}
-              className="rounded-lg border border-gray-200 bg-white p-4"
               //   onPress={() => onSelectTemplate(template)}
             >
-              {template.icon && (
-                <View className="mb-2">
-                  <Text>{template.icon}</Text>
+              <View className="flex w-full flex-row items-center justify-between">
+                <Text className="text-base font-medium" type={"title"}>
+                  {template.name}
+                </Text>
+
+                <View className="flex flex-row gap-2">
+                  {template.featured && <Star size={16} />}
+                  {template.recommended && <ThumbsUp size={16} />}
                 </View>
-              )}
-              <Text className="text-base font-medium">{template.name}</Text>
+              </View>
               {template.description && (
-                <Text className="mt-1 text-sm text-gray-600">
+                <Text className="text-sand-11 text-sm">
                   {template.description}
                 </Text>
               )}
-              {template.recommended && (
-                <View className="mt-2 self-start rounded-full bg-primary/10 px-2 py-1">
-                  <Text className="text-xs text-primary">Recommended</Text>
-                </View>
-              )}
-            </Pressable>
-          ))}
-        </View>
-      </ScrollView>
+            </Button>
+          );
+        })}
+      </View>
     </View>
   );
 }

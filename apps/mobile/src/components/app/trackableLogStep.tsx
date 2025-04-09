@@ -13,7 +13,6 @@ import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { trpc } from "~/utils/api";
 import { TemplateList } from "../trackables/TemplateList";
-import { Button } from "../ui/button";
 import { LogStepWrapper } from "./logStepWrapper";
 
 // Use the proper type from consts
@@ -27,12 +26,6 @@ interface TrackableOptions {
   textAreaLabel: string;
   tipText: string;
   title: string;
-  new: {
-    name: string;
-    description: string;
-    icon: string;
-    subType: TrackableSubType;
-  }[];
 }
 
 const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
@@ -49,26 +42,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Be as detailed as possible about the components and size of this meal/drink.",
     title: "Food & Drink",
-    new: [
-      {
-        name: "Nom npm",
-        description: "Log your food and drink",
-        icon: "🍽️",
-        subType: "consumption.parent.other",
-      },
-      {
-        name: "Lala",
-        description: "Log your food and drink",
-        icon: "🍽️",
-        subType: "consumption.parent.other",
-      },
-      {
-        name: "ooooo",
-        description: "Log your food and drink",
-        icon: "🍽️",
-        subType: "consumption.parent.other",
-      },
-    ],
   },
   activity: {
     textAreaPlaceholders: [
@@ -83,7 +56,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Include details like duration, intensity, and any other relevant information.",
     title: "Physical Activity",
-    new: [],
   },
   medication: {
     textAreaPlaceholders: [
@@ -97,7 +69,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     textAreaLabel: "What medication did you take?",
     tipText: "Include details like dosage, frequency, and any side effects.",
     title: "Medication",
-    new: [],
   },
   supplement: {
     textAreaPlaceholders: [
@@ -112,7 +83,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Include details like dosage, brand if relevant, and when you took it.",
     title: "Supplement",
-    new: [],
   },
   energy: {
     textAreaPlaceholders: [
@@ -127,7 +97,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Note any patterns or factors that might be affecting your energy levels.",
     title: "Energy",
-    new: [],
   },
   blood: {
     textAreaPlaceholders: [
@@ -141,7 +110,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     textAreaLabel: "What blood metric are you logging?",
     tipText: "Include specific measurements, units, and context if available.",
     title: "Blood Reading",
-    new: [],
   },
   body: {
     textAreaPlaceholders: [
@@ -155,7 +123,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     textAreaLabel: "What would you like to record about your body?",
     tipText: "Include specific measurements with units where applicable.",
     title: "Body",
-    new: [],
   },
   sleep: {
     textAreaPlaceholders: [
@@ -170,7 +137,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Include details about duration, quality, and any factors affecting your sleep.",
     title: "Sleep",
-    new: [],
   },
   mind: {
     textAreaPlaceholders: [
@@ -185,7 +151,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Share details about your mental wellbeing, practices, or observations.",
     title: "Mind",
-    new: [],
   },
   symptom: {
     textAreaPlaceholders: [
@@ -200,7 +165,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     tipText:
       "Include details about severity, duration, and any potential triggers.",
     title: "Symptom",
-    new: [],
   },
   custom: {
     textAreaPlaceholders: [
@@ -214,7 +178,6 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
     textAreaLabel: "What would you like to log?",
     tipText: "Add any relevant details that you want to track.",
     title: "Custom Log",
-    new: [],
   },
 };
 
@@ -357,6 +320,9 @@ export const TrackableLogStep = ({
   return (
     <LogStepWrapper title={lookupValues.title} onBack={onBack}>
       <View className="flex flex-col gap-4">
+        <Text className="text-lg" type="title">
+          Smart Ai
+        </Text>
         <form.Field
           name="text"
           children={(field) => {
@@ -395,32 +361,22 @@ export const TrackableLogStep = ({
           onSubmit={handleSubmit}
           submitting={isFormSubmitting}
         />
-        <Text className="text-sand-11 text-sm">
-          Existing TRACKERS {parentTrackableTypes?.length}
-        </Text>
-        {parentTrackableTypes?.map((trackable) => (
-          <Text key={trackable.id} className="text-sand-11 text-sm">
-            {trackable.name}
-          </Text>
-        ))}
-        {lookupValues.new.length > 0 && (
-          <Text className="text-sand-11 text-sm">
-            Track something new with a template
-          </Text>
+        {trackableParentType !== "consumption" && (
+          <View className="flex flex-col gap-4">
+            <Text className="text-lg" type="title">
+              Manual
+            </Text>
+            <Text className="text-sand-11 text-sm">
+              Existing TRACKERS {parentTrackableTypes?.length}
+            </Text>
+            {parentTrackableTypes?.map((trackable) => (
+              <Text key={trackable.id} className="text-sand-11 text-sm">
+                {trackable.name}
+              </Text>
+            ))}
+            <TemplateList typeFilter={trackableParentType} />
+          </View>
         )}
-        {lookupValues.new.map((newTrackable) => (
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            key={newTrackable.name}
-            onPress={() => {
-              console.log("pressed");
-            }}
-          >
-            <Text>{newTrackable.name}</Text>
-          </Button>
-        ))}
-        <TemplateList typeFilter={trackableParentType} />
       </View>
     </LogStepWrapper>
   );

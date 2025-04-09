@@ -83,10 +83,17 @@ export const TRACKABLE_SUB_TYPES = {
   "blood.generic": "Blood",
   "body.weight": "Weight",
   "body.height": "Height",
-  "body.bodyFat": "Body Fat",
+  "body.fat": "Fat",
   "body.muscle": "Muscle",
   "body.generic": "Body",
   "custom.generic": "Custom",
+  "mind.journal": "Daily Journal",
+  "mind.stress": "Stress Level",
+  "mind.anxiety": "Anxiety Level",
+  "mind.focus": "Focus",
+  "mind.productivity": "Productivity",
+  "mind.creativity": "Creativity",
+  "mind.generic": "Mind",
 } as const;
 
 // Then derive the types from the object
@@ -153,13 +160,17 @@ export type TrackableCustomConfig =
       type: "rating";
       // used to limit inputs
       ratingMax: number;
-      // Labels for range extremes
       ratingUnit?: string;
       ratingIcon?: string;
       ratingEmoji?: string;
     }
   | {
-      type: "note";
+      type: "shortText";
+      // For text-based tracking
+      maxLength?: number;
+    }
+  | {
+      type: "longText";
       // For text-based tracking
       maxLength?: number;
     };

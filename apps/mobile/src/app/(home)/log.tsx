@@ -16,25 +16,33 @@ import {
 
 import { TrackableLogStep } from "~/components/app/trackableLogStep";
 import { Text } from "~/components/ui/text";
+import { cn } from "~/utils/ui";
 
 // Button component for consistent styling and behavior
 function LogButton({
   icon,
   label,
   onPress,
+  soon = false,
 }: {
   icon: React.ReactNode;
   label: string;
   onPress: () => void;
+  soon?: boolean;
 }) {
   return (
     <Pressable
-      className="bg-sand-3 flex h-28 w-[31%] flex-col items-center justify-center gap-4 rounded-md"
+      className={cn(
+        soon && "bg-sand-2 opacity-50",
+        "bg-sand-3 flex h-28 w-[31%] flex-col items-center justify-center gap-4 rounded-md",
+      )}
       onPress={onPress}
       android_ripple={{ color: "rgba(0, 0, 0, 0.1)" }}
+      disabled={soon}
     >
       {icon}
       <Text className="text-sm">{label}</Text>
+      {soon && <Text className="-mt-4 text-xs">Coming Soon</Text>}
     </Pressable>
   );
 }
@@ -187,16 +195,19 @@ export default function Logger() {
               <LogButton
                 icon={<PersonSimpleRun size={24} weight="bold" />}
                 label="Activities"
+                soon={true}
                 onPress={() => setCurrentStep("activities")}
               />
               <LogButton
                 icon={<Bed size={24} weight="bold" />}
                 label="Sleep"
+                soon={true}
                 onPress={() => setCurrentStep("sleep")}
               />
               <LogButton
                 icon={<Pill size={24} weight="bold" />}
                 label="Supplements"
+                soon={true}
                 onPress={() => setCurrentStep("supplements")}
               />
             </View>
@@ -207,18 +218,20 @@ export default function Logger() {
             </Text>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <LogButton
-                icon={<Lightning size={24} weight="bold" />}
-                label="Energy"
-                onPress={() => setCurrentStep("energy")}
-              />
-              <LogButton
                 icon={<Brain size={24} weight="bold" />}
                 label="Mind"
                 onPress={() => setCurrentStep("mind")}
               />
               <LogButton
+                icon={<Lightning size={24} weight="bold" />}
+                label="Energy"
+                soon={true}
+                onPress={() => setCurrentStep("energy")}
+              />
+              <LogButton
                 icon={<ArrowsClockwise size={24} weight="bold" />}
                 label="Cycles"
+                soon={true}
                 onPress={() => setCurrentStep("cycles")}
               />
             </View>
@@ -228,19 +241,21 @@ export default function Logger() {
             </Text>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <LogButton
+                icon={<PersonArmsSpread size={24} weight="bold" />}
+                label="Body"
+                onPress={() => setCurrentStep("body")}
+              />
+              <LogButton
                 icon={<Virus size={24} weight="bold" />}
                 label="Symptoms"
+                soon={true}
                 onPress={() => setCurrentStep("symptoms")}
               />
               <LogButton
                 icon={<Drop size={24} weight="bold" />}
                 label="Blood"
+                soon={true}
                 onPress={() => setCurrentStep("blood")}
-              />
-              <LogButton
-                icon={<PersonArmsSpread size={24} weight="bold" />}
-                label="Body"
-                onPress={() => setCurrentStep("body")}
               />
             </View>
           </View>

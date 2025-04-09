@@ -22,7 +22,7 @@ export const baseTemplateSchema = z.object({
   version: z.number(),
   name: z.string(),
   description: z.string().optional(),
-  icon: z.string().optional(),
+  aiDescriptionHelper: z.string(),
   recommended: z.boolean().default(false),
   featured: z.boolean().default(false),
   uses: z.number().default(0),
@@ -40,8 +40,8 @@ export interface TrackableTemplateGroup {
   id: string;
   version: number;
   name: string;
-  description: string;
-  icon?: string;
+  description?: string;
+  aiDescriptionHelper: string;
   recommended?: boolean;
   featured?: boolean;
   uses?: number;

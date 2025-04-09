@@ -20,12 +20,12 @@ const buttonVariants = cva(
         link: "",
       },
       size: {
-        default: "native:h-12 h-10 px-4",
-        sm: "h-9 rounded-md px-3",
-        lg: "native:h-14 h-11 px-5",
-        icon: "h-12 w-12",
-        "icon-sm": "h-9 w-9",
-        "icon-lg": "h-14 w-14",
+        default: "min-h-12 px-4 py-2.5",
+        sm: "min-h-9 rounded-md px-3",
+        lg: "min-h-14 px-5",
+        icon: "min-h-12 min-w-12",
+        "icon-sm": "min-h-9 min-w-9",
+        "icon-lg": "min-h-14 min-w-14",
       },
     },
     defaultVariants: {
