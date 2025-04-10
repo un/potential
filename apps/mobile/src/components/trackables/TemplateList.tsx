@@ -23,7 +23,7 @@ export function TemplateList({
 
   return (
     <View className="flex flex-col gap-2">
-      <Text type={"title"}>New</Text>
+      <Text type={"title"}>New Trackable</Text>
       <View className="flex flex-col gap-4">
         <Button
           variant={"outline"}

@@ -179,7 +179,7 @@ export default function Logger() {
   };
 
   return (
-    <SafeAreaView className="flex-1" edges={["bottom"]}>
+    <SafeAreaView className="flex-1" edges={{ bottom: "maximum" }}>
       <ScrollView>
         <View className="flex w-full flex-col items-center justify-center gap-6 p-6">
           <View className="border-sand-3 flex w-full flex-col gap-4 border-b-2 pb-4">

@@ -43,7 +43,7 @@ export const LogStepWrapper = ({
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : undefined}
-          keyboardVerticalOffset={100}
+          keyboardVerticalOffset={200}
           className="flex h-full w-full flex-1 flex-col gap-0"
         >
           <View className="border-sand-3 border-b p-4">
@@ -56,7 +56,7 @@ export const LogStepWrapper = ({
             </Pressable>
           </View>
           <ScrollView
-            className={cn("h-full w-full flex-1", !zeroPadding && "p-6")}
+            className={cn("-mb-12 h-full w-full flex-1", !zeroPadding && "p-6")}
             contentContainerStyle={{ flexGrow: 1 }}
           >
             {children}
