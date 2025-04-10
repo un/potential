@@ -24,10 +24,26 @@ import {
   IntegrationsValues,
 } from "./integrations";
 import {
+  getCustomConfigTypeDisplayValue,
   getSubTypeDisplayValue,
   getTypeDisplayValue,
+  TRACKABLE_CUSTOM_CONFIG_TYPES,
   TRACKABLE_SUB_TYPES,
   TRACKABLE_TYPES,
+  TrackableCustomConfigMeasureAggregationKey,
+  TrackableCustomConfigMeasureAggregationMap,
+  TrackableCustomConfigMeasureAggregationValues,
+  TrackableCustomConfigMeasureCumulationKey,
+  TrackableCustomConfigMeasureCumulationMap,
+  TrackableCustomConfigMeasureCumulationValues,
+  TrackableCustomConfigMeasureUnitsKey,
+  TrackableCustomConfigMeasureUnitsMap,
+  TrackableCustomConfigMeasureUnitsValues,
+  TrackableCustomConfigTypesKey,
+  TrackableCustomConfigTypesMap,
+  trackableCustomConfigTypesSchema,
+  TrackableCustomConfigTypesSchema,
+  TrackableCustomConfigTypesValues,
   TrackableSubTypesKey,
   TrackableSubTypesMap,
   trackableSubTypesSchema,
@@ -66,6 +82,11 @@ export const CONSTS = {
     getSubTypeDisplayValue,
     TYPES_SCHEMA: trackableTypesSchema,
     SUB_TYPES_SCHEMA: trackableSubTypesSchema,
+    CONFIG: {
+      TYPES: TRACKABLE_CUSTOM_CONFIG_TYPES,
+      getCustomConfigTypeDisplayValue,
+      TYPES_SCHEMA: trackableCustomConfigTypesSchema,
+    },
   },
   COLORS: {
     TYPES: COLORS,
@@ -113,6 +134,40 @@ export type ConstsTypes = {
       MAP: TrackableSubTypesMap;
       DISPLAY_VALUE: (key: TrackableSubTypesKey) => string;
       SCHEMA: TrackableSubTypesSchema;
+    };
+    CONFIG: {
+      TYPES: {
+        KEY: TrackableCustomConfigTypesKey;
+        VALUES: TrackableCustomConfigTypesValues;
+        MAP: TrackableCustomConfigTypesMap;
+        DISPLAY_VALUE: (key: TrackableCustomConfigTypesKey) => string;
+        SCHEMA: TrackableCustomConfigTypesSchema;
+      };
+
+      UNITS: {
+        MEASURE: {
+          KEY: TrackableCustomConfigMeasureUnitsKey;
+          VALUES: TrackableCustomConfigMeasureUnitsValues;
+          MAP: TrackableCustomConfigMeasureUnitsMap;
+          DISPLAY_VALUE: (key: TrackableCustomConfigMeasureUnitsKey) => string;
+        };
+        CUMULATION: {
+          KEY: TrackableCustomConfigMeasureCumulationKey;
+          VALUES: TrackableCustomConfigMeasureCumulationValues;
+          MAP: TrackableCustomConfigMeasureCumulationMap;
+          DISPLAY_VALUE: (
+            key: TrackableCustomConfigMeasureCumulationKey,
+          ) => string;
+        };
+        AGGREGATION: {
+          KEY: TrackableCustomConfigMeasureAggregationKey;
+          VALUES: TrackableCustomConfigMeasureAggregationValues;
+          MAP: TrackableCustomConfigMeasureAggregationMap;
+          DISPLAY_VALUE: (
+            key: TrackableCustomConfigMeasureAggregationKey,
+          ) => string;
+        };
+      };
     };
   };
   COLORS: {

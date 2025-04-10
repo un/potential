@@ -115,32 +115,102 @@ export function getSubTypeDisplayValue(key: TrackableSubTypesKey): string {
 }
 
 // Custom config
+
+export const TRACKABLE_CUSTOM_CONFIG_TYPES = {
+  measure: "Measure",
+  checkbox: "Checkbox",
+  range: "Range",
+  rating: "Rating",
+  shortText: "Short Text",
+  longText: "Long Text",
+} as const;
+
+export type TrackableCustomConfigTypesMap =
+  typeof TRACKABLE_CUSTOM_CONFIG_TYPES;
+export type TrackableCustomConfigTypesKey = keyof TrackableCustomConfigTypesMap;
+export type TrackableCustomConfigTypesValues =
+  TrackableCustomConfigTypesMap[TrackableCustomConfigTypesKey];
+
+export const trackableCustomConfigTypesSchema = z.enum(
+  Object.keys(TRACKABLE_CUSTOM_CONFIG_TYPES) as [
+    TrackableCustomConfigTypesKey,
+    ...TrackableCustomConfigTypesKey[],
+  ],
+);
+export type TrackableCustomConfigTypesSchema = z.infer<
+  typeof trackableCustomConfigTypesSchema
+>;
+
+export function getCustomConfigTypeDisplayValue(
+  key: TrackableCustomConfigTypesKey,
+): string {
+  return TRACKABLE_CUSTOM_CONFIG_TYPES[key];
+}
+
+export const TRACKABLE_CONFIG_MEASURE_UNITS = {
+  volume: "Volume",
+  mass: "Mass",
+  length: "Length",
+  time: "Time",
+  temperature: "Temperature",
+  percentage: "Percentage",
+} as const;
+
+export type TrackableCustomConfigMeasureUnitsMap =
+  typeof TRACKABLE_CONFIG_MEASURE_UNITS;
+export type TrackableCustomConfigMeasureUnitsKey =
+  keyof TrackableCustomConfigMeasureUnitsMap;
+export type TrackableCustomConfigMeasureUnitsValues =
+  TrackableCustomConfigMeasureUnitsMap[TrackableCustomConfigMeasureUnitsKey];
+
+export const TRACKABLE_CONFIG_MEASURE_CUMULATION = {
+  hourly: "Hourly",
+  daily: "Daily",
+  weekly: "Weekly",
+  monthly: "Monthly",
+  yearly: "Yearly",
+} as const;
+
+export type TrackableCustomConfigMeasureCumulationMap =
+  typeof TRACKABLE_CONFIG_MEASURE_CUMULATION;
+export type TrackableCustomConfigMeasureCumulationKey =
+  keyof TrackableCustomConfigMeasureCumulationMap;
+export type TrackableCustomConfigMeasureCumulationValues =
+  TrackableCustomConfigMeasureCumulationMap[TrackableCustomConfigMeasureCumulationKey];
+
+export const TRACKABLE_CONFIG_MEASURE_AGGREGATION = {
+  sum: "Sum",
+  average: "Average",
+  latest: "Latest",
+} as const;
+
+export type TrackableCustomConfigMeasureAggregationMap =
+  typeof TRACKABLE_CONFIG_MEASURE_AGGREGATION;
+export type TrackableCustomConfigMeasureAggregationKey =
+  keyof TrackableCustomConfigMeasureAggregationMap;
+export type TrackableCustomConfigMeasureAggregationValues =
+  TrackableCustomConfigMeasureAggregationMap[TrackableCustomConfigMeasureAggregationKey];
+
 export type TrackableCustomConfig =
-  | ({
-      cumulative: boolean;
-      limitOnePerDay: boolean;
-    } & {
+  | {
       type: "measure";
       // used to display input and logs
-      measureUnitType:
-        | "volume"
-        | "mass"
-        | "length"
-        | "time"
-        | "temperature"
-        | "percentage";
+      measureUnitType: TrackableCustomConfigMeasureUnitsKey;
       measureUnitSource: string;
       measureUnitDisplay: string;
       measureTarget: number | null;
       // Additional flexibility
       measureMin?: number;
       measureMax?: number;
-      cumulative: boolean;
       // For aggregation and reporting
-      aggregationType?: "sum" | "average" | "latest";
-    })
+      cumulative: boolean;
+      cumulation?: TrackableCustomConfigMeasureCumulationKey;
+      aggregationType?: TrackableCustomConfigMeasureAggregationKey;
+      limitOnePerDay: boolean;
+    }
   | {
       type: "checkbox";
+      limitOnePerDay: boolean;
       // used to display input and logs
       checkboxName: string;
     }
@@ -155,6 +225,7 @@ export type TrackableCustomConfig =
       rangeMaxLabel?: string;
       // Step for input control
       rangeStepLabels: Record<number, string>[];
+      limitOnePerDay: boolean;
     }
   | {
       type: "rating";
@@ -163,14 +234,13 @@ export type TrackableCustomConfig =
       ratingUnit?: string;
       ratingIcon?: string;
       ratingEmoji?: string;
+      limitOnePerDay: boolean;
     }
   | {
       type: "shortText";
-      // For text-based tracking
-      maxLength?: number;
+      limitOnePerDay: boolean;
     }
   | {
       type: "longText";
-      // For text-based tracking
-      maxLength?: number;
+      limitOnePerDay: boolean;
     };

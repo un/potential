@@ -14,7 +14,7 @@ export const mindTemplates = {
     uses: 0,
     defaultConfig: {
       type: "longText",
-
+      limitOnePerDay: false,
       _meta: {
         templateId: "mind.journal",
         templateVersion: 1,
@@ -37,6 +37,7 @@ export const mindTemplates = {
       ratingMax: 10,
       ratingUnit: "out of 10",
       ratingEmoji: "😥",
+      limitOnePerDay: false,
       _meta: {
         templateId: "mind.stress",
         templateVersion: 1,
@@ -59,6 +60,7 @@ export const mindTemplates = {
       ratingMax: 10,
       ratingUnit: "out of 10",
       ratingEmoji: "😨",
+      limitOnePerDay: false,
       _meta: {
         templateId: "mind.anxiety",
         templateVersion: 1,
@@ -80,6 +82,7 @@ export const mindTemplates = {
       ratingMax: 10,
       ratingUnit: "out of 10",
       ratingEmoji: "🤓",
+      limitOnePerDay: false,
       _meta: {
         templateId: "mind.focus",
         templateVersion: 1,
@@ -101,6 +104,7 @@ export const mindTemplates = {
       ratingMax: 10,
       ratingUnit: "out of 10",
       ratingEmoji: "💪",
+      limitOnePerDay: false,
       _meta: {
         templateId: "mind.productivity",
         templateVersion: 1,
@@ -122,6 +126,7 @@ export const mindTemplates = {
       ratingMax: 10,
       ratingUnit: "out of 10",
       ratingEmoji: "🧑‍🎨",
+      limitOnePerDay: false,
       _meta: {
         templateId: "mind.creativity",
         templateVersion: 1,

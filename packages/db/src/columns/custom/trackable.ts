@@ -45,3 +45,27 @@ export const trackableSubTypeColumn = (columnName: string) =>
       return sql.raw(`'${value}'`);
     },
   })(columnName);
+
+// Trackable Types
+export const trackableTypeConfigColumn = (columnName: string) =>
+  customType<{
+    data: ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
+    driverData: string;
+  }>({
+    dataType() {
+      return "varchar(64)";
+    },
+    fromDriver(
+      value: string,
+    ): ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"] {
+      if (!(value in CONSTS.TRACKABLE.CONFIG.TYPES)) {
+        throw new Error(`Invalid trackable config type key: ${value}`);
+      }
+      return value as ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
+    },
+    toDriver(
+      value: ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"],
+    ): SQL<unknown> {
+      return sql.raw(`'${value}'`);
+    },
+  })(columnName);

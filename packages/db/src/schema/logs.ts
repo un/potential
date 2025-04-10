@@ -2,9 +2,9 @@ import { relations } from "drizzle-orm";
 import {
   boolean,
   json,
+  mediumint,
   mysqlEnum,
   mysqlTable,
-  smallint,
   text,
   varchar,
 } from "drizzle-orm/mysql-core";
@@ -17,6 +17,7 @@ import { colorsColumn } from "../columns/custom/color";
 import {
   trackableSubTypeColumn,
   trackableTypeColumn,
+  trackableTypeConfigColumn,
 } from "../columns/custom/trackable";
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";
@@ -34,6 +35,7 @@ export const trackables = mysqlTable("trackables", {
   type: trackableTypeColumn("type"),
   subType: trackableSubTypeColumn("subType"),
   subTypeCustomName: varchar("subTypeCustomName", { length: 64 }),
+  configType: trackableTypeConfigColumn("configType"),
   customConfig: json("customConfig").$type<TrackableCustomConfig>(),
   public: boolean("public").default(false),
   ...timestamps.createUpdate,
@@ -62,7 +64,7 @@ export const trackableLogs = mysqlTable("trackable_logs", {
   parentLogId: typeIdColumn("trackableLog", "id"),
   ownerId: typeIdColumn("user", "user_id").notNull(),
   checked: boolean("checked"),
-  numericValue: smallint("numericValue"),
+  numericValue: mediumint("numericValue", { unsigned: true }),
   textValue: text("textValue"),
   jsonValue: json("jsonValue").$type<TrackableLogJsonValue>(),
   source: mysqlEnum("source", ["app", "api", "integration"]),
