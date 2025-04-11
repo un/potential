@@ -26,6 +26,7 @@
     "@better-auth/expo": "catalog:",
     "@expo-google-fonts/martian-mono": "0.2.3",
     "@expo/metro-config": "^0.19.9",
+    "@react-native-picker/picker": "^2.11.0",
     "@rn-primitives/hooks": "^1.1.0",
     "@rn-primitives/portal": "^1.1.0",
     "@rn-primitives/slot": "^1.1.0",

@@ -1816,6 +1816,8 @@ PODS:
     - React-logger (= 0.78.0)
     - React-perflogger (= 0.78.0)
     - React-utils (= 0.78.0)
+  - RNCPicker (2.11.0):
+    - React-Core
   - RNFlashList (1.7.3):
     - DoubleConversion
     - glog
@@ -2106,6 +2108,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
+  - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
   - "RNFlashList (from `../../../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../../../node_modules/react-native-reanimated`)
@@ -2303,6 +2306,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../../../node_modules/react-native/ReactCommon"
+  RNCPicker:
+    :path: "../../../node_modules/@react-native-picker/picker"
   RNFlashList:
     :path: "../../../node_modules/@shopify/flash-list"
   RNGestureHandler:
@@ -2408,6 +2413,7 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: a1fb08dfdc7ebc387b2e54cfc9decd283ed821d8
   ReactCodegen: e232f8db3a40721044ec81b9388f95a7afaad36a
   ReactCommon: 0c097b53f03d6bf166edbcd0915da32f3015dd90
+  RNCPicker: 124b4fb5859ba1a3fd53a91e16d1e7a0fc016e59
   RNFlashList: 21a172f8ca03161880572c7429529c639ff29fa2
   RNGestureHandler: 9f3109e11ed88fe5bed280bf7762b25e4c52f396
   RNReanimated: e59d2f743bf272f4f50ad7fd447f6e6a43987e4d
