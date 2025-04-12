@@ -13,22 +13,17 @@ export interface PickerOption {
 export interface PickerProps {
   items: PickerOption[];
   value: string;
-  onValueChange: (value: string) => void;
+  onChange: (value: string) => void;
   className?: string;
 }
 
-export function Picker({
-  items,
-  value,
-  onValueChange,
-  className,
-}: PickerProps) {
+export function Picker({ items, value, onChange, className }: PickerProps) {
   const { colorScheme } = useColorScheme();
   return (
     <View className={cn("w-full rounded-lg bg-card", className)}>
       <RNPicker
         selectedValue={value}
-        onValueChange={onValueChange}
+        onValueChange={onChange}
         itemStyle={{
           fontFamily: "MartianMono-Regular",
           fontSize: 14,
