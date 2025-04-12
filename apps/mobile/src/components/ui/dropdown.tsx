@@ -12,7 +12,7 @@ export interface DropdownOption {
 
 export interface DropdownProps {
   label?: string;
-  options: DropdownOption[];
+  items: DropdownOption[];
   value?: string | number;
   onChange: (value: string | number) => void;
   placeholder?: string;
@@ -24,7 +24,7 @@ export interface DropdownProps {
 
 export const Dropdown = ({
   label,
-  options,
+  items,
   value,
   onChange,
   placeholder = "Select an option",
@@ -38,6 +38,7 @@ export const Dropdown = ({
 
   const handleChange = (item: DropdownOption) => {
     onChange(item.value);
+
     setIsFocus(false);
   };
 
@@ -111,7 +112,7 @@ export const Dropdown = ({
         activeColor={colorScheme === "dark" ? "#313131" : "#F5F2F0"} // sand-3
         // equivalent
 
-        data={options}
+        data={items}
         search={search}
         maxHeight={300}
         labelField="label"
