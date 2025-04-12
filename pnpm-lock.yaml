@@ -291,6 +291,9 @@ importers:
       react-native-css-interop:
         specifier: ~0.1.22
         version: 0.1.22(ggfi7gpaarjml5abzmu6iu3fmm)
+      react-native-element-dropdown:
+        specifier: ^2.12.4
+        version: 2.12.4(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0)
       react-native-gesture-handler:
         specifier: ~2.24.0
         version: 2.24.0(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0)
@@ -8417,6 +8420,13 @@ packages:
         optional: true
       react-native-svg:
         optional: true
+
+  react-native-element-dropdown@2.12.4:
+    resolution: {integrity: sha512-abZc5SVji9FIt7fjojRYrbuvp03CoeZJrgvezQoDoSOrpiTqkX69ix5m+j06W2AVncA0VWvbT+vCMam8SoVadw==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
 
   react-native-gesture-handler@2.24.0:
     resolution: {integrity: sha512-ZdWyOd1C8axKJHIfYxjJKCcxjWEpUtUWgTOVY2wynbiveSQDm8X/PDyAKXSer/GOtIpjudUbACOndZXCN3vHsw==}
@@ -18576,6 +18586,12 @@ snapshots:
       react-native-svg: 15.11.2(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0)
     transitivePeerDependencies:
       - supports-color
+
+  react-native-element-dropdown@2.12.4(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      lodash: 4.17.21
+      react: 19.0.0
+      react-native: 0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0)
 
   react-native-gesture-handler@2.24.0(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0):
     dependencies:

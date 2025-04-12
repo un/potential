@@ -31,7 +31,7 @@ export function Picker({
         onValueChange={onValueChange}
         itemStyle={{
           fontFamily: "MartianMono-Regular",
-          fontSize: 16,
+          fontSize: 14,
           color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
         }}
       >
