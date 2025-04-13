@@ -53,12 +53,12 @@ export const Dropdown = ({
       <RNDropdown
         style={[
           {
-            height: 48,
+            height: 42,
             borderWidth: 1,
             borderColor: colorScheme === "dark" ? "#494844" : "#E3DCD5", // sand-7 equivalent
             borderRadius: 8,
             paddingHorizontal: 12,
-            backgroundColor: colorScheme === "dark" ? "#1B1917" : "#FFFFFF",
+            backgroundColor: colorScheme === "dark" ? "#111110" : "#FDFDFC",
           },
           isFocus && {
             borderColor: colorScheme === "dark" ? "#E54D2E" : "#EC6E48", // tomato-9 equivalent
