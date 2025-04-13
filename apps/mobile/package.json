@@ -51,6 +51,7 @@
     "expo-image-manipulator": "13.0.7-canary-20250304-f08e984",
     "expo-image-picker": "16.1.0-canary-20250304-f08e984",
     "expo-linking": "7.1.0-canary-20250304-f08e984",
+    "expo-localization": "^16.0.1",
     "expo-router": "4.0.18-canary-20250304-f08e984",
     "expo-secure-store": "14.0.2-canary-20250304-f08e984",
     "expo-splash-screen": "0.29.23-canary-20250304-f08e984",

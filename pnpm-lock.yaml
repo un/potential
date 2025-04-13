@@ -252,6 +252,9 @@ importers:
       expo-linking:
         specifier: 7.1.0-canary-20250304-f08e984
         version: 7.1.0-canary-20250304-f08e984(expo@53.0.0-canary-20250304-f08e984(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@expo/metro-runtime@4.0.2-canary-20250304-f08e984(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0)))(bufferutil@4.0.8)(graphql@15.8.0)(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0))(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0)
+      expo-localization:
+        specifier: ^16.0.1
+        version: 16.0.1(expo@53.0.0-canary-20250304-f08e984(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@expo/metro-runtime@4.0.2-canary-20250304-f08e984(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0)))(bufferutil@4.0.8)(graphql@15.8.0)(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0))(react@19.0.0)
       expo-router:
         specifier: 4.0.18-canary-20250304-f08e984
         version: 4.0.18-canary-20250304-f08e984(j4sbbydmow3msll47higmruztm)
@@ -6253,6 +6256,12 @@ packages:
       react: '*'
       react-native: '*'
 
+  expo-localization@16.0.1:
+    resolution: {integrity: sha512-kUrXiV/Pq9r7cG+TMt+Qa49IUQ9Y/czVwen4hmiboTclTopcWdIeCzYZv6JGtufoPpjEO9vVx1QJrXYl9V2u0Q==}
+    peerDependencies:
+      expo: '*'
+      react: '*'
+
   expo-manifests@0.15.8-canary-20250304-f08e984:
     resolution: {integrity: sha512-UCIODNCIe9RVCMpCKQP73HYBZp9d4HqyO0OW3Le4SMs4F6WorLOsvrcDjViazEVpfQCHC3tw1QA4h0RyvVqzJQ==}
     peerDependencies:
@@ -8672,6 +8681,9 @@ packages:
 
   rou3@0.5.1:
     resolution: {integrity: sha512-OXMmJ3zRk2xeXFGfA3K+EOPHC5u7RDFG7lIOx0X1pdnhUkI8MdVrbV+sNsD80ElpUZ+MRHdyxPnFthq9VHs8uQ==}
+
+  rtl-detect@1.1.2:
+    resolution: {integrity: sha512-PGMBq03+TTG/p/cRB7HCLKJ1MgDIi07+QU1faSjiYRfmY5UsAttV9Hs08jDAHVwcOwmVLcSJkpwyfXszVjWfIQ==}
 
   run-async@2.4.1:
     resolution: {integrity: sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==}
@@ -16168,6 +16180,12 @@ snapshots:
       - expo
       - supports-color
 
+  expo-localization@16.0.1(expo@53.0.0-canary-20250304-f08e984(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@expo/metro-runtime@4.0.2-canary-20250304-f08e984(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0)))(bufferutil@4.0.8)(graphql@15.8.0)(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0))(react@19.0.0):
+    dependencies:
+      expo: 53.0.0-canary-20250304-f08e984(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@expo/metro-runtime@4.0.2-canary-20250304-f08e984(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0)))(bufferutil@4.0.8)(graphql@15.8.0)(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0)
+      react: 19.0.0
+      rtl-detect: 1.1.2
+
   expo-manifests@0.15.8-canary-20250304-f08e984(expo@53.0.0-canary-20250304-f08e984(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@expo/metro-runtime@4.0.2-canary-20250304-f08e984(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0)))(bufferutil@4.0.8)(graphql@15.8.0)(react-native@0.78.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(@react-native-community/cli-server-api@13.6.9(bufferutil@4.0.8))(@types/react@19.0.10)(bufferutil@4.0.8)(react@19.0.0))(react@19.0.0)):
     dependencies:
       '@expo/config': 11.0.0-canary-20250304-f08e984
@@ -18907,6 +18925,8 @@ snapshots:
       glob: 7.2.3
 
   rou3@0.5.1: {}
+
+  rtl-detect@1.1.2: {}
 
   run-async@2.4.1: {}
 
