@@ -310,80 +310,82 @@ export function Slider({
 
   // Render the component
   return (
-    <GestureHandlerRootView className={cn("w-full py-4", className)}>
-      <View className="relative">
-        {/* Track with tap gesture */}
-        <GestureDetector gesture={tapGesture}>
-          <View
-            onLayout={onTrackLayout}
-            className={cn(
-              "bg-sand-3 border-sand-6 h-12 w-full rounded-full border",
-              trackClassName,
-            )}
-          >
-            {/* Filled portion of track */}
-            <Animated.View
-              className="bg-tomato-9 absolute h-full rounded-full"
-              style={filledTrackStyle}
-            />
-
-            {/* Step markers overlay */}
-            <View className="relative h-full w-full">
-              {renderStepMarkers()}
-            </View>
-          </View>
-        </GestureDetector>
-
-        {/* Knob */}
-        <GestureDetector gesture={panGesture}>
-          <Animated.View
-            className={cn(
-              "absolute -mt-1 flex flex-col items-center justify-center",
-              "bg-sand-1 border-sand-7 rounded-3xl border-2 px-4 py-1 shadow-md",
-              isDraggingState ? "bg-sand-2" : "bg-sand-1",
-              knobClassName,
-            )}
-            style={[
-              {
-                width: KNOB_WIDTH,
-                height: KNOB_HEIGHT,
-                top: (48 - KNOB_HEIGHT) / 2, // Center vertically on the track (48px height)
-              },
-              knobStyle,
-            ]}
-          >
-            {/* Value display inside knob */}
-            <Text className="text-sand-12 text-lg font-medium">
-              {displayValue}
-            </Text>
-
-            {/* Unit display below value */}
-            {rangeUnit ? (
-              <Text className="text-sand-11 leading-0 -mt-1 text-xs">
-                {rangeUnit}
-              </Text>
-            ) : null}
-
-            {/* Floating value display when dragging */}
+    <View className="pb-12">
+      <GestureHandlerRootView className={cn("w-full py-4", className)}>
+        <View className="relative">
+          {/* Track with tap gesture */}
+          <GestureDetector gesture={tapGesture}>
             <View
+              onLayout={onTrackLayout}
               className={cn(
-                "bg-sand-1 border-sand-6 absolute -top-10 flex min-w-20 flex-row items-center justify-center rounded-md border px-2 py-1",
-                isDraggingState ? "opacity-100" : "opacity-0",
+                "bg-sand-3 border-sand-6 h-12 w-full rounded-full border",
+                trackClassName,
               )}
             >
-              <Text className="text-sand-12 text-md font-medium">
+              {/* Filled portion of track */}
+              <Animated.View
+                className="bg-tomato-9 absolute h-full rounded-full"
+                style={filledTrackStyle}
+              />
+
+              {/* Step markers overlay */}
+              <View className="relative h-full w-full">
+                {renderStepMarkers()}
+              </View>
+            </View>
+          </GestureDetector>
+
+          {/* Knob */}
+          <GestureDetector gesture={panGesture}>
+            <Animated.View
+              className={cn(
+                "absolute -mt-1 flex flex-col items-center justify-center",
+                "bg-sand-1 border-sand-7 rounded-3xl border-2 px-4 py-1 shadow-md",
+                isDraggingState ? "bg-sand-2" : "bg-sand-1",
+                knobClassName,
+              )}
+              style={[
+                {
+                  minWidth: KNOB_WIDTH,
+                  height: KNOB_HEIGHT,
+                  top: (48 - KNOB_HEIGHT) / 2, // Center vertically on the track (48px height)
+                },
+                knobStyle,
+              ]}
+            >
+              {/* Value display inside knob */}
+              <Text className="text-sand-12 text-lg font-medium">
                 {displayValue}
               </Text>
 
-              {rangeUnit && (
-                <Text className="text-sand-11 ml-1 text-sm font-medium">
+              {/* Unit display below value */}
+              {rangeUnit ? (
+                <Text className="text-sand-11 leading-0 -mt-1 text-xs">
                   {rangeUnit}
                 </Text>
-              )}
-            </View>
-          </Animated.View>
-        </GestureDetector>
-      </View>
-    </GestureHandlerRootView>
+              ) : null}
+
+              {/* Floating value display when dragging */}
+              <View
+                className={cn(
+                  "bg-sand-1 border-sand-6 absolute -top-10 flex min-w-20 max-w-80 flex-row items-center justify-center gap-1 rounded-md border px-2 py-1",
+                  isDraggingState ? "opacity-100" : "opacity-0",
+                )}
+              >
+                <Text className="text-sand-12 text-md font-medium">
+                  {displayValue}
+                </Text>
+
+                {rangeUnit && (
+                  <Text className="text-sand-11 text-sm font-medium">
+                    {rangeUnit}
+                  </Text>
+                )}
+              </View>
+            </Animated.View>
+          </GestureDetector>
+        </View>
+      </GestureHandlerRootView>
+    </View>
   );
 }

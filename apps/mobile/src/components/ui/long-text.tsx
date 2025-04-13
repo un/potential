@@ -15,7 +15,7 @@ const LongText = React.forwardRef<
     ref,
   ) => {
     return (
-      <View className="bg-red-5 relative flex h-full flex-1 flex-col gap-1">
+      <View className="relative flex flex-col gap-1">
         {label && (
           <View className="ml-0.5">
             <Text type={"title"}>{label}</Text>
