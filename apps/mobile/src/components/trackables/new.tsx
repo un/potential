@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Platform, ScrollView, View } from "react-native";
-// import { Picker } from "~/components/ui/picker";
 import { Plus } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
@@ -29,6 +28,7 @@ enum Step {
   NAME = 0,
   CONFIG_TYPE = 1,
   CONFIG = 2,
+  ORGANIZATION = 3,
 }
 
 // Define separate substeps for each config type
@@ -241,7 +241,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   const handleNextStep = () => {
     if (step < Step.CONFIG) {
       setStep(step + 1);
-    } else {
+    } else if (step === Step.CONFIG) {
       // In config step, handle config substeps
       const configSteps = getConfigStepsForType(
         formData.configType,
@@ -253,6 +253,9 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       );
       if (configStep < configSteps.length - 1) {
         setConfigStep(configStep + 1);
+      } else {
+        // Move to organization step after completing all config steps
+        setStep(Step.ORGANIZATION);
       }
     }
   };
@@ -262,6 +265,18 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
     if (step > Step.NAME) {
       if (step === Step.CONFIG && configStep > 0) {
         setConfigStep(configStep - 1);
+      } else if (step === Step.ORGANIZATION) {
+        setStep(Step.CONFIG);
+        // Set config step to the last step
+        const configSteps = getConfigStepsForType(
+          formData.configType,
+          formData.config,
+          handleConfigChange,
+          formData.configType === "measure"
+            ? handleMeasureUnitTypeChange
+            : undefined,
+        );
+        setConfigStep(configSteps.length - 1);
       } else {
         setStep(step - 1);
       }
@@ -311,7 +326,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   );
 
   // Calculate total steps
-  const totalSteps = step === Step.TEMPLATE_CHOICE ? 1 : 2 + configSteps.length;
+  const totalSteps = step === Step.TEMPLATE_CHOICE ? 1 : 3 + configSteps.length;
 
   // Calculate current step for display
   const currentDisplayStep =
@@ -321,7 +336,9 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
         ? 1
         : step === Step.CONFIG_TYPE
           ? 2
-          : 3 + configStep;
+          : step === Step.CONFIG
+            ? 3 + configStep
+            : 3 + configSteps.length;
 
   // Render step content
   const renderStepContent = () => {
@@ -394,28 +411,6 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
               </View>
             )}
 
-            <View>
-              <Text type="title" className="mb-1">
-                Type
-              </Text>
-              <Dropdown
-                items={typeOptions}
-                value={formData.type}
-                onChange={(value) => handleChange("type", value)}
-              />
-            </View>
-
-            <View>
-              <Text type="title" className="mb-1">
-                Subtype
-              </Text>
-              <Dropdown
-                items={subtypeOptions}
-                value={formData.subType}
-                onChange={(value) => handleChange("subType", value)}
-              />
-            </View>
-
             {template && (
               <Button onPress={handleCustomizeTemplate} className="mt-4">
                 <Text>Customize</Text>
@@ -467,6 +462,51 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
           }
         }
         return <Text>No configuration options available</Text>;
+      case Step.ORGANIZATION:
+        return (
+          <View className="gap-4">
+            <View>
+              <Text type="title" className="mb-1">
+                Group
+              </Text>
+              <Dropdown
+                items={typeOptions}
+                value={formData.type}
+                onChange={(value) => handleChange("type", value)}
+              />
+            </View>
+
+            <View>
+              <Text type="title" className="mb-1">
+                Sub Group
+              </Text>
+              <Dropdown
+                items={subtypeOptions}
+                value={formData.subType}
+                onChange={(value) => handleChange("subType", value)}
+              />
+              <Text className="text-sand-11 mt-2 text-xs">
+                Missing a group or sub group? Want something more specific?
+                Report it as a bug and we'll add it within 24 hours
+              </Text>
+            </View>
+
+            <View className="mt-4">
+              <Text type="title" className="mb-1">
+                Entry Limit
+              </Text>
+              <View className="mt-2 flex-row items-center">
+                <Checkbox
+                  checked={formData.config.limitOnePerDay}
+                  onCheckedChange={(checked) =>
+                    handleConfigChange("limitOnePerDay", checked)
+                  }
+                />
+                <Text className="ml-2">Limit to one entry per day</Text>
+              </View>
+            </View>
+          </View>
+        );
       default:
         return null;
     }
@@ -474,11 +514,11 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
 
   // Render step buttons
   const renderStepButtons = () => {
-    const isLastConfigStep =
-      step === Step.CONFIG && configStep === configSteps.length - 1;
+    const isLastStep = step === Step.ORGANIZATION;
     const hasNextStep =
       step < Step.CONFIG ||
-      (step === Step.CONFIG && configStep < configSteps.length - 1);
+      (step === Step.CONFIG && configStep < configSteps.length - 1) ||
+      (step === Step.CONFIG && configStep === configSteps.length - 1);
 
     return (
       <View className="flex-col gap-4">
@@ -507,7 +547,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
         </View>
         <Button
           onPress={handleStartTracking}
-          variant={isLastConfigStep ? "default" : "outline"}
+          variant={isLastStep ? "default" : "outline"}
           size={"sm"}
         >
           <Text>Start Tracking</Text>
@@ -562,22 +602,8 @@ function getConfigStepsForType(
   onChange: (field: string, value: unknown) => void,
   onMeasureUnitTypeChange?: (unitType: string) => void,
 ): ConfigStepDef[] {
-  // Common step for all types
-  const commonSteps: ConfigStepDef[] = [
-    {
-      title: "Entry Limit",
-      field: "limitOnePerDay",
-      component: (
-        <View className="mt-2 flex-row items-center">
-          <Checkbox
-            checked={config.limitOnePerDay}
-            onCheckedChange={(checked) => onChange("limitOnePerDay", checked)}
-          />
-          <Text className="ml-2">Limit to one entry per day</Text>
-        </View>
-      ),
-    },
-  ];
+  // Remove common step for all types, as it's now in the ORGANIZATION step
+  const commonSteps: ConfigStepDef[] = [];
 
   switch (type) {
     case "measure":
@@ -892,9 +918,37 @@ function getConfigStepsForType(
       ];
 
     case "shortText":
+      if (config.type !== "shortText") return commonSteps;
+      return [
+        {
+          title: "Short Text Configuration",
+          field: "shortTextConfig",
+          component: (
+            <View>
+              <Text className="text-sand-11">
+                Short text entries allow users to add brief notes or values.
+              </Text>
+            </View>
+          ),
+        },
+      ];
+
     case "longText":
-      if (config.type !== type) return commonSteps;
-      return commonSteps;
+      if (config.type !== "longText") return commonSteps;
+      return [
+        {
+          title: "Long Text Configuration",
+          field: "longTextConfig",
+          component: (
+            <View>
+              <Text className="text-sand-11">
+                Long text entries allow users to add detailed notes or journal
+                entries.
+              </Text>
+            </View>
+          ),
+        },
+      ];
 
     default:
       return commonSteps;

@@ -79,13 +79,14 @@ export const TRACKABLE_SUB_TYPES = {
   "energy.calories.intake": "Calories Intake",
   "energy.calories.burn": "Calories Burn",
   "supplement.generic": "Supplement",
-  "symptom.generic": "Symptom",
-  "blood.generic": "Blood",
+  "symptom.generic": "Custom Symptom",
+  "blood.generic": "Custom Blood",
   "body.weight": "Weight",
   "body.height": "Height",
   "body.fat": "Fat",
   "body.muscle": "Muscle",
-  "body.generic": "Body",
+  "body.measurement": "Measurement",
+  "body.generic": "Custom Body",
   "custom.generic": "Custom",
   "mind.journal": "Daily Journal",
   "mind.stress": "Stress Level",
@@ -93,7 +94,12 @@ export const TRACKABLE_SUB_TYPES = {
   "mind.focus": "Focus",
   "mind.productivity": "Productivity",
   "mind.creativity": "Creativity",
-  "mind.generic": "Mind",
+  "mind.generic": "Custom Mind",
+  "medication.generic": "Custom Medication",
+  "sleep.quality": "Sleep Quality",
+  "sleep.duration": "Sleep Duration",
+  "sleep.generic": "Custom Sleep",
+  "activity.generic": "Custom Activity",
 } as const;
 
 // Then derive the types from the object
@@ -230,7 +236,7 @@ export type TrackableCustomConfig =
   | {
       type: "rating";
       // used to limit inputs
-      ratingMax: number;
+      ratingMax: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
       ratingUnit?: string;
       ratingIcon?: string;
       ratingEmoji?: string;
