@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Gear, Star, ThumbsUp } from "phosphor-react-native";
 
 import type { ConstsTypes } from "@1up/consts";
 import type { BaseTemplate } from "@1up/templates";
@@ -35,10 +34,10 @@ export function TemplateList({
             <Text className="text-base font-medium" type={"title"}>
               Custom
             </Text>
-
+            {/* 
             <View className="flex flex-row gap-2">
               <Gear size={16} />
-            </View>
+            </View> */}
           </View>
 
           <Text className="text-sand-11 w-full text-sm" type={"paragraph"}>
@@ -51,15 +50,25 @@ export function TemplateList({
               variant={"outline"}
               key={template.id}
               //   onPress={() => onSelectTemplate(template)}
+              className="flex w-full flex-row items-center justify-between"
             >
               <View className="flex w-full flex-row items-center justify-between">
                 <Text className="text-base font-medium" type={"title"}>
                   {template.name}
                 </Text>
 
-                <View className="flex flex-row gap-2">
-                  {template.featured && <Star size={16} />}
-                  {template.recommended && <ThumbsUp size={16} />}
+                <View className="flex flex-row items-center justify-end gap-2">
+                  {/* {template.featured && (
+                    <View className="bg-tomato-9 flex flex-row gap-2 rounded-full px-1.5 py-1">
+                      <Text className="text-tomato-1 text-xs">Featured</Text>
+                    </View>
+                  )} */}
+                  {template.recommended && (
+                    <View className="bg-amber-9 flex flex-row gap-2 rounded-full px-1.5 py-1">
+                      <Text className="text-amber-1 text-xs">Recommended</Text>
+                    </View>
+                  )}
+                  {/* {template.recommended && <ThumbsUp size={16} />} */}
                 </View>
               </View>
               {template.description && (

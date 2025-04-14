@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { Fire, Star } from "phosphor-react-native";
+import { Bug, Fire, Star } from "phosphor-react-native";
 
 import { trpc } from "~/utils/api";
 import { Text } from "../ui/text";
@@ -38,6 +38,9 @@ export default function UserHeader() {
               {profileData?.streakCurrentDays}
             </Text>
             <Fire size={18} />
+          </View>
+          <View className="flex flex-row items-center justify-end gap-1">
+            <Bug size={18} />
           </View>
         </View>
       </Link>
