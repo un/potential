@@ -2,6 +2,7 @@
 import { z } from "zod";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
+import { CONSTS } from "@1up/consts";
 
 type TrackableSubTypesKey = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
 type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
@@ -27,6 +28,8 @@ export const baseTemplateSchema = z.object({
   featured: z.boolean().default(false),
   uses: z.number().default(0),
   defaultConfig: z.custom<TrackableConfigWithMeta>(),
+  type: CONSTS.TRACKABLE.TYPES_SCHEMA,
+  subType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
 });
 
 export type BaseTemplate = z.infer<typeof baseTemplateSchema>;

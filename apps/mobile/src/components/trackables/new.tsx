@@ -131,8 +131,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   const [formData, setFormData] = useState<NewTrackableFormData>({
     name: template?.name ?? "",
     description: template?.description ?? "",
-    type: "custom",
-    subType: "custom.generic",
+    type: template?.type ?? "custom",
+    subType: template?.subType ?? "custom.generic",
     configType: "measure",
     config: template?.defaultConfig ?? createEmptyConfig("measure"),
   });
@@ -144,8 +144,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       setFormData({
         name: template.name,
         description: template.description ?? "",
-        type: extractTypeFromSubType(template.id),
-        subType: template.id as TrackableSubTypesKey,
+        type: template.type,
+        subType: template.subType,
         configType: configType,
         config: template.defaultConfig as TrackableCustomConfig,
       });
@@ -240,7 +240,16 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   // Move to next step
   const handleNextStep = () => {
     if (step < Step.CONFIG) {
-      setStep(step + 1);
+      // Skip CONFIG step for shortText and longText since they have no configuration
+      if (
+        step === Step.CONFIG_TYPE &&
+        (formData.configType === "shortText" ||
+          formData.configType === "longText")
+      ) {
+        setStep(Step.ORGANIZATION);
+      } else {
+        setStep(step + 1);
+      }
     } else if (step === Step.CONFIG) {
       // In config step, handle config substeps
       const configSteps = getConfigStepsForType(
@@ -251,7 +260,10 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
           ? handleMeasureUnitTypeChange
           : undefined,
       );
-      if (configStep < configSteps.length - 1) {
+      if (configSteps.length === 0) {
+        // Skip to organization step if there are no config steps
+        setStep(Step.ORGANIZATION);
+      } else if (configStep < configSteps.length - 1) {
         setConfigStep(configStep + 1);
       } else {
         // Move to organization step after completing all config steps
@@ -266,17 +278,25 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       if (step === Step.CONFIG && configStep > 0) {
         setConfigStep(configStep - 1);
       } else if (step === Step.ORGANIZATION) {
-        setStep(Step.CONFIG);
-        // Set config step to the last step
-        const configSteps = getConfigStepsForType(
-          formData.configType,
-          formData.config,
-          handleConfigChange,
-          formData.configType === "measure"
-            ? handleMeasureUnitTypeChange
-            : undefined,
-        );
-        setConfigStep(configSteps.length - 1);
+        // For shortText and longText, skip CONFIG step when going backward
+        if (
+          formData.configType === "shortText" ||
+          formData.configType === "longText"
+        ) {
+          setStep(Step.CONFIG_TYPE);
+        } else {
+          setStep(Step.CONFIG);
+          // Set config step to the last step
+          const configSteps = getConfigStepsForType(
+            formData.configType,
+            formData.config,
+            handleConfigChange,
+            formData.configType === "measure"
+              ? handleMeasureUnitTypeChange
+              : undefined,
+          );
+          setConfigStep(configSteps.length - 1);
+        }
       } else {
         setStep(step - 1);
       }
@@ -326,7 +346,13 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   );
 
   // Calculate total steps
-  const totalSteps = step === Step.TEMPLATE_CHOICE ? 1 : 3 + configSteps.length;
+  const totalSteps =
+    step === Step.TEMPLATE_CHOICE
+      ? 1
+      : formData.configType === "shortText" ||
+          formData.configType === "longText"
+        ? 3
+        : 3 + configSteps.length;
 
   // Calculate current step for display
   const currentDisplayStep =
@@ -338,7 +364,10 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
           ? 2
           : step === Step.CONFIG
             ? 3 + configStep
-            : 3 + configSteps.length;
+            : formData.configType === "shortText" ||
+                formData.configType === "longText"
+              ? 3
+              : 3 + configSteps.length;
 
   // Render step content
   const renderStepContent = () => {
@@ -460,6 +489,15 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
               </View>
             );
           }
+        }
+        // Skip to organization step programmatically since this shouldn't be visible
+        // This is a fallback for types that skip the config
+        if (
+          formData.configType === "shortText" ||
+          formData.configType === "longText"
+        ) {
+          setTimeout(() => setStep(Step.ORGANIZATION), 0);
+          return null;
         }
         return <Text>No configuration options available</Text>;
       case Step.ORGANIZATION:
@@ -897,7 +935,7 @@ function getConfigStepsForType(
 
                 <View className="flex-1">
                   <Text className="text-sand-11 mb-1 text-xs">
-                    Emoji (optional)
+                    Emoji (option.)
                   </Text>
                   <Input
                     value={config.ratingEmoji}
@@ -919,36 +957,11 @@ function getConfigStepsForType(
 
     case "shortText":
       if (config.type !== "shortText") return commonSteps;
-      return [
-        {
-          title: "Short Text Configuration",
-          field: "shortTextConfig",
-          component: (
-            <View>
-              <Text className="text-sand-11">
-                Short text entries allow users to add brief notes or values.
-              </Text>
-            </View>
-          ),
-        },
-      ];
+      return [];
 
     case "longText":
       if (config.type !== "longText") return commonSteps;
-      return [
-        {
-          title: "Long Text Configuration",
-          field: "longTextConfig",
-          component: (
-            <View>
-              <Text className="text-sand-11">
-                Long text entries allow users to add detailed notes or journal
-                entries.
-              </Text>
-            </View>
-          ),
-        },
-      ];
+      return [];
 
     default:
       return commonSteps;

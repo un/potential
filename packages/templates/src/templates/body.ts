@@ -4,6 +4,8 @@ import { defineTemplate } from "../utils";
 export const bodyTemplates = {
   "body.weight": defineTemplate({
     id: "weight",
+    type: "body",
+    subType: "body.weight",
     version: 1,
     name: "Body Weight",
     // description: "Track your body weight",
@@ -32,6 +34,8 @@ export const bodyTemplates = {
   }),
   "body.bodyFat": defineTemplate({
     id: "body-fat-percentage",
+    type: "body",
+    subType: "body.fat",
     version: 2,
     name: "Body Fat Percentage",
     // description: "Track your body fat percentage",
@@ -60,6 +64,8 @@ export const bodyTemplates = {
   }),
   "body.bodyMuscle": defineTemplate({
     id: "body-muscle-percentage",
+    type: "body",
+    subType: "body.muscle",
     version: 2,
     name: "Body Muscle Percentage",
     // description: "Track your body fat percentage",

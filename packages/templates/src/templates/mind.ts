@@ -4,6 +4,8 @@ import { defineTemplate } from "../utils";
 export const mindTemplates = {
   "mind.journal": defineTemplate({
     id: "journal",
+    type: "mind",
+    subType: "mind.journal",
     version: 1,
     name: "Daily Journal",
     // description: "Track your body weight",
@@ -24,6 +26,8 @@ export const mindTemplates = {
   }),
   "mind.stress": defineTemplate({
     id: "stress",
+    type: "mind",
+    subType: "mind.stress",
     version: 2,
     name: "Stress Level",
     // description: "Track your body fat percentage",
@@ -47,6 +51,8 @@ export const mindTemplates = {
   }),
   "mind.anxiety": defineTemplate({
     id: "anxiety",
+    type: "mind",
+    subType: "mind.anxiety",
     version: 2,
     name: "Anxiety Level",
     // description: "Track your body fat percentage",
@@ -70,6 +76,8 @@ export const mindTemplates = {
   }),
   "mind.focus": defineTemplate({
     id: "focus",
+    type: "mind",
+    subType: "mind.focus",
     version: 2,
     name: "Focus",
     aiDescriptionHelper:
@@ -92,6 +100,8 @@ export const mindTemplates = {
   }),
   "mind.productivity": defineTemplate({
     id: "productivity",
+    type: "mind",
+    subType: "mind.productivity",
     version: 1,
     name: "Productivity",
     aiDescriptionHelper:
@@ -114,6 +124,8 @@ export const mindTemplates = {
   }),
   "mind.creativity": defineTemplate({
     id: "creativity",
+    type: "mind",
+    subType: "mind.creativity",
     version: 1,
     name: "Creativity",
     aiDescriptionHelper:
