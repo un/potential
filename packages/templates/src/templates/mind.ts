@@ -34,8 +34,8 @@ export const mindTemplates = {
     uses: 0,
     defaultConfig: {
       type: "rating",
-      ratingMax: 10,
-      ratingUnit: "out of 10",
+      ratingMax: 5,
+      ratingUnit: "out of 5",
       ratingEmoji: "😥",
       limitOnePerDay: false,
       _meta: {
@@ -57,8 +57,8 @@ export const mindTemplates = {
     uses: 0,
     defaultConfig: {
       type: "rating",
-      ratingMax: 10,
-      ratingUnit: "out of 10",
+      ratingMax: 5,
+      ratingUnit: "out of 5",
       ratingEmoji: "😨",
       limitOnePerDay: false,
       _meta: {
@@ -79,8 +79,8 @@ export const mindTemplates = {
     uses: 0,
     defaultConfig: {
       type: "rating",
-      ratingMax: 10,
-      ratingUnit: "out of 10",
+      ratingMax: 5,
+      ratingUnit: "out of 5",
       ratingEmoji: "🤓",
       limitOnePerDay: false,
       _meta: {
@@ -101,8 +101,8 @@ export const mindTemplates = {
     uses: 0,
     defaultConfig: {
       type: "rating",
-      ratingMax: 10,
-      ratingUnit: "out of 10",
+      ratingMax: 5,
+      ratingUnit: "out of 5",
       ratingEmoji: "💪",
       limitOnePerDay: false,
       _meta: {
@@ -123,8 +123,8 @@ export const mindTemplates = {
     uses: 0,
     defaultConfig: {
       type: "rating",
-      ratingMax: 10,
-      ratingUnit: "out of 10",
+      ratingMax: 5,
+      ratingUnit: "out of 5",
       ratingEmoji: "🧑‍🎨",
       limitOnePerDay: false,
       _meta: {

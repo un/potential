@@ -346,7 +346,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       case Step.TEMPLATE_CHOICE:
         return (
           <View className="flex flex-col gap-6">
-            <View className="border-sand-6 bg-sand-2 flex flex-col gap-4 rounded-md border p-4">
+            {/* <View className="border-sand-6 bg-sand-2 flex flex-col gap-4 rounded-md border p-4">
               <Text type="title">{template?.name}</Text>
               {template?.description && (
                 <Text className="text-sand-11">{template.description}</Text>
@@ -362,7 +362,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
                   />
                 )}
               </View>
-            </View>
+            </View> */}
 
             <View className="flex flex-col gap-4">
               <Button onPress={handleUseTemplateDirectly} variant="default">

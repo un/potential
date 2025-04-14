@@ -1,23 +1,36 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
-import type { ConstsTypes } from "@1up/consts";
+import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
+import type { BaseTemplate } from "@1up/templates";
+import { filterTemplatesByType } from "@1up/templates";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
+import { Button } from "~/components/ui/button";
 import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { trpc } from "~/utils/api";
-import { TemplateList } from "../trackables/TemplateList";
+import { NewTrackable } from "../trackables/new";
 import { LogStepWrapper } from "./logStepWrapper";
 
 // Use the proper type from consts
 type TrackableParentType = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
 type TrackableSubType = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
+
+// Define NewTrackableFormData to match the one in new.tsx
+interface NewTrackableFormData {
+  name: string;
+  description: string;
+  type: ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
+  subType: ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
+  configType: ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
+  config: TrackableCustomConfig;
+}
 
 // Lookup data for different trackable types
 interface TrackableOptions {
@@ -209,6 +222,19 @@ export const TrackableLogStep = ({
   trackableSubType,
 }: TrackableLogStepProps) => {
   const lookupValues = getLookupValues(trackableParentType);
+  const router = useRouter();
+
+  // Template and NewTrackable state
+  const [selectedTemplate, setSelectedTemplate] = useState<BaseTemplate | null>(
+    null,
+  );
+  const [templates, setTemplates] = useState<BaseTemplate[]>([]);
+
+  // Fetch templates based on trackableParentType
+  useEffect(() => {
+    const typeTemplates = filterTemplatesByType(trackableParentType);
+    setTemplates(typeTemplates);
+  }, [trackableParentType]);
 
   // get user profile
   const {
@@ -237,8 +263,6 @@ export const TrackableLogStep = ({
   });
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const [_isUploading, setIsUploading] = useState(false);
-
-  const router = useRouter();
 
   const { mutateAsync } = useMutation(
     trpc.log.createLog.mutationOptions({
@@ -317,67 +341,164 @@ export const TrackableLogStep = ({
     setIsFormSubmitting(false);
   }
 
-  return (
-    <LogStepWrapper title={lookupValues.title} onBack={onBack}>
-      <View className="flex flex-col gap-4">
-        <Text className="text-lg" type="title">
-          Smart Ai
-        </Text>
-        <form.Field
-          name="text"
-          children={(field) => {
-            return (
-              <Textarea
-                id={field.name}
-                value={field.state.value}
-                onBlur={field.handleBlur}
-                onChangeText={field.handleChange}
-                error={
-                  field.state.meta.errors.length > 0
-                    ? [
-                        {
-                          message:
-                            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-                            field.state.meta.errors[0] ??
-                            "Something is wrong, but we dont know what",
-                        },
-                      ]
-                    : ""
-                }
-                label={lookupValues.textAreaLabel}
-                placeholder={placeholder}
-                editable={!form.state.isSubmitting}
-              />
-            );
-          }}
-        />
-        <Text className="text-sand-11 text-sm">
-          Tips: {lookupValues.tipText}
-        </Text>
-        <ImagePickerUploader
-          ref={imagePickerRef}
-          onImagesChanged={setImageState}
-          onUploadStateChange={setIsUploading}
-          onSubmit={handleSubmit}
-          submitting={isFormSubmitting}
-        />
-        {trackableParentType !== "consumption" && (
-          <View className="flex flex-col gap-4">
-            <Text className="text-lg" type="title">
-              Manual
-            </Text>
-            <Text className="text-sand-11 text-sm">
-              Existing TRACKERS {parentTrackableTypes?.length}
-            </Text>
-            {parentTrackableTypes?.map((trackable) => (
-              <Text key={trackable.id} className="text-sand-11 text-sm">
-                {trackable.name}
+  // Template selection handler
+  const onSelectTemplate = (template?: BaseTemplate) => {
+    setSelectedTemplate(template ?? null);
+  };
+
+  // Handler for saving a new trackable
+  const handleSaveNewTrackable = (data: NewTrackableFormData) => {
+    // Handle the new trackable data
+    console.log("New trackable saved:", data);
+    toast.success("New trackable added successfully");
+    setSelectedTemplate(null); // Return to main screen after saving
+  };
+
+  // Render the main trackable log content
+  const renderMainContent = () => {
+    return (
+      <LogStepWrapper title={lookupValues.title} onBack={onBack}>
+        <View className="flex flex-col gap-4">
+          <Text className="text-lg" type="title">
+            Smart Ai
+          </Text>
+          <form.Field
+            name="text"
+            children={(field) => {
+              return (
+                <Textarea
+                  id={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChangeText={field.handleChange}
+                  error={
+                    field.state.meta.errors.length > 0
+                      ? [
+                          {
+                            message:
+                              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                              field.state.meta.errors[0] ??
+                              "Something is wrong, but we dont know what",
+                          },
+                        ]
+                      : ""
+                  }
+                  label={lookupValues.textAreaLabel}
+                  placeholder={placeholder}
+                  editable={!form.state.isSubmitting}
+                />
+              );
+            }}
+          />
+          <Text className="text-sand-11 text-sm">
+            Tips: {lookupValues.tipText}
+          </Text>
+          <ImagePickerUploader
+            ref={imagePickerRef}
+            onImagesChanged={setImageState}
+            onUploadStateChange={setIsUploading}
+            onSubmit={handleSubmit}
+            submitting={isFormSubmitting}
+          />
+          {trackableParentType !== "consumption" && (
+            <View className="flex flex-col gap-4">
+              <Text className="text-lg" type="title">
+                Manual
               </Text>
-            ))}
-            <TemplateList typeFilter={trackableParentType} />
-          </View>
-        )}
-      </View>
-    </LogStepWrapper>
+              <Text className="text-sand-11 text-sm">
+                Existing TRACKERS {parentTrackableTypes?.length}
+              </Text>
+              {parentTrackableTypes?.map((trackable) => (
+                <Text key={trackable.id} className="text-sand-11 text-sm">
+                  {trackable.name}
+                </Text>
+              ))}
+
+              {/* Template Selection */}
+              <View className="flex flex-col gap-2">
+                <Text type={"title"}>New Trackable</Text>
+                <View className="flex flex-col gap-4">
+                  <Button
+                    variant={"outline"}
+                    className="flex w-full flex-col gap-2"
+                    onPress={() => onSelectTemplate()}
+                  >
+                    <View className="flex w-full flex-row items-center justify-between">
+                      <Text className="text-base font-medium" type={"title"}>
+                        Custom
+                      </Text>
+                    </View>
+
+                    <Text
+                      className="text-sand-11 w-full text-sm"
+                      type={"paragraph"}
+                    >
+                      Track something new and configure how you want to track it
+                    </Text>
+                  </Button>
+
+                  {/* Templates from filterTemplatesByType */}
+                  {templates.map((template) => (
+                    <Button
+                      variant={"outline"}
+                      key={template.id}
+                      onPress={() => onSelectTemplate(template)}
+                      className="flex w-full flex-row items-center justify-between"
+                    >
+                      <View className="flex w-full flex-row items-center justify-between">
+                        <Text className="text-base font-medium" type={"title"}>
+                          {template.name}
+                        </Text>
+
+                        <View className="flex flex-row items-center justify-end gap-2">
+                          {template.recommended && (
+                            <View className="bg-amber-9 flex flex-row gap-2 rounded-full px-1.5 py-1">
+                              <Text className="text-amber-1 text-xs">
+                                Recommended
+                              </Text>
+                            </View>
+                          )}
+                        </View>
+                      </View>
+                      {template.description && (
+                        <Text className="text-sand-11 text-sm">
+                          {template.description}
+                        </Text>
+                      )}
+                    </Button>
+                  ))}
+                </View>
+              </View>
+            </View>
+          )}
+        </View>
+      </LogStepWrapper>
+    );
+  };
+
+  // Render the new trackable view if a template is selected
+  const renderNewTrackable = () => {
+    if (!selectedTemplate) return null;
+
+    return (
+      <LogStepWrapper
+        title={selectedTemplate.name || "New Trackable"}
+        onBack={() => setSelectedTemplate(null)}
+      >
+        <NewTrackable
+          template={selectedTemplate}
+          onSave={handleSaveNewTrackable}
+        />
+      </LogStepWrapper>
+    );
+  };
+
+  // In log.tsx, steps are conditionally rendered based on state
+  // Following the same pattern:
+  return (
+    <>
+      {renderMainContent()}
+      {selectedTemplate && renderNewTrackable()}
+    </>
   );
 };
