@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { useLocales } from "expo-localization";
+import { useMutation } from "@tanstack/react-query";
 import { Plus } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
@@ -16,6 +17,7 @@ import { NumberInput } from "~/components/ui/number-input";
 import { Rating } from "~/components/ui/rating";
 import { Slider } from "~/components/ui/slider";
 import { Text } from "~/components/ui/text";
+import { queryClient, trpc } from "~/utils/api";
 import { Dropdown } from "../ui/dropdown";
 
 type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
@@ -124,7 +126,7 @@ interface NewTrackableProps {
 
 export function NewTrackable({ template, onSave }: NewTrackableProps) {
   const locales = useLocales();
-  const userMeasurementSystem = locales[0]?.measurementSystem || "metric";
+  const userMeasurementSystem = locales[0]?.measurementSystem ?? "metric";
   const [step, setStep] = useState<Step>(
     template ? Step.TEMPLATE_CHOICE : Step.NAME,
   );
@@ -140,6 +142,27 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
     config: template?.defaultConfig ?? createEmptyConfig("measure"),
   });
 
+  // Setup the mutation at component level
+  const mutation = useMutation(
+    trpc.trackables.createTrackable.mutationOptions({
+      onSuccess: async () => {
+        console.log("Trackable created successfully");
+
+        // Invalidate the query for the parent type
+        const queryKey = trpc.trackables.getTrackablesForParentType.queryKey({
+          trackableParentType: formData.type,
+        });
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSave) {
+          onSave(formData);
+        }
+      },
+      onError: (error) => {
+        console.error("Error creating trackable:", error);
+      },
+    }),
+  );
+
   // Initialize form with template data if provided
   useEffect(() => {
     if (template) {
@@ -150,7 +173,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
 
       // Update display unit based on user's locale if it's a measure config
       if (configType === "measure" && configCopy.type === "measure") {
-        const unitType = configCopy.measureUnitType || "mass";
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        const unitType = configCopy.measureUnitType ?? "mass";
         const { source, display } = getUnitDisplayFromType(
           unitType,
           userMeasurementSystem,
@@ -180,6 +204,24 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
     const parts = subType.split(".");
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     return (parts[0] as TrackableTypesKey) ?? "custom";
+  };
+
+  // Map template ID to valid subType (e.g., "weight" -> "body.weight")
+  const mapTemplateIdToSubType = (templateId: string): TrackableSubTypesKey => {
+    // Check if this is already a valid subType format (contains dots)
+    if (templateId.includes(".")) {
+      return templateId as TrackableSubTypesKey;
+    }
+
+    // Special case mappings for template IDs
+    const mappings: Record<string, TrackableSubTypesKey> = {
+      weight: "body.weight",
+      "body-fat-percentage": "body.fat",
+      "body-muscle-percentage": "body.muscle",
+      // Add more mappings as needed
+    };
+
+    return mappings[templateId] || "custom.generic";
   };
 
   // Handle form field changes
@@ -237,16 +279,37 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   const handleUseTemplateDirectly = () => {
     if (template) {
       const configType = template.defaultConfig.type;
+
+      // Get the correct subType using our mapping function
+      const subType = mapTemplateIdToSubType(template.id);
+      // Extract the main type from the subType
+      const type = extractTypeFromSubType(subType);
+
+      console.log(
+        `Template ID: ${template.id} -> Type: ${type}, SubType: ${subType}`,
+      );
+
       const newFormData = {
         name: template.name,
         description: template.description ?? "",
-        type: extractTypeFromSubType(template.id),
-        subType: template.id as TrackableSubTypesKey,
+        type: type,
+        subType: subType,
         configType: configType,
         config: template.defaultConfig as TrackableCustomConfig,
       };
 
-      console.log("Using template directly:", template);
+      console.log("Using template directly:", newFormData);
+
+      // Create the trackable in the database
+      mutation.mutate({
+        name: newFormData.name,
+        description: newFormData.description,
+        type: newFormData.type,
+        subType: newFormData.subType,
+        configType: newFormData.configType,
+        config: newFormData.config,
+      });
+
       if (onSave) {
         onSave(newFormData);
       }
@@ -327,9 +390,15 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   // Start tracking
   const handleStartTracking = () => {
     console.log("Starting to track with data:", formData);
-    if (onSave) {
-      onSave(formData);
-    }
+
+    mutation.mutate({
+      name: formData.name,
+      description: formData.description,
+      type: formData.type,
+      subType: formData.subType,
+      configType: formData.configType,
+      config: formData.config,
+    });
   };
 
   // Create type options for picker

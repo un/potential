@@ -242,7 +242,7 @@ export const TrackableLogStep = ({
     // isLoading: parentTrackableTypesLoading,
     // error: parentTrackableTypesError,
   } = useQuery(
-    trpc.log.getTrackableParentTypes.queryOptions({
+    trpc.trackables.getTrackablesForParentType.queryOptions({
       trackableParentType,
     }),
   );

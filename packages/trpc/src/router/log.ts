@@ -3,7 +3,6 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { CONSTS } from "@1up/consts";
-import { and, eq, trackables } from "@1up/db";
 
 import { protectedProcedure } from "../trpc";
 
@@ -46,24 +45,5 @@ export const logRouter = {
       return {
         success: true,
       };
-    }),
-  getTrackableParentTypes: protectedProcedure
-    .input(
-      z.object({
-        trackableParentType: CONSTS.TRACKABLE.TYPES_SCHEMA,
-      }),
-    )
-    .query(async ({ ctx, input }) => {
-      const { db, auth } = ctx;
-      const user = auth.user;
-
-      const logTypeTrackables = await db.query.trackables.findMany({
-        where: and(
-          eq(trackables.ownerId, user.id),
-          eq(trackables.type, input.trackableParentType),
-        ),
-      });
-
-      return logTypeTrackables;
     }),
 } satisfies TRPCRouterRecord;
