@@ -584,104 +584,119 @@ function getConfigStepsForType(
       if (config.type !== "measure") return commonSteps;
       return [
         {
-          title: "Unit Type",
-          field: "measureUnitType",
+          title: "Measurement Configuration",
+          field: "measureConfig",
           component: (
-            <Dropdown
-              items={[
-                { value: "volume", label: "Volume" },
-                { value: "mass", label: "Mass" },
-                { value: "length", label: "Length" },
-                { value: "time", label: "Time" },
-                { value: "temperature", label: "Temperature" },
-                { value: "percentage", label: "Percentage" },
-              ]}
-              value={config.measureUnitType}
-              onChange={(value) => {
-                if (onMeasureUnitTypeChange) {
-                  onMeasureUnitTypeChange(value as string);
-                } else {
-                  onChange("measureUnitType", value);
-                }
-              }}
-            />
-          ),
-        },
-        {
-          title: "Unit Display",
-          field: "measureUnitDisplay",
-          component: (
-            <Input
-              value={config.measureUnitDisplay}
-              onChangeText={(text) => onChange("measureUnitDisplay", text)}
-              placeholder="e.g., kg, pounds"
-              label="Unit Display"
-            />
-          ),
-        },
-        {
-          title: "Target Value (optional)",
-          field: "measureTarget",
-          component: (
-            <View className="flex flex-col gap-2">
-              <NumberInput
-                value={config.measureTarget ?? 0}
-                onValueChange={(value) =>
-                  onChange("measureTarget", value !== 0 ? value : null)
-                }
-                unit={config.measureUnitDisplay}
-                increments={[0.1, 1, 5]}
-                decrements={[0.1, 1, 5]}
-              />
+            <View className="flex flex-col gap-6">
+              <View className="flex flex-row gap-2">
+                <View className="flex-1 flex-col gap-1">
+                  <Text type="title" className="text-sm">
+                    Unit Type
+                  </Text>
+                  <Dropdown
+                    items={[
+                      { value: "volume", label: "Volume" },
+                      { value: "mass", label: "Mass" },
+                      { value: "length", label: "Length" },
+                      { value: "time", label: "Time" },
+                      { value: "temperature", label: "Temperature" },
+                      { value: "percentage", label: "Percentage" },
+                    ]}
+                    value={config.measureUnitType}
+                    onChange={(value) => {
+                      if (onMeasureUnitTypeChange) {
+                        onMeasureUnitTypeChange(value as string);
+                      } else {
+                        onChange("measureUnitType", value);
+                      }
+                    }}
+                  />
+                </View>
+
+                <View className="flex-1 flex-col gap-1">
+                  <Text type="title" className="text-sm">
+                    Unit Display
+                  </Text>
+                  <Input
+                    value={config.measureUnitDisplay}
+                    onChangeText={(text) =>
+                      onChange("measureUnitDisplay", text)
+                    }
+                    placeholder="e.g., kg, pounds"
+                  />
+                </View>
+              </View>
+
+              <View className="flex flex-col gap-2">
+                <Text type="title" className="text-sm">
+                  Values
+                </Text>
+                <View className="flex flex-row gap-2">
+                  <View className="flex-1">
+                    <Text className="text-sand-11 mb-1 text-xs">Target</Text>
+                    <Input
+                      value={
+                        config.measureTarget !== null
+                          ? String(config.measureTarget)
+                          : ""
+                      }
+                      onChangeText={(text) => {
+                        const value =
+                          text.trim() === "" ? null : parseFloat(text);
+                        onChange(
+                          "measureTarget",
+                          value !== null && !isNaN(value) ? value : null,
+                        );
+                      }}
+                      placeholder="Target"
+                      keyboardType="numeric"
+                    />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-sand-11 mb-1 text-xs">Min</Text>
+                    <Input
+                      value={String(config.measureMin ?? 0)}
+                      onChangeText={(text) => {
+                        const value = parseFloat(text);
+                        onChange("measureMin", !isNaN(value) ? value : 0);
+                      }}
+                      placeholder="Min"
+                      keyboardType="numeric"
+                    />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-sand-11 mb-1 text-xs">Max</Text>
+                    <Input
+                      value={String(config.measureMax ?? 0)}
+                      onChangeText={(text) => {
+                        const value = parseFloat(text);
+                        onChange("measureMax", !isNaN(value) ? value : 0);
+                      }}
+                      placeholder="Max"
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
           ),
         },
         {
-          title: "Minimum Value (optional)",
-          field: "measureMin",
-          component: (
-            <View className="flex flex-col gap-2">
-              <NumberInput
-                value={config.measureMin ?? 0}
-                onValueChange={(value) => onChange("measureMin", value)}
-                unit={config.measureUnitDisplay}
-                increments={[0.1, 1, 5]}
-                decrements={[0.1, 1, 5]}
-              />
-            </View>
-          ),
-        },
-        {
-          title: "Maximum Value (optional)",
-          field: "measureMax",
-          component: (
-            <View className="flex flex-col gap-2">
-              <NumberInput
-                value={config.measureMax ?? 0}
-                onValueChange={(value) => onChange("measureMax", value)}
-                unit={config.measureUnitDisplay}
-                increments={[0.1, 1, 5]}
-                decrements={[0.1, 1, 5]}
-              />
-            </View>
-          ),
-        },
-        {
-          title: "Cumulative Value",
+          title: "Cumulative",
           field: "cumulative",
           component: (
-            <View>
+            <View className="flex flex-col gap-4">
               <View className="flex-row items-center">
                 <Checkbox
                   checked={config.cumulative}
                   onCheckedChange={(checked) => onChange("cumulative", checked)}
                 />
-                <Text className="ml-2">Cumulative value</Text>
+                <Text className="ml-2">Add all entries together</Text>
               </View>
 
               {config.cumulative && (
-                <View className="mt-2">
-                  <Text>Cumulation Period</Text>
+                <View className="flex flex-col gap-1">
+                  <Text>Reset every</Text>
                   <Dropdown
                     items={[
                       { value: "hourly", label: "Hourly" },
@@ -720,14 +735,14 @@ function getConfigStepsForType(
       if (config.type !== "checkbox") return commonSteps;
       return [
         {
-          title: "Checkbox Name",
+          title: "Checkbox Label",
           field: "checkboxName",
           component: (
             <Input
               value={config.checkboxName}
               onChangeText={(text) => onChange("checkboxName", text)}
               placeholder="e.g., Completed, Done"
-              label="Checkbox Name"
+              label="Checkbox Label"
             />
           ),
         },
@@ -742,26 +757,36 @@ function getConfigStepsForType(
           field: "rangeValues",
           component: (
             <View className="flex flex-col gap-4">
-              <View className="flex flex-col items-center gap-0">
-                <Text className="text-sand-11 text-xs">Minimum Value</Text>
-                <NumberInput
-                  value={config.rangeMin}
-                  onValueChange={(value) => onChange("rangeMin", value)}
-                  unit=""
-                  increments={[1, 5, 10]}
-                  decrements={[1, 5, 10]}
-                />
-              </View>
+              <View className="flex flex-row gap-2">
+                <View className="flex-1">
+                  <Text className="text-sand-11 mb-1 text-xs">
+                    Minimum Value
+                  </Text>
+                  <Input
+                    value={String(config.rangeMin)}
+                    onChangeText={(text) => {
+                      const value = parseFloat(text);
+                      onChange("rangeMin", !isNaN(value) ? value : 0);
+                    }}
+                    placeholder="Min"
+                    keyboardType="numeric"
+                  />
+                </View>
 
-              <View className="flex flex-col items-center gap-0">
-                <Text className="text-sand-11 text-xs">Maximum Value</Text>
-                <NumberInput
-                  value={config.rangeMax}
-                  onValueChange={(value) => onChange("rangeMax", value)}
-                  unit=""
-                  increments={[1, 5, 10]}
-                  decrements={[1, 5, 10]}
-                />
+                <View className="flex-1">
+                  <Text className="text-sand-11 mb-1 text-xs">
+                    Maximum Value
+                  </Text>
+                  <Input
+                    value={String(config.rangeMax)}
+                    onChangeText={(text) => {
+                      const value = parseFloat(text);
+                      onChange("rangeMax", !isNaN(value) ? value : 0);
+                    }}
+                    placeholder="Max"
+                    keyboardType="numeric"
+                  />
+                </View>
               </View>
             </View>
           ),
@@ -801,65 +826,66 @@ function getConfigStepsForType(
       if (config.type !== "rating") return commonSteps;
       return [
         {
-          title: "Maximum Rating",
-          field: "ratingMax",
+          title: "Rating Configuration",
+          field: "ratingConfig",
           component: (
-            <Dropdown
-              items={[
-                { value: "1", label: "1" },
-                { value: "2", label: "2" },
-                { value: "3", label: "3" },
-                { value: "4", label: "4" },
-                { value: "5", label: "5" },
-                { value: "6", label: "6" },
-                { value: "7", label: "7" },
-                { value: "8", label: "8" },
-                { value: "9", label: "9" },
-                { value: "10", label: "10" },
-              ]}
-              value={String(config.ratingMax)}
-              onChange={(value) =>
-                onChange(
-                  "ratingMax",
-                  Number(value) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
-                )
-              }
-            />
-          ),
-        },
-        {
-          title: "Unit (optional)",
-          field: "ratingUnit",
-          component: (
-            <Input
-              value={config.ratingUnit}
-              onChangeText={(text) => onChange("ratingUnit", text)}
-              placeholder="e.g., stars, points"
-              label="Unit (optional)"
-            />
-          ),
-        },
-        // {
-        //   title: "Icon (optional)",
-        //   field: "ratingIcon",
-        //   component: (
-        //     <Input
-        //       value={config.ratingIcon}
-        //       onChangeText={(text) => onChange("ratingIcon", text)}
-        //       placeholder="Icon name"
-        //     />
-        //   ),
-        // },
-        {
-          title: "Emoji (optional)",
-          field: "ratingEmoji",
-          component: (
-            <Input
-              value={config.ratingEmoji}
-              onChangeText={(text) => onChange("ratingEmoji", text)}
-              placeholder="Emoji"
-              label="Emoji (optional)"
-            />
+            <View className="flex flex-col gap-4">
+              <View className="flex flex-row gap-2">
+                <View className="flex-1">
+                  <Text className="text-sand-11 mb-1 text-xs">
+                    Maximum Rating
+                  </Text>
+                  <Dropdown
+                    items={[
+                      { value: "1", label: "1" },
+                      { value: "2", label: "2" },
+                      { value: "3", label: "3" },
+                      { value: "4", label: "4" },
+                      { value: "5", label: "5" },
+                      { value: "6", label: "6" },
+                      { value: "7", label: "7" },
+                      { value: "8", label: "8" },
+                      { value: "9", label: "9" },
+                      { value: "10", label: "10" },
+                    ]}
+                    value={String(config.ratingMax)}
+                    onChange={(value) =>
+                      onChange(
+                        "ratingMax",
+                        Number(value) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
+                      )
+                    }
+                  />
+                </View>
+
+                <View className="flex-1">
+                  <Text className="text-sand-11 mb-1 text-xs">
+                    Unit (optional)
+                  </Text>
+                  <Input
+                    value={config.ratingUnit}
+                    onChangeText={(text) => onChange("ratingUnit", text)}
+                    placeholder="e.g., stars"
+                  />
+                </View>
+
+                <View className="flex-1">
+                  <Text className="text-sand-11 mb-1 text-xs">
+                    Emoji (optional)
+                  </Text>
+                  <Input
+                    value={config.ratingEmoji}
+                    onChangeText={(text) => {
+                      // Limit to 1 character
+                      const singleChar = text.charAt(0);
+                      onChange("ratingEmoji", singleChar);
+                    }}
+                    placeholder="⭐"
+                    maxLength={1}
+                  />
+                </View>
+              </View>
+            </View>
           ),
         },
         ...commonSteps,
