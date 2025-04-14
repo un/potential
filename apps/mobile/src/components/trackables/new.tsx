@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Platform, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import { useLocales } from "expo-localization";
 import { Plus } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
@@ -47,7 +48,7 @@ const DEFAULT_TEMPLATES = {
       type: "measure" as const,
       measureUnitType: "mass" as const,
       measureUnitSource: "g",
-      measureUnitDisplay: Platform.OS === "ios" ? "lb" : "kg",
+      measureUnitDisplay: "kg",
       measureTarget: null,
       measureMin: 0,
       measureMax: 100,
@@ -122,6 +123,8 @@ interface NewTrackableProps {
 }
 
 export function NewTrackable({ template, onSave }: NewTrackableProps) {
+  const locales = useLocales();
+  const userMeasurementSystem = locales[0]?.measurementSystem || "metric";
   const [step, setStep] = useState<Step>(
     template ? Step.TEMPLATE_CHOICE : Step.NAME,
   );
@@ -141,16 +144,31 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   useEffect(() => {
     if (template) {
       const configType = template.defaultConfig.type;
+
+      // Create a copy of the template's config
+      const configCopy = { ...template.defaultConfig } as TrackableCustomConfig;
+
+      // Update display unit based on user's locale if it's a measure config
+      if (configType === "measure" && configCopy.type === "measure") {
+        const unitType = configCopy.measureUnitType || "mass";
+        const { source, display } = getUnitDisplayFromType(
+          unitType,
+          userMeasurementSystem,
+        );
+        configCopy.measureUnitSource = source;
+        configCopy.measureUnitDisplay = display;
+      }
+
       setFormData({
         name: template.name,
         description: template.description ?? "",
         type: template.type,
         subType: template.subType,
         configType: configType,
-        config: template.defaultConfig as TrackableCustomConfig,
+        config: configCopy,
       });
     }
-  }, [template]);
+  }, [template, userMeasurementSystem]);
 
   // Reset config step when config type changes
   useEffect(() => {
@@ -181,7 +199,10 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   // Handle measure unit type change - auto update the display units
   const handleMeasureUnitTypeChange = (unitType: string) => {
     if (formData.config.type === "measure") {
-      const { source, display } = getUnitDisplayFromType(unitType);
+      const { source, display } = getUnitDisplayFromType(
+        unitType,
+        userMeasurementSystem,
+      );
 
       setFormData((prev) => ({
         ...prev,
@@ -1146,28 +1167,31 @@ function createEmptyConfig(
   }
 }
 
-// Function to get unit display based on unit type and platform
-function getUnitDisplayFromType(unitType: string): {
+// Function to get unit display based on unit type and user's locale measurement system
+function getUnitDisplayFromType(
+  unitType: string,
+  measurementSystem = "metric",
+): {
   source: string;
   display: string;
 } {
-  const isUS = Platform.OS === "ios"; // Simplification: iOS devices usually use imperial
+  const isImperial = measurementSystem === "us";
 
   switch (unitType) {
     case "mass":
-      return isUS
+      return isImperial
         ? { source: "g", display: "lb" }
         : { source: "g", display: "kg" };
     case "volume":
-      return isUS
+      return isImperial
         ? { source: "ml", display: "fl oz" }
         : { source: "ml", display: "ml" };
     case "length":
-      return isUS
+      return isImperial
         ? { source: "cm", display: "in" }
         : { source: "cm", display: "cm" };
     case "temperature":
-      return isUS
+      return isImperial
         ? { source: "C", display: "°F" }
         : { source: "C", display: "°C" };
     case "time":
