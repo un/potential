@@ -221,7 +221,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       // Add more mappings as needed
     };
 
-    return mappings[templateId] || "custom.generic";
+    return mappings[templateId] ?? "custom.generic";
   };
 
   // Handle form field changes
