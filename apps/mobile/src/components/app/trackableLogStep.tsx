@@ -519,12 +519,20 @@ export const TrackableLogStep = ({
       try {
         const payload: CreateLogPayload = {
           text: textValue || "",
-          imageIds: [],
+          imageIds: imageState.imageIds,
           trackableParentType,
           trackableSubType,
           trackableId: selectedTrackable.id,
           trackableValue: trackableValue,
         };
+
+        // Handle pending image uploads before submitting
+        if (imageState.pendingUpload) {
+          const uploadedImageIds = await handleUpload();
+          if (uploadedImageIds) {
+            payload.imageIds = [...payload.imageIds, ...uploadedImageIds];
+          }
+        }
 
         await mutateAsync(payload);
 

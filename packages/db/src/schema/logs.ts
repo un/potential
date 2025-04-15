@@ -52,17 +52,17 @@ export const trackablesRelations = relations(trackables, ({ one, many }) => ({
 export type TrackableLogJsonValue = {
   integrationId?: CloudTypeId<"integration">;
 } & {
-  imageUrl: string;
-  voiceClipUrl: string;
+  imageIds: string[];
+  voiceClipIds: string[];
 };
 
 export const trackableLogs = mysqlTable("trackable_logs", {
   id: typeIdColumn("trackableLog", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("trackableLog")),
-  trackableId: typeIdColumn("trackable", "id").notNull(),
-  parentLogId: typeIdColumn("trackableLog", "id"),
-  ownerId: typeIdColumn("user", "user_id").notNull(),
+  trackableId: typeIdColumn("trackable", "trackableId").notNull(),
+  parentLogId: typeIdColumn("trackableLog", "parentLogId"),
+  ownerId: typeIdColumn("user", "userId").notNull(),
   checked: boolean("checked"),
   numericValue: mediumint("numericValue", { unsigned: true }),
   textValue: text("textValue"),
