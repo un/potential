@@ -3,7 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { CONSTS } from "@1up/consts";
-import { trackableLogs } from "@1up/db";
+import { and, desc, eq, trackableLogs } from "@1up/db";
 import { cloudTypeIdValidator } from "@1up/utils";
 
 import { protectedProcedure } from "../trpc";
@@ -87,6 +87,36 @@ export const logRouter = {
         return {
           success: true,
         };
+      }
+    }),
+
+  getLogsByTrackableId: protectedProcedure
+    .input(
+      z.object({
+        trackableId: cloudTypeIdValidator("trackable"),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const { db, auth } = ctx;
+      const user = auth.user;
+
+      try {
+        const logs = await db.query.trackableLogs.findMany({
+          where: and(
+            eq(trackableLogs.ownerId, user.id),
+            eq(trackableLogs.trackableId, input.trackableId),
+          ),
+          orderBy: [desc(trackableLogs.createdAt)],
+          limit: 3,
+        });
+
+        return logs;
+      } catch (error) {
+        console.error("Error fetching trackable logs:", error);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to fetch trackable logs",
+        });
       }
     }),
 } satisfies TRPCRouterRecord;
