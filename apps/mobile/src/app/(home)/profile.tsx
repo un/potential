@@ -1,8 +1,9 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 
+import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 import { authClient, doAuthLogout } from "~/utils/auth-client";
 
@@ -27,12 +28,9 @@ export default function Profile() {
           <Text>Email: {session?.user.email ?? "Not available"}</Text>
         </View>
 
-        <TouchableOpacity
-          className="mt-4 items-center rounded-lg bg-red-500 px-4 py-3"
-          onPress={() => handleLogout()}
-        >
-          <Text className="font-semibold">Sign Out</Text>
-        </TouchableOpacity>
+        <Button variant={"destructive"} onPress={() => handleLogout()}>
+          <Text>Sign Out</Text>
+        </Button>
       </View>
     </SafeAreaView>
   );
