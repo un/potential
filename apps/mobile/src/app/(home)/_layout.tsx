@@ -82,6 +82,27 @@ export default function DashboardLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="[trackableId]"
+        options={{
+          title: "Tracker",
+          presentation: "card",
+          headerRight: () => (
+            <Button variant="link" size="icon" onPress={() => router.back()}>
+              <X size={24} />
+            </Button>
+          ),
+          headerLeft: () => (
+            <Button
+              variant="link"
+              size="icon"
+              onPress={() => router.replace("/(home)")}
+            >
+              <CaretLeft size={24} />
+            </Button>
+          ),
+        }}
+      />
     </Stack>
   );
 }

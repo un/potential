@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { useLocales } from "expo-localization";
+import { router } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import { Plus } from "phosphor-react-native";
 
@@ -145,7 +146,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   // Setup the mutation at component level
   const mutation = useMutation(
     trpc.trackables.createTrackable.mutationOptions({
-      onSuccess: async () => {
+      onSuccess: async ({ id }) => {
         console.log("Trackable created successfully");
 
         // Invalidate the query for the parent type
@@ -153,6 +154,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
           trackableParentType: formData.type,
         });
         await queryClient.invalidateQueries({ queryKey });
+
+        router.replace(`/${id}`);
         if (onSave) {
           onSave(formData);
         }

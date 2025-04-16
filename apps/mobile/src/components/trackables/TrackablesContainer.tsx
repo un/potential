@@ -106,8 +106,10 @@ export function TrackablesContainer() {
         if (subTypes.length === 0) return null;
 
         return (
-          <View key={type} className="mb-8">
-            <Text className="mb-4 text-2xl font-bold">{typeName}</Text>
+          <View key={type} className="flex flex-col gap-4">
+            <Text className="text-2xl font-bold" type={"title"}>
+              {typeName}
+            </Text>
 
             {subTypes.map(([subType, subTypeData]) => (
               <TrackableSection
