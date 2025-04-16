@@ -702,9 +702,9 @@ export const TrackableLogStep = ({
     if (selectedTrackable) return null;
 
     return (
-      <View className="flex flex-col gap-4">
+      <View className="mt-4 flex flex-col gap-6">
         <Text className="text-lg" type="title">
-          Manual
+          Existing Trackers
         </Text>
         {parentTrackableTypes?.length === 0 && (
           <Text className="text-sand-11 text-sm">
@@ -801,7 +801,7 @@ export const TrackableLogStep = ({
   const renderMainContent = () => {
     return (
       <LogStepWrapper title={lookupValues.title} onBack={onBack}>
-        <View className="flex flex-col gap-4">
+        <View className="mb-12 flex flex-col gap-4">
           {renderSmartAISection()}
           {trackableParentType !== "consumption" && renderManualSection()}
         </View>

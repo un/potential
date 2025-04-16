@@ -173,10 +173,10 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
                 key={log.id}
                 className="border-sand-6 flex flex-row justify-between gap-2 border-b pb-2"
               >
-                {renderLogEntry(log)}
                 <Text className="text-sm">
                   {new Date(log.createdAt).toLocaleDateString()}
                 </Text>
+                {renderLogEntry(log)}
               </View>
             ))}
           </View>
