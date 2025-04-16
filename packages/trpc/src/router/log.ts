@@ -107,7 +107,7 @@ export const logRouter = {
             eq(trackableLogs.trackableId, input.trackableId),
           ),
           orderBy: [desc(trackableLogs.createdAt)],
-          limit: 3,
+          limit: 100,
         });
 
         return logs;
