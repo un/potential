@@ -16,6 +16,7 @@ import { Input } from "~/components/ui/input";
 import { LongText } from "~/components/ui/long-text";
 import { NumberInput } from "~/components/ui/number-input";
 import { Rating } from "~/components/ui/rating";
+import { RatingDisplay } from "~/components/ui/rating-display";
 import { Slider } from "~/components/ui/slider";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
@@ -250,7 +251,7 @@ export default function TrackableDetailsPage() {
           typeof trackableValue === "number"
             ? trackableValue
             : logs && logs.length > 0 && logs[0]?.numericValue !== null
-              ? logs[0].numericValue
+              ? (logs[0]?.numericValue ?? 0)
               : 0;
         return (
           <NumberInput
@@ -380,18 +381,53 @@ export default function TrackableDetailsPage() {
           )}
           <Card>
             <View className="flex flex-col items-center justify-center gap-0">
-              <View className="flex flex-row items-center justify-center gap-0">
-                <Text type={"title"} className="text-5xl">
-                  {logs?.[0]?.numericValue}
-                </Text>
-                <Text className="text-sand-11 text-xs">
-                  {getMeasurementUnit()}
-                </Text>
-              </View>
-              {logs?.[0]?.createdAt && (
-                <Text className="text-sand-11 text-xs">
-                  {new Date(logs[0]?.createdAt).toLocaleString()}
-                </Text>
+              {trackable.customConfig?.type === "rating" &&
+              logs &&
+              logs.length > 0 &&
+              logs[0]?.numericValue !== null ? (
+                <View className="items-center justify-center">
+                  <RatingDisplay
+                    value={logs[0]?.numericValue ?? 0}
+                    ratingMax={
+                      Math.max(
+                        2,
+                        Math.min(10, trackable.customConfig.ratingMax ?? 5),
+                      ) as 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+                    }
+                    ratingIcon={
+                      "ratingIcon" in (trackable.customConfig ?? {})
+                        ? trackable.customConfig.ratingIcon
+                        : undefined
+                    }
+                    ratingEmoji={
+                      "ratingEmoji" in (trackable.customConfig ?? {})
+                        ? trackable.customConfig.ratingEmoji
+                        : undefined
+                    }
+                    size="lg"
+                  />
+                  {logs[0]?.createdAt && (
+                    <Text className="text-sand-11 mt-2 text-xs">
+                      {new Date(logs[0]?.createdAt).toLocaleString()}
+                    </Text>
+                  )}
+                </View>
+              ) : (
+                <>
+                  <View className="flex flex-row items-center justify-center gap-0">
+                    <Text type={"title"} className="text-5xl">
+                      {logs?.[0]?.numericValue}
+                    </Text>
+                    <Text className="text-sand-11 text-xs">
+                      {getMeasurementUnit()}
+                    </Text>
+                  </View>
+                  {logs?.[0]?.createdAt && (
+                    <Text className="text-sand-11 text-xs">
+                      {new Date(logs[0]?.createdAt).toLocaleString()}
+                    </Text>
+                  )}
+                </>
               )}
             </View>
           </Card>
@@ -465,15 +501,42 @@ export default function TrackableDetailsPage() {
                         </Text>
                       )}
 
-                      {log.numericValue !== null && (
-                        <View className="flex flex-row items-end gap-0">
-                          <Text className="font-medium">
-                            {log.numericValue}
-                          </Text>
-                          <Text className="text-sand-11 text-xs">
-                            {getMeasurementUnit()}
-                          </Text>
-                        </View>
+                      {log.numericValue !== null &&
+                      trackable.customConfig?.type === "rating" ? (
+                        <RatingDisplay
+                          value={log.numericValue}
+                          ratingMax={
+                            Math.max(
+                              2,
+                              Math.min(
+                                10,
+                                trackable.customConfig.ratingMax ?? 5,
+                              ),
+                            ) as 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+                          }
+                          ratingIcon={
+                            "ratingIcon" in (trackable.customConfig ?? {})
+                              ? trackable.customConfig.ratingIcon
+                              : undefined
+                          }
+                          ratingEmoji={
+                            "ratingEmoji" in (trackable.customConfig ?? {})
+                              ? trackable.customConfig.ratingEmoji
+                              : undefined
+                          }
+                          size="sm"
+                        />
+                      ) : (
+                        log.numericValue !== null && (
+                          <View className="flex flex-row items-end gap-0">
+                            <Text className="font-medium">
+                              {log.numericValue}
+                            </Text>
+                            <Text className="text-sand-11 text-xs">
+                              {getMeasurementUnit()}
+                            </Text>
+                          </View>
+                        )
                       )}
 
                       {log.textValue && (
