@@ -706,10 +706,11 @@ export const TrackableLogStep = ({
         <Text className="text-lg" type="title">
           Manual
         </Text>
-        <Text className="text-sand-11 text-sm">
-          Existing TRACKERS {parentTrackableTypes?.length}
-        </Text>
-
+        {parentTrackableTypes?.length === 0 && (
+          <Text className="text-sand-11 text-sm">
+            No existing trackers found
+          </Text>
+        )}
         {/* Show existing trackers in a scrollview with max height */}
         <ScrollView
           className="flex flex-col gap-2"
@@ -740,7 +741,6 @@ export const TrackableLogStep = ({
             </Button>
           ))}
         </ScrollView>
-
         {/* Template Selection */}
         <View className="flex flex-col gap-2">
           <Text type={"title"}>New Trackable</Text>
