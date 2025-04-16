@@ -9,15 +9,14 @@ import { toast } from "sonner-native";
 import type { ConstsTypes } from "@1up/consts";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
+// Import TrackableType from our types
+import type { TrackableType } from "~/types/trackables";
+// Import our new display components
+import { getValueFromLog } from "~/components/trackables/displays";
+// Import our new input components
+import { getInputForTrackableType } from "~/components/trackables/inputs";
 import { Card } from "~/components/ui/card";
-import { Checkbox } from "~/components/ui/checkbox";
 import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
-import { Input } from "~/components/ui/input";
-import { LongText } from "~/components/ui/long-text";
-import { NumberInput } from "~/components/ui/number-input";
-import { Rating } from "~/components/ui/rating";
-import { RatingDisplay } from "~/components/ui/rating-display";
-import { Slider } from "~/components/ui/slider";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { queryClient, trpc } from "~/utils/api";
@@ -31,6 +30,8 @@ type TrackableValueType =
 
 type TrackableParentType = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
 type TrackableSubType = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
+// Rename to _UnitType since it's not used directly in this file
+type _UnitType = ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
 
 // Payload for creating a log
 interface CreateLogPayload {
@@ -102,17 +103,6 @@ export default function TrackableDetailsPage() {
   // Image related
   const imagePickerRef = useRef<ImagePickerUploaderRef>(null);
 
-  // Helper to safely get measurement unit if available
-  const getMeasurementUnit = () => {
-    if (
-      trackable?.customConfig &&
-      "measureUnitDisplay" in trackable.customConfig
-    ) {
-      return trackable.customConfig.measureUnitDisplay;
-    }
-    return "";
-  };
-
   const handleUpload = async () => {
     if (imagePickerRef.current) {
       const result = await imagePickerRef.current.uploadPendingImages();
@@ -147,8 +137,9 @@ export default function TrackableDetailsPage() {
       const payload: CreateLogPayload = {
         text: textValue || "",
         imageIds: imageState.imageIds,
-        trackableParentType: trackable.type!,
-        trackableSubType: trackable.subType!,
+        // Use optional chaining instead of non-null assertion
+        trackableParentType: trackable.type ?? "custom",
+        trackableSubType: trackable.subType ?? "custom.generic",
         trackableId: trackableId,
         trackableValue: trackableValue,
       };
@@ -240,133 +231,20 @@ export default function TrackableDetailsPage() {
     );
   }
 
-  // Component to render trackable input based on its config type
-  const renderTrackableInput = () => {
-    const config = trackable.customConfig;
-    if (!config) return null;
+  // Get trackable type from config
+  const getTrackableType = (): TrackableType => {
+    if (!trackable.customConfig) return "measure";
+    return trackable.customConfig.type as TrackableType;
+  };
 
-    switch (config.type) {
-      case "measure": {
-        const numberValue =
-          typeof trackableValue === "number"
-            ? trackableValue
-            : logs && logs.length > 0 && logs[0]?.numericValue !== null
-              ? (logs[0]?.numericValue ?? 0)
-              : 0;
-        return (
-          <NumberInput
-            value={numberValue}
-            onValueChange={(val) => setTrackableValue(val)}
-            unit={
-              "measureUnitDisplay" in config ? config.measureUnitDisplay : ""
-            }
-            increments={[0.1, 1, 5]}
-            decrements={[0.1, 1, 5]}
-            minValue={"measureMin" in config ? config.measureMin : undefined}
-            maxValue={"measureMax" in config ? config.measureMax : undefined}
-          />
-        );
-      }
-      case "checkbox": {
-        const boolValue =
-          typeof trackableValue === "boolean" ? trackableValue : false;
-        return (
-          <View className="flex-row items-center">
-            <Checkbox
-              checked={boolValue}
-              onCheckedChange={(val) => setTrackableValue(val || false)}
-            />
-            <Text className="ml-2">
-              {"checkboxName" in config ? config.checkboxName : "Completed"}
-            </Text>
-          </View>
-        );
-      }
-      case "range": {
-        if (!("rangeMin" in config && "rangeMax" in config)) {
-          return <Text>Invalid range configuration</Text>;
-        }
+  const trackableType = getTrackableType();
 
-        const numberValue =
-          typeof trackableValue === "number"
-            ? trackableValue
-            : config.rangeMin || 0;
-        return (
-          <Slider
-            value={numberValue}
-            onValueChange={(val) => setTrackableValue(val)}
-            rangeMin={config.rangeMin}
-            rangeMax={config.rangeMax}
-            rangeUnit={"rangeUnit" in config ? config.rangeUnit : undefined}
-            rangeMinLabel={
-              "rangeMinLabel" in config ? config.rangeMinLabel : undefined
-            }
-            rangeMaxLabel={
-              "rangeMaxLabel" in config ? config.rangeMaxLabel : undefined
-            }
-          />
-        );
-      }
-      case "rating": {
-        if (!("ratingMax" in config)) {
-          return <Text>Invalid rating configuration</Text>;
-        }
+  // Ensure trackable.customConfig is not null for the display/input components
+  const safeCustomConfig = trackable.customConfig ?? {};
 
-        const numberValue =
-          typeof trackableValue === "number" ? trackableValue : 0;
-        const safeRatingMax = Math.max(2, Math.min(10, config.ratingMax)) as
-          | 2
-          | 3
-          | 4
-          | 5
-          | 6
-          | 7
-          | 8
-          | 9
-          | 10;
-
-        return (
-          <Rating
-            value={numberValue}
-            onValueChange={(val) => setTrackableValue(val)}
-            ratingMax={safeRatingMax}
-            ratingUnit={"ratingUnit" in config ? config.ratingUnit : undefined}
-            ratingIcon={"ratingIcon" in config ? config.ratingIcon : undefined}
-            ratingEmoji={
-              "ratingEmoji" in config ? config.ratingEmoji : undefined
-            }
-          />
-        );
-      }
-      case "shortText": {
-        const stringValue =
-          typeof trackableValue === "string" ? trackableValue : "";
-        return (
-          <Input
-            value={stringValue}
-            onChangeText={(text) => setTrackableValue(text)}
-            placeholder="Enter text..."
-          />
-        );
-      }
-      case "longText": {
-        const stringValue =
-          typeof trackableValue === "string" ? trackableValue : "";
-        return (
-          <LongText
-            value={stringValue}
-            onChangeText={(text) => setTrackableValue(text)}
-            placeholder="Enter long text..."
-          />
-        );
-      }
-      default:
-        return (
-          <View className="p-2">
-            <Text>Unsupported trackable type</Text>
-          </View>
-        );
-    }
+  // Create a wrapper for setTrackableValue with the right type signature
+  const handleTrackableValueChange = (value: unknown) => {
+    setTrackableValue(value as TrackableValueType);
   };
 
   return (
@@ -381,31 +259,16 @@ export default function TrackableDetailsPage() {
           )}
           <Card>
             <View className="flex flex-col items-center justify-center gap-0">
-              {trackable.customConfig?.type === "rating" &&
-              logs &&
-              logs.length > 0 &&
-              logs[0]?.numericValue !== null ? (
+              {logs && logs.length > 0 ? (
                 <View className="items-center justify-center">
-                  <RatingDisplay
-                    value={logs[0]?.numericValue ?? 0}
-                    ratingMax={
-                      Math.max(
-                        2,
-                        Math.min(10, trackable.customConfig.ratingMax ?? 5),
-                      ) as 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-                    }
-                    ratingIcon={
-                      "ratingIcon" in (trackable.customConfig ?? {})
-                        ? trackable.customConfig.ratingIcon
-                        : undefined
-                    }
-                    ratingEmoji={
-                      "ratingEmoji" in (trackable.customConfig ?? {})
-                        ? trackable.customConfig.ratingEmoji
-                        : undefined
-                    }
-                    size="lg"
-                  />
+                  {/* Use our display component for the latest log - large size */}
+                  {getValueFromLog(
+                    logs[0],
+                    trackableType,
+                    safeCustomConfig,
+                    "lg",
+                  )}
+
                   {logs[0]?.createdAt && (
                     <Text className="text-sand-11 mt-2 text-xs">
                       {new Date(logs[0]?.createdAt).toLocaleString()}
@@ -413,21 +276,7 @@ export default function TrackableDetailsPage() {
                   )}
                 </View>
               ) : (
-                <>
-                  <View className="flex flex-row items-center justify-center gap-0">
-                    <Text type={"title"} className="text-5xl">
-                      {logs?.[0]?.numericValue}
-                    </Text>
-                    <Text className="text-sand-11 text-xs">
-                      {getMeasurementUnit()}
-                    </Text>
-                  </View>
-                  {logs?.[0]?.createdAt && (
-                    <Text className="text-sand-11 text-xs">
-                      {new Date(logs[0]?.createdAt).toLocaleString()}
-                    </Text>
-                  )}
-                </>
+                <Text className="text-sand-11">No logs yet</Text>
               )}
             </View>
           </Card>
@@ -438,9 +287,14 @@ export default function TrackableDetailsPage() {
               New Log
             </Text>
 
-            {/* Trackable Input */}
+            {/* Trackable Input - Use our new input components */}
             <View className="flex flex-col gap-2">
-              {renderTrackableInput()}
+              {getInputForTrackableType(
+                trackableType,
+                trackableValue,
+                handleTrackableValueChange,
+                safeCustomConfig,
+              )}
             </View>
 
             {/* Notes Section */}
@@ -459,7 +313,7 @@ export default function TrackableDetailsPage() {
                             {
                               message:
                                 field.state.meta.errors[0] ??
-                                "Something is wrong, but we dont know what",
+                                "Something is wrong",
                             },
                           ]
                         : ""
@@ -494,53 +348,12 @@ export default function TrackableDetailsPage() {
                 <Card key={log.id} className="border-sand-6 border">
                   <View className="flex flex-row justify-between">
                     <View>
-                      {/* Display log value based on type */}
-                      {log.checked !== null && (
-                        <Text className="font-medium">
-                          Status: {log.checked ? "Completed" : "Not Completed"}
-                        </Text>
-                      )}
-
-                      {log.numericValue !== null &&
-                      trackable.customConfig?.type === "rating" ? (
-                        <RatingDisplay
-                          value={log.numericValue}
-                          ratingMax={
-                            Math.max(
-                              2,
-                              Math.min(
-                                10,
-                                trackable.customConfig.ratingMax ?? 5,
-                              ),
-                            ) as 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-                          }
-                          ratingIcon={
-                            "ratingIcon" in (trackable.customConfig ?? {})
-                              ? trackable.customConfig.ratingIcon
-                              : undefined
-                          }
-                          ratingEmoji={
-                            "ratingEmoji" in (trackable.customConfig ?? {})
-                              ? trackable.customConfig.ratingEmoji
-                              : undefined
-                          }
-                          size="sm"
-                        />
-                      ) : (
-                        log.numericValue !== null && (
-                          <View className="flex flex-row items-end gap-0">
-                            <Text className="font-medium">
-                              {log.numericValue}
-                            </Text>
-                            <Text className="text-sand-11 text-xs">
-                              {getMeasurementUnit()}
-                            </Text>
-                          </View>
-                        )
-                      )}
-
-                      {log.textValue && (
-                        <Text className="font-medium">{log.textValue}</Text>
+                      {/* Use our display component for each log - small size */}
+                      {getValueFromLog(
+                        log,
+                        trackableType,
+                        safeCustomConfig,
+                        "sm",
                       )}
                     </View>
 

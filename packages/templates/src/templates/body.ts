@@ -17,7 +17,7 @@ export const bodyTemplates = {
     defaultConfig: {
       type: "measure",
       measureUnitType: "mass",
-      measureUnitSource: "kg",
+      measureUnitSource: "g",
       measureUnitDisplay: "kg",
       measureTarget: null,
       measureMin: 20,
