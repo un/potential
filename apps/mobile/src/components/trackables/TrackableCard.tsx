@@ -57,30 +57,33 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
   // Determine if we should use column layout for the latest value
   const shouldUseColumnLayout = () => {
     const trackableType = getTrackableType();
-    return trackableType === "rating" || trackableType === "range";
+    return (
+      // trackableType === "rating" ||
+      // trackableType === "range" ||
+      trackableType === "shortText" || trackableType === "longText"
+    );
   };
 
   return (
     <Pressable onPress={handlePress}>
       <Card>
-        <View className="flex flex-row justify-between">
+        <View
+          className={cn(
+            "flex flex-row justify-between gap-2",
+            shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
+          )}
+        >
           <Text className="text-lg font-bold" type={"title"}>
             {trackable.name}
           </Text>
-          <View
-            className={cn(
-              "flex items-center",
-              shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
-            )}
-          >
-            <Text className="text-sand-11 text-xs">Latest: </Text>
+          <View className={cn("flex items-center", "flex-row gap-0")}>
             {renderLatestValue()}
           </View>
         </View>
 
-        {isLoading ? (
+        {/* {isLoading ? (
           <Text className="text-sand-11 text-sm">Loading logs...</Text>
-        ) : logs && logs.length > 0 ? (
+        ) : logs && logs.length > 0  ? (
           <View className="flex flex-col gap-2">
             {logs.slice(1, 3).map((log) => (
               <View
@@ -96,7 +99,7 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
           </View>
         ) : (
           <Text className="text-sm text-gray-500">No logs available</Text>
-        )}
+        )} */}
       </Card>
     </Pressable>
   );

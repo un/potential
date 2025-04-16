@@ -61,9 +61,9 @@ export function MeasureDisplay({
   size = "md",
 }: MeasureDisplayProps) {
   const textSize =
-    size === "sm" ? "text-sm" : size === "lg" ? "text-lg" : "text-base";
+    size === "sm" ? "text-sm" : size === "lg" ? "text-5lg" : "text-2xl";
   const titleSize =
-    size === "sm" ? "text-base" : size === "lg" ? "text-xl" : "text-lg";
+    size === "sm" ? "text-base" : size === "lg" ? "text-5xl" : "text-2xl";
 
   // Format the value to avoid too many decimal places
   const formattedValue = Number.isInteger(value)

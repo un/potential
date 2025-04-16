@@ -7,22 +7,19 @@ interface TextDisplayProps {
   value: string;
   isLong?: boolean;
   size?: "sm" | "md" | "lg";
-  maxWidth?: string;
 }
 
 export function TextDisplay({
   value,
   isLong = false,
   size = "md",
-  maxWidth = "150px",
 }: TextDisplayProps) {
   const textSize =
     size === "sm" ? "text-sm" : size === "lg" ? "text-lg" : "text-base";
 
   if (isLong) {
-    // For long text, show truncated
     return (
-      <Text className={`line-clamp-2 max-w-[${maxWidth}] ${textSize}`}>
+      <Text className={`w-full max-w-full text-wrap text-left ${textSize}`}>
         {value}
       </Text>
     );
@@ -30,7 +27,7 @@ export function TextDisplay({
 
   // For short text
   return (
-    <Text className={`line-clamp-1 max-w-[${maxWidth}] truncate ${textSize}`}>
+    <Text className={`w-full max-w-full text-wrap text-left ${textSize}`}>
       {value}
     </Text>
   );

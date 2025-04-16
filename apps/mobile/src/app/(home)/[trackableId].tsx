@@ -260,8 +260,16 @@ export default function TrackableDetailsPage() {
           <Card>
             <View className="flex flex-col items-center justify-center gap-0">
               {logs && logs.length > 0 ? (
-                <View className="items-center justify-center">
+                <View className="flex flex-col items-center justify-center gap-2">
                   {/* Use our display component for the latest log - large size */}
+                  {logs[0]?.createdAt &&
+                    (trackableType === "shortText" ||
+                      trackableType === "longText") && (
+                      <Text className="text-sand-11 mt-2 text-xs">
+                        {new Date(logs[0]?.createdAt).toLocaleString()}
+                      </Text>
+                    )}
+
                   {getValueFromLog(
                     logs[0],
                     trackableType,
@@ -269,11 +277,13 @@ export default function TrackableDetailsPage() {
                     "lg",
                   )}
 
-                  {logs[0]?.createdAt && (
-                    <Text className="text-sand-11 mt-2 text-xs">
-                      {new Date(logs[0]?.createdAt).toLocaleString()}
-                    </Text>
-                  )}
+                  {logs[0]?.createdAt &&
+                    trackableType !== "shortText" &&
+                    trackableType !== "longText" && (
+                      <Text className="text-sand-11 mt-2 text-xs">
+                        {new Date(logs[0]?.createdAt).toLocaleString()}
+                      </Text>
+                    )}
                 </View>
               ) : (
                 <Text className="text-sand-11">No logs yet</Text>
