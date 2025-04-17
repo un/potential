@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   date,
-  int,
+  decimal,
   mysqlTable,
   smallint,
   timestamp,
@@ -32,8 +32,10 @@ export const userProfiles = mysqlTable("user_profiles", {
   healthWeight: smallint("healthWeight", { unsigned: true }), //in kg
 
   // experience Points
-  xpTotal: int("xpTotal", {
+  xpTotal: decimal("xpTotal", {
     unsigned: true,
+    precision: 12,
+    scale: 2,
   }).notNull(),
 
   // Streak
@@ -58,10 +60,22 @@ export const userXpLogs = mysqlTable("userXpLogs", {
   id: typeIdColumn("userXpLog", "id")
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("userXpLog")),
-  ownerId: typeIdColumn("user", "user_id").notNull(),
-  points: int("points", { unsigned: true }).notNull(),
-  originalPoints: int("originalPoints", { unsigned: true }).notNull(),
-  multiplier: int("multiplier", { unsigned: true }).notNull(),
+  ownerId: typeIdColumn("user", "ownerId").notNull(),
+  points: decimal("points", {
+    unsigned: true,
+    precision: 6,
+    scale: 2,
+  }).notNull(),
+  originalPoints: decimal("originalPoints", {
+    unsigned: true,
+    precision: 6,
+    scale: 2,
+  }).notNull(),
+  multiplier: decimal("multiplier", {
+    unsigned: true,
+    precision: 4,
+    scale: 2,
+  }).notNull(),
   actionId: varchar("actionId", { length: 64 }).notNull(),
   friendlyName: varchar("friendlyName", { length: 64 }).notNull(),
   createdAt: timestamp("created_at").notNull(),

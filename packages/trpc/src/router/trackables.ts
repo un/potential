@@ -8,6 +8,7 @@ import { and, eq, trackables } from "@1up/db";
 import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@1up/utils/typeid";
 
 import { protectedProcedure } from "../trpc";
+import { awardXpPoints } from "../utils/xpPoints";
 
 export const trackablesRouter = {
   createTrackable: protectedProcedure
@@ -32,7 +33,7 @@ export const trackablesRouter = {
       try {
         const newTrackableId = cloudTypeIdGenerator("trackable");
 
-        const dbResponse = await db.insert(trackables).values({
+        await db.insert(trackables).values({
           id: newTrackableId,
           ownerId: user.id,
           name: input.name,
@@ -43,7 +44,11 @@ export const trackablesRouter = {
           customConfig: input.config,
         });
 
-        console.log("🔥", { dbResponse });
+        await awardXpPoints({
+          userId: user.id,
+          action: "newTrackable",
+          actionId: newTrackableId,
+        });
 
         return {
           success: true,

@@ -4,9 +4,10 @@ import { z } from "zod";
 
 import { CONSTS } from "@1up/consts";
 import { and, desc, eq, trackableLogs } from "@1up/db";
-import { cloudTypeIdValidator } from "@1up/utils";
+import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@1up/utils";
 
 import { protectedProcedure } from "../trpc";
+import { awardXpPoints } from "../utils/xpPoints";
 
 export const logRouter = {
   createLog: protectedProcedure
@@ -31,7 +32,9 @@ export const logRouter = {
         try {
           // Construct the log data that would be saved to the database
 
+          const newLogId = cloudTypeIdGenerator("trackableLog");
           await db.insert(trackableLogs).values({
+            id: newLogId,
             trackableId: input.trackableId,
             ownerId: user.id,
             source: "app",
@@ -58,6 +61,12 @@ export const logRouter = {
                   },
                 }
               : {}),
+          });
+
+          await awardXpPoints({
+            userId: user.id,
+            action: "newLog",
+            actionId: newLogId,
           });
 
           return {

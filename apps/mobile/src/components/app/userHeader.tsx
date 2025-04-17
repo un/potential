@@ -29,7 +29,7 @@ export default function UserHeader() {
         <View className="flex flex-row items-center justify-end gap-4">
           <View className="flex flex-row items-center justify-end gap-1">
             <Text className="" type="title">
-              {profileData?.xpTotal}
+              {profileData?.xpTotal.toString().split(".")[0]}
             </Text>
             <Star size={18} />
           </View>

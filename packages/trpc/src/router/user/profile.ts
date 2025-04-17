@@ -22,7 +22,7 @@ export const profileRouter = {
         streakLongestDays: 1,
         streakCurrentStartDate: new Date(),
         streakCurrentEndDate: null,
-        xpTotal: 50,
+        xpTotal: "50",
         healthDateOfBirth: null,
         healthGenderAtBirth: null,
         healthHeight: null,
@@ -33,10 +33,10 @@ export const profileRouter = {
         ownerId: user.id,
         actionId: "onboarding",
         friendlyName: "Onboarding",
-        points: 50,
+        points: "50",
         createdAt: new Date(),
-        originalPoints: 50,
-        multiplier: 1,
+        originalPoints: "50",
+        multiplier: "1",
       });
     }
 
