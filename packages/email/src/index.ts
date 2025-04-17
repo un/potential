@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { serverEnv } from "@1up/env";
 
 import AuthOtpEmail from "./emails/auth-otp";
+import BugReportEmail from "./emails/bug-report";
 
 type StandardEmailProps = {
   to: string;
@@ -17,8 +18,14 @@ type WelcomeEmailProps = {
   type: "welcome";
   username: string;
 };
+type BugReportEmailProps = {
+  type: "bug-report";
+  message: string;
+  userEmail: string;
+};
 
-type EmailProps = StandardEmailProps & (AuthEmailOTPProps | WelcomeEmailProps);
+type EmailProps = StandardEmailProps &
+  (AuthEmailOTPProps | WelcomeEmailProps | BugReportEmailProps);
 
 export async function sendEmail({ to, type, ...props }: EmailProps) {
   // TODO: FIX react import to HONO to send emails
@@ -29,7 +36,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
     console.log("Email type", type);
     console.log("Email props", props);
     console.log("💌========================================💌");
-    return;
+    return true;
   }
   const fetchTemplate = () => {
     switch (type) {
@@ -39,6 +46,14 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
             otpCode: (props as AuthEmailOTPProps).otpCode,
           }),
           subject: "1up Login Code 🔑",
+        };
+      case "bug-report":
+        return {
+          content: BugReportEmail({
+            message: (props as BugReportEmailProps).message,
+            userEmail: (props as BugReportEmailProps).userEmail,
+          }),
+          subject: "🚨 Bug Report from 1up Health",
         };
       // case "welcome":
       //   return {
@@ -63,6 +78,26 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
   }
 
   const resend = new Resend(resendApiKey);
+
+  if (type === "bug-report") {
+    const { error } = await resend.emails.send({
+      from: "1up Health Auth <no-reply@1up.xyz>",
+      to: "omar@mcadam.io",
+      cc: to,
+      replyTo: to,
+      subject: template.subject,
+      react: template.content,
+    });
+
+    if (error) {
+      console.error("🚨 Error sending email", error);
+      console.error("🚨 Sending email to", to);
+      console.error("🚨 Email props", props);
+      return false;
+    }
+
+    return true;
+  }
   const { error } = await resend.emails.send({
     from: "1up Health Auth <no-reply@1up.xyz>",
     to,
