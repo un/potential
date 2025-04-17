@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { Bug, Fire, Star } from "phosphor-react-native";
+import { Bug, Fire, Gear, Star } from "phosphor-react-native";
 
 import { trpc } from "~/utils/api";
 import { Text } from "../ui/text";
@@ -19,9 +19,7 @@ export default function UserHeader() {
     >
       <View className="">
         <Link href="/(home)/profile">
-          <Text className="" type="title">
-            one
-          </Text>
+          <Gear size={24} />
         </Link>
       </View>
 

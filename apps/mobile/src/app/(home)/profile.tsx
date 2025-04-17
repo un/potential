@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 
@@ -16,22 +16,24 @@ export default function Profile() {
   }
 
   return (
-    <SafeAreaView className="flex-1">
-      <View className="flex-1 p-6">
-        <Text className="mb-4 text-3xl" type={"title"}>
-          Profile
-        </Text>
+    <SafeAreaView className="flex-1" edges={["bottom"]}>
+      <ScrollView className="w-full flex-1 p-6">
+        <View className="w-full flex-1 flex-col gap-4">
+          <Text className="text-3xl" type={"title"}>
+            Settings
+          </Text>
 
-        <View className="mb-4 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-          <Text className="mb-2 text-lg">User Information</Text>
-          <Text>Name: {session?.user.name ?? "Not available"}</Text>
-          <Text>Email: {session?.user.email ?? "Not available"}</Text>
+          <View className="">
+            <Text className="mb-2 text-lg">User Information</Text>
+            <Text>Name: {session?.user.name ?? "Not available"}</Text>
+            <Text>Email: {session?.user.email ?? "Not available"}</Text>
+          </View>
+
+          <Button variant={"destructive"} onPress={() => handleLogout()}>
+            <Text>Sign Out</Text>
+          </Button>
         </View>
-
-        <Button variant={"destructive"} onPress={() => handleLogout()}>
-          <Text>Sign Out</Text>
-        </Button>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

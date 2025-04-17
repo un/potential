@@ -1,7 +1,9 @@
 import type { TRPCRouterRecord } from "@trpc/server";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { eq, userProfiles, userXpLogs } from "@1up/db";
+import { sendEmail } from "@1up/email";
 
 import { protectedProcedure } from "../../trpc";
 
@@ -66,5 +68,33 @@ export const profileRouter = {
         })
         .where(eq(userProfiles.ownerId, user.id));
       return;
+    }),
+  sendBugReport: protectedProcedure
+    .input(
+      z.object({
+        message: z.string().min(1),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { auth } = ctx;
+      const user = auth.user;
+
+      const success = await sendEmail({
+        type: "bug-report",
+
+        message: input.message,
+        userEmail: user.email,
+      });
+
+      if (!success) {
+        console.error("🚨 Error sending bug report email", {
+          message: input.message,
+          userEmail: user.email,
+        });
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Error sending bug report email",
+        });
+      }
     }),
 } satisfies TRPCRouterRecord;
