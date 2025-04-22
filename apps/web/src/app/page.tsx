@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { Heart } from "~/app/_components/heart";
 import { HydrateClient } from "~/trpc/server";
+import { AnimatedHeart } from "./_components/branding/heart-sprite";
 
 // import { PostCardSkeleton } from "./_components/posts";
 
@@ -29,7 +29,7 @@ export default function HomePage() {
               {/* <PostList /> */}
             </Suspense>
 
-            <Heart />
+            <AnimatedHeart />
           </div>
         </div>
       </main>
