@@ -1,36 +1,14 @@
-import { Suspense } from "react";
-
 import { HydrateClient } from "~/trpc/server";
-import { AnimatedHeart } from "./_components/branding/heart-sprite";
-
-// import { PostCardSkeleton } from "./_components/posts";
+import { Logo } from "./_components/branding/logo";
 
 export default function HomePage() {
   return (
     <HydrateClient>
       <main className="container h-screen py-16">
         <div className="flex flex-col items-center justify-center gap-4">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-primary">T3</span> Turbo
-          </h1>
-          {/* <AuthShowcase /> */}
+          <h1 className="bg-blue-5 font-mono text-5xl">1up</h1>
 
-          {/* <CreatePostForm /> */}
-          <div className="w-full max-w-2xl overflow-y-scroll">
-            <Suspense
-              fallback={
-                <div className="flex w-full flex-col gap-4">
-                  {/* <PostCardSkeleton />
-                  <PostCardSkeleton />
-                  <PostCardSkeleton /> */}
-                </div>
-              }
-            >
-              {/* <PostList /> */}
-            </Suspense>
-
-            <AnimatedHeart />
-          </div>
+          <Logo size="mega" />
         </div>
       </main>
     </HydrateClient>

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { Martian_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
 import { cn } from "@1up/ui";
 import { ThemeProvider, ThemeToggle } from "@1up/ui/theme";
@@ -40,14 +40,25 @@ export const viewport: Viewport = {
   ],
 };
 
+const monocraftFont = localFont({
+  src: "../../public/fonts/Monocraft.otf",
+  display: "swap",
+  variable: "--font-monocraft",
+});
+
+const martianMonoFont = Martian_Mono({
+  display: "swap",
+  variable: "--font-martian-mono",
+});
+
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans text-foreground antialiased",
-          GeistSans.variable,
-          GeistMono.variable,
+          "text-sand-12 bg-sand-3 min-h-screen font-sans antialiased",
+          monocraftFont.variable,
+          martianMonoFont.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
