@@ -21,9 +21,9 @@ interface NavMenuProps {
 export function NavMenu({
   className,
   links = [
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/tracking", label: "Health Tracking" },
-    { href: "/insights", label: "Insights" },
+    { href: "/app", label: "App" },
+    { href: "/vision", label: "Vision" },
+    { href: "/memo", label: "Memo/pitch" },
   ],
 }: NavMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
