@@ -32,7 +32,7 @@ export function NavMenu({
     <div className="flex w-full justify-center px-4">
       <nav
         className={cn(
-          "bg-sand-1 my-4 grid w-full max-w-screen-lg grid-cols-6 items-center justify-between rounded-full px-6 py-0 pl-0 shadow-lg",
+          "bg-sand-1 my-4 grid w-full max-w-screen-lg grid-cols-6 items-center justify-between rounded-full px-8 py-0 pl-0 shadow-sm",
           className,
         )}
       >
@@ -56,12 +56,12 @@ export function NavMenu({
 
         {/* Button on the right */}
         <div className="hidden justify-self-end md:block">
-          <Button>Get Started</Button>
+          <Button size={"sm"}>Join Now</Button>
         </div>
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden"
+          className="col-span-5 justify-self-end md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -112,7 +112,9 @@ export function NavMenu({
                   {link.label}
                 </Link>
               ))}
-              <Button onClick={() => setIsMenuOpen(false)}>Get Started</Button>
+              <Button onClick={() => setIsMenuOpen(false)} size={"sm"}>
+                Join Now
+              </Button>
             </div>
           </div>
         )}

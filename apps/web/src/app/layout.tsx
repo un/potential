@@ -57,7 +57,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "text-sand-12 bg-sand-3 min-h-screen font-sans antialiased",
+          "text-sand-12 bg-sand-3 min-h-screen font-sans text-sm font-light antialiased",
           monocraftFont.variable,
           martianMonoFont.variable,
         )}
