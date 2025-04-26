@@ -21,9 +21,11 @@ interface NavMenuProps {
 export function NavMenu({
   className,
   links = [
-    { href: "/app", label: "App" },
+    { href: "/#open", label: "Open Health" },
+    { href: "/app", label: "Tracking App" },
+    { href: "/#story", label: "Story" },
     { href: "/vision", label: "Vision" },
-    { href: "/memo", label: "Memo/pitch" },
+    { href: "/pitch", label: "Pitch" },
   ],
 }: NavMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,13 +38,11 @@ export function NavMenu({
           className,
         )}
       >
-        {/* Logo on the left */}
         <Link href="/" className="flex items-center">
           <Logo size="2xl" />
         </Link>
 
-        {/* Navigation Links - desktop */}
-        <div className="col-span-4 hidden items-center space-x-8 justify-self-center md:flex">
+        <div className="place-center col-span-4 hidden w-full justify-between gap-4 justify-self-center md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -54,12 +54,10 @@ export function NavMenu({
           ))}
         </div>
 
-        {/* Button on the right */}
         <div className="hidden justify-self-end md:block">
           <Button size={"sm"}>Join Now</Button>
         </div>
 
-        {/* Mobile menu button */}
         <button
           className="col-span-5 justify-self-end md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}

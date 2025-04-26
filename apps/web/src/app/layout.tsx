@@ -16,21 +16,21 @@ import { NavMenu } from "./ui/NavMenu";
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
-      ? "https://turbo.t3.gg"
+      ? "https://potential.health"
       : "http://localhost:3000",
   ),
-  title: "Create T3 Turbo",
-  description: "Simple monorepo with shared backend for web & mobile apps",
+  title: "Potential Health",
+  description: "The open source alternative to Death",
   openGraph: {
-    title: "Create T3 Turbo",
-    description: "Simple monorepo with shared backend for web & mobile apps",
-    url: "https://create-t3-turbo.vercel.app",
-    siteName: "Create T3 Turbo",
+    title: "Potential Health",
+    description: "The open source alternative to Death",
+    url: "https://potential.health",
+    siteName: "Potential Health",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@jullerino",
-    creator: "@jullerino",
+    site: "@OmarMcAdam",
+    creator: "@OmarMcAdam",
   },
 };
 
@@ -57,13 +57,13 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "text-sand-12 bg-sand-3 min-h-screen font-sans text-sm font-light antialiased",
+          "text-sand-12 bg-sand-2 h-full font-sans text-sm font-light antialiased",
           monocraftFont.variable,
           martianMonoFont.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NavMenu />
+          <NavMenu className="mb-16" />
           <TRPCReactProvider>{props.children}</TRPCReactProvider>
           <div className="absolute bottom-4 right-4">
             <ThemeToggle />
