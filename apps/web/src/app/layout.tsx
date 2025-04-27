@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 
-import { cn } from "@1up/ui";
-import { ThemeProvider, ThemeToggle } from "@1up/ui/theme";
-import { Toaster } from "@1up/ui/toast";
+import { cn } from "@potential/ui";
+import { ThemeProvider, ThemeToggle } from "@potential/ui/theme";
+import { Toaster } from "@potential/ui/toast";
 
 import { TRPCReactProvider } from "~/trpc/react";
 

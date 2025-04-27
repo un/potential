@@ -1,5 +1,5 @@
 {
-  "name": "@1up/templates",
+  "name": "@potential/templates",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -15,17 +15,17 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@1up/consts": "workspace:*",
-    "@1up/utils": "workspace:*",
+    "@potential/consts": "workspace:*",
+    "@potential/utils": "workspace:*",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

@@ -1,6 +1,6 @@
 import type React from "react";
 
-import type { ConstsTypes } from "@1up/consts";
+import type { ConstsTypes } from "@potential/consts";
 
 import type { Log, Trackable, TrackableType } from "~/types/trackables";
 import { getCheckboxValueFromLog } from "./CheckboxDisplay";

@@ -1,5 +1,5 @@
 // @ts-check
-import baseConfig from "@1up/eslint-config/base.js";
+import baseConfig from "@potential/eslint-config/base.js";
 
 /** @type {import("eslint").Linter.Config} */
 export default [

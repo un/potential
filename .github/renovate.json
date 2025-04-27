@@ -6,7 +6,7 @@
   "packageRules": [
     {
       "matchPackagePatterns": [
-        "^@1up/"
+        "^@potential/"
       ],
       "enabled": false
     }

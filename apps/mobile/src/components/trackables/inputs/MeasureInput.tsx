@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native";
 
-import type { ConstsTypes } from "@1up/consts";
-import { convert } from "@1up/utils/convert";
+import type { ConstsTypes } from "@potential/consts";
+import { convert } from "@potential/utils/convert";
 
 import { NumberInput } from "~/components/ui/number-input";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@1up/eslint-config",
+  "name": "@potential/eslint-config",
   "private": true,
   "version": "0.3.0",
   "type": "module",
@@ -28,11 +28,11 @@
     "typescript-eslint": "^8.26.1"
   },
   "devDependencies": {
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

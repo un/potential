@@ -38,7 +38,7 @@ import { int, json, mysqlEnum, timestamp, varchar } from "drizzle-orm/mysql-core
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
+import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { timestamps } from "../schema/helpers";
 import { typeIdColumn } from "../customColumnTypes";
 import { users } from "./user";

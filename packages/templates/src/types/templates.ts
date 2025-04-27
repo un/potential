@@ -1,7 +1,7 @@
 // packages/templates/src/types/templates.ts
 import { z } from "zod";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
+import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
 
 type TrackableSubTypesKey = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
 type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];

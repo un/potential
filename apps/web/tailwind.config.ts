@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-import baseConfig from "@1up/tailwind-config/web";
+import baseConfig from "@potential/tailwind-config/web";
 
 // export default {
 //   // We need to append the path to the UI package to the content array so that

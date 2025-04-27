@@ -1,9 +1,8 @@
 import type { Config } from "tailwindcss";
+import baseConfig from "@potential/tailwind-config/native";
 // @ts-expect-error - no types
 import nativewind from "nativewind/preset";
 import { radixColors, tailwindSafelist } from "radi-color-css";
-
-import baseConfig from "@1up/tailwind-config/native";
 
 export default {
   content: ["./src/**/*.{ts,tsx}"],

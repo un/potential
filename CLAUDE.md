@@ -1,13 +1,15 @@
-# CLAUDE.md - 1up Project Guidelines
+# CLAUDE.md - PotentialHealth Project Guidelines
 
 ## Build, Lint, Test Commands
+
 - **Build:** `pnpm build` (builds all packages)
-- **Lint:** `pnpm lint` or `pnpm lint:fix` (add `--fix` to auto-fix issues)  
+- **Lint:** `pnpm lint` or `pnpm lint:fix` (add `--fix` to auto-fix issues)
 - **Typecheck:** `pnpm typecheck` (runs TypeScript type checking)
 - **Dev:** `pnpm dev` (start development servers)
 - **iOS:** `pnpm ios` (run mobile app on iOS simulator)
 
 ## Code Style Guidelines
+
 - Use **functional and declarative programming** patterns; avoid classes
 - Use **TypeScript** with proper interfaces and types
 - Use **Zod** for schema validation and type inference

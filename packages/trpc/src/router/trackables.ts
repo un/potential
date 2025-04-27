@@ -2,10 +2,10 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import type { TrackableCustomConfig } from "@1up/consts";
-import { CONSTS } from "@1up/consts";
-import { and, eq, trackables } from "@1up/db";
-import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@1up/utils/typeid";
+import type { TrackableCustomConfig } from "@potential/consts";
+import { CONSTS } from "@potential/consts";
+import { and, eq, trackables } from "@potential/db";
+import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@potential/utils/typeid";
 
 import { protectedProcedure } from "../trpc";
 import { awardXpPoints } from "../utils/xpPoints";

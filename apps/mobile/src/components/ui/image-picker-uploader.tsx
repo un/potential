@@ -1,3 +1,6 @@
+import * as ImagePicker from "expo-image-picker";
+import { useColorScheme } from "nativewind";
+import { Camera, Images, X, XCircle } from "phosphor-react-native";
 import React, {
   forwardRef,
   useCallback,
@@ -5,19 +8,16 @@ import React, {
   useState,
 } from "react";
 import { Image, Modal, Pressable, ScrollView, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import { useColorScheme } from "nativewind";
-import { Camera, Images, X, XCircle } from "phosphor-react-native";
 
-import type { CloudTypeId } from "@1up/utils";
+import type { CloudTypeId } from "@potential/utils";
 
-import type { ProcessedImage } from "~/utils/images/image-processing";
-import type { UploadedImage } from "~/utils/images/image-upload";
 import { CameraComponent } from "~/components/app/camera";
+import type { ProcessedImage } from "~/utils/images/image-processing";
 import {
   cleanupImageTempFiles,
   processImage,
 } from "~/utils/images/image-processing";
+import type { UploadedImage } from "~/utils/images/image-upload";
 import { useImageUpload } from "~/utils/images/image-upload";
 import { Button } from "./button";
 import { Text } from "./text";
@@ -119,7 +119,7 @@ export const ImagePickerUploader = forwardRef<
 
         if (!permissionResult.granted) {
           setError(
-            "Permission to access camera roll was previously denied! Please go to phone Settings > Apps > 1up > Photos",
+            "Permission to access camera roll was previously denied! Please go to phone Settings > Apps > Potential Health > Photos",
           );
           return;
         }

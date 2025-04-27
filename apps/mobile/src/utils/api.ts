@@ -4,7 +4,7 @@ import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { toast } from "sonner-native";
 import superjson from "superjson";
 
-import type { AppRouter } from "@1up/trpc";
+import type { AppRouter } from "@potential/trpc";
 
 import { authClient } from "./auth-client";
 import { getApiUrl } from "./base-url";
@@ -49,4 +49,4 @@ export const trpc = createTRPCOptionsProxy<AppRouter>({
   queryClient,
 });
 
-export { type RouterInputs, type RouterOutputs } from "@1up/trpc";
+export { type RouterInputs, type RouterOutputs } from "@potential/trpc";

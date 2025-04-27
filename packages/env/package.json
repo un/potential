@@ -1,5 +1,5 @@
 {
-  "name": "@1up/env",
+  "name": "@potential/env",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -15,14 +15,14 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config",
+  "prettier": "@potential/prettier-config",
   "dependencies": {
     "@t3-oss/env-core": "^0.12.0",
     "zod": "catalog:"

@@ -1,6 +1,6 @@
 import type React from "react";
 
-import type { ConstsTypes } from "@1up/consts";
+import type { ConstsTypes } from "@potential/consts";
 
 import type { TrackableType } from "~/types/trackables";
 import { getCheckboxInputForLog } from "./CheckboxInput";
@@ -14,7 +14,7 @@ export {
   getMeasureInputForLog,
   getRangeInputForLog,
   getRatingInputForLog,
-  getTextInputForLog,
+  getTextInputForLog
 };
 
 type UnitType = ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];

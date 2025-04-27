@@ -1,3 +1,6 @@
+import type { TrackableCustomConfig } from "@potential/consts";
+import type { CloudTypeId } from "@potential/utils/typeid";
+import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { relations } from "drizzle-orm";
 import {
   boolean,
@@ -8,10 +11,6 @@ import {
   text,
   varchar,
 } from "drizzle-orm/mysql-core";
-
-import type { TrackableCustomConfig } from "@1up/consts";
-import type { CloudTypeId } from "@1up/utils/typeid";
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { colorsColumn } from "../columns/custom/color";
 import {

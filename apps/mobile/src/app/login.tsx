@@ -1,8 +1,8 @@
+import { useForm } from "@tanstack/react-form";
+import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack, useRouter } from "expo-router";
-import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 
 import { Logo } from "~/components/branding/logo";
@@ -80,7 +80,7 @@ export default function Login() {
               </Text>
             ) : (
               <Text className="mb-8 text-xl" type={"title"}>
-                Start your 1up journey now
+                Reach your health potential now
               </Text>
             )}
             <View className="flex w-full max-w-sm flex-col gap-8">
@@ -131,7 +131,7 @@ export default function Login() {
             {/* </form> */}
             {formMode === "join" && (
               <Text className="text-sand-11 mb-8 text-sm">
-                1up is currently in beta. Please be sure to check our
+                Potential Health is currently in beta. Please be sure to check our
                 communities for regular updates.
               </Text>
             )}

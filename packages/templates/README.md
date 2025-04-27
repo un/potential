@@ -1,4 +1,4 @@
-# @1up/templates
+# @potential/templates
 
 This package contains all trackable templates and template groups for the 1up health tracking app.
 

@@ -1,5 +1,5 @@
 {
-  "extends": "@1up/tsconfig/internal-package.json",
+  "extends": "@potential/tsconfig/internal-package.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "baseUrl": "."

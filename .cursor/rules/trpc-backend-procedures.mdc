@@ -52,7 +52,7 @@ export type AppRouter = typeof appRouter;
 // Example procedure in user/profile.ts
 import { router, protectedProcedure } from "../../trpc";
 import { z } from "zod";
-import { PROFILE_ERRORS } from "@1up/consts/errors";
+import { PROFILE_ERRORS } from "@potential/consts/errors";
 
 export const userProfileRouter = router({
   getDetails: protectedProcedure
@@ -136,7 +136,7 @@ import { initTRPC, TRPCError } from '@trpc/server';
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
 import { getServerSession } from 'next-auth/next';
 import { nanoid } from 'nanoid';
-import { db } from '@1up/db';
+import { db } from '@potential/db';
 
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const requestId = nanoid();

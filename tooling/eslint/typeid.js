@@ -195,14 +195,14 @@ export default [
   {
     files: ["**/typeid.ts"],
     plugins: {
-      "@1up": {
+      "@potential": {
         rules: {
           "no-duplicate-typeid-prefixes": typeidRule,
         },
       },
     },
     rules: {
-      "@1up/no-duplicate-typeid-prefixes": "error",
+      "@potential/no-duplicate-typeid-prefixes": "error",
     },
   },
 ];

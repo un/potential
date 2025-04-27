@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { View } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 
-import type { ConstsTypes } from "@1up/consts";
-import { CONSTS } from "@1up/consts";
+import type { ConstsTypes } from "@potential/consts";
+import { CONSTS } from "@potential/consts";
 
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";

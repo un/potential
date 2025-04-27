@@ -2,8 +2,8 @@ import type { SQL } from "drizzle-orm";
 import { sql } from "drizzle-orm";
 import { customType } from "drizzle-orm/mysql-core";
 
-import type { ConstsTypes } from "@1up/consts";
-import { CONSTS } from "@1up/consts";
+import type { ConstsTypes } from "@potential/consts";
+import { CONSTS } from "@potential/consts";
 
 // Integrations
 

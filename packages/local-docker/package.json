@@ -1,5 +1,5 @@
 {
-  "name": "@1up/local-docker",
+  "name": "@potential/local-docker",
   "version": "0.0.0",
   "scripts": {
     "dev:docker": "pnpm docker:up",

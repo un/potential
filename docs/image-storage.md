@@ -11,7 +11,7 @@ The 1up app uses Cloudflare Images for secure image storage with the following f
 - Support for AI image analysis
 - Multiple image variants/sizes
 
-All storage functionality is contained in the `@1up/storage` package, which provides:
+All storage functionality is contained in the `@potential/storage` package, which provides:
 - Cloudflare Images API integration
 - Utilities for generating signed URLs
 - Helper functions for working with images

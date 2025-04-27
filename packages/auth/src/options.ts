@@ -1,4 +1,13 @@
 import type { ClientOptions } from "better-auth/types";
+import {
+  accounts,
+  db,
+  sessions,
+  users,
+  verificationTokens,
+} from "@potential/db";
+import { sendEmail } from "@potential/email";
+import { serverEnv } from "@potential/env";
 import { type BetterAuthOptions } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import {
@@ -8,10 +17,6 @@ import {
 } from "better-auth/client/plugins";
 import { emailOTP, username } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
-
-import { accounts, db, sessions, users, verificationTokens } from "@1up/db";
-import { sendEmail } from "@1up/email";
-import { serverEnv } from "@1up/env";
 
 import { validateUsername } from "./validator";
 

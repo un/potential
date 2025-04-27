@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-import { serverEnv } from "@1up/env";
+import { serverEnv } from "@potential/env";
 
 import AuthOtpEmail from "./emails/auth-otp";
 import BugReportEmail from "./emails/bug-report";
@@ -81,7 +81,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
 
   if (type === "bug-report") {
     const { error } = await resend.emails.send({
-      from: "1up Health Auth <no-reply@1up.xyz>",
+      from: "1up Health Auth <no-reply@potential.xyz>",
       to: "omar@mcadam.io",
       cc: to,
       replyTo: to,
@@ -99,7 +99,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
     return true;
   }
   const { error } = await resend.emails.send({
-    from: "1up Health Auth <no-reply@1up.xyz>",
+    from: "1up Health Auth <no-reply@potential.xyz>",
     to,
     subject: template.subject,
     react: template.content,

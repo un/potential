@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { serverEnv } from "@1up/env";
-import { getSignedUrl, PutObjectCommand, s3Client } from "@1up/storage";
-import { cloudTypeIdGenerator } from "@1up/utils";
+import { serverEnv } from "@potential/env";
+import { getSignedUrl, PutObjectCommand, s3Client } from "@potential/storage";
+import { cloudTypeIdGenerator } from "@potential/utils";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 

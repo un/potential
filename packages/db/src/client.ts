@@ -1,7 +1,7 @@
 import { Client } from "@planetscale/database";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 
-import { serverEnv } from "@1up/env";
+import { serverEnv } from "@potential/env";
 
 import * as schema from "./schema";
 

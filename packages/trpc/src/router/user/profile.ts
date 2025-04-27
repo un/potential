@@ -1,9 +1,8 @@
 import type { TRPCRouterRecord } from "@trpc/server";
+import { eq, userProfiles, userXpLogs } from "@potential/db";
+import { sendEmail } from "@potential/email";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-
-import { eq, userProfiles, userXpLogs } from "@1up/db";
-import { sendEmail } from "@1up/email";
 
 import { protectedProcedure } from "../../trpc";
 

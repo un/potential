@@ -1,5 +1,5 @@
-import baseConfig from '@1up/eslint-config/base';
-import typeidConfig from '@1up/eslint-config/typeid';
+import baseConfig from '@potential/eslint-config/base';
+import typeidConfig from '@potential/eslint-config/typeid';
 
 /** @type {import('typescript-eslint').Config} */
 export default [

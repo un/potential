@@ -9,7 +9,7 @@ const env: ExpoEnv = Object.fromEntries(
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "1up",
+  name: "Potential",
   extra: {
     env,
     onboardingVersion: "0.0.1",
@@ -17,8 +17,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: "473dc1d3-c667-41e9-a543-508b4ec62250",
     },
   },
-  slug: "1up",
-  scheme: "1up",
+  slug: "potential",
+  scheme: "potential",
   version: "0.1.0",
   orientation: "portrait",
   icon: "./assets/app/icon-light.png",
@@ -28,7 +28,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   assetBundlePatterns: ["**/*"],
   ios: {
-    bundleIdentifier: "xyz.1up",
+    bundleIdentifier: "io.potentialhealth",
     supportsTablet: true,
     icon: {
       light: "./assets/app/icon-light.png",
@@ -37,7 +37,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
   },
   android: {
-    package: "xyz.1up",
+    package: "io.potentialhealth",
     adaptiveIcon: {
       foregroundImage: "./assets/app/icon-light.png",
       backgroundColor: "#1F104A",
@@ -66,22 +66,22 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       "expo-camera",
       {
-        cameraPermission: "Allow 1up Health to access your camera",
-        microphonePermission: "Allow 1up Health to access your microphone",
+        cameraPermission: "Allow Potential Health to access your camera",
+        microphonePermission: "Allow Potential Health to access your microphone",
         recordAudioAndroid: true,
       },
     ],
     [
       "expo-av",
       {
-        microphonePermission: "Allow 1up Health to access your microphone.",
+        microphonePermission: "Allow Potential Health to access your microphone.",
       },
     ],
     [
       "expo-image-picker",
       {
         photosPermission:
-          "Allow 1up Health to access your photos and let you upload them.",
+          "Allow Potential Health to access your photos and let you upload them.",
       },
     ],
   ],

@@ -1,5 +1,5 @@
 {
-    "name": "@1up/consts",
+    "name": "@potential/consts",
     "private": true,
     "version": "0.3.0",
     "type": "module",
@@ -7,13 +7,13 @@
         ".": "./src/index.ts"
     },
     "devDependencies": {
-        "@1up/prettier-config": "workspace:*",
-        "@1up/tsconfig": "workspace:*",
-        "@1up/utils": "workspace:*",
+        "@potential/prettier-config": "workspace:*",
+        "@potential/tsconfig": "workspace:*",
+        "@potential/utils": "workspace:*",
         "eslint": "catalog:",
         "prettier": "catalog:",
         "typescript": "catalog:",
         "zod": "catalog:"
     },
-    "prettier": "@1up/prettier-config"
+    "prettier": "@potential/prettier-config"
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@1up/db",
+  "name": "@potential/db",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -29,23 +29,23 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@1up/consts": "workspace:*",
-    "@1up/env": "workspace:*",
-    "@1up/utils": "workspace:*",
     "@planetscale/database": "^1.19.0",
+    "@potential/consts": "workspace:*",
+    "@potential/env": "workspace:*",
+    "@potential/utils": "workspace:*",
     "drizzle-orm": "catalog:",
     "drizzle-zod": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

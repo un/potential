@@ -1,8 +1,8 @@
 // packages/templates/src/utils.ts
-import type { ConstsTypes } from "@1up/consts";
+import type { ConstsTypes } from "@potential/consts";
 
-import type { BaseTemplate, TrackableConfigWithMeta } from "./types";
 import { TRACKABLE_TEMPLATES } from "./templates/templates-registry";
+import type { BaseTemplate, TrackableConfigWithMeta } from "./types";
 
 // Helper function to create templates with type checking
 export function defineTemplate(template: BaseTemplate): BaseTemplate {

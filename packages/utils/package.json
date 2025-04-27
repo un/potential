@@ -1,5 +1,5 @@
 {
-    "name": "@1up/utils",
+    "name": "@potential/utils",
     "version": "1.0.0",
     "description": "",
     "type": "module",
@@ -24,7 +24,7 @@
         "pnpm": ">=8"
     },
     "dependencies": {
-        "@1up/tsconfig": "workspace:*",
+        "@potential/tsconfig": "workspace:*",
         "convert-units": "3.0.0-beta.7",
         "itty-time": "^1.0.6",
         "nanoid": "^5.1.2",
@@ -32,6 +32,6 @@
         "zod": "catalog:"
     },
     "devDependencies": {
-        "@1up/eslint-config": "workspace:*"
+        "@potential/eslint-config": "workspace:*"
     }
 }

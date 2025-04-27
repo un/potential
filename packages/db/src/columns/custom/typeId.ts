@@ -1,12 +1,14 @@
+import type {
+  CloudIdTypePrefixNames,
+  CloudTypeId,
+} from "@potential/utils/typeid";
 import type { SQL } from "drizzle-orm";
-import { sql } from "drizzle-orm";
-import { customType } from "drizzle-orm/mysql-core";
-
-import type { CloudIdTypePrefixNames, CloudTypeId } from "@1up/utils/typeid";
 import {
   cloudTypeIdFromUUIDBytes,
   cloudTypeIdToUUIDBytes,
-} from "@1up/utils/typeid";
+} from "@potential/utils/typeid";
+import { sql } from "drizzle-orm";
+import { customType } from "drizzle-orm/mysql-core";
 
 // TypeId Column
 function bytesToHex(bytes: Uint8Array): string {

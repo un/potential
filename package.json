@@ -1,5 +1,5 @@
 {
-  "name": "1up",
+  "name": "potential",
   "private": true,
   "engines": {
     "node": ">=22.11.0",
@@ -11,12 +11,12 @@
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "clean:repo": "find . -name node_modules -o -name .next -o -name ios -o -name .expo -o -name .expo-shared -o -name .cache -o -name .metro -o -name .output -o -name .turbo -o -name dist -type d -prune | xargs rm -rf",
-    "db:push": "turbo -F @1up/db push  --env-mode=loose",
-    "db:studio": "turbo -F @1up/db studio  --env-mode=loose",
+    "db:push": "turbo -F @potential/db push  --env-mode=loose",
+    "db:studio": "turbo -F @potential/db studio  --env-mode=loose",
     "dev": "turbo watch dev --continue  --env-mode=loose",
     "dev:package": "turbo watch dev:package --continue  --env-mode=loose",
-    "dev:next": "turbo watch dev -F @1up/nextjs...",
-    "docker:up": "pnpm -F @1up/local-docker dev:docker",
+    "dev:next": "turbo watch dev -F @potential/nextjs...",
+    "docker:up": "pnpm -F @potential/local-docker dev:docker",
     "ios": "turbo run ios  --env-mode=loose",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
     "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
@@ -28,13 +28,13 @@
     "ui-add": "turbo run ui-add"
   },
   "devDependencies": {
-    "@1up/prettier-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
     "@turbo/gen": "^2.3.4",
     "prettier": "catalog:",
     "turbo": "^2.3.4",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config",
+  "prettier": "@potential/prettier-config",
   "pnpm": {
     "patchedDependencies": {
       "better-auth": "patches/better-auth.patch"

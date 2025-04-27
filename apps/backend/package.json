@@ -1,5 +1,5 @@
 {
-  "name": "@1up/backend",
+  "name": "@potential/backend",
   "scripts": {
     "dev": "ENVIRONMENT=development pnpm with-env tsx watch api/index.ts",
     "build": "tsc",
@@ -10,23 +10,23 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@1up/auth": "workspace:*",
-    "@1up/db": "workspace:*",
-    "@1up/env": "workspace:*",
-    "@1up/storage": "workspace:*",
-    "@1up/trpc": "workspace:*",
-    "@1up/utils": "workspace:*",
     "@hono/node-server": "^1.13.8",
     "@hono/trpc-server": "^0.3.4",
     "@hono/zod-validator": "^0.4.3",
+    "@potential/auth": "workspace:*",
+    "@potential/db": "workspace:*",
+    "@potential/env": "workspace:*",
+    "@potential/storage": "workspace:*",
+    "@potential/trpc": "workspace:*",
+    "@potential/utils": "workspace:*",
     "better-auth": "catalog:",
     "hono": "^4.7.4",
     "nanoid": "^5.1.2",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "vercel": "^32.4.1"
   }
 }

@@ -5,9 +5,9 @@ import { router } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import { Plus } from "phosphor-react-native";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
-import type { BaseTemplate } from "@1up/templates";
-import { CONSTS } from "@1up/consts";
+import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { BaseTemplate } from "@potential/templates";
+import { CONSTS } from "@potential/consts";
 
 import type { PickerOption } from "~/components/ui/picker";
 import { Button } from "~/components/ui/button";

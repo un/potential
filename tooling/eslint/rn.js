@@ -54,14 +54,14 @@ export default [
   {
     files: ["**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js"],
     plugins: {
-      "@1up": {
+      "@potential": {
         rules: {
           "no-direct-rn-import": rnImportRule,
         },
       },
     },
     rules: {
-      "@1up/no-direct-rn-import": "error",
+      "@potential/no-direct-rn-import": "error",
     },
   },
 ];

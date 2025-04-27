@@ -1,5 +1,5 @@
 {
-  "name": "@1up/trpc",
+  "name": "@potential/trpc",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -28,15 +28,15 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@1up/auth": "workspace:*",
-    "@1up/consts": "workspace:*",
-    "@1up/db": "workspace:*",
-    "@1up/email": "workspace:*",
-    "@1up/env": "workspace:*",
-    "@1up/storage": "workspace:*",
-    "@1up/utils": "workspace:*",
-    "@1up/validators": "workspace:*",
     "@ai-sdk/anthropic": "^1.2.1",
+    "@potential/auth": "workspace:*",
+    "@potential/consts": "workspace:*",
+    "@potential/db": "workspace:*",
+    "@potential/email": "workspace:*",
+    "@potential/env": "workspace:*",
+    "@potential/storage": "workspace:*",
+    "@potential/utils": "workspace:*",
+    "@potential/validators": "workspace:*",
     "@trpc/server": "catalog:",
     "ai": "^4.2.2",
     "better-auth": "catalog:",
@@ -44,12 +44,12 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

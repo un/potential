@@ -1,4 +1,4 @@
-import type { TrackableCustomConfig } from "@1up/consts";
+import type { TrackableCustomConfig } from "@potential/consts";
 
 export type TrackableType =
   | "measure"

@@ -1,3 +1,4 @@
+import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { relations } from "drizzle-orm";
 import {
   boolean,
@@ -7,8 +8,6 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
-
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../columns/custom/typeId";
 
@@ -30,7 +29,7 @@ export const users = mysqlTable("users", {
   updatedAt: timestamp("updated_at").notNull(),
 });
 
-// eslint-disable-next-line @1up/every-db-table-needs-ownerid-column
+// eslint-disable-next-line @potential/every-db-table-needs-ownerid-column
 export const sessions = mysqlTable("sessions", {
   id: typeIdColumn("session", "id")
     .primaryKey()
@@ -82,7 +81,7 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
   }),
 }));
 
-// eslint-disable-next-line @1up/every-db-table-needs-ownerid-column
+// eslint-disable-next-line @potential/every-db-table-needs-ownerid-column
 export const verificationTokens = mysqlTable("verification_tokens", {
   id: typeIdColumn("verification", "id")
     .primaryKey()
@@ -94,7 +93,7 @@ export const verificationTokens = mysqlTable("verification_tokens", {
   updatedAt: timestamp("updated_at"),
 });
 
-// eslint-disable-next-line @1up/every-db-table-needs-ownerid-column
+// eslint-disable-next-line @potential/every-db-table-needs-ownerid-column
 export const passkeys = mysqlTable("passkeys", {
   id: typeIdColumn("passkey", "id")
     .primaryKey()

@@ -1,8 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
-import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
 import { Button } from "~/components/ui/button";
@@ -53,7 +53,7 @@ export default function Updates() {
         <Text className="text-3xl" type={"title"}>
           Latest{" "}
           <Text type="title" className="text-3xl">
-            1up
+            Potential Health
           </Text>{" "}
           Updates
         </Text>

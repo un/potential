@@ -1,3 +1,4 @@
+import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { relations } from "drizzle-orm";
 import {
   date,
@@ -7,8 +8,6 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/mysql-core";
-
-import { cloudTypeIdGenerator } from "@1up/utils/typeid";
 
 import { typeIdColumn } from "../columns/custom/typeId";
 import { genderAtBirthColumn } from "../columns/custom/user";

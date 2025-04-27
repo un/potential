@@ -5,9 +5,9 @@ import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
-import type { BaseTemplate } from "@1up/templates";
-import { filterTemplatesByType } from "@1up/templates";
+import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { BaseTemplate } from "@potential/templates";
+import { filterTemplatesByType } from "@potential/templates";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
 import { Button } from "~/components/ui/button";

@@ -176,14 +176,14 @@ export default [
   {
     files: ["**/schema/**/*.ts", "**/schema/*.ts", "**/schema.ts"],
     plugins: {
-      "@1up": {
+      "@potential": {
         rules: {
           "every-db-table-needs-ownerid-column": ownerIdColumnRule,
         },
       },
     },
     rules: {
-      "@1up/every-db-table-needs-ownerid-column": "error",
+      "@potential/every-db-table-needs-ownerid-column": "error",
     },
   },
 ];

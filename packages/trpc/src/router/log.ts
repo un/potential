@@ -2,9 +2,9 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { CONSTS } from "@1up/consts";
-import { and, desc, eq, trackableLogs } from "@1up/db";
-import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@1up/utils";
+import { CONSTS } from "@potential/consts";
+import { and, desc, eq, trackableLogs } from "@potential/db";
+import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@potential/utils";
 
 import { protectedProcedure } from "../trpc";
 import { awardXpPoints } from "../utils/xpPoints";

@@ -1,11 +1,11 @@
 import React from "react";
 import { View } from "react-native";
 
-import type { ConstsTypes } from "@1up/consts";
-import { convert } from "@1up/utils/convert";
+import type { ConstsTypes } from "@potential/consts";
+import { convert } from "@potential/utils/convert";
 
-import type { Log } from "~/types/trackables";
 import { Text } from "~/components/ui/text";
+import type { Log } from "~/types/trackables";
 import { cn } from "~/utils/ui";
 
 // Define unit types locally to avoid import issues

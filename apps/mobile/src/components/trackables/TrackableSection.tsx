@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-import type { TrackableCustomConfig } from "@1up/consts";
+import type { TrackableCustomConfig } from "@potential/consts";
 
 import { TrackableCard } from "./TrackableCard";
 

@@ -1,7 +1,7 @@
-import { networkInterfaces } from "os";
 import { S3Client } from "@aws-sdk/client-s3";
+import { networkInterfaces } from "os";
 
-import { serverEnv } from "@1up/env";
+import { serverEnv } from "@potential/env";
 
 // dynamically work out the endpoint based on the environment or localhost ip
 const getS3Endpoint = (): string => {
@@ -50,3 +50,4 @@ export const s3Client = new S3Client({
 
 export { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 export { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+

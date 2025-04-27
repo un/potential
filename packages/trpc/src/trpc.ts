@@ -3,9 +3,9 @@ import { betterAuth } from "better-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import type { db } from "@1up/db";
-import type { CloudTypeId } from "@1up/utils";
-import { authOptions } from "@1up/auth";
+import { authOptions } from "@potential/auth";
+import type { db } from "@potential/db";
+import type { CloudTypeId } from "@potential/utils";
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
   ...authOptions,

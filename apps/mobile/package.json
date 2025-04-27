@@ -1,5 +1,5 @@
 {
-  "name": "@1up/mobile",
+  "name": "@potential/mobile",
   "version": "0.1.0",
   "private": true,
   "main": "index.ts",
@@ -18,15 +18,15 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@1up/auth": "workspace:*",
-    "@1up/consts": "workspace:*",
-    "@1up/storage": "workspace:*",
-    "@1up/templates": "workspace:*",
-    "@1up/utils": "workspace:*",
     "@better-auth/expo": "catalog:",
     "@expo-google-fonts/ibm-plex-sans": "0.3.0",
     "@expo-google-fonts/ibm-plex-serif": "0.3.0",
     "@expo/metro-config": "^0.19.9",
+    "@potential/auth": "workspace:*",
+    "@potential/consts": "workspace:*",
+    "@potential/storage": "workspace:*",
+    "@potential/templates": "workspace:*",
+    "@potential/utils": "workspace:*",
     "@react-native-picker/picker": "^2.11.0",
     "@rn-primitives/hooks": "^1.1.0",
     "@rn-primitives/portal": "^1.1.0",
@@ -77,14 +77,14 @@
     "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tailwind-config": "workspace:*",
-    "@1up/trpc": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
     "@babel/core": "^7.26.7",
     "@babel/preset-env": "^7.26.7",
     "@babel/runtime": "^7.26.7",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tailwind-config": "workspace:*",
+    "@potential/trpc": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
@@ -92,5 +92,5 @@
     "tailwindcss": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

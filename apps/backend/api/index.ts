@@ -9,17 +9,17 @@ import { logger } from "hono/logger";
 import { customAlphabet } from "nanoid";
 import { z } from "zod";
 
-import { authOptions } from "@1up/auth";
-import { db } from "@1up/db";
-import { clientEnv, serverEnv } from "@1up/env";
-import { GetObjectCommand, getSignedUrl, s3Client } from "@1up/storage";
-import { appRouter } from "@1up/trpc";
-import { CloudTypeId, cloudTypeIdValidator } from "@1up/utils";
+import { authOptions } from "@potential/auth";
+import { db } from "@potential/db";
+import { clientEnv, serverEnv } from "@potential/env";
+import { GetObjectCommand, getSignedUrl, s3Client } from "@potential/storage";
+import { appRouter } from "@potential/trpc";
+import { CloudTypeId, cloudTypeIdValidator } from "@potential/utils";
 
 // Initialize auth with error handling
 const auth = betterAuth({
   ...authOptions,
-  trustedOrigins: ["1up://"],
+  trustedOrigins: ["potential://"],
 });
 if (!auth) {
   console.error("❌ Failed to initialize auth");

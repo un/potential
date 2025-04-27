@@ -1,15 +1,9 @@
-# 1up Health App
+# Potential Health
 
-The Open Source Ai System to make you live Longer, Sharper and Better
+Your personal Ai Health Coach
+Helping you live Longer, Sharper and Better
 
 We are currently focusing on our iOS Build
-
-Initial integrations:
-
-- Apple Health (Apple Watch Data)
-- Oura ring (API Access)
-- Whoop strap (API Access)
-- UltraHuman Ring (requires applying to waitlist for sdk)
 
 to run in dev mode:
 
@@ -22,6 +16,6 @@ to run in dev mode:
 
 Join the discord for discussions
 
-[Join the waitlist](https://1upapp.com)
-[Follow on X](https://x.com/1upHealthApp)
+[Join the waitlist](https://potentialhealth.io)
+[Follow on X](https://x.com/potential_health)
 [Chat on Discord](https://discord.gg/tKmSyU8GBT)

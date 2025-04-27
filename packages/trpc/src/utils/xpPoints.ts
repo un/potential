@@ -1,5 +1,5 @@
-import type { CloudTypeId } from "@1up/utils";
-import { db, eq, userProfiles, userXpLogs } from "@1up/db";
+import { db, eq, userProfiles, userXpLogs } from "@potential/db";
+import type { CloudTypeId } from "@potential/utils";
 
 export async function awardXpPoints({
   userId,

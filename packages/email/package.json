@@ -1,5 +1,5 @@
 {
-  "name": "@1up/email",
+  "name": "@potential/email",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",
@@ -14,8 +14,8 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@1up/consts": "workspace:*",
-    "@1up/env": "workspace:*",
+    "@potential/consts": "workspace:*",
+    "@potential/env": "workspace:*",
     "@react-email/components": "^0.0.33",
     "dotenv": "^16.4.7",
     "react": "catalog:react19",
@@ -23,13 +23,13 @@
     "resend": "^4.1.2"
   },
   "devDependencies": {
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react-email": "^3.0.7",
     "tsx": "^4.18.0",
     "typescript": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

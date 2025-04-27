@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 import { Label as LabelPrimitive } from "radix-ui";
 import * as React from "react";
 
-import { cn } from "@1up/ui";
+import { cn } from "@potential/ui";
 
 const labelVariants = cva(
   "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",

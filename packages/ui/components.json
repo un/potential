@@ -10,7 +10,7 @@
     "cssVariables": true
   },
   "aliases": {
-    "utils": "@1up/ui",
+    "utils": "@potential/ui",
     "components": "src/",
     "ui": "src/"
   }

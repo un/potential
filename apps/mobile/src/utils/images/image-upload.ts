@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
-import type { CloudTypeId } from "@1up/utils";
+import type { CloudTypeId } from "@potential/utils";
 
-import type { ProcessedImage } from "./image-processing";
 import { trpc } from "~/utils/api";
+import type { ProcessedImage } from "./image-processing";
 
 export interface UploadedImage {
   imageId: CloudTypeId<"userUpload">;

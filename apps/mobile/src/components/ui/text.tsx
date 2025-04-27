@@ -1,10 +1,10 @@
-/* eslint-disable @1up/no-direct-rn-import */
+/* eslint-disable @potential/no-direct-rn-import */
+import * as Slot from "@rn-primitives/slot";
 import type { SlottableTextProps, TextRef } from "@rn-primitives/types";
 import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import * as React from "react";
 import { Text as RNText } from "react-native";
-import * as Slot from "@rn-primitives/slot";
-import { cva } from "class-variance-authority";
 
 import { cn } from "~/utils/ui";
 

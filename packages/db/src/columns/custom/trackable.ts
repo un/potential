@@ -1,9 +1,8 @@
+import type { ConstsTypes } from "@potential/consts";
 import type { SQL } from "drizzle-orm";
+import { CONSTS } from "@potential/consts";
 import { sql } from "drizzle-orm";
 import { customType } from "drizzle-orm/mysql-core";
-
-import type { ConstsTypes } from "@1up/consts";
-import { CONSTS } from "@1up/consts";
 
 // Trackable Types
 export const trackableTypeColumn = (columnName: string) =>

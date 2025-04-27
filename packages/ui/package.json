@@ -1,5 +1,5 @@
 {
-  "name": "@1up/ui",
+  "name": "@potential/ui",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -31,10 +31,10 @@
     "tailwind-merge": "catalog:"
   },
   "devDependencies": {
-    "@1up/eslint-config": "workspace:*",
-    "@1up/prettier-config": "workspace:*",
-    "@1up/tailwind-config": "workspace:*",
-    "@1up/tsconfig": "workspace:*",
+    "@potential/eslint-config": "workspace:*",
+    "@potential/prettier-config": "workspace:*",
+    "@potential/tailwind-config": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -46,5 +46,5 @@
     "react": "catalog:react19",
     "zod": "catalog:"
   },
-  "prettier": "@1up/prettier-config"
+  "prettier": "@potential/prettier-config"
 }

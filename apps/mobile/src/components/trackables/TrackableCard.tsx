@@ -3,7 +3,7 @@ import { Pressable, View } from "react-native";
 import { router } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
-import type { TrackableCustomConfig } from "@1up/consts";
+import type { TrackableCustomConfig } from "@potential/consts";
 
 import type { TrackableType } from "~/types/trackables";
 import { getValueFromLog } from "~/components/trackables/displays";

@@ -6,7 +6,7 @@ import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
-import type { ConstsTypes } from "@1up/consts";
+import type { ConstsTypes } from "@potential/consts";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
 // Import TrackableType from our types

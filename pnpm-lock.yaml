@@ -83,7 +83,7 @@ importers:
 
   .:
     devDependencies:
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:tooling/prettier
       '@turbo/gen':
@@ -101,22 +101,22 @@ importers:
 
   apps/backend:
     dependencies:
-      '@1up/auth':
+      '@potential/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@1up/db':
+      '@potential/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@1up/env':
+      '@potential/env':
         specifier: workspace:*
         version: link:../../packages/env
-      '@1up/storage':
+      '@potential/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@1up/trpc':
+      '@potential/trpc':
         specifier: workspace:*
         version: link:../../packages/trpc
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../../packages/utils
       '@hono/node-server':
@@ -141,10 +141,10 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       vercel:
@@ -153,19 +153,19 @@ importers:
 
   apps/mobile:
     dependencies:
-      '@1up/auth':
+      '@potential/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@1up/consts':
+      '@potential/consts':
         specifier: workspace:*
         version: link:../../packages/consts
-      '@1up/storage':
+      '@potential/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@1up/templates':
+      '@potential/templates':
         specifier: workspace:*
         version: link:../../packages/templates
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../../packages/utils
       '@better-auth/expo':
@@ -325,19 +325,19 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tailwind-config':
+      '@potential/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@1up/trpc':
+      '@potential/trpc':
         specifier: workspace:*
         version: link:../../packages/trpc
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@babel/core':
@@ -370,19 +370,19 @@ importers:
 
   apps/web:
     dependencies:
-      '@1up/auth':
+      '@potential/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@1up/db':
+      '@potential/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@1up/trpc':
+      '@potential/trpc':
         specifier: workspace:*
         version: link:../../packages/trpc
-      '@1up/ui':
+      '@potential/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@1up/validators':
+      '@potential/validators':
         specifier: workspace:*
         version: link:../../packages/validators
       '@radix-ui/colors':
@@ -440,16 +440,16 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tailwind-config':
+      '@potential/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -482,22 +482,22 @@ importers:
 
   packages/auth:
     dependencies:
-      '@1up/consts':
+      '@potential/consts':
         specifier: workspace:*
         version: link:../consts
-      '@1up/db':
+      '@potential/db':
         specifier: workspace:*
         version: link:../db
-      '@1up/email':
+      '@potential/email':
         specifier: workspace:*
         version: link:../email
-      '@1up/env':
+      '@potential/env':
         specifier: workspace:*
         version: link:../env
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../utils
-      '@1up/validators':
+      '@potential/validators':
         specifier: workspace:*
         version: link:../validators
       '@better-auth/expo':
@@ -513,10 +513,10 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -534,13 +534,13 @@ importers:
 
   packages/consts:
     devDependencies:
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../utils
       eslint:
@@ -558,13 +558,13 @@ importers:
 
   packages/db:
     dependencies:
-      '@1up/consts':
+      '@potential/consts':
         specifier: workspace:*
         version: link:../consts
-      '@1up/env':
+      '@potential/env':
         specifier: workspace:*
         version: link:../env
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../utils
       '@planetscale/database':
@@ -580,13 +580,13 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       dotenv-cli:
@@ -607,10 +607,10 @@ importers:
 
   packages/email:
     dependencies:
-      '@1up/consts':
+      '@potential/consts':
         specifier: workspace:*
         version: link:../consts
-      '@1up/env':
+      '@potential/env':
         specifier: workspace:*
         version: link:../env
       '@react-email/components':
@@ -629,10 +629,10 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -660,13 +660,13 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -683,10 +683,10 @@ importers:
 
   packages/storage:
     dependencies:
-      '@1up/env':
+      '@potential/env':
         specifier: workspace:*
         version: link:../env
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@aws-sdk/client-s3':
@@ -702,29 +702,29 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
 
   packages/templates:
     dependencies:
-      '@1up/consts':
+      '@potential/consts':
         specifier: workspace:*
         version: link:../consts
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../utils
       zod:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -739,28 +739,28 @@ importers:
 
   packages/trpc:
     dependencies:
-      '@1up/auth':
+      '@potential/auth':
         specifier: workspace:*
         version: link:../auth
-      '@1up/consts':
+      '@potential/consts':
         specifier: workspace:*
         version: link:../consts
-      '@1up/db':
+      '@potential/db':
         specifier: workspace:*
         version: link:../db
-      '@1up/email':
+      '@potential/email':
         specifier: workspace:*
         version: link:../email
-      '@1up/env':
+      '@potential/env':
         specifier: workspace:*
         version: link:../env
-      '@1up/storage':
+      '@potential/storage':
         specifier: workspace:*
         version: link:../storage
-      '@1up/utils':
+      '@potential/utils':
         specifier: workspace:*
         version: link:../utils
-      '@1up/validators':
+      '@potential/validators':
         specifier: workspace:*
         version: link:../validators
       '@ai-sdk/anthropic':
@@ -782,13 +782,13 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -828,16 +828,16 @@ importers:
         specifier: 'catalog:'
         version: 3.0.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tailwind-config':
+      '@potential/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/react':
@@ -861,7 +861,7 @@ importers:
 
   packages/utils:
     dependencies:
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       convert-units:
@@ -880,7 +880,7 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
 
@@ -890,13 +890,13 @@ importers:
         specifier: 'catalog:'
         version: 3.24.2
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -939,10 +939,10 @@ importers:
         specifier: ^8.26.1
         version: 8.26.1(eslint@9.19.0(jiti@2.4.2))(typescript@5.7.3)
     devDependencies:
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       eslint:
@@ -969,7 +969,7 @@ importers:
         specifier: ^0.6.11
         version: 0.6.11(@ianvs/prettier-plugin-sort-imports@4.4.1(prettier@3.4.2))(prettier@3.4.2)
     devDependencies:
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -991,13 +991,13 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.10.10)(typescript@5.7.3)))
     devDependencies:
-      '@1up/eslint-config':
+      '@potential/eslint-config':
         specifier: workspace:*
         version: link:../eslint
-      '@1up/prettier-config':
+      '@potential/prettier-config':
         specifier: workspace:*
         version: link:../prettier
-      '@1up/tsconfig':
+      '@potential/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':

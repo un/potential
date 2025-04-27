@@ -3,9 +3,9 @@ import { View } from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
 import { ArrowLeft } from "phosphor-react-native";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@1up/consts";
-import type { BaseTemplate } from "@1up/templates";
-import { filterTemplatesByType } from "@1up/templates";
+import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { BaseTemplate } from "@potential/templates";
+import { filterTemplatesByType } from "@potential/templates";
 
 import { Text } from "~/components/ui/text";
 import { Button } from "../ui/button";
