@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-
+import Link from "next/link";
 import { cn } from "@potential/ui";
 
 import { Logo } from "../_components/branding/logo";

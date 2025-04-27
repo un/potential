@@ -25,6 +25,6 @@ const logoVariants = cva("relative flex flex-col items-center justify-center", {
 
 export const Logo: React.FC<VariantProps<typeof logoVariants>> = ({ size }) => (
   <div className={cn(logoVariants({ size }))}>
-    <Image src="/images/branding/logo-1up-dark.svg" alt="1up" fill />
+    <Image src="/images/branding/logo-ph-dark.svg" alt="1up" fill />
   </div>
 );
