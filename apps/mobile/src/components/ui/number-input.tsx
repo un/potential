@@ -120,7 +120,7 @@ export function NumberInput({
       <View className="mx-2 flex-col items-center pt-4">
         {isEditing ? (
           <TextInput
-            className="text-sand-12 min-w-[40px] p-0 text-center font-['Monocraft'] text-5xl"
+            className="text-sand-12 min-w-[40px] p-0 text-center font-['IBMPlexSerif-Regular'] text-5xl italic"
             value={inputValue}
             onChangeText={handleValueChange}
             keyboardType="decimal-pad"

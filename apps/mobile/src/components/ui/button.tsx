@@ -35,31 +35,34 @@ const buttonVariants = cva(
   },
 );
 
-const buttonTextVariants = cva("text-sand-1 font-['Monocraft'] text-lg", {
-  variants: {
-    variant: {
-      default: "text-tomato-1 dark:text-tomato-12",
-      destructive: "text-red-12",
-      secondary:
-        "text-sand-1 dark:text-sand-12 group-active:text-secondary-foreground",
-      outline: "text-sand-12 group-active:text-accent-foreground",
-      ghost: "text-sand-12 group-active:text-accent-foreground",
-      link: "text-sand-12 group-active:underline",
+const buttonTextVariants = cva(
+  "text-sand-1 font-['IBMPlexSerif-Medium'] text-lg italic",
+  {
+    variants: {
+      variant: {
+        default: "text-tomato-1 dark:text-tomato-12",
+        destructive: "text-red-12",
+        secondary:
+          "text-sand-1 dark:text-sand-12 group-active:text-secondary-foreground",
+        outline: "text-sand-12 group-active:text-accent-foreground",
+        ghost: "text-sand-12 group-active:text-accent-foreground",
+        link: "text-sand-12 group-active:underline",
+      },
+      size: {
+        default: "",
+        sm: "",
+        lg: "native:text-lg",
+        icon: "",
+        "icon-sm": "",
+        "icon-lg": "",
+      },
     },
-    size: {
-      default: "",
-      sm: "",
-      lg: "native:text-lg",
-      icon: "",
-      "icon-sm": "",
-      "icon-lg": "",
+    defaultVariants: {
+      variant: "default",
+      size: "default",
     },
   },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-  },
-});
+);
 
 type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
   VariantProps<typeof buttonVariants> & {

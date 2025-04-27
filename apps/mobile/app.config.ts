@@ -64,12 +64,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       },
     ],
     [
-      "expo-font",
-      {
-        fonts: ["./assets/fonts/Monocraft.ttf"],
-      },
-    ],
-    [
       "expo-camera",
       {
         cameraPermission: "Allow 1up Health to access your camera",

@@ -48,20 +48,10 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
     return getValueFromLog(latestLog, trackableType, trackable.customConfig);
   };
 
-  // Render log entry in history based on trackable type
-  const renderLogEntry = (log: unknown) => {
-    const trackableType = getTrackableType();
-    return getValueFromLog(log, trackableType, trackable.customConfig);
-  };
-
   // Determine if we should use column layout for the latest value
   const shouldUseColumnLayout = () => {
     const trackableType = getTrackableType();
-    return (
-      // trackableType === "rating" ||
-      // trackableType === "range" ||
-      trackableType === "shortText" || trackableType === "longText"
-    );
+    return trackableType === "shortText" || trackableType === "longText";
   };
 
   return (
@@ -73,7 +63,7 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
             shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
           )}
         >
-          <Text className="text-lg font-bold" type={"title"}>
+          <Text className="text-lg" type={"title"}>
             {trackable.name}
           </Text>
           <View className={cn("flex items-center", "flex-row gap-0")}>

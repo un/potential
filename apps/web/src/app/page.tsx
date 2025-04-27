@@ -8,7 +8,7 @@ export default function HomePage() {
         <div className="flex flex-col items-start justify-start gap-12">
           <div className="flex flex-col gap-4">
             <div className="border-orange-9 -ml-4 flex flex-row border-l-2 pl-4">
-              <span className="font-semibold">
+              <span className="font-serif text-lg">
                 The best way to reach{" "}
                 <span className="decoration-blue-9 underline decoration-2 underline-offset-2">
                   your
@@ -16,6 +16,7 @@ export default function HomePage() {
                 health potential
               </span>
             </div>
+
             <span className="">
               The Potential Platform guides you to reach your unique maximum
               possible health.

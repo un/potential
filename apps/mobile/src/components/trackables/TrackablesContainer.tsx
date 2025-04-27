@@ -64,7 +64,7 @@ export function TrackablesContainer() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center">
+      <View className="flex-1 items-center justify-center font-serif">
         <Text>Loading trackables...</Text>
       </View>
     );
@@ -87,7 +87,9 @@ export function TrackablesContainer() {
   if (totalTrackables === 0) {
     return (
       <View className="flex-1 items-center justify-center p-4">
-        <Text className="text-center text-lg">No trackables found</Text>
+        <Text className="text-center font-serif text-lg">
+          No trackables found
+        </Text>
         <Text className="text-center text-sm text-gray-500">
           Add some trackables to start tracking your progress
         </Text>
@@ -107,7 +109,7 @@ export function TrackablesContainer() {
 
         return (
           <View key={type} className="flex flex-col gap-4">
-            <Text className="text-2xl font-bold" type={"title"}>
+            <Text className="text-2xl" type={"title"}>
               {typeName}
             </Text>
 

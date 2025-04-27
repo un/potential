@@ -2,7 +2,7 @@ import type React from "react";
 
 import type { ConstsTypes } from "@1up/consts";
 
-import type { Log, TrackableType } from "~/types/trackables";
+import type { Log, Trackable, TrackableType } from "~/types/trackables";
 import { getCheckboxValueFromLog } from "./CheckboxDisplay";
 import { getMeasureValueFromLog } from "./MeasureDisplay";
 import { getRangeValueFromLog } from "./RangeDisplay";
@@ -25,6 +25,7 @@ export function getValueFromLog(
   type: TrackableType,
   config: Record<string, unknown>,
   size: "sm" | "md" | "lg" = "sm",
+  trackable?: Trackable,
 ): React.ReactNode {
   if (!log) return null;
 
@@ -65,7 +66,7 @@ export function getValueFromLog(
       );
 
     case "checkbox":
-      return getCheckboxValueFromLog(safeLog, size);
+      return getCheckboxValueFromLog(safeLog, trackable, size);
 
     case "rating":
       return getRatingValueFromLog(

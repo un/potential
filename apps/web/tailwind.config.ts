@@ -29,8 +29,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-martian-mono)"],
-        mono: ["var(--font-monocraft)"],
+        sans: ["var(--font-ibm-plex-sans)"],
+        serif: ["var(--font-ibm-plex-serif)"],
       },
       colors: {
         base: {

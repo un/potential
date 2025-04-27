@@ -11,8 +11,8 @@ import { cn } from "~/utils/ui";
 const textVariants = cva("web:select-text text-sand-12 text-base", {
   variants: {
     type: {
-      paragraph: "font-['MartianMono-Regular']",
-      title: "font-['Monocraft']",
+      paragraph: "font-['IBMPlexSans-Regular']",
+      title: "font-['IBMPlexSerif-Italic']",
     },
   },
   defaultVariants: {

@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { Star } from "phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
@@ -36,9 +37,24 @@ export function RatingDisplay({
   };
 
   const iconSizeClasses = {
-    sm: "h-4 w-4",
+    sm: "h-3 w-3",
     md: "h-5 w-5",
     lg: "h-6 w-6",
+  };
+
+  const iconSize = () => {
+    if (size === "lg") {
+      return 32;
+    }
+    if (size === "md") {
+      return 24;
+    }
+
+    if (ratingMax < 6) {
+      return 20;
+    }
+
+    return 16;
   };
 
   // Create an array of rating icons based on the max value
@@ -67,16 +83,22 @@ export function RatingDisplay({
         key={index}
         className={cn(
           iconSizeClasses[size],
-          "items-center justify-center",
+          "flex flex-row items-center justify-center gap-2",
           isFilled ? "opacity-100" : "opacity-30",
         )}
       >
-        <Text>{iconType}</Text>
+        <Star
+          size={iconSize()}
+          color="#FFC53D"
+          weight={isFilled ? "fill" : "regular"}
+        />
       </View>
     );
   });
 
   return (
-    <View className={cn("flex-row", sizeClasses[size])}>{ratingItems}</View>
+    <View className={cn("flex flex-row gap-8", sizeClasses[size])}>
+      {ratingItems}
+    </View>
   );
 }

@@ -171,9 +171,12 @@ importers:
       '@better-auth/expo':
         specifier: 'catalog:'
         version: 1.2.5(better-auth@1.2.5(patch_hash=d2e3mihboacrcwytvagews5dqe)(typescript@5.7.3))
-      '@expo-google-fonts/martian-mono':
-        specifier: 0.2.3
-        version: 0.2.3
+      '@expo-google-fonts/ibm-plex-sans':
+        specifier: 0.3.0
+        version: 0.3.0
+      '@expo-google-fonts/ibm-plex-serif':
+        specifier: 0.3.0
+        version: 0.3.0
       '@expo/metro-config':
         specifier: ^0.19.9
         version: 0.19.9
@@ -2598,8 +2601,11 @@ packages:
     resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@expo-google-fonts/martian-mono@0.2.3':
-    resolution: {integrity: sha512-chwd7tRQFnLvhEtPO/NMBUS12StEw0l7uOhTO61wq49MmYacURSkox2ATL/kM76feMBhbFPxCxAQL57ZOklbOw==}
+  '@expo-google-fonts/ibm-plex-sans@0.3.0':
+    resolution: {integrity: sha512-Z02fSj41Tz76nHXZBqyrgpvNId6Q3bL4/awC1VQ524galhejLrnXHCixdZtHHX7mufvxVyAfDaPknvT9DZosiA==}
+
+  '@expo-google-fonts/ibm-plex-serif@0.3.0':
+    resolution: {integrity: sha512-cTcfzO05/7c0Qgje0loyiI/1X0eXb3LQX5nQQCp2xCiglroFflHsymYxt9QCeR1g34Nukbjp9CP7Ry0QMY1KPw==}
 
   '@expo/cli@1.0.0-canary-20250304-f08e984':
     resolution: {integrity: sha512-qzt0BIdH3wpUBD0QBWqmvkz7+pCAqgvoAp4VYfqqIHV8H/bZP8dHouj/3ONCrluzxyAYG00on+w3T+mxrXYWnw==}
@@ -11810,7 +11816,9 @@ snapshots:
       '@eslint/core': 0.10.0
       levn: 0.4.1
 
-  '@expo-google-fonts/martian-mono@0.2.3': {}
+  '@expo-google-fonts/ibm-plex-sans@0.3.0': {}
+
+  '@expo-google-fonts/ibm-plex-serif@0.3.0': {}
 
   '@expo/cli@1.0.0-canary-20250304-f08e984(bufferutil@4.0.8)(graphql@15.8.0)':
     dependencies:

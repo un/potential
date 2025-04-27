@@ -40,7 +40,7 @@ export function Rating({
 
   return (
     <View className={cn("w-full items-center", className)}>
-      <View className="flex-row items-center justify-center gap-3">
+      <View className="flex-row items-center justify-center gap-2">
         {Array.from({ length: ratingMax }, (_, i) => i + 1).map((index) => {
           const isActive = value >= index;
 

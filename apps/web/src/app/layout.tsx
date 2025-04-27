@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Martian_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 
 import { cn } from "@1up/ui";
 import { ThemeProvider, ThemeToggle } from "@1up/ui/theme";
@@ -41,15 +40,15 @@ export const viewport: Viewport = {
   ],
 };
 
-const monocraftFont = localFont({
-  src: "../../public/fonts/Monocraft.otf",
+const ibmPlexSans = IBM_Plex_Sans({
   display: "swap",
-  variable: "--font-monocraft",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
 });
-
-const martianMonoFont = Martian_Mono({
+const ibmPlexSerif = IBM_Plex_Serif({
   display: "swap",
-  variable: "--font-martian-mono",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-serif",
 });
 
 export default function RootLayout(props: { children: React.ReactNode }) {
@@ -58,8 +57,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={cn(
           "text-sand-12 bg-sand-2 h-full font-sans text-sm font-light antialiased",
-          monocraftFont.variable,
-          martianMonoFont.variable,
+          ibmPlexSans.variable,
+          ibmPlexSerif.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
