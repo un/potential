@@ -1,7 +1,7 @@
-import { Stack, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack, useRouter } from "expo-router";
 
 import { Loading } from "~/components/loading";
 import { Text } from "~/components/ui/text";
@@ -37,8 +37,15 @@ export default function Index() {
 
       <View className="flex-1 items-center justify-center gap-8 p-8">
         <Loading size="mega" />
-        <Text className="text-5xl" type={"title"}>
-          Loading your health potential
+        <Text className="text-center text-5xl" type={"title"}>
+          Loading{" "}
+          <Text
+            className="decoration-blue-9 text-center text-5xl underline"
+            type={"title"}
+          >
+            your
+          </Text>{" "}
+          health potential
         </Text>
       </View>
     </SafeAreaView>

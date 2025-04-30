@@ -7,6 +7,7 @@ import { CONSTS } from "@potential/consts";
 
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
+import { Card } from "../ui/card";
 import { TrackableSection } from "./TrackableSection";
 
 type TrackableParentType = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
@@ -112,14 +113,15 @@ export function TrackablesContainer() {
             <Text className="text-2xl" type={"title"}>
               {typeName}
             </Text>
-
-            {subTypes.map(([subType, subTypeData]) => (
-              <TrackableSection
-                key={subType}
-                title={subTypeData._subTypeName}
-                trackables={subTypeData.items}
-              />
-            ))}
+            <Card>
+              {subTypes.map(([subType, subTypeData]) => (
+                <TrackableSection
+                  key={subType}
+                  title={subTypeData._subTypeName}
+                  trackables={subTypeData.items}
+                />
+              ))}
+            </Card>
           </View>
         );
       })}

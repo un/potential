@@ -7,7 +7,6 @@ import type { TrackableCustomConfig } from "@potential/consts";
 
 import type { TrackableType } from "~/types/trackables";
 import { getValueFromLog } from "~/components/trackables/displays";
-import { Card } from "~/components/ui/card";
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
 import { cn } from "~/utils/ui";
@@ -56,41 +55,19 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
 
   return (
     <Pressable onPress={handlePress}>
-      <Card>
-        <View
-          className={cn(
-            "flex flex-row justify-between gap-2",
-            shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
-          )}
-        >
-          <Text className="text-lg" type={"title"}>
-            {trackable.name}
-          </Text>
-          <View className={cn("flex items-center", "flex-row gap-0")}>
-            {renderLatestValue()}
-          </View>
+      <View
+        className={cn(
+          "flex flex-row justify-between gap-2",
+          shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
+        )}
+      >
+        <Text className="text-lg" type={"title"}>
+          {trackable.name}
+        </Text>
+        <View className={cn("flex items-center", "flex-row gap-0")}>
+          {renderLatestValue()}
         </View>
-
-        {/* {isLoading ? (
-          <Text className="text-sand-11 text-sm">Loading logs...</Text>
-        ) : logs && logs.length > 0  ? (
-          <View className="flex flex-col gap-2">
-            {logs.slice(1, 3).map((log) => (
-              <View
-                key={log.id}
-                className="border-sand-6 flex flex-row justify-between gap-2 border-b pb-2"
-              >
-                <Text className="text-sm">
-                  {new Date(log.createdAt).toLocaleDateString()}
-                </Text>
-                {renderLogEntry(log)}
-              </View>
-            ))}
-          </View>
-        ) : (
-          <Text className="text-sm text-gray-500">No logs available</Text>
-        )} */}
-      </Card>
+      </View>
     </Pressable>
   );
 }
