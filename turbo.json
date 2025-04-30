@@ -19,6 +19,15 @@
         "dist/**"
       ]
     },
+    "build:web": {
+      "dependsOn": [
+        "^build:web"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**"
+      ]
+    },
     "dev:package": {
       "dependsOn": [],
       "cache": false,

@@ -1,8 +1,9 @@
 import type { TRPCRouterRecord } from "@trpc/server";
-import { eq, userProfiles, userXpLogs } from "@potential/db";
-import { sendEmail } from "@potential/email";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+
+import { eq, userProfiles, userXpLogs } from "@potential/db";
+import { sendEmail } from "@potential/email";
 
 import { protectedProcedure } from "../../trpc";
 
@@ -80,7 +81,7 @@ export const profileRouter = {
 
       const success = await sendEmail({
         type: "bug-report",
-
+        to: "omar@potentialhealth.io",
         message: input.message,
         userEmail: user.email,
       });

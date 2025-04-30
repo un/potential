@@ -44,11 +44,13 @@ const ibmPlexSans = IBM_Plex_Sans({
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-ibm-plex-sans",
+  subsets: ["latin"],
 });
 const ibmPlexSerif = IBM_Plex_Serif({
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-ibm-plex-serif",
+  subsets: ["latin"],
 });
 
 export default function RootLayout(props: { children: React.ReactNode }) {
