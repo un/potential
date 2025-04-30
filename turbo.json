@@ -16,7 +16,9 @@
       ],
       "outputs": [
         ".cache/tsbuildinfo.json",
-        "dist/**"
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**"
       ]
     },
     "build:web": {
