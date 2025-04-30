@@ -10,7 +10,11 @@
 @import "@radix-ui/colors/blue-alpha.css";
 @import "@radix-ui/colors/blue-dark.css";
 @import "@radix-ui/colors/blue-dark-alpha.css";
-@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/tomato.css";
+@import "@radix-ui/colors/tomato-alpha.css";
+@import "@radix-ui/colors/tomato-dark.css";
+@import "@radix-ui/colors/tomato-dark-alpha.css";
+/* @import "@radix-ui/colors/amber.css";
 @import "@radix-ui/colors/amber-alpha.css";
 @import "@radix-ui/colors/amber-dark.css";
 @import "@radix-ui/colors/amber-dark-alpha.css";
@@ -41,7 +45,7 @@
 @import "@radix-ui/colors/sky.css";
 @import "@radix-ui/colors/sky-alpha.css";
 @import "@radix-ui/colors/sky-dark.css";
-@import "@radix-ui/colors/sky-dark-alpha.css";
+@import "@radix-ui/colors/sky-dark-alpha.css"; */
 
 @import "tw-animate-css";
 

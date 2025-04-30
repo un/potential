@@ -15,7 +15,7 @@
     "db:studio": "turbo -F @potential/db studio  --env-mode=loose",
     "dev": "turbo watch dev --continue  --env-mode=loose",
     "dev:package": "turbo watch dev:package --continue  --env-mode=loose",
-    "dev:next": "turbo watch dev -F @potential/nextjs...",
+    "dev:web": "turbo watch dev -F @potential/web...",
     "docker:up": "pnpm -F @potential/local-docker dev:docker",
     "ios": "turbo run ios  --env-mode=loose",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",

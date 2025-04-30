@@ -1,14 +1,221 @@
 import { HydrateClient } from "~/trpc/server";
+import { Button } from "./components/button";
 import { Divider } from "./components/divider";
 
 export default function HomePage() {
   return (
     <HydrateClient>
+      <main className="mx-auto flex max-w-screen-lg flex-col items-center justify-center gap-32 py-32">
+        {/* Hero Section */}
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
+          <h1 className="font-serif text-4xl font-normal italic">
+            The best way to reach your{" "}
+            <span className="decoration-blue-9 underline">
+              health potential
+            </span>
+          </h1>
+          <p className="text-lg">
+            Your personal{" "}
+            <span className="decoration-blue-9 underline">AI health coach</span>{" "}
+            for <span className="decoration-blue-9 underline">longevity</span>,{" "}
+            <span className="decoration-blue-9 underline">vitality</span>, and
+            sustainable results.
+          </p>
+          <div className="flex flex-row justify-center gap-4">
+            <Button>Get Started Free</Button>
+            <Button className="">Watch How It Works</Button>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* How It Works */}
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
+          <h2 className="mb-8 text-center font-serif text-3xl font-normal italic">
+            <span className="decoration-blue-9 underline">Simple steps</span>.
+            Personalized results.
+          </h2>
+          <div className="grid grid-cols-1 place-items-start gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="bg-sand-1 border-sand-6 flex flex-col items-center justify-center gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">Step 1</h3>
+              <p className="text-center">
+                Tell us what you want to{" "}
+                <span className="decoration-blue-9 underline">solve</span> or{" "}
+                <span className="decoration-blue-9 underline">improve</span>.
+              </p>
+            </div>
+            <div className="bg-sand-1 border-sand-6 flex flex-col items-center justify-center gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">Step 2</h3>
+              <p className="text-center">
+                Run{" "}
+                <span className="decoration-blue-9 underline">
+                  3 short experiments
+                </span>{" "}
+                guided by AI.
+              </p>
+            </div>
+            <div className="bg-sand-1 border-sand-6 flex flex-col items-center justify-center gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">Step 3</h3>
+              <p className="text-center">
+                Get a{" "}
+                <span className="decoration-blue-9 underline">
+                  sustainable, long-term plan
+                </span>
+                .
+              </p>
+            </div>
+            <div className="bg-sand-1 border-sand-6 flex h-full flex-col items-center justify-start gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">∞</h3>
+              <p className="text-center">
+                The system{" "}
+                <span className="decoration-blue-9 underline">
+                  keeps learning
+                </span>
+                .
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Why Potential */}
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
+          <h2 className="mb-8 text-center font-serif text-3xl font-normal italic">
+            Built <span className="decoration-blue-9 underline">different</span>
+            . On purpose.
+          </h2>
+          <div className="mx-auto grid max-w-3xl gap-12">
+            <div className="bg-sand-1 border-sand-6 flex flex-col items-center justify-center gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">
+                Human-First, Science-Backed
+              </h3>
+              <p>
+                We value{" "}
+                <span className="decoration-blue-9 underline">
+                  real-world results
+                </span>{" "}
+                over blanket science. We combine{" "}
+                <span className="decoration-blue-9 underline">
+                  peer-reviewed research
+                </span>{" "}
+                with{" "}
+                <span className="decoration-blue-9 underline">your data</span>{" "}
+                to discover what actually works for{" "}
+                <span className="decoration-blue-9 underline">you</span>.
+              </p>
+            </div>
+            <div className="bg-sand-1 border-sand-6 flex flex-col items-center justify-center gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">
+                Open Health, Open Source
+              </h3>
+              <p>
+                We’re building the world’s first{" "}
+                <span className="decoration-blue-9 underline">
+                  open health ecosystem
+                </span>
+                . Open source tools, transparent methods, and a belief in{" "}
+                <span className="decoration-blue-9 underline">
+                  health equity
+                </span>
+                .
+              </p>
+            </div>
+            <div className="bg-sand-1 border-sand-6 flex flex-col items-center justify-center gap-2 rounded-lg border p-4">
+              <h3 className="text-xl font-semibold">Privacy by Design</h3>
+              <p>
+                <span className="decoration-blue-9 underline">
+                  You own your data
+                </span>
+                . Encrypted, private, and under your control—always.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* Who It's For */}
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
+          <h2 className="mb-8 text-center font-serif text-3xl font-normal italic">
+            Made for people who…
+          </h2>
+          <ul className="mx-auto max-w-3xl list-inside list-disc space-y-4 text-lg">
+            <li>
+              Want a{" "}
+              <span className="decoration-blue-9 underline">
+                smarter, personalized path
+              </span>{" "}
+              to better health
+            </li>
+            <li>
+              Are done{" "}
+              <span className="decoration-blue-9 underline">guessing</span> with
+              supplements, routines, or diets
+            </li>
+            <li>
+              Believe in{" "}
+              <span className="decoration-blue-9 underline">
+                testing, learning
+              </span>
+              , and real outcomes
+            </li>
+            <li>
+              Want to{" "}
+              <span className="decoration-blue-9 underline">
+                own their health data
+              </span>
+              , not give it away
+            </li>
+          </ul>
+        </section>
+
+        <Divider />
+
+        {/* The Potential Loop */}
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
+          <h2 className="mb-8 text-center font-serif text-3xl font-normal italic">
+            The more you use it, the{" "}
+            <span className="decoration-blue-9 underline">better it gets</span>.
+          </h2>
+          <p className="mx-auto max-w-2xl text-center text-lg">
+            Our AI learns from your unique{" "}
+            <span className="decoration-blue-9 underline">
+              bio-psychological makeup
+            </span>
+            . Every experiment you run, every insight you share—feeds the loop
+            and makes your{" "}
+            <span className="decoration-blue-9 underline">
+              personal health model
+            </span>{" "}
+            more powerful.
+          </p>
+        </section>
+
+        <Divider />
+
+        {/* Join Us Early */}
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
+          <h2 className="mb-4 font-serif text-3xl font-bold italic">
+            Get{" "}
+            <span className="decoration-blue-9 underline">early access</span>.
+            Be part of the{" "}
+            <span className="decoration-blue-9 underline">
+              future of health
+            </span>
+            .
+          </h2>
+          <Button className="mt-6 rounded-xl bg-black px-8 py-4 font-semibold text-white">
+            Join the Beta
+          </Button>
+        </section>
+      </main>
+      {/* 
       <main className="container flex h-svh max-w-screen-lg flex-col">
         <div className="flex flex-col items-start justify-start gap-12">
           <div className="flex flex-col gap-4">
             <div className="border-orange-9 -ml-4 flex flex-row border-l-2 pl-4">
-              <span className="font-serif text-lg">
+              <span className="font-serif text-lg italic">
                 The best way to reach{" "}
                 <span className="decoration-blue-9 underline decoration-2 underline-offset-2">
                   your
@@ -18,12 +225,11 @@ export default function HomePage() {
             </div>
 
             <span className="">
-              The Potential Platform guides you to reach your unique maximum
-              possible health.
+              Potential Health is your personal Ai coach.
             </span>
             <span className="">
-              Our Ai coach learns everything about you, from biological to
-              psychological, working out the best way to maximize your health.
+              It learns everything about you, from biological to psychological,
+              working out the best way to maximize your health.
             </span>
             <span className="">
               The longer you use the system the more it learns about you and
@@ -34,7 +240,7 @@ export default function HomePage() {
           <Divider />
           <div className="flex flex-col gap-4">
             <div className="border-orange-9 -ml-4 flex flex-row border-l-2 pl-4">
-              <span className="font-semibold">
+              <span className="font-serif text-lg italic">
                 Backed by real people first, traditional science second
               </span>
             </div>
@@ -63,7 +269,7 @@ export default function HomePage() {
           <Divider />
           <div className="flex flex-col gap-4">
             <div className="border-orange-9 -ml-4 flex flex-row border-l-2 pl-4">
-              <span className="font-semibold">How it works</span>
+              <span className="font-serif text-lg italic">How it works</span>
             </div>
             <div className="flex flex-row gap-2">
               <span className="">1</span>
@@ -101,7 +307,7 @@ export default function HomePage() {
           <Divider />
           <div className="flex flex-col gap-4">
             <div className="border-orange-9 -ml-4 flex flex-row border-l-2 pl-4">
-              <span className="font-semibold">
+              <span className="font-serif text-lg italic">
                 Open Health, Open Life, Open Source
               </span>
             </div>
@@ -132,7 +338,7 @@ export default function HomePage() {
           </div>
           <Divider />
         </div>
-      </main>
+      </main> */}
     </HydrateClient>
   );
 }
