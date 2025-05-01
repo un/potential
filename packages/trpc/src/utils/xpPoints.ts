@@ -1,5 +1,5 @@
-import { db, eq, userProfiles, userXpLogs } from "@potential/db";
 import type { CloudTypeId } from "@potential/utils";
+import { db, eq, userProfiles, userXpLogs } from "@potential/db";
 
 export async function awardXpPoints({
   userId,
@@ -10,7 +10,6 @@ export async function awardXpPoints({
   action: "newLog" | "newTrackable";
   actionId: CloudTypeId<"trackable"> | CloudTypeId<"trackableLog">;
 }) {
-  console.log("🔥", { userId, action, actionId });
   const user = await db.query.userProfiles.findFirst({
     where: eq(userProfiles.ownerId, userId),
   });
@@ -21,17 +20,15 @@ export async function awardXpPoints({
   }
 
   const baseXpPoints = action === "newTrackable" ? 25 : 10;
-  console.log("🔥", { baseXpPoints });
 
   const hoursBetweenNowAndStreakEnd = user.streakCurrentEndDate
     ? differenceInHours(new Date(), user.streakCurrentEndDate)
     : 0;
-  console.log("🔥", { hoursBetweenNowAndStreakEnd });
+
   let streakDays = user.streakCurrentDays;
-  console.log("🔥", { streakDays });
+
   // If current streakEndData is more than 48 hours ago, we reset the streak
   if (hoursBetweenNowAndStreakEnd > 48) {
-    console.log("🔥 caught in more than 48 hours");
     await db
       .update(userProfiles)
       .set({
@@ -42,7 +39,6 @@ export async function awardXpPoints({
       .where(eq(userProfiles.ownerId, userId));
     streakDays = 1;
   } else {
-    console.log("🔥 caught in less than 48 hours");
     streakDays = user.streakCurrentStartDate
       ? daysBetweenDates(user.streakCurrentStartDate, new Date())
       : 1;
@@ -53,9 +49,12 @@ export async function awardXpPoints({
         ...(!user.streakCurrentStartDate && {
           streakCurrentStartDate: new Date(),
         }),
-        streakCurrentDays: 1,
+        streakCurrentDays: streakDays,
         streakCurrentEndDate: new Date(),
-        streakCurrentStartDate: new Date(),
+        streakLongestDays:
+          streakDays > (user.streakLongestDays ?? 0)
+            ? streakDays
+            : (user.streakLongestDays ?? 1),
       })
       .where(eq(userProfiles.ownerId, userId));
   }
