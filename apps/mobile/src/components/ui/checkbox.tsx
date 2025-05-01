@@ -2,7 +2,6 @@ import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { Pressable } from "react-native";
 import { cva } from "class-variance-authority";
-import { useColorScheme } from "nativewind";
 import { Check } from "phosphor-react-native";
 
 import { Loading } from "~/components/loading";
@@ -42,7 +41,6 @@ const Checkbox = React.forwardRef<
     { className, size, loading, checked = false, onCheckedChange, ...props },
     ref,
   ) => {
-    const { colorScheme } = useColorScheme();
     const handleToggle = React.useCallback(() => {
       onCheckedChange?.(!checked);
     }, [checked, onCheckedChange]);
@@ -50,8 +48,8 @@ const Checkbox = React.forwardRef<
     return (
       <Pressable
         className={cn(
-          props.disabled && "web:pointer-events-none opacity-50",
-          checked ? "bg-sand-12 border-sand-12" : "bg-sand-1 border-sand-7",
+          props.disabled && "web:pointer-events-none opacity-90",
+          checked ? "bg-tomato-9 border-tomato-9" : "bg-sand-1 border-sand-7",
           checkboxVariants({ size, className }),
         )}
         ref={ref}
@@ -68,7 +66,7 @@ const Checkbox = React.forwardRef<
           <Check
             size={size === "lg" ? 24 : size === "sm" ? 12 : 16}
             weight="bold"
-            color={colorScheme === "dark" ? "#191918" : "#f9f9f8"}
+            color={"#f9f9f8"}
           />
         ) : null}
       </Pressable>

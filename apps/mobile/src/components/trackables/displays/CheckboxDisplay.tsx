@@ -9,6 +9,7 @@ interface CheckboxDisplayProps {
   checked: boolean;
   label?: string;
   size?: "sm" | "md" | "lg";
+  color?: "accent" | "default";
 }
 
 export function CheckboxDisplay({
@@ -22,9 +23,9 @@ export function CheckboxDisplay({
   const checkboxSize = size === "sm" ? "sm" : size === "lg" ? "lg" : "default";
 
   return (
-    <View className="flex-row items-center">
+    <View className="flex-row items-center gap-2">
+      <Text className={`${textSize}`}>{label}</Text>
       <Checkbox checked={checked} disabled size={checkboxSize} />
-      <Text className={`ml-2 ${textSize}`}>{label}</Text>
     </View>
   );
 }
@@ -41,5 +42,12 @@ export function getCheckboxValueFromLog(
     label = trackable.customConfig.checkboxName || "Completed";
   }
 
-  return <CheckboxDisplay checked={log.checked} label={label} size={size} />;
+  return (
+    <CheckboxDisplay
+      checked={log.checked}
+      label={label}
+      size={size}
+      color="accent"
+    />
+  );
 }
