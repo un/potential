@@ -4,8 +4,8 @@ import { View } from "react-native";
 import type { ConstsTypes } from "@potential/consts";
 import { convert } from "@potential/utils/convert";
 
-import { Text } from "~/components/ui/text";
 import type { Log } from "~/types/trackables";
+import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
 
 // Define unit types locally to avoid import issues
@@ -75,7 +75,7 @@ export function MeasureDisplay({
       <Text type={"title"} className={cn(titleSize)}>
         {formattedValue}
       </Text>
-      {unit && <Text className={cn("text-sand-11", textSize)}>{unit}</Text>}
+      {unit && <Text className={cn("text-tomato-10", textSize)}>{unit}</Text>}
     </View>
   );
 }

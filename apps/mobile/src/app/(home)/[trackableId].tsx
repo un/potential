@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
@@ -58,6 +58,8 @@ export default function TrackableDetailsPage() {
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const [_isUploading, setIsUploading] = useState(false);
 
+  const router = useRouter();
+
   const { data: trackable, isLoading: isLoadingTrackable } = useQuery(
     trpc.trackables.getTrackableById.queryOptions({
       id: trackableId,
@@ -91,6 +93,7 @@ export default function TrackableDetailsPage() {
         setIsFormSubmitting(false);
         setTrackableValue(null);
         form.reset();
+        router.back();
       },
       onError: (err) => {
         console.error("Mutation error:", err);
@@ -257,9 +260,6 @@ export default function TrackableDetailsPage() {
               {trackable.description}
             </Text>
           )}
-          <Text className="text-sand-11 text-xs">
-            {JSON.stringify(trackableValue)}
-          </Text>
           <Card>
             <View className="flex flex-col items-center justify-center gap-0">
               {logs && logs.length > 0 ? (

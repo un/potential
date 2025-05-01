@@ -33,7 +33,7 @@ export function RangeDisplay({
       <View className="flex flex-row items-end justify-end gap-0">
         <Text type={"title"} className={titleSize}>
           {value}
-          <Text type={"title"} className={titleSize + " text-sand-11"}>
+          <Text type={"title"} className={titleSize + " text-tomato-10"}>
             /{max}
           </Text>
         </Text>
