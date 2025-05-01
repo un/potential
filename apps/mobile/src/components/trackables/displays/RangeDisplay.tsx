@@ -29,10 +29,13 @@ export function RangeDisplay({
   );
 
   return (
-    <View className="flex flex-col gap-1">
-      <View className="flex flex-row items-end gap-0">
+    <View className="flex flex-row-reverse items-center gap-4">
+      <View className="flex flex-row items-end justify-end gap-0">
         <Text type={"title"} className={titleSize}>
           {value}
+          <Text type={"title"} className={titleSize + " text-sand-11"}>
+            /{max}
+          </Text>
         </Text>
         {unit && (
           <Text
@@ -44,9 +47,9 @@ export function RangeDisplay({
       </View>
 
       {/* Range bar visualization */}
-      <View className="bg-sand-4 h-1 w-20 overflow-hidden rounded-full">
+      <View className="bg-tomato-4 h-1 w-20 overflow-hidden rounded-full">
         <View
-          className="bg-sand-10 h-1 rounded-full"
+          className="bg-tomato-10 h-1 rounded-full"
           style={{ width: `${position}%` }}
         />
       </View>

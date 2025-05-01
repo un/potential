@@ -20,13 +20,19 @@ export {
 /**
  * Get a UI element to display a log value based on trackable type
  */
-export function getValueFromLog(
-  log: unknown,
-  type: TrackableType,
-  config: Record<string, unknown>,
-  size: "sm" | "md" | "lg" = "sm",
-  trackable?: Trackable,
-): React.ReactNode {
+export function getValueFromLog({
+  log,
+  type,
+  config,
+  size = "sm",
+  trackable,
+}: {
+  log: unknown;
+  type: TrackableType;
+  config: Record<string, unknown>;
+  size?: "sm" | "md" | "lg";
+  trackable: Trackable;
+}): React.ReactNode {
   if (!log) return null;
 
   // Safe cast the log to our Log type

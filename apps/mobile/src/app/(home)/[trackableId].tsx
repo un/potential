@@ -10,7 +10,7 @@ import type { ConstsTypes } from "@potential/consts";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
 // Import TrackableType from our types
-import type { TrackableType } from "~/types/trackables";
+import type { Trackable, TrackableType } from "~/types/trackables";
 // Import our new display components
 import { getValueFromLog } from "~/components/trackables/displays";
 // Import our new input components
@@ -257,6 +257,9 @@ export default function TrackableDetailsPage() {
               {trackable.description}
             </Text>
           )}
+          <Text className="text-sand-11 text-xs">
+            {JSON.stringify(trackableValue)}
+          </Text>
           <Card>
             <View className="flex flex-col items-center justify-center gap-0">
               {logs && logs.length > 0 ? (
@@ -270,12 +273,13 @@ export default function TrackableDetailsPage() {
                       </Text>
                     )}
 
-                  {getValueFromLog(
-                    logs[0],
-                    trackableType,
-                    safeCustomConfig,
-                    "lg",
-                  )}
+                  {getValueFromLog({
+                    log: logs[0],
+                    type: trackableType,
+                    config: safeCustomConfig,
+                    size: "lg",
+                    trackable: trackable as Trackable,
+                  })}
 
                   {logs[0]?.createdAt &&
                     trackableType !== "shortText" &&

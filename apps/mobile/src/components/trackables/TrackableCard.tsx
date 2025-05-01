@@ -10,6 +10,7 @@ import { getValueFromLog } from "~/components/trackables/displays";
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
 import { cn } from "~/utils/ui";
+import { Loading } from "../loading";
 
 interface TrackableCardProps {
   trackable: {
@@ -44,7 +45,12 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
     const latestLog = logs[0];
     const trackableType = getTrackableType();
 
-    return getValueFromLog(latestLog, trackableType, trackable.customConfig);
+    return getValueFromLog({
+      log: latestLog,
+      type: trackableType,
+      config: trackable.customConfig,
+      trackable,
+    });
   };
 
   // Determine if we should use column layout for the latest value
@@ -61,12 +67,14 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
           shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
         )}
       >
-        <Text className="text-lg" type={"title"}>
-          {trackable.name}
-        </Text>
-        <View className={cn("flex items-center", "flex-row gap-0")}>
-          {renderLatestValue()}
-        </View>
+        <Text className="">{trackable.name}</Text>
+        {isLoading ? (
+          <Loading size={"sm"} />
+        ) : (
+          <View className={cn("flex items-center", "flex-row gap-0")}>
+            {renderLatestValue()}
+          </View>
+        )}
       </View>
     </Pressable>
   );

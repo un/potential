@@ -31,13 +31,13 @@ export function CheckboxDisplay({
 
 export function getCheckboxValueFromLog(
   log: Log,
-  trackable?: Trackable,
+  trackable: Trackable,
   size: "sm" | "md" | "lg" = "sm",
 ): React.ReactNode {
   if (log.checked === null) return null;
 
   let label = "Completed";
-  if (trackable?.customConfig.type === "checkbox") {
+  if (trackable.customConfig.type === "checkbox") {
     label = trackable.customConfig.checkboxName || "Completed";
   }
 
