@@ -13,7 +13,7 @@ export function Card({ children, className, ...props }: CardProps) {
   return (
     <View
       className={cn(
-        "bg-sand-1 border-sand-6 flex flex-col gap-4 rounded-lg border p-6 shadow-sm",
+        "bg-sand-1 border-sand-6 flex flex-col gap-0 rounded-lg border px-6 py-4 shadow-sm",
         className,
       )}
       {...props}

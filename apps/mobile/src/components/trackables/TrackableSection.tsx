@@ -26,7 +26,7 @@ export function TrackableSection({ trackables }: TrackableSectionProps) {
   }
 
   return (
-    <View className="flex flex-col gap-4">
+    <View className="flex flex-col gap-0">
       {trackables.map((trackable) => (
         <TrackableCard key={trackable.id} trackable={trackable} />
       ))}

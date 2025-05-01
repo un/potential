@@ -360,18 +360,19 @@ export default function TrackableDetailsPage() {
             <View className="flex flex-col gap-4">
               {logs.map((log) => (
                 <Card key={log.id} className="border-sand-6 border">
-                  <View className="flex flex-row justify-between">
+                  <View className="flex flex-row items-center justify-between">
                     <View>
                       {/* Use our display component for each log - small size */}
-                      {getValueFromLog(
+                      {getValueFromLog({
                         log,
-                        trackableType,
-                        safeCustomConfig,
-                        "sm",
-                      )}
+                        type: trackableType,
+                        config: safeCustomConfig,
+                        size: "sm",
+                        trackable: trackable as Trackable,
+                      })}
                     </View>
 
-                    <Text className="text-sand-11">
+                    <Text className="text-sand-11 text-xs">
                       {new Date(log.createdAt).toLocaleString()}
                     </Text>
                   </View>
