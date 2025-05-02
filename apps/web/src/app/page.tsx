@@ -8,12 +8,13 @@ export default function HomePage() {
       <main className="mx-auto flex max-w-screen-lg flex-col items-center justify-center gap-32 py-32">
         {/* Hero Section */}
         <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-8">
-          <h1 className="font-serif text-4xl font-normal italic">
+          <h1 className="font-serif text-6xl italic">Potential Health</h1>
+          <h2 className="font-serif text-3xl font-normal italic">
             The best way to reach your{" "}
             <span className="decoration-blue-9 underline">
               health potential
             </span>
-          </h1>
+          </h2>
           <p className="text-lg">
             Your personal{" "}
             <span className="decoration-blue-9 underline">AI health coach</span>{" "}
