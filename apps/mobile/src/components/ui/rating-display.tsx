@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import { Star } from "phosphor-react-native";
+
+// import { Star } from "@potential/phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
@@ -87,11 +88,12 @@ export function RatingDisplay({
           isFilled ? "opacity-100" : "opacity-30",
         )}
       >
-        <Star
+        {/* <Star
           size={iconSize()}
           color="#FFC53D"
           weight={isFilled ? "fill" : "regular"}
-        />
+        /> */}
+        <Text>CA</Text>
       </View>
     );
   });

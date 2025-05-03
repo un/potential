@@ -7,7 +7,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>1up</string>
+    <string>Potential</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -27,14 +27,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>1up</string>
-          <string>xyz.1up</string>
+          <string>potential</string>
+          <string>io.potentialhealth</string>
         </array>
       </dict>
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+1up</string>
+          <string>exp+potential</string>
         </array>
       </dict>
     </array>
@@ -52,20 +52,16 @@
       <true/>
     </dict>
     <key>NSCameraUsageDescription</key>
-    <string>Allow 1up Health to access your camera</string>
+    <string>Allow Potential Health to access your camera</string>
     <key>NSFaceIDUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to access your Face ID biometric data.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Allow 1up Health to access your microphone</string>
+    <string>Allow Potential Health to access your microphone</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Allow 1up Health to access your photos and let you upload them.</string>
+    <string>Allow Potential Health to access your photos and let you upload them.</string>
     <key>NSUserActivityTypes</key>
     <array>
       <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>
-    </array>
-    <key>UIAppFonts</key>
-    <array>
-      <string>Monocraft.ttf</string>
     </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>

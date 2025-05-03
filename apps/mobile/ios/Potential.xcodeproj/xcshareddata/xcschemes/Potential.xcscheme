@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "1up.app"
-               BlueprintName = "1up"
-               ReferencedContainer = "container:1up.xcodeproj">
+               BuildableName = "Potential.app"
+               BlueprintName = "Potential"
+               ReferencedContainer = "container:Potential.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "1upTests.xctest"
-               BlueprintName = "1upTests"
-               ReferencedContainer = "container:1up.xcodeproj">
+               BuildableName = "PotentialTests.xctest"
+               BlueprintName = "PotentialTests"
+               ReferencedContainer = "container:Potential.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "1up.app"
-            BlueprintName = "1up"
-            ReferencedContainer = "container:1up.xcodeproj">
+            BuildableName = "Potential.app"
+            BlueprintName = "Potential"
+            ReferencedContainer = "container:Potential.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "1up.app"
-            BlueprintName = "1up"
-            ReferencedContainer = "container:1up.xcodeproj">
+            BuildableName = "Potential.app"
+            BlueprintName = "Potential"
+            ReferencedContainer = "container:Potential.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

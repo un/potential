@@ -3,13 +3,14 @@ import { ScrollView, View } from "react-native";
 import { useLocales } from "expo-localization";
 import { router } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
-import { Plus } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
 import { CONSTS } from "@potential/consts";
 
 import type { PickerOption } from "~/components/ui/picker";
+// import { Plus } from "@potential/phosphor-react-native";
+
 import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 import { Input } from "~/components/ui/input";
@@ -517,7 +518,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
                 onPress={() => setShowDescription(true)}
                 className="flex flex-row gap-4 self-start"
               >
-                <Plus size={12} />
+                {/* <Plus size={12} /> */}
+                <Text>CA</Text>
                 <Text>Description</Text>
               </Button>
             ) : (

@@ -1,6 +1,3 @@
-import * as ImagePicker from "expo-image-picker";
-import { useColorScheme } from "nativewind";
-import { Camera, Images, X, XCircle } from "phosphor-react-native";
 import React, {
   forwardRef,
   useCallback,
@@ -8,16 +5,20 @@ import React, {
   useState,
 } from "react";
 import { Image, Modal, Pressable, ScrollView, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { useColorScheme } from "nativewind";
 
 import type { CloudTypeId } from "@potential/utils";
 
-import { CameraComponent } from "~/components/app/camera";
 import type { ProcessedImage } from "~/utils/images/image-processing";
+import type { UploadedImage } from "~/utils/images/image-upload";
+// import { Camera, Images, X, XCircle } from "@potential/phosphor-react-native";
+
+import { CameraComponent } from "~/components/app/camera";
 import {
   cleanupImageTempFiles,
   processImage,
 } from "~/utils/images/image-processing";
-import type { UploadedImage } from "~/utils/images/image-upload";
 import { useImageUpload } from "~/utils/images/image-upload";
 import { Button } from "./button";
 import { Text } from "./text";
@@ -292,7 +293,8 @@ export const ImagePickerUploader = forwardRef<
                       onPress={() => removePendingImage(index)}
                       disabled={isUploading}
                     >
-                      <XCircle size={24} color="#FF3B30" weight="fill" />
+                      {/* <XCircle size={24} color="#FF3B30" weight="fill" /> */}
+                      <Text>CA</Text>
                     </Pressable>
 
                     <View className="bg-orange-9 absolute bottom-0 items-center rounded-xl px-2 py-1">
@@ -318,7 +320,8 @@ export const ImagePickerUploader = forwardRef<
                       onPress={() => removeUploadedImage(index)}
                       disabled={isUploading}
                     >
-                      <XCircle size={24} color="#FF3B30" weight="fill" />
+                      {/* <XCircle size={24} color="#FF3B30" weight="fill" /> */}
+                      <Text>CA</Text>
                     </Pressable>
 
                     <View className="bg-green-9 absolute bottom-0 items-center rounded-xl px-2 py-1">
@@ -339,14 +342,16 @@ export const ImagePickerUploader = forwardRef<
             onPress={() => setShowCamera(true)}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Camera size={24} color={"#f9f9f8"} />
+            {/* <Camera size={24} color={"#f9f9f8"} /> */}
+            <Text>CA</Text>
           </Button>
           <Button
             size="icon-lg"
             onPress={handlePickImages}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Images size={24} color={"#f9f9f8"} />
+            {/* <Images size={24} color={"#f9f9f8"} /> */}
+            <Text>CA</Text>
           </Button>
           {onSubmit && (
             <Button
@@ -382,7 +387,8 @@ export const ImagePickerUploader = forwardRef<
               className="bg-red-9 rounded-2xl p-3"
               onPress={() => setShowCamera(false)}
             >
-              <X size={24} />
+              {/* <X size={24} /> */}
+              <Text>CA</Text>
             </Pressable>
           </View>
         </Modal>

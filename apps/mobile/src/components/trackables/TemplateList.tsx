@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
-import { ArrowLeft } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
+// import { ArrowLeft } from "@potential/phosphor-react-native";
 import { filterTemplatesByType } from "@potential/templates";
 
 import { Text } from "~/components/ui/text";
@@ -74,7 +74,8 @@ export function TemplateList({
             className="mb-4 self-start"
           >
             <View className="flex flex-row items-center gap-2">
-              <ArrowLeft size={20} />
+              {/* <ArrowLeft size={20} /> */}
+              <Text>CA</Text>
               <Text>Back</Text>
             </View>
           </Button>

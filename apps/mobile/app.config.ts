@@ -26,6 +26,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   updates: {
     fallbackToCacheTimeout: 0,
   },
+  newArchEnabled: true,
   assetBundlePatterns: ["**/*"],
   ios: {
     bundleIdentifier: "io.potentialhealth",
@@ -67,14 +68,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       "expo-camera",
       {
         cameraPermission: "Allow Potential Health to access your camera",
-        microphonePermission: "Allow Potential Health to access your microphone",
+        microphonePermission:
+          "Allow Potential Health to access your microphone",
         recordAudioAndroid: true,
       },
     ],
     [
       "expo-av",
       {
-        microphonePermission: "Allow Potential Health to access your microphone.",
+        microphonePermission:
+          "Allow Potential Health to access your microphone.",
       },
     ],
     [

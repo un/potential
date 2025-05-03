@@ -2,9 +2,10 @@ import type { CameraType } from "expo-camera";
 import { useRef, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { CameraView } from "expo-camera";
-import { ArrowsClockwise, Camera } from "phosphor-react-native";
 
 import type { ProcessedImage } from "~/utils/images/image-processing";
+// import { ArrowsClockwise, Camera } from "@potential/phosphor-react-native";
+
 import { RequestPermission } from "~/components/ui/request-permission";
 import { Text } from "~/components/ui/text";
 import { usePermission } from "~/lib/hooks/usePermission";
@@ -78,14 +79,16 @@ export function CameraComponent({ onPictureTaken }: CameraComponentProps) {
               className="bg-sand-10 rounded-3xl p-4"
               onPress={toggleCameraFacing}
             >
-              <ArrowsClockwise size={24} weight="bold" />
+              {/* <ArrowsClockwise size={24} weight="bold" /> */}
+              <Text>CA</Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="bg-sand-10 rounded-3xl p-4"
               onPress={takePicture}
               disabled={isTakingPicture}
             >
-              <Camera size={24} weight="bold" />
+              {/* <Camera size={24} weight="bold" /> */}
+              <Text>CA</Text>
             </TouchableOpacity>
             {error && <Text className="text-red-9 p-6">{error}</Text>}
           </View>

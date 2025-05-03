@@ -10,9 +10,9 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@hono/node-server": "^1.13.8",
+    "@hono/node-server": "^1.14.1",
     "@hono/trpc-server": "^0.3.4",
-    "@hono/zod-validator": "^0.4.3",
+    "@hono/zod-validator": "^0.5.0",
     "@potential/auth": "workspace:*",
     "@potential/db": "workspace:*",
     "@potential/env": "workspace:*",
@@ -20,13 +20,13 @@
     "@potential/trpc": "workspace:*",
     "@potential/utils": "workspace:*",
     "better-auth": "catalog:",
-    "hono": "^4.7.4",
-    "nanoid": "^5.1.2",
+    "hono": "^4.7.8",
+    "nanoid": "^5.1.5",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@potential/eslint-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
-    "vercel": "^32.4.1"
+    "vercel": "^41.7.0"
   }
 }

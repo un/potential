@@ -1,7 +1,8 @@
 import React from "react";
 import { Stack, useRouter } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { CaretLeft, X } from "phosphor-react-native";
+
+// import { CaretLeft, X } from "@potential/phosphor-react-native/lib/commonjs";
 
 import UserHeader from "~/components/app/userHeader";
 import { Button } from "~/components/ui/button";
@@ -41,7 +42,8 @@ export default function DashboardLayout() {
           headerBackVisible: false,
           headerLeft: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <CaretLeft size={24} />
+              {/* <CaretLeft size={24} /> */}
+              <Text>CA</Text>
             </Button>
           ),
         }}
@@ -53,7 +55,8 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              {/* <X size={24} /> */}
+              <Text>CA</Text>
             </Button>
           ),
         }}
@@ -65,7 +68,8 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              {/* <X size={24} /> */}
+              <Text>CA</Text>
             </Button>
           ),
         }}
@@ -77,7 +81,8 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              {/* <X size={24} /> */}
+              <Text>CA</Text>
             </Button>
           ),
         }}
@@ -89,7 +94,8 @@ export default function DashboardLayout() {
           presentation: "card",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              {/* <X size={24} /> */}
+              <Text>CA</Text>
             </Button>
           ),
           headerLeft: () => (
@@ -98,7 +104,8 @@ export default function DashboardLayout() {
               size="icon"
               onPress={() => router.replace("/(home)")}
             >
-              <CaretLeft size={24} />
+              {/* <CaretLeft size={24} /> */}
+              <Text>CA</Text>
             </Button>
           ),
         }}

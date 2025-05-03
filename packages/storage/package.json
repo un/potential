@@ -28,11 +28,11 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.532.0",
-    "@aws-sdk/s3-request-presigner": "^3.532.0",
+    "@aws-sdk/client-s3": "^3.802.0",
+    "@aws-sdk/s3-request-presigner": "^3.802.0",
     "@potential/env": "workspace:*",
     "@potential/tsconfig": "workspace:*",
-    "date-fns": "^3.0.0",
+    "date-fns": "^4.1.0",
     "zod": "catalog:"
   },
   "devDependencies": {
