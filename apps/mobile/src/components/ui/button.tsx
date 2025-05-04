@@ -36,7 +36,7 @@ const buttonVariants = cva(
 );
 
 const buttonTextVariants = cva(
-  "text-sand-1 font-['IBMPlexSerif-Medium'] text-lg italic",
+  "text-sand-1 font-['IBMPlexSerif-Regular'] text-lg italic",
   {
     variants: {
       variant: {
