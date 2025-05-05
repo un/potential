@@ -7,14 +7,16 @@ import {
   View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-
-// import { XCircle } from "@potential/phosphor-react-native";
+import { XCircle } from "phosphor-react-native";
 
 // Import our utility functions and components
-import type { ProcessedImage } from "~/utils/image-processing";
-import type { UploadedImage } from "~/utils/image-upload";
-import { cleanupImageTempFiles, processImage } from "~/utils/image-processing";
-import { useImageUpload } from "~/utils/image-upload";
+import type { ProcessedImage } from "~/utils/images/image-processing";
+import type { UploadedImage } from "~/utils/images/image-upload";
+import {
+  cleanupImageTempFiles,
+  processImage,
+} from "~/utils/images/image-processing";
+import { useImageUpload } from "~/utils/images/image-upload";
 import { Text } from "./text";
 
 /**
@@ -211,8 +213,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
                 onPress={() => removePendingImage(index)}
                 disabled={isUploading}
               >
-                {/* <XCircle size={24} color="#FF3B30" weight="fill" /> */}
-                <Text>CA</Text>
+                <XCircle size={24} color="#FF3B30" weight="fill" />
               </Pressable>
               {/* Pending indicator */}
               <View className="absolute bottom-0 left-0 right-0 items-center bg-black/50 py-0.5">
@@ -234,8 +235,7 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({
                 onPress={() => removeUploadedImage(index)}
                 disabled={isUploading}
               >
-                {/* <XCircle size={24} color="#FF3B30" weight="fill" /> */}
-                <Text>CA</Text>
+                <XCircle size={24} color="#FF3B30" weight="fill" />
               </Pressable>
             </View>
           ))}

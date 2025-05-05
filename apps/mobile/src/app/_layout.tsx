@@ -45,8 +45,8 @@ import "../styles.css";
 import { View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { QueryClientProvider } from "@tanstack/react-query";
-
-// import IconContext from "@potential/phosphor-react-native/lib/commonjs";
+// @ts-expect-error types not exported correctly from lib
+import { IconContext } from "phosphor-react-native/lib/module";
 
 import { queryClient } from "~/utils/api";
 
@@ -116,42 +116,43 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView>
         <SafeAreaProvider>
-          {/* <IconContext.Provider
+          <IconContext.Provider
             value={{
               color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
             }}
-          > */}
-          <View className="flex-1" onLayout={onLayoutRootView}>
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: {
+          >
+            <View className="flex-1" onLayout={onLayoutRootView}>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: {
+                    backgroundColor:
+                      colorScheme === "dark" ? "#191918" : "#f9f9f8",
+                  },
+                }}
+              />
+            </View>
+            <Toaster
+              position="top-center"
+              closeButton
+              pauseWhenPageIsHidden
+              autoWiggleOnUpdate={"always"}
+              toastOptions={{
+                toastContainerStyle: {
                   backgroundColor:
                     colorScheme === "dark" ? "#191918" : "#f9f9f8",
+                  borderColor: colorScheme === "dark" ? "#292928" : "#e0e0e0",
+                  borderWidth: 1,
+                },
+                titleStyle: {
+                  color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
+                },
+                descriptionStyle: {
+                  color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
                 },
               }}
             />
-          </View>
-          <Toaster
-            position="top-center"
-            closeButton
-            pauseWhenPageIsHidden
-            autoWiggleOnUpdate={"always"}
-            toastOptions={{
-              toastContainerStyle: {
-                backgroundColor: colorScheme === "dark" ? "#191918" : "#f9f9f8",
-                borderColor: colorScheme === "dark" ? "#292928" : "#e0e0e0",
-                borderWidth: 1,
-              },
-              titleStyle: {
-                color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
-              },
-              descriptionStyle: {
-                color: colorScheme === "dark" ? "#f9f9f8" : "#191918",
-              },
-            }}
-          />
-          {/* </IconContext.Provider> */}
+          </IconContext.Provider>
         </SafeAreaProvider>
       </GestureHandlerRootView>
     </QueryClientProvider>

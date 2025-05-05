@@ -282,6 +282,9 @@ importers:
       nativewind:
         specifier: ~4.1.23
         version: 4.1.23(react-native-reanimated@3.17.5(@babel/core@7.27.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0))(react-native-svg@15.11.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0)(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@22.15.3)(typescript@5.8.3)))
+      phosphor-react-native:
+        specifier: ^2.3.1
+        version: 2.3.1(react-native-svg@15.11.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0)
       radi-color-css:
         specifier: ^1.0.5
         version: 1.0.5
@@ -9046,6 +9049,13 @@ packages:
 
   pend@1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
+
+  phosphor-react-native@2.3.1:
+    resolution: {integrity: sha512-DErQj1ccLLRZOrpT4ZRnjScpoE1ITmBDjbY9N9mOaOvmbNYkJFctVeeAWo6eqNtoIY5sCcMOK1qHO3mIMtBt/w==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-svg: '*'
 
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
@@ -20380,6 +20390,12 @@ snapshots:
   peberminta@0.9.0: {}
 
   pend@1.2.0: {}
+
+  phosphor-react-native@2.3.1(react-native-svg@15.11.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0)
+      react-native-svg: 15.11.2(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.1.2)(react@19.0.0))(react@19.0.0)
 
   picocolors@1.0.0: {}
 

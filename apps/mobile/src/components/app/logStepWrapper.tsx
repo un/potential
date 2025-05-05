@@ -9,8 +9,7 @@ import {
 } from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// import { ArrowLeft } from "@potential/phosphor-react-native";
+import { ArrowLeft } from "phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
@@ -52,8 +51,7 @@ export const LogStepWrapper = ({
               onPress={onBack}
               className="flex flex-row items-center gap-4"
             >
-              {/* <ArrowLeft size={24} weight="bold" /> */}
-              <Text>CA</Text>
+              <ArrowLeft size={24} weight="bold" />
               <Text type="title">{title}</Text>
             </Pressable>
           </View>

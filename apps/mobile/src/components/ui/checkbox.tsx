@@ -2,12 +2,10 @@ import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { Pressable } from "react-native";
 import { cva } from "class-variance-authority";
-
-// import { Check } from "@potential/phosphor-react-native";
+import { Check } from "phosphor-react-native";
 
 import { Loading } from "~/components/loading";
 import { cn } from "~/utils/ui";
-import { Text } from "./text";
 
 const checkboxVariants = cva(
   "group flex items-center justify-center rounded-md border p-3",
@@ -65,12 +63,11 @@ const Checkbox = React.forwardRef<
         {loading ? (
           <Loading size="sm" />
         ) : checked ? (
-          // <Check
-          //   size={size === "lg" ? 24 : size === "sm" ? 12 : 16}
-          //   weight="bold"
-          //   color={"#f9f9f8"}
-          // />
-          <Text>CA</Text>
+          <Check
+            size={size === "lg" ? 24 : size === "sm" ? 12 : 16}
+            weight="bold"
+            color={"#f9f9f8"}
+          />
         ) : null}
       </Pressable>
     );

@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// import {
-//   ArrowsClockwise,
-//   Bed,
-//   Brain,
-//   Drop,
-//   ForkKnife,
-//   Lightning,
-//   PersonArmsSpread,
-//   PersonSimpleRun,
-//   Pill,
-//   Virus,
-// } from "@potential/phosphor-react-native";
+import {
+  ArrowsClockwise,
+  Bed,
+  Brain,
+  Drop,
+  ForkKnife,
+  Lightning,
+  PersonArmsSpread,
+  PersonSimpleRun,
+  Pill,
+  Virus,
+} from "phosphor-react-native";
 
 import { TrackableLogStep } from "~/components/app/trackableLogStep";
 import { Text } from "~/components/ui/text";
@@ -189,28 +188,24 @@ export default function Logger() {
             </Text>
             <View className="flex flex-row flex-wrap items-center justify-start gap-3 p-0">
               <LogButton
-                // icon={<ForkKnife size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<ForkKnife size={24} weight="bold" />}
                 label="Food/Drink"
                 onPress={() => setCurrentStep("food")}
               />
               <LogButton
-                // icon={<PersonSimpleRun size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<PersonSimpleRun size={24} weight="bold" />}
                 label="Activities"
                 soon={true}
                 onPress={() => setCurrentStep("activities")}
               />
               <LogButton
-                // icon={<Bed size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<Bed size={24} weight="bold" />}
                 label="Sleep"
                 soon={true}
                 onPress={() => setCurrentStep("sleep")}
               />
               <LogButton
-                // icon={<Pill size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<Pill size={24} weight="bold" />}
                 label="Supplements"
                 soon={true}
                 onPress={() => setCurrentStep("supplements")}
@@ -223,21 +218,18 @@ export default function Logger() {
             </Text>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <LogButton
-                // icon={<Brain size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<Brain size={24} weight="bold" />}
                 label="Mind"
                 onPress={() => setCurrentStep("mind")}
               />
               <LogButton
-                // icon={<Lightning size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<Lightning size={24} weight="bold" />}
                 label="Energy"
                 soon={true}
                 onPress={() => setCurrentStep("energy")}
               />
               <LogButton
-                // icon={<ArrowsClockwise size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<ArrowsClockwise size={24} weight="bold" />}
                 label="Cycles"
                 soon={true}
                 onPress={() => setCurrentStep("cycles")}
@@ -249,21 +241,18 @@ export default function Logger() {
             </Text>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <LogButton
-                // icon={<PersonArmsSpread size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<PersonArmsSpread size={24} weight="bold" />}
                 label="Body"
                 onPress={() => setCurrentStep("body")}
               />
               <LogButton
-                // icon={<Virus size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<Virus size={24} weight="bold" />}
                 label="Symptoms"
                 soon={true}
                 onPress={() => setCurrentStep("symptoms")}
               />
               <LogButton
-                // icon={<Drop size={24} weight="bold" />}
-                icon={<Text>CA</Text>}
+                icon={<Drop size={24} weight="bold" />}
                 label="Blood"
                 soon={true}
                 onPress={() => setCurrentStep("blood")}

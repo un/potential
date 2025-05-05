@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { Pressable, View } from "react-native";
-
-// import Star from "@potential/phosphor-react-native/lib/commonjs";
+import { Star } from "phosphor-react-native";
 
 import { cn } from "~/utils/ui";
 import { Text } from "./text";
@@ -21,7 +20,6 @@ interface RatingProps {
 export function Rating({
   ratingMax,
   ratingUnit,
-  ratingIcon,
   ratingEmoji,
   value,
   onValueChange,
@@ -74,12 +72,11 @@ export function Rating({
               className="mb-1 items-center justify-center"
               hitSlop={2}
             >
-              {/* <Star
+              <Star
                 size={36}
                 color="#FFC53D"
                 weight={isActive ? "fill" : "regular"}
-              /> */}
-              <Text>CA</Text>
+              />
             </Pressable>
           );
         })}

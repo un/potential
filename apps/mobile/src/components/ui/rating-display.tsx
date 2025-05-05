@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-
-// import { Star } from "@potential/phosphor-react-native";
+import { Star } from "phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
@@ -20,7 +19,7 @@ interface RatingDisplayProps {
 export function RatingDisplay({
   value,
   ratingMax,
-  ratingIcon,
+  // ratingIcon,
   ratingEmoji,
   size = "md",
 }: RatingDisplayProps) {
@@ -78,7 +77,7 @@ export function RatingDisplay({
     }
 
     // Default to star icon or use specified icon
-    const iconType = ratingIcon ?? "star";
+    // const iconType = ratingIcon ?? "star";
     return (
       <View
         key={index}
@@ -88,12 +87,11 @@ export function RatingDisplay({
           isFilled ? "opacity-100" : "opacity-30",
         )}
       >
-        {/* <Star
+        <Star
           size={iconSize()}
           color="#FFC53D"
           weight={isFilled ? "fill" : "regular"}
-        /> */}
-        <Text>CA</Text>
+        />
       </View>
     );
   });
