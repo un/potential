@@ -269,7 +269,7 @@ export default function TrackableDetailsPage() {
                     (trackableType === "shortText" ||
                       trackableType === "longText") && (
                       <Text className="text-sand-11 mt-2 text-xs">
-                        {new Date(logs[0]?.createdAt).toLocaleString()}
+                        {new Date(logs[0].createdAt).toLocaleString()}
                       </Text>
                     )}
 
@@ -285,7 +285,7 @@ export default function TrackableDetailsPage() {
                     trackableType !== "shortText" &&
                     trackableType !== "longText" && (
                       <Text className="text-sand-11 mt-2 text-xs">
-                        {new Date(logs[0]?.createdAt).toLocaleString()}
+                        {new Date(logs[0].createdAt).toLocaleString()}
                       </Text>
                     )}
                 </View>
@@ -325,9 +325,7 @@ export default function TrackableDetailsPage() {
                       field.state.meta.errors.length > 0
                         ? [
                             {
-                              message:
-                                field.state.meta.errors[0] ??
-                                "Something is wrong",
+                              message: field.state.meta.errors[0],
                             },
                           ]
                         : ""
