@@ -15,7 +15,8 @@
     "*.js",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "phosphor-react-native.d.ts"
   ],
   "exclude": ["node_modules"]
 }

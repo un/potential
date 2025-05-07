@@ -109,7 +109,7 @@ export function TrackablesContainer() {
         if (subTypes.length === 0) return null;
 
         return (
-          <View key={type} className="flex flex-col gap-4">
+          <View key={type} className="flex flex-col gap-2">
             <Text className="text-2xl" type={"title"}>
               {typeName}
             </Text>
