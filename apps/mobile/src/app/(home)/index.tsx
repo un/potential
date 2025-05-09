@@ -14,19 +14,25 @@ export default function DashboardHome() {
 
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
-      <View className="flex h-full flex-1 flex-col gap-6">
+      <View className="flex h-full flex-1 flex-col gap-2">
         <ScrollView className="flex-1 p-6 pb-0">
           <View className="mb-6 flex flex-1 flex-col gap-6">
             <ExperimentsDemo />
             <TrackablesContainer />
           </View>
         </ScrollView>
-        <View className="px-6 py-0">
+        <View className="flex w-full flex-row gap-2 px-6 py-0">
           <Button
             onPress={() => router.push("/(home)/log")}
-            className="flex flex-row gap-2"
+            className="flex w-[49%] flex-row gap-2"
           >
             <Text>Log</Text>
+          </Button>
+          <Button
+            onPress={() => router.push("/(home)/experiment")}
+            className="flex w-[49%] flex-row gap-2"
+          >
+            <Text>Experiment</Text>
           </Button>
         </View>
       </View>

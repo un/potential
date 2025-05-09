@@ -17,7 +17,7 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
     ref,
   ) => {
     return (
-      <View className="relative flex flex-col gap-1">
+      <View className="relative flex grow flex-col gap-1">
         {label && (
           <View className="ml-0.5">
             <Text type={"title"}>{label}</Text>
@@ -26,7 +26,7 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
         <TextInput
           ref={ref}
           className={cn(
-            "native:leading-[1.25] border-sand-7 text-sand-12 placeholder:text-sand-10 bg-sand-1 h-12 rounded-md border px-3 font-['MartianMono-Regular'] text-base",
+            "native:leading-[1.25] border-sand-7 text-sand-12 placeholder:text-sand-10 bg-sand-1 h-12 w-full rounded-md border px-3 font-['MartianMono-Regular'] text-base",
             props.editable === false && "web:cursor-not-allowed opacity-50",
             className,
           )}

@@ -59,6 +59,18 @@ export default function DashboardLayout() {
         }}
       />
       <Stack.Screen
+        name="experiment"
+        options={{
+          title: "Run a new experiment",
+          presentation: "modal",
+          headerRight: () => (
+            <Button variant="link" size="icon" onPress={() => router.back()}>
+              <X size={24} />
+            </Button>
+          ),
+        }}
+      />
+      <Stack.Screen
         name="stats"
         options={{
           title: "Progress",
