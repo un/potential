@@ -209,6 +209,16 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        pulseColor: {
+          "0%, 100%": { backgroundColor: "#10B981" }, // green-500
+          "33%": { backgroundColor: "#F97316" }, // orange-500
+          "66%": { backgroundColor: "#3B82F6" }, // blue-500
+        },
+      },
+      animation: {
+        pulseColor: "pulseColor 3s infinite ease-in-out",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

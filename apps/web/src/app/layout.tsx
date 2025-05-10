@@ -15,21 +15,21 @@ import { NavMenu } from "./ui/NavMenu";
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
-      ? "https://potential.health"
+      ? "https://potentialhealth.io"
       : "http://localhost:3000",
   ),
   title: "Potential Health",
-  description: "The open source alternative to Death",
+  description: "The health system made for you.",
   openGraph: {
     title: "Potential Health",
-    description: "The open source alternative to Death",
-    url: "https://potential.health",
+    description: "The health system made for you.",
+    url: "https://potentialhealth.io",
     siteName: "Potential Health",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@OmarMcAdam",
-    creator: "@OmarMcAdam",
+    site: "@PotentialH_",
+    creator: "@PotentialH_",
   },
 };
 
@@ -58,7 +58,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "text-sand-12 bg-sand-2 h-full font-sans text-sm font-light antialiased",
+          "text-sand-12 bg-sand-3 h-full font-sans text-sm font-light antialiased",
           ibmPlexSans.variable,
           ibmPlexSerif.variable,
         )}
