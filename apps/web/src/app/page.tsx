@@ -17,31 +17,29 @@ export default function HomePage() {
       <main className="mx-auto flex max-w-screen-lg flex-col items-center justify-center gap-32 py-32">
         {/* Hero Section */}
         <section className="mx-auto flex max-w-4xl flex-col items-start justify-center gap-12">
-          <h2 className="font-serif text-5xl font-normal">
+          <h2 className="font-serif text-4xl font-normal md:text-5xl">
             Most health advice was made for the average person.
           </h2>
 
-          <h2 className="font-serif text-6xl font-normal italic">
+          <h2 className="font-serif text-5xl font-normal italic md:text-6xl">
             This was made for <PulsingUnderline>you. </PulsingUnderline>
           </h2>
           <div className="flex flex-col gap-6">
-            <p className="text-2xl">
-              We build a <span className="italic">live, personal model</span>
-              <br />
-              of your <span className="italic">biology and psychology</span>.
+            <p className="text-balance text-2xl">
+              We build a <span className="italic">live, personal model</span> of
+              your <span className="italic">biology and psychology</span>.
             </p>
-            <p className="text-2xl">
+            <p className="text-balance text-2xl">
               So you can{" "}
               <span className="italic">
                 stop guessing,
                 <br />
                 start evolving,
               </span>{" "}
-              and <br />
-              actually <span className="italic">feel better.</span>{" "}
+              and actually <span className="italic">feel better.</span>{" "}
             </p>
           </div>
-          <div className="flex flex-row justify-center gap-4">
+          <div className="flex flex-col justify-center gap-4 md:flex-row">
             <Button size={"lg"}>Start My Health Loop</Button>
             <Button variant={"outline"} size={"lg"}>
               <div className="flex flex-row items-center gap-2">
@@ -68,11 +66,9 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col items-center justify-center gap-2">
-            <p className="text-2xl">
-              The longer you use <span>Potential</span>, the smarter it
-            </p>
-            <p className="text-2xl">
-              gets — the faster your results come to life.
+            <p className="text-balance text-2xl">
+              The longer you use <span>Potential</span>, the smarter it gets —
+              the faster your results come to life.
             </p>
           </div>
 
@@ -178,7 +174,7 @@ export default function HomePage() {
                 <span>It gets smarter the more you use it.</span>
               </div>
             </div>
-            <span className="text-2xl italic">
+            <span className="text-balance text-2xl italic">
               <span className="decoration-blue-9 underline">
                 The longer you use Potential, the smarter it gets
               </span>{" "}
@@ -208,53 +204,53 @@ export default function HomePage() {
                 Nothing worked.
               </h2>
               {/* Mobile-only image below H2s */}
-              <div className="relative block aspect-square w-full md:hidden">
+              <div className="relative block min-h-96 w-full md:hidden">
                 <Image
                   src="/images/home/omar.jpg"
                   className="rounded-lg object-cover"
                   fill
-                  sizes="100vw"
+                  sizes="100vh"
                   alt="Picture of Omar McAdam, Potential Health Founder"
                 />
               </div>
             </div>
 
-            <div className="flex flex-col items-start justify-start gap-2">
-              <p className="text-lg">
+            <div className="flex flex-col items-start justify-start gap-4">
+              <p className="text-balance text-lg">
                 I’ve been diagnosed with{" "}
                 <span className="decoration-tomato-9 underline">
                   bipolar, ADHD, ASD, IBS, and autoimmune{" "}
                 </span>
                 issues.
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 Doctors gave me pills and said, “Try this. Come back in 6
                 weeks.”
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 That’s when I decided to take things into my own hands.
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 So I started{" "}
                 <span className="decoration-tomato-9 underline">
                   reading every medical journal
                 </span>{" "}
                 I could find.
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 I spent months{" "}
                 <span className="decoration-tomato-9 underline">
                   researching, testing, and building my own tools
                 </span>{" "}
                 — combining data, feedback, and micro-experiments.
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 Potential is the system{" "}
                 <span className="decoration-tomato-9 underline">
                   I had to create for myself.
                 </span>
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 <span className="decoration-tomato-9 underline">
                   And now, it’s here for you.
                 </span>
@@ -286,7 +282,7 @@ export default function HomePage() {
 
         <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-12">
           <div className="flex w-full flex-col items-center justify-center gap-6">
-            <h2 className="font-serif text-5xl font-normal">
+            <h2 className="text-balance font-serif text-5xl font-normal">
               You’re in control. Not the algorithm.
             </h2>
 
@@ -301,12 +297,15 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="bg-sand-1 flex flex-col items-start justify-start gap-6 rounded-sm px-8 py-6">
               <span className="text-tomato-9">
-                <ToggleRight className="h-20 w-20" weight="fill" />
+                <ToggleRight
+                  className="h-16 w-16 md:h-20 md:w-20"
+                  weight="fill"
+                />
               </span>
-              <p className="text-3xl font-semibold">
+              <p className="text-balance text-2xl font-semibold md:text-3xl">
                 You decide what to track.
               </p>
-              <p className="text-lg">
+              <p className="text-balance text-lg">
                 Want to keep things private? Done.
                 <br />
                 Want to connect wearables? That’s your call.
@@ -317,10 +316,12 @@ export default function HomePage() {
 
             <div className="bg-sand-1 flex flex-col items-start justify-start gap-6 rounded-sm px-8 py-6">
               <span className="text-tomato-9">
-                <Code className="h-20 w-20" />
+                <Code className="h-16 w-16 md:h-20 md:w-20" />
               </span>
-              <p className="text-3xl font-semibold">All our code is public.</p>
-              <p className="text-lg">
+              <p className="text-balance text-2xl font-semibold md:text-3xl">
+                All our code is public.
+              </p>
+              <p className="text-balance text-lg">
                 We’re 100% open source.
                 <br />
                 You don’t have to guess what’s happening — you can see for
@@ -330,7 +331,7 @@ export default function HomePage() {
           </div>
 
           <p className="mt-6 text-3xl">This isn’t our system. It’s yours.</p>
-          <div className="flex flex-row justify-center gap-4">
+          <div className="flex flex-col justify-center gap-4 md:flex-row">
             <Button size={"lg"}>Start My Health Loop</Button>
             <Button variant={"outline"} size={"lg"}>
               <div className="flex flex-row items-center gap-2">

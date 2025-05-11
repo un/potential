@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import { cn } from "@potential/ui";
 
 import { Logo } from "../_components/branding/logo";
@@ -30,10 +31,10 @@ export function NavMenu({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex w-full justify-center px-4">
+    <div className="flex w-full justify-center px-0 md:px-4">
       <nav
         className={cn(
-          "bg-sand-1 my-4 grid w-full max-w-screen-lg grid-cols-6 items-center justify-between rounded-full px-8 py-0 pl-0 shadow-sm",
+          "bg-sand-1 my-4 grid w-full max-w-screen-lg grid-cols-6 items-center justify-between rounded-full px-0 py-0 pl-0 shadow-sm md:px-8",
           className,
         )}
       >
@@ -58,7 +59,7 @@ export function NavMenu({
         </div>
 
         <button
-          className="col-span-5 justify-self-end md:hidden"
+          className="col-span-5 justify-self-end pr-6 md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
