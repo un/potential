@@ -177,7 +177,7 @@ export default function HomePage() {
               <span className="decoration-blue-9 underline">
                 The longer you use Potential, the smarter it gets
               </span>{" "}
-              <br /> — and the more clearly you’ll know what works.
+              <br /> — and the more clearly you'll know what works.
             </span>
           </div>
           <div className="flex flex-row justify-center gap-4">
@@ -189,9 +189,9 @@ export default function HomePage() {
 
         {/* Proof */}
 
-        <section className="bg-tomato-5 mx-auto flex max-w-4xl flex-col items-center justify-center gap-12 md:flex-row">
-          <div className="bg-blue-5 flex flex-col items-start justify-center gap-12">
-            <div className="flex flex-col items-start justify-center gap-6">
+        <section className="mx-auto flex w-full max-w-4xl flex-col items-center justify-center gap-12 md:grid md:h-[600px] md:grid-cols-5 md:items-stretch">
+          <div className="flex h-full flex-1 flex-col items-start justify-center gap-12 md:col-span-3">
+            <div className="flex w-full flex-col items-start justify-center gap-6">
               <h2 className="font-serif text-5xl font-normal">
                 Nothing was personalized.
               </h2>
@@ -202,39 +202,69 @@ export default function HomePage() {
               <h2 className="font-serif text-5xl font-normal">
                 Nothing worked.
               </h2>
+              {/* Mobile-only image below H2s */}
+              <div className="relative block aspect-square w-full md:hidden">
+                <Image
+                  src="/images/home/omar.jpg"
+                  className="rounded-lg object-cover"
+                  fill
+                  sizes="100vw"
+                  alt="Picture of Omar McAdam, Potential Health Founder"
+                />
+              </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center gap-2">
-              <p className="text-2xl">
-                The longer you use <span>Potential</span>, the smarter it
+            <div className="flex flex-col items-start justify-start gap-2">
+              <p className="text-lg">
+                I’ve been diagnosed with{" "}
+                <span className="decoration-blue-9 underline">
+                  bipolar, ADHD, ASD, IBS, and autoimmune
+                </span>
+                issues.
               </p>
-              <p className="text-2xl">
-                gets — the faster your results come to life.
+              <p className="text-lg">
+                Doctors gave me pills and said, “Try this. Come back in 6
+                weeks.”
+              </p>
+              <p className="text-lg">
+                So I started{" "}
+                <span className="decoration-blue-9 underline">
+                  reading every medical journal
+                </span>{" "}
+                I could find.
+              </p>
+              <p className="text-lg">
+                I spent months{" "}
+                <span className="decoration-blue-9 underline">
+                  researching, testing, and building my own tools
+                </span>{" "}
+                — combining data, feedback, and micro-experiments.
+              </p>
+              <p className="text-lg">
+                Potential is the system{" "}
+                <span className="decoration-blue-9 underline">
+                  I had to create for myself.
+                </span>
+              </p>
+              <p className="text-lg">
+                <span className="decoration-blue-9 underline">
+                  And now, it’s here for you.
+                </span>
               </p>
             </div>
           </div>
-          <div className="bg-blue-5 relative flex h-full min-h-96 w-full flex-col gap-2 self-stretch">
-            <div className="bg-blue-5 relative flex h-full min-h-96 w-full flex-col gap-2 self-stretch">
-              <Image
-                src="/images/home/omar.jpg"
-                className="object-cover"
-                fill
-                alt="Picture of Omar McAdam, Potential Health Founder"
-              />
-            </div>
+          {/* Desktop-only image in grid */}
+          <div className="relative hidden h-full min-h-96 w-full flex-1 md:col-span-2 md:block">
+            <Image
+              src="/images/home/omar.jpg"
+              className="rounded-lg object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 40vw"
+              alt="Picture of Omar McAdam, Potential Health Founder"
+            />
+            {/* Gradient overlay */}
+            <div className="to-sand-3 pointer-events-none absolute inset-x-0 bottom-0 h-1/4 rounded-b-lg bg-gradient-to-b from-transparent" />
           </div>
-
-          {/* <div className="flex flex-col items-center gap-12">
-            <span className="text-2xl italic">
-              <span className="decoration-blue-9 underline">
-                The longer you use Potential, the smarter it gets
-              </span>{" "}
-              <br /> — and the more clearly you’ll know what works.
-            </span>
-          </div>
-          <div className="flex flex-row justify-center gap-4">
-            <Button size={"lg"}>Start My Health Loop</Button>
-          </div> */}
         </section>
       </main>
     </HydrateClient>
