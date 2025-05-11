@@ -31,6 +31,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-ibm-plex-sans)"],
         serif: ["var(--font-ibm-plex-serif)"],
+        ephesis: ["var(--font-ephesis)"],
       },
       colors: {
         base: {

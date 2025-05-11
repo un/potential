@@ -217,8 +217,8 @@ export default function HomePage() {
             <div className="flex flex-col items-start justify-start gap-2">
               <p className="text-lg">
                 I’ve been diagnosed with{" "}
-                <span className="decoration-blue-9 underline">
-                  bipolar, ADHD, ASD, IBS, and autoimmune
+                <span className="decoration-tomato-9 underline">
+                  bipolar, ADHD, ASD, IBS, and autoimmune{" "}
                 </span>
                 issues.
               </p>
@@ -227,43 +227,52 @@ export default function HomePage() {
                 weeks.”
               </p>
               <p className="text-lg">
+                That’s when I decided to take things into my own hands.
+              </p>
+              <p className="text-lg">
                 So I started{" "}
-                <span className="decoration-blue-9 underline">
+                <span className="decoration-tomato-9 underline">
                   reading every medical journal
                 </span>{" "}
                 I could find.
               </p>
               <p className="text-lg">
                 I spent months{" "}
-                <span className="decoration-blue-9 underline">
+                <span className="decoration-tomato-9 underline">
                   researching, testing, and building my own tools
                 </span>{" "}
                 — combining data, feedback, and micro-experiments.
               </p>
               <p className="text-lg">
                 Potential is the system{" "}
-                <span className="decoration-blue-9 underline">
+                <span className="decoration-tomato-9 underline">
                   I had to create for myself.
                 </span>
               </p>
               <p className="text-lg">
-                <span className="decoration-blue-9 underline">
+                <span className="decoration-tomato-9 underline">
                   And now, it’s here for you.
                 </span>
               </p>
             </div>
           </div>
           {/* Desktop-only image in grid */}
-          <div className="relative hidden h-full min-h-96 w-full flex-1 md:col-span-2 md:block">
-            <Image
-              src="/images/home/omar.jpg"
-              className="rounded-lg object-cover"
-              fill
-              sizes="(max-width: 768px) 100vw, 40vw"
-              alt="Picture of Omar McAdam, Potential Health Founder"
-            />
-            {/* Gradient overlay */}
-            <div className="to-sand-3 pointer-events-none absolute inset-x-0 bottom-0 h-1/4 rounded-b-lg bg-gradient-to-b from-transparent" />
+          <div className="hidden h-full min-h-96 w-full flex-1 flex-col items-center gap-12 md:col-span-2 md:flex">
+            <div className="relative hidden h-full min-h-96 w-full flex-1 md:block">
+              <Image
+                src="/images/home/omar.jpg"
+                className="rounded-lg object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                alt="Picture of Omar McAdam, Potential Health Founder"
+              />
+              {/* Gradient overlay */}
+              <div className="to-sand-3 pointer-events-none absolute inset-x-0 bottom-0 h-1/4 rounded-b-lg bg-gradient-to-b from-transparent" />
+            </div>
+            <div className="flex flex-col items-center justify-center gap-2">
+              <p className="font-ephesis text-5xl">Omar McAdam</p>
+              <p className="text-lg">Founder, Potential Health</p>
+            </div>
           </div>
         </section>
       </main>

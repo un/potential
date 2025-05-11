@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
+import { Ephesis, IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 
 import { cn } from "@potential/ui";
 import { ThemeProvider, ThemeToggle } from "@potential/ui/theme";
@@ -52,15 +52,22 @@ const ibmPlexSerif = IBM_Plex_Serif({
   variable: "--font-ibm-plex-serif",
   subsets: ["latin"],
 });
+const ephesis = Ephesis({
+  display: "swap",
+  weight: ["400"],
+  variable: "--font-ephesis",
+  subsets: ["latin"],
+});
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "text-sand-12 bg-sand-3 h-full font-sans text-sm font-light antialiased",
+          "text-sand-12 bg-sand-3 h-full px-12 font-sans text-sm font-light antialiased",
           ibmPlexSans.variable,
           ibmPlexSerif.variable,
+          ephesis.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
