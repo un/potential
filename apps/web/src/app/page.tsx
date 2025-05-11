@@ -1,5 +1,10 @@
 import Image from "next/image";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowRight,
+  Code,
+  GithubLogo,
+  ToggleRight,
+} from "@phosphor-icons/react/dist/ssr";
 
 import { HydrateClient } from "~/trpc/server";
 import { Button } from "./components/button";
@@ -273,6 +278,66 @@ export default function HomePage() {
               <p className="font-ephesis text-5xl">Omar McAdam</p>
               <p className="text-lg">Founder, Potential Health</p>
             </div>
+          </div>
+        </section>
+
+        <Divider />
+        {/* data & Privacy */}
+
+        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-12">
+          <div className="flex w-full flex-col items-center justify-center gap-6">
+            <h2 className="font-serif text-5xl font-normal">
+              You’re in control. Not the algorithm.
+            </h2>
+
+            <p className="text-center text-2xl">
+              Most health apps track you in the background.
+              <br />
+              We built Potential to work only when you want it to
+              <br /> — and only for you.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="bg-sand-1 flex flex-col items-start justify-start gap-6 rounded-sm px-8 py-6">
+              <span className="text-tomato-9">
+                <ToggleRight className="h-20 w-20" weight="fill" />
+              </span>
+              <p className="text-3xl font-semibold">
+                You decide what to track.
+              </p>
+              <p className="text-lg">
+                Want to keep things private? Done.
+                <br />
+                Want to connect wearables? That’s your call.
+                <br />
+                Only want to track one thing? No problem.
+              </p>
+            </div>
+
+            <div className="bg-sand-1 flex flex-col items-start justify-start gap-6 rounded-sm px-8 py-6">
+              <span className="text-tomato-9">
+                <Code className="h-20 w-20" />
+              </span>
+              <p className="text-3xl font-semibold">All our code is public.</p>
+              <p className="text-lg">
+                We’re 100% open source.
+                <br />
+                You don’t have to guess what’s happening — you can see for
+                yourself.
+              </p>
+            </div>
+          </div>
+
+          <p className="mt-6 text-3xl">This isn’t our system. It’s yours.</p>
+          <div className="flex flex-row justify-center gap-4">
+            <Button size={"lg"}>Start My Health Loop</Button>
+            <Button variant={"outline"} size={"lg"}>
+              <div className="flex flex-row items-center gap-2">
+                <GithubLogo className="h-10 w-10" weight="fill" />
+                View Our Code
+              </div>
+            </Button>
           </div>
         </section>
       </main>
