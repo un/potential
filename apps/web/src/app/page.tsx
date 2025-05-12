@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   Code,
@@ -40,12 +41,16 @@ export default function HomePage() {
             </p>
           </div>
           <div className="flex flex-col justify-center gap-4 md:flex-row">
-            <Button size={"lg"}>Start My Health Loop</Button>
-            <Button variant={"outline"} size={"lg"}>
-              <div className="flex flex-row items-center gap-2">
-                How It Works
-                <ArrowRight />
-              </div>
+            <Button size={"lg"} asChild>
+              <Link href="/start">Start My Health Loop</Link>
+            </Button>
+            <Button variant={"outline"} size={"lg"} asChild>
+              <Link href="#how-it-works">
+                <div className="flex flex-row items-center gap-2">
+                  How It Works
+                  <ArrowRight />
+                </div>
+              </Link>
             </Button>
           </div>
         </section>
@@ -54,7 +59,10 @@ export default function HomePage() {
 
         {/* How It Works */}
 
-        <section className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-12">
+        <section
+          className="mx-auto flex max-w-4xl flex-col items-center justify-center gap-12"
+          id="how-it-works"
+        >
           <div className="flex flex-col items-center justify-center gap-6">
             <h2 className="font-serif text-5xl font-normal">
               Built around you.
@@ -182,7 +190,9 @@ export default function HomePage() {
             </span>
           </div>
           <div className="flex flex-row justify-center gap-4">
-            <Button size={"lg"}>Start My Health Loop</Button>
+            <Button size={"lg"} asChild>
+              <Link href="/start">Start My Health Loop</Link>
+            </Button>
           </div>
         </section>
 
@@ -332,12 +342,16 @@ export default function HomePage() {
 
           <p className="mt-6 text-3xl">This isn’t our system. It’s yours.</p>
           <div className="flex flex-col justify-center gap-4 md:flex-row">
-            <Button size={"lg"}>Start My Health Loop</Button>
-            <Button variant={"outline"} size={"lg"}>
-              <div className="flex flex-row items-center gap-2">
-                <GithubLogo className="h-10 w-10" weight="fill" />
-                View Our Code
-              </div>
+            <Button size={"lg"} asChild>
+              <Link href="/start">Start My Health Loop</Link>
+            </Button>
+            <Button variant={"outline"} size={"lg"} asChild>
+              <a target="_blank" href="https://github.com/un/potential">
+                <div className="flex flex-row items-center gap-2">
+                  <GithubLogo className="h-10 w-10" weight="fill" />
+                  View Our Code
+                </div>
+              </a>
             </Button>
           </div>
         </section>
