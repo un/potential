@@ -34,7 +34,7 @@ export function NavMenu({
     <div className="flex w-full justify-center px-0 md:px-4">
       <nav
         className={cn(
-          "bg-sand-1 my-4 grid w-full max-w-screen-lg grid-cols-6 items-center justify-between rounded-full px-0 py-0 pl-0 shadow-sm md:px-8",
+          "bg-sand-1 my-4 grid w-full max-w-screen-lg grid-cols-6 items-center justify-between rounded-full px-0 py-0 pl-0 shadow-sm md:pr-8",
           className,
         )}
       >

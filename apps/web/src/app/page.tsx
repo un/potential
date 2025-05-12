@@ -74,7 +74,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col items-center justify-center gap-2">
-            <p className="text-balance text-2xl">
+            <p className="text-balance text-center text-2xl">
               The longer you use <span>Potential</span>, the smarter it gets —
               the faster your results come to life.
             </p>
