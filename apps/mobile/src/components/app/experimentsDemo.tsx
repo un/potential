@@ -53,7 +53,7 @@ function ExperimentDetails({
 
       <View className={"flex w-[100px] flex-row gap-1"}>
         <View className={"flex w-[30px] flex-col items-center gap-0"}>
-          <View className={"mt-2 flex flex-row items-center gap-0"}>
+          <View className={"flex flex-row items-center gap-0"}>
             <View
               className="bg-tomato-10 h-1 rounded-bl-full rounded-tl-full"
               style={{ width: `${step1bar1Width}%` }}
@@ -63,10 +63,9 @@ function ExperimentDetails({
               style={{ width: `${step1bar2Width}%` }}
             />
           </View>
-          <Text className="text-sand-10 text-[9px]">Test 1</Text>
         </View>
         <View className={"flex w-[30px] flex-col items-center gap-0"}>
-          <View className={"mt-2 flex flex-row items-center gap-0"}>
+          <View className={"flex flex-row items-center gap-0"}>
             <View
               className="bg-tomato-10 h-1"
               style={{ width: `${step2bar1Width}%` }}
@@ -76,10 +75,9 @@ function ExperimentDetails({
               style={{ width: `${step2bar2Width}%` }}
             />
           </View>
-          <Text className="text-sand-10 text-[9px]">Test 2</Text>
         </View>
         <View className={"flex w-[30px] flex-col items-center gap-0"}>
-          <View className={"mt-2 flex flex-row items-center gap-0"}>
+          <View className={"flex flex-row items-center gap-0"}>
             <View
               className="bg-tomato-10 h-1"
               style={{ width: `${step3bar1Width}%` }}
@@ -89,7 +87,6 @@ function ExperimentDetails({
               style={{ width: `${step3bar2Width}%` }}
             />
           </View>
-          <Text className="text-sand-10 text-[9px]">Test 3</Text>
         </View>
       </View>
     </View>
