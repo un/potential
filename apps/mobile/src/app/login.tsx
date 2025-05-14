@@ -1,13 +1,15 @@
-import { useForm } from "@tanstack/react-form";
-import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Stack, useRouter } from "expo-router";
+import * as WebBrowser from "expo-web-browser";
+import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 
 import { Logo } from "~/components/branding/logo";
 import { Loading } from "~/components/loading";
 import { Button } from "~/components/ui/button";
+import { Checkbox } from "~/components/ui/checkbox";
 import { Input } from "~/components/ui/input";
 import { Text } from "~/components/ui/text";
 import { authClient } from "~/utils/auth-client";
@@ -21,6 +23,7 @@ export default function Login() {
   const [isSwitchingFormMode, setIsSwitchingFormMode] = useState(false);
   const [formMode, setFormMode] = useState<"login" | "join">("login");
   const router = useRouter();
+  const [agreeTerms, setAgreeTerms] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -57,6 +60,15 @@ export default function Login() {
       setFormMode(formMode === "login" ? "join" : "login");
       setIsSwitchingFormMode(false);
     }, 1000);
+  };
+
+  const handleTermsPress = async () => {
+    await WebBrowser.openBrowserAsync("https://legal.u22n.com/potential/terms");
+  };
+  const handlePrivacyPress = async () => {
+    await WebBrowser.openBrowserAsync(
+      "https://legal.u22n.com/potential/privacy",
+    );
   };
 
   return (
@@ -106,6 +118,34 @@ export default function Login() {
                 }}
               />
               <View className="flex w-full max-w-sm flex-col gap-4">
+                {formMode === "join" && (
+                  <View className="-mt-4 mb-4 flex h-fit flex-row items-center gap-4">
+                    <Checkbox
+                      size={"sm"}
+                      id="terms"
+                      checked={agreeTerms}
+                      onCheckedChange={setAgreeTerms}
+                    />
+                    <View className="">
+                      <Text className="text-sand-11 text-sm">
+                        I agree to the{" "}
+                        <Text
+                          className="text-sand-11 text-sm underline"
+                          onPress={handleTermsPress}
+                        >
+                          Terms of Service
+                        </Text>{" "}
+                        and{" "}
+                        <Text
+                          className="text-sand-11 text-sm underline"
+                          onPress={handlePrivacyPress}
+                        >
+                          Privacy Policy
+                        </Text>
+                      </Text>
+                    </View>
+                  </View>
+                )}
                 <form.Subscribe
                   selector={(state) => [state.canSubmit, state.isSubmitting]}
                   children={([canSubmit, isSubmitting]) => (
@@ -113,7 +153,9 @@ export default function Login() {
                       // eslint-disable-next-line @typescript-eslint/unbound-method
                       onPress={form.handleSubmit}
                       loading={isLoading || isSubmitting}
-                      disabled={!canSubmit}
+                      disabled={
+                        !canSubmit || (!agreeTerms && formMode === "join")
+                      }
                     >
                       <Text>{formMode === "login" ? "Login" : "Join"}</Text>
                     </Button>
@@ -129,12 +171,6 @@ export default function Login() {
               </View>
             </View>
             {/* </form> */}
-            {formMode === "join" && (
-              <Text className="text-sand-11 mb-8 text-sm">
-                Potential Health is currently in beta. Please be sure to check our
-                communities for regular updates.
-              </Text>
-            )}
           </View>
         )}
       </KeyboardAvoidingView>
