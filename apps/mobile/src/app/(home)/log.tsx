@@ -16,7 +16,7 @@ import {
 
 import { TrackableLogStep } from "~/components/app/trackableLogStep";
 import { Text } from "~/components/ui/text";
-import { cn } from "~/utils/ui";
+import { cn, iconColor } from "~/utils/ui";
 
 // Button component for consistent styling and behavior
 function LogButton({
@@ -188,24 +188,30 @@ export default function Logger() {
             </Text>
             <View className="flex flex-row flex-wrap items-center justify-start gap-3 p-0">
               <LogButton
-                icon={<ForkKnife size={24} weight="bold" />}
+                icon={<ForkKnife size={24} weight="bold" color={iconColor()} />}
                 label="Food/Drink"
                 onPress={() => setCurrentStep("food")}
               />
               <LogButton
-                icon={<PersonSimpleRun size={24} weight="bold" />}
+                icon={
+                  <PersonSimpleRun
+                    size={24}
+                    weight="bold"
+                    color={iconColor()}
+                  />
+                }
                 label="Activities"
                 soon={true}
                 onPress={() => setCurrentStep("activities")}
               />
               <LogButton
-                icon={<Bed size={24} weight="bold" />}
+                icon={<Bed size={24} weight="bold" color={iconColor()} />}
                 label="Sleep"
                 soon={true}
                 onPress={() => setCurrentStep("sleep")}
               />
               <LogButton
-                icon={<Pill size={24} weight="bold" />}
+                icon={<Pill size={24} weight="bold" color={iconColor()} />}
                 label="Supplements"
                 soon={true}
                 onPress={() => setCurrentStep("supplements")}
@@ -218,18 +224,24 @@ export default function Logger() {
             </Text>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <LogButton
-                icon={<Brain size={24} weight="bold" />}
+                icon={<Brain size={24} weight="bold" color={iconColor()} />}
                 label="Mind"
                 onPress={() => setCurrentStep("mind")}
               />
               <LogButton
-                icon={<Lightning size={24} weight="bold" />}
+                icon={<Lightning size={24} weight="bold" color={iconColor()} />}
                 label="Energy"
                 soon={true}
                 onPress={() => setCurrentStep("energy")}
               />
               <LogButton
-                icon={<ArrowsClockwise size={24} weight="bold" />}
+                icon={
+                  <ArrowsClockwise
+                    size={24}
+                    weight="bold"
+                    color={iconColor()}
+                  />
+                }
                 label="Cycles"
                 soon={true}
                 onPress={() => setCurrentStep("cycles")}
@@ -241,18 +253,24 @@ export default function Logger() {
             </Text>
             <View className="flex w-full flex-row items-center justify-between gap-2">
               <LogButton
-                icon={<PersonArmsSpread size={24} weight="bold" />}
+                icon={
+                  <PersonArmsSpread
+                    size={24}
+                    weight="bold"
+                    color={iconColor()}
+                  />
+                }
                 label="Body"
                 onPress={() => setCurrentStep("body")}
               />
               <LogButton
-                icon={<Virus size={24} weight="bold" />}
+                icon={<Virus size={24} weight="bold" color={iconColor()} />}
                 label="Symptoms"
                 soon={true}
                 onPress={() => setCurrentStep("symptoms")}
               />
               <LogButton
-                icon={<Drop size={24} weight="bold" />}
+                icon={<Drop size={24} weight="bold" color={iconColor()} />}
                 label="Blood"
                 soon={true}
                 onPress={() => setCurrentStep("blood")}

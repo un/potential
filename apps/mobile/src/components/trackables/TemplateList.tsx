@@ -8,6 +8,7 @@ import type { BaseTemplate } from "@potential/templates";
 import { filterTemplatesByType } from "@potential/templates";
 
 import { Text } from "~/components/ui/text";
+import { iconColor } from "~/utils/ui";
 import { Button } from "../ui/button";
 import { NewTrackable } from "./new";
 
@@ -74,7 +75,7 @@ export function TemplateList({
             className="mb-4 self-start"
           >
             <View className="flex flex-row items-center gap-2">
-              <ArrowLeft size={20} />
+              <ArrowLeft size={20} color={iconColor()} />
               <Text>Back</Text>
             </View>
           </Button>

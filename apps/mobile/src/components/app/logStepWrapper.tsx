@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ArrowLeft } from "phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
-import { cn } from "~/utils/ui";
+import { cn, iconColor } from "~/utils/ui";
 
 interface LogStepWrapperProps {
   title: string;
@@ -51,7 +51,7 @@ export const LogStepWrapper = ({
               onPress={onBack}
               className="flex flex-row items-center gap-4"
             >
-              <ArrowLeft size={24} weight="bold" />
+              <ArrowLeft size={24} weight="bold" color={iconColor()} />
               <Text type="title">{title}</Text>
             </Pressable>
           </View>

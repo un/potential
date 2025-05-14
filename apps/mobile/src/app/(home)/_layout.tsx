@@ -6,6 +6,7 @@ import { CaretLeft, X } from "phosphor-react-native";
 import UserHeader from "~/components/app/userHeader";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
+import { iconColor } from "~/utils/ui";
 
 export default function DashboardLayout() {
   const { colorScheme } = useColorScheme();
@@ -41,7 +42,7 @@ export default function DashboardLayout() {
           headerBackVisible: false,
           headerLeft: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <CaretLeft size={24} />
+              <CaretLeft size={24} color={iconColor()} />
             </Button>
           ),
         }}
@@ -53,7 +54,7 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              <X size={24} color={iconColor()} />
             </Button>
           ),
         }}
@@ -65,7 +66,7 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              <X size={24} color={iconColor()} />
             </Button>
           ),
         }}
@@ -77,7 +78,7 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              <X size={24} color={iconColor()} />
             </Button>
           ),
         }}
@@ -89,7 +90,7 @@ export default function DashboardLayout() {
           presentation: "modal",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              <X size={24} color={iconColor()} />
             </Button>
           ),
         }}
@@ -101,7 +102,7 @@ export default function DashboardLayout() {
           presentation: "card",
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
-              <X size={24} />
+              <X size={24} color={iconColor()} />
             </Button>
           ),
           headerLeft: () => (
@@ -110,7 +111,7 @@ export default function DashboardLayout() {
               size="icon"
               onPress={() => router.replace("/(home)")}
             >
-              <CaretLeft size={24} />
+              <CaretLeft size={24} color={iconColor()} />
             </Button>
           ),
         }}

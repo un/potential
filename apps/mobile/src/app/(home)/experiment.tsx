@@ -7,7 +7,7 @@ import { PaperPlane } from "phosphor-react-native";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Text } from "~/components/ui/text";
-import { cn } from "~/utils/ui";
+import { cn, iconColor } from "~/utils/ui";
 
 export default function NewExperiment() {
   return (
@@ -66,7 +66,7 @@ export default function NewExperiment() {
           <View className="flex h-fit w-full flex-row items-center gap-2">
             <Input placeholder="" value={""} onChangeText={() => null} />
             <Button className="h-fit" variant={"secondary"}>
-              <PaperPlane size={24} color="#f9f9f8" />
+              <PaperPlane size={24} color={iconColor({ lightColor: true })} />
             </Button>
           </View>
           <Button className="h-fit w-full">

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Bug, Fire, Gear, Star } from "phosphor-react-native";
 
 import { trpc } from "~/utils/api";
+import { iconColor } from "~/utils/ui";
 import { Text } from "../ui/text";
 
 export default function UserHeader() {
@@ -19,7 +20,7 @@ export default function UserHeader() {
     >
       <View className="">
         <Link href="/(home)/profile">
-          <Gear size={24} />
+          <Gear size={24} color={iconColor()} />
         </Link>
       </View>
 
@@ -29,16 +30,16 @@ export default function UserHeader() {
             <Text className="" type="title">
               {profileData?.xpTotal.toString().split(".")[0]}
             </Text>
-            <Star size={18} />
+            <Star size={18} color={iconColor()} />
           </View>
           <View className="flex flex-row items-center justify-end gap-1">
             <Text className="" type="title">
               {profileData?.streakCurrentDays}
             </Text>
-            <Fire size={18} />
+            <Fire size={18} color={iconColor()} />
           </View>
           <View className="flex flex-row items-center justify-end gap-1">
-            <Bug size={18} />
+            <Bug size={18} color={iconColor()} />
           </View>
         </View>
       </Link>

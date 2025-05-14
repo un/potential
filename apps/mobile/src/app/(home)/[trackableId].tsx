@@ -20,6 +20,7 @@ import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { queryClient, trpc } from "~/utils/api";
+import { cn } from "~/utils/ui";
 
 // Define types for the trackable values based on different input types
 type TrackableValueType =
@@ -358,7 +359,15 @@ export default function TrackableDetailsPage() {
             <View className="flex flex-col gap-4">
               {logs.map((log) => (
                 <Card key={log.id} className="border-sand-6 border">
-                  <View className="flex flex-row items-center justify-between">
+                  <View
+                    className={cn(
+                      trackableType === "shortText" ||
+                        trackableType === "longText"
+                        ? "border-sand-6 flex-col-reverse border-b pb-2"
+                        : "flex-row",
+                      "flex items-center justify-between gap-2",
+                    )}
+                  >
                     <View>
                       {/* Use our display component for each log - small size */}
                       {getValueFromLog({
@@ -382,10 +391,10 @@ export default function TrackableDetailsPage() {
                       </View>
                     )}
 
-                  {log.textValue &&
+                  {/* {log.textValue &&
                     log.textValue !== log.numericValue?.toString() && (
                       <Text className="mt-2 text-sm">{log.textValue}</Text>
-                    )}
+                    )} */}
                 </Card>
               ))}
             </View>

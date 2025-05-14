@@ -19,6 +19,7 @@ import { Rating } from "~/components/ui/rating";
 import { Slider } from "~/components/ui/slider";
 import { Text } from "~/components/ui/text";
 import { queryClient, trpc } from "~/utils/api";
+import { iconColor } from "~/utils/ui";
 import { Dropdown } from "../ui/dropdown";
 
 type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
@@ -517,7 +518,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
                 onPress={() => setShowDescription(true)}
                 className="flex flex-row gap-4 self-start"
               >
-                <Plus size={12} />
+                <Plus size={12} color={iconColor()} />
                 <Text>Description</Text>
               </Button>
             ) : (

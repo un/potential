@@ -9,6 +9,7 @@ import { RequestPermission } from "~/components/ui/request-permission";
 import { Text } from "~/components/ui/text";
 import { usePermission } from "~/lib/hooks/usePermission";
 import { processCameraPicture } from "~/utils/images/image-processing";
+import { iconColor } from "~/utils/ui";
 
 interface CameraComponentProps {
   onPictureTaken?: (processedImage: ProcessedImage) => void;
@@ -78,14 +79,14 @@ export function CameraComponent({ onPictureTaken }: CameraComponentProps) {
               className="bg-sand-10 rounded-3xl p-4"
               onPress={toggleCameraFacing}
             >
-              <ArrowsClockwise size={24} weight="bold" />
+              <ArrowsClockwise size={24} weight="bold" color={iconColor()} />
             </TouchableOpacity>
             <TouchableOpacity
               className="bg-sand-10 rounded-3xl p-4"
               onPress={takePicture}
               disabled={isTakingPicture}
             >
-              <Camera size={24} weight="bold" />
+              <Camera size={24} weight="bold" color={iconColor()} />
             </TouchableOpacity>
             {error && <Text className="text-red-9 p-6">{error}</Text>}
           </View>
