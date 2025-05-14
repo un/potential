@@ -13,6 +13,8 @@ export const env = createEnv({
     BASE_URL: z.string(),
     EXPO_PUBLIC_BACKEND_URL: z.string(),
     AUTH_SECRET: z.string(),
+    RESEND_API_KEY: z.string(),
+    RESEND_AUDIENCE_ID: z.string(),
   },
   client: {
     NEXT_PUBLIC_URL: z.string(),

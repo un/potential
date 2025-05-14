@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Envelope } from "@phosphor-icons/react/dist/ssr";
 
 import { Button } from "../components/button";
 import { Divider } from "../components/divider";
+import { EmailSignupDialog } from "../components/email-signup-dialog";
 
 interface Feature {
   title: string;
@@ -12,23 +12,35 @@ interface Feature {
 export default function StartPage() {
   const readyFeatures: Feature[] = [
     {
-      title: "Early access pricing ($75 → $50/year lifetime)",
+      title: "Early access pricing - $50/year Locked In",
       date: "Now",
     },
     {
-      title: "Get Your Plan",
-      date: "May 19, 2025",
+      title: "Use 20 health tracking templates",
+      date: "Now",
     },
     {
-      title: "Track & Evolve",
-      date: "May 26, 2025",
+      title: "Add ∞ custom trackers",
+      date: "Now",
     },
   ];
 
   const comingSoonFeatures: Feature[] = [
     {
-      title: "Chat with Your Model",
-      date: "May 19, 2025",
+      title: "Ai Analysis of photos/text",
+      date: "May, 2025",
+    },
+    {
+      title: "Track Calories and Ingredients",
+      date: "May, 2025",
+    },
+    {
+      title: "Ai Guided Experiments",
+      date: "June, 2025",
+    },
+    {
+      title: "Public Profile Page",
+      date: "July, 2025",
     },
     {
       title: "📱 Android App",
@@ -68,16 +80,11 @@ export default function StartPage() {
         </div>
         <div className="flex flex-col justify-center gap-4 md:flex-row">
           <Button size={"lg"} asChild>
-            <Link href="/start">Signup for Early Access</Link>
+            <a href="https://buy.stripe.com/6oE15Nfbp4jWdfGaEF" target="_blank">
+              Signup for Early Access
+            </a>
           </Button>
-          <Button variant={"outline"} size={"lg"} asChild>
-            <Link href="#how-it-works">
-              <div className="flex flex-row items-center gap-2">
-                Get updates
-                <Envelope />
-              </div>
-            </Link>
-          </Button>
+          <EmailSignupDialog />
         </div>
         <p className="text-sand-11 text-sm">
           Scroll down to see what's coming up soon.
@@ -130,14 +137,7 @@ export default function StartPage() {
         <Button size={"lg"} asChild>
           <Link href="/start">Start My Health Loop</Link>
         </Button>
-        <Button variant={"outline"} size={"lg"} asChild>
-          <Link href="#how-it-works">
-            <div className="flex flex-row items-center gap-2">
-              How It Works
-              <ArrowRight />
-            </div>
-          </Link>
-        </Button>
+        <EmailSignupDialog />
       </div>
       <div className="flex flex-col items-center gap-2">
         <p className="text-balance text-center text-xl">
