@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 import { Check } from "phosphor-react-native";
 
 import { Loading } from "~/components/loading";
-import { cn } from "~/utils/ui";
+import { cn, iconColor } from "~/utils/ui";
 
 const checkboxVariants = cva(
   "group flex items-center justify-center rounded-md border p-3",
@@ -66,7 +66,7 @@ const Checkbox = React.forwardRef<
           <Check
             size={size === "lg" ? 24 : size === "sm" ? 12 : 16}
             weight="bold"
-            color={"#f9f9f8"}
+            color={iconColor({ lightColor: true })}
           />
         ) : null}
       </Pressable>

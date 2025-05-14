@@ -6,7 +6,6 @@ import React, {
 } from "react";
 import { Image, Modal, Pressable, ScrollView, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useColorScheme } from "nativewind";
 import { Camera, Images, X, XCircle } from "phosphor-react-native";
 
 import type { CloudTypeId } from "@potential/utils";
@@ -19,6 +18,7 @@ import {
   processImage,
 } from "~/utils/images/image-processing";
 import { useImageUpload } from "~/utils/images/image-upload";
+import { iconColor } from "~/utils/ui";
 import { Button } from "./button";
 import { Text } from "./text";
 
@@ -77,7 +77,6 @@ export const ImagePickerUploader = forwardRef<
     const [error, setError] = useState<string | null>(null);
 
     const { uploadImages, isLoading: isUploading } = useImageUpload();
-    const { colorScheme } = useColorScheme();
 
     // Notify parent about state changes
     const updateParent = useCallback(() => {
@@ -339,14 +338,14 @@ export const ImagePickerUploader = forwardRef<
             onPress={() => setShowCamera(true)}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Camera size={24} color={"#f9f9f8"} />
+            <Camera size={24} color={iconColor({ lightColor: true })} />
           </Button>
           <Button
             size="icon-lg"
             onPress={handlePickImages}
             disabled={isUploading || isMaxImagesReached}
           >
-            <Images size={24} color={"#f9f9f8"} />
+            <Images size={24} color={iconColor({ lightColor: true })} />
           </Button>
           {onSubmit && (
             <Button
@@ -382,7 +381,7 @@ export const ImagePickerUploader = forwardRef<
               className="bg-red-9 rounded-2xl p-3"
               onPress={() => setShowCamera(false)}
             >
-              <X size={24} />
+              <X size={24} color={iconColor({ lightColor: true })} />
             </Pressable>
           </View>
         </Modal>
