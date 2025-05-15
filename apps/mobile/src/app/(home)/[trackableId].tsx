@@ -20,6 +20,7 @@ import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { queryClient, trpc } from "~/utils/api";
+import { timeAgoText } from "~/utils/date";
 import { cn } from "~/utils/ui";
 
 // Define types for the trackable values based on different input types
@@ -269,9 +270,14 @@ export default function TrackableDetailsPage() {
                   {logs[0]?.createdAt &&
                     (trackableType === "shortText" ||
                       trackableType === "longText") && (
-                      <Text className="text-sand-11 mt-2 text-xs">
-                        {new Date(logs[0].createdAt).toLocaleString()}
-                      </Text>
+                      <View className="mt-2 flex flex-col items-center gap-0">
+                        <Text className="text-sand-11 text-xs">
+                          {timeAgoText({ date: new Date(logs[0].createdAt) })}
+                        </Text>
+                        <Text className="text-sand-11 text-xs">
+                          {new Date(logs[0].createdAt).toLocaleString()}
+                        </Text>
+                      </View>
                     )}
 
                   {getValueFromLog({
@@ -285,9 +291,14 @@ export default function TrackableDetailsPage() {
                   {logs[0]?.createdAt &&
                     trackableType !== "shortText" &&
                     trackableType !== "longText" && (
-                      <Text className="text-sand-11 mt-2 text-xs">
-                        {new Date(logs[0].createdAt).toLocaleString()}
-                      </Text>
+                      <View className="mt-2 flex flex-col items-center gap-0">
+                        <Text className="text-sand-11 text-xs">
+                          {timeAgoText({ date: new Date(logs[0].createdAt) })}
+                        </Text>
+                        <Text className="text-sand-11 text-xs">
+                          {new Date(logs[0].createdAt).toLocaleString()}
+                        </Text>
+                      </View>
                     )}
                 </View>
               ) : (

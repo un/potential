@@ -9,6 +9,7 @@ import type { TrackableType } from "~/types/trackables";
 import { getValueFromLog } from "~/components/trackables/displays";
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
+import { timeAgoText } from "~/utils/date";
 import { cn } from "~/utils/ui";
 import { Loading } from "../loading";
 
@@ -59,6 +60,14 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
     return trackableType === "shortText" || trackableType === "longText";
   };
 
+  const getLatestLogTime = () => {
+    if (!logs || logs.length === 0) return "";
+    const latestLog = logs[0];
+    if (!latestLog) return "";
+    const latestLogTime = latestLog.createdAt;
+    return timeAgoText({ date: new Date(latestLogTime) });
+  };
+
   return (
     <Pressable onPress={handlePress}>
       <View
@@ -67,11 +76,15 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
           shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
         )}
       >
-        <Text className="">{trackable.name}</Text>
+        <View className={"flex flex-row items-center gap-2"}>
+          <Text className="">{trackable.name}</Text>
+          <Text className="text-sand-10 text-xs">{getLatestLogTime()}</Text>
+        </View>
+
         {isLoading ? (
           <Loading size={"sm"} />
         ) : (
-          <View className={cn("flex items-center", "flex-row gap-0")}>
+          <View className={cn("flex items-center", "flex-row gap-2")}>
             {renderLatestValue()}
           </View>
         )}
