@@ -4,6 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
+// Import our new input components
+import { Plus } from "phosphor-react-native";
 import { toast } from "sonner-native";
 
 import type { ConstsTypes } from "@potential/consts";
@@ -13,15 +15,15 @@ import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-upload
 import type { Trackable, TrackableType } from "~/types/trackables";
 // Import our new display components
 import { getValueFromLog } from "~/components/trackables/displays";
-// Import our new input components
 import { getInputForTrackableType } from "~/components/trackables/inputs";
+import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { queryClient, trpc } from "~/utils/api";
 import { timeAgoText } from "~/utils/date";
-import { cn } from "~/utils/ui";
+import { cn, iconColor } from "~/utils/ui";
 
 // Define types for the trackable values based on different input types
 type TrackableValueType =
@@ -59,6 +61,8 @@ export default function TrackableDetailsPage() {
   });
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const [_isUploading, setIsUploading] = useState(false);
+  const [showNewLog, setShowNewLog] = useState(false);
+  const [showNewLogNoteField, setShowNewLogNoteField] = useState(false);
 
   const router = useRouter();
 
@@ -257,108 +261,134 @@ export default function TrackableDetailsPage() {
       <Stack.Screen options={{ title: trackable.name }} />
       <ScrollView className="flex-1 p-6">
         <View className="mb-6 flex flex-col gap-6">
-          {trackable.description && (
+          {trackable.description && !showNewLog && (
             <Text className="text-sand-11 text-xs">
               {trackable.description}
             </Text>
           )}
-          <Card>
-            <View className="flex flex-col items-center justify-center gap-0">
-              {logs && logs.length > 0 ? (
-                <View className="flex flex-col items-center justify-center gap-2">
-                  {/* Use our display component for the latest log - large size */}
-                  {logs[0]?.createdAt &&
-                    (trackableType === "shortText" ||
-                      trackableType === "longText") && (
-                      <View className="mt-2 flex flex-col items-center gap-0">
-                        <Text className="text-sand-11 text-xs">
-                          {timeAgoText({ date: new Date(logs[0].createdAt) })}
-                        </Text>
-                        <Text className="text-sand-11 text-xs">
-                          {new Date(logs[0].createdAt).toLocaleString()}
-                        </Text>
-                      </View>
-                    )}
+          {!showNewLog && (
+            <Card>
+              <View className="flex flex-col items-center justify-center gap-0">
+                {logs && logs.length > 0 ? (
+                  <View className="flex flex-col items-center justify-center gap-2">
+                    {/* Use our display component for the latest log - large size */}
+                    {logs[0]?.createdAt &&
+                      (trackableType === "shortText" ||
+                        trackableType === "longText") && (
+                        <View className="mt-2 flex flex-col items-center gap-0">
+                          <Text className="text-sand-11 text-xs">
+                            {timeAgoText({ date: new Date(logs[0].createdAt) })}
+                          </Text>
+                          <Text className="text-sand-11 text-xs">
+                            {new Date(logs[0].createdAt).toLocaleString()}
+                          </Text>
+                        </View>
+                      )}
 
-                  {getValueFromLog({
-                    log: logs[0],
-                    type: trackableType,
-                    config: safeCustomConfig,
-                    size: "lg",
-                    trackable: trackable as Trackable,
-                  })}
+                    {getValueFromLog({
+                      log: logs[0],
+                      type: trackableType,
+                      config: safeCustomConfig,
+                      size: "lg",
+                      trackable: trackable as Trackable,
+                    })}
 
-                  {logs[0]?.createdAt &&
-                    trackableType !== "shortText" &&
-                    trackableType !== "longText" && (
-                      <View className="mt-2 flex flex-col items-center gap-0">
-                        <Text className="text-sand-11 text-xs">
-                          {timeAgoText({ date: new Date(logs[0].createdAt) })}
-                        </Text>
-                        <Text className="text-sand-11 text-xs">
-                          {new Date(logs[0].createdAt).toLocaleString()}
-                        </Text>
-                      </View>
-                    )}
-                </View>
-              ) : (
-                <Text className="text-sand-11">No logs yet</Text>
-              )}
-            </View>
-          </Card>
+                    {logs[0]?.createdAt &&
+                      trackableType !== "shortText" &&
+                      trackableType !== "longText" && (
+                        <View className="mt-2 flex flex-col items-center gap-0">
+                          <Text className="text-sand-11 text-xs">
+                            {timeAgoText({ date: new Date(logs[0].createdAt) })}
+                          </Text>
+                          <Text className="text-sand-11 text-xs">
+                            {new Date(logs[0].createdAt).toLocaleString()}
+                          </Text>
+                        </View>
+                      )}
+                  </View>
+                ) : (
+                  <Text className="text-sand-11">No logs yet</Text>
+                )}
+              </View>
+            </Card>
+          )}
 
           {/* Data Entry Section */}
-          <View className="border-sand-6 bg-sand-2 flex flex-col gap-4 rounded-lg border p-4">
-            <Text type="title" className="text-lg">
-              New Log
-            </Text>
+          {showNewLog ? (
+            <View className="border-sand-6 bg-sand-1 flex flex-col gap-4 rounded-lg border px-6 py-4">
+              {/* Trackable Input - Use our new input components */}
+              <View className="flex flex-col gap-2">
+                {getInputForTrackableType(
+                  trackableType,
+                  trackableValue,
+                  handleTrackableValueChange,
+                  safeCustomConfig,
+                )}
+              </View>
 
-            {/* Trackable Input - Use our new input components */}
-            <View className="flex flex-col gap-2">
-              {getInputForTrackableType(
-                trackableType,
-                trackableValue,
-                handleTrackableValueChange,
-                safeCustomConfig,
+              {/* Notes Section */}
+              {showNewLogNoteField ? (
+                <form.Field
+                  name="text"
+                  children={(field) => {
+                    return (
+                      <Textarea
+                        id={field.name}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChangeText={field.handleChange}
+                        error={
+                          field.state.meta.errors.length > 0
+                            ? [
+                                {
+                                  message: field.state.meta.errors[0],
+                                },
+                              ]
+                            : ""
+                        }
+                        label="Add a note"
+                        placeholder="Add any additional notes here..."
+                        editable={!isFormSubmitting}
+                      />
+                    );
+                  }}
+                />
+              ) : (
+                <Button
+                  variant={"link"}
+                  size={"sm"}
+                  onPress={() => setShowNewLogNoteField(true)}
+                >
+                  <View className="-ml-8 flex w-full flex-row items-start gap-2">
+                    <Plus size={16} color={iconColor()} />
+                    <Text className="text-sand-11 text-left text-xs">
+                      Add a note
+                    </Text>
+                  </View>
+                </Button>
               )}
+
+              {/* Image Upload */}
+              <ImagePickerUploader
+                ref={imagePickerRef}
+                onImagesChanged={setImageState}
+                onUploadStateChange={setIsUploading}
+                onSubmit={handleSubmit}
+                submitting={isFormSubmitting}
+              />
+              <Button
+                variant={"outline"}
+                onPress={() => setShowNewLog(false)}
+                className="w-full"
+              >
+                <Text>Cancel</Text>
+              </Button>
             </View>
-
-            {/* Notes Section */}
-            <form.Field
-              name="text"
-              children={(field) => {
-                return (
-                  <Textarea
-                    id={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChangeText={field.handleChange}
-                    error={
-                      field.state.meta.errors.length > 0
-                        ? [
-                            {
-                              message: field.state.meta.errors[0],
-                            },
-                          ]
-                        : ""
-                    }
-                    label="Add a note (optional)"
-                    placeholder="Add any additional notes here..."
-                    editable={!isFormSubmitting}
-                  />
-                );
-              }}
-            />
-
-            {/* Image Upload */}
-            <ImagePickerUploader
-              ref={imagePickerRef}
-              onImagesChanged={setImageState}
-              onUploadStateChange={setIsUploading}
-              onSubmit={handleSubmit}
-              submitting={isFormSubmitting}
-            />
-          </View>
+          ) : (
+            <Button onPress={() => setShowNewLog(true)}>
+              <Text>New Log</Text>
+            </Button>
+          )}
 
           <Text type="title" className="-mb-4">
             History

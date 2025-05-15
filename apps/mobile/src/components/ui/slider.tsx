@@ -310,7 +310,7 @@ export function Slider({
 
   // Render the component
   return (
-    <View className="pb-12">
+    <View className="">
       <GestureHandlerRootView className={cn("w-full py-4", className)}>
         <View className="relative">
           {/* Track with tap gesture */}

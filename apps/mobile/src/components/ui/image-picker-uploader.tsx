@@ -334,14 +334,14 @@ export const ImagePickerUploader = forwardRef<
 
         <View className="flex w-full flex-row items-center gap-4">
           <Button
-            size="icon-lg"
+            size="icon"
             onPress={() => setShowCamera(true)}
             disabled={isUploading || isMaxImagesReached}
           >
             <Camera size={24} color={iconColor({ lightColor: true })} />
           </Button>
           <Button
-            size="icon-lg"
+            size="icon"
             onPress={handlePickImages}
             disabled={isUploading || isMaxImagesReached}
           >
@@ -350,7 +350,6 @@ export const ImagePickerUploader = forwardRef<
           {onSubmit && (
             <Button
               className="grow"
-              size="lg"
               onPress={onSubmit}
               loading={submitting}
               disabled={submitting || isUploading}
