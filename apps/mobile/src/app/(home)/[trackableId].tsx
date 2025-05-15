@@ -180,7 +180,7 @@ export default function TrackableDetailsPage() {
     // For other types or if no logs available, use defaults
     switch (configType) {
       case "measure":
-        return 0;
+        return logs?.[0]?.numericValue ?? 0;
       case "checkbox":
         return false;
       case "range":
@@ -191,9 +191,9 @@ export default function TrackableDetailsPage() {
         ) {
           return trackable.customConfig.rangeMin;
         }
-        return 0;
+        return logs?.[0]?.numericValue ?? 0;
       case "rating":
-        return 0;
+        return logs?.[0]?.numericValue ?? 0;
       case "shortText":
       case "longText":
         return "";

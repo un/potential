@@ -26,9 +26,11 @@ export const logRouter = {
     .mutation(async ({ ctx, input }) => {
       const { db, auth } = ctx;
       const user = auth.user;
-      console.log("🔥", { id: input.trackableId, value: input.trackableValue });
       // Check if a trackable was selected
-      if (input.trackableId && input.trackableValue) {
+      if (
+        input.trackableId &&
+        (input.trackableValue || input.trackableValue === 0)
+      ) {
         try {
           // Construct the log data that would be saved to the database
 
@@ -90,7 +92,6 @@ export const logRouter = {
 
         console.log("Regular log (no trackable selected):", input);
 
-        // This is a placeholder - in a real app, you'd have some database operation here
         await Promise.resolve();
 
         return {
