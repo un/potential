@@ -29,8 +29,14 @@ export default function Profile() {
             <Text>Email: {session?.user.email ?? "Not available"}</Text>
           </View>
 
-          <Button variant={"destructive"} onPress={() => handleLogout()}>
+          <Button onPress={() => handleLogout()}>
             <Text>Sign Out</Text>
+          </Button>
+          <Button
+            variant={"destructive"}
+            onPress={() => router.push("/delete")}
+          >
+            <Text>Permanently Delete Account</Text>
           </Button>
         </View>
       </ScrollView>

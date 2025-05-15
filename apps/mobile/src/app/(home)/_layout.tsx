@@ -61,6 +61,18 @@ export default function DashboardLayout() {
         }}
       />
       <Stack.Screen
+        name="delete"
+        options={{
+          title: "Delete Account",
+          presentation: "modal",
+          headerRight: () => (
+            <Button variant="link" size="icon" onPress={() => router.back()}>
+              <X size={24} color={iconColor()} />
+            </Button>
+          ),
+        }}
+      />
+      <Stack.Screen
         name="experiment"
         options={{
           title: "Run a new experiment",
