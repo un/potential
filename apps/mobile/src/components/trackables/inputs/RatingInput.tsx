@@ -42,7 +42,7 @@ export function RatingInput({
   const className = size === "sm" ? "gap-1" : size === "lg" ? "gap-3" : "gap-2";
 
   return (
-    <View className="flex-col gap-1">
+    <View className="flex-col items-center gap-1">
       <Rating
         value={value}
         onValueChange={onValueChange}
