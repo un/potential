@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import {
+  Stack,
+  useLocalSearchParams,
+  useNavigation,
+  useRouter,
+} from "expo-router";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
@@ -46,6 +51,8 @@ interface CreateLogPayload {
 }
 
 export default function TrackableDetailsPage() {
+  const navigation = useNavigation();
+
   const params = useLocalSearchParams();
   const trackableId = params.trackableId as string;
   const [trackableValue, setTrackableValue] =
@@ -67,6 +74,12 @@ export default function TrackableDetailsPage() {
       id: trackableId,
     }),
   );
+
+  useEffect(() => {
+    if (trackable) {
+      navigation.setOptions({ title: trackable.name });
+    }
+  }, [trackable, navigation]);
 
   const { data: logs, isLoading: isLoadingLogs } = useQuery(
     trpc.log.getLogsByTrackableId.queryOptions({
@@ -254,7 +267,7 @@ export default function TrackableDetailsPage() {
 
   return (
     <SafeAreaView className="flex-1" edges={{ bottom: "maximum" }}>
-      <Stack.Screen options={{ title: trackable.name }} />
+      <Stack.Screen />
       <ScrollView className="flex-1 p-6">
         <View className="mb-6 flex flex-col gap-6">
           {trackable.description && (
