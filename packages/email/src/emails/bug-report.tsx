@@ -26,7 +26,7 @@ export const BugReportEmail = ({
           <Container>
             <Section className="my-[32px]">
               <Text className="mb-[24px]">
-                Yo Omar! someone reported a bug on 1up Health
+                Yo Omar! someone reported a bug on Potential Health
               </Text>
               <Text className="mb-[24px]">{message}</Text>
             </Section>

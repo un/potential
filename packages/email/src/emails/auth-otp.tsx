@@ -16,26 +16,26 @@ export const AuthOtpEmail = ({ otpCode }: { otpCode: string }) => {
   return (
     <Html>
       <Head />
-      <Preview>Your 1up verification code: {otpCode}</Preview>
+      <Preview>Your Potential Health verification code: {otpCode}</Preview>
       <Tailwind>
         <Body className="bg-[#111110] font-serif">
           <Container className="mx-auto my-[40px] w-full max-w-[600px] rounded-[8px] bg-[#222221] p-[24px] text-center">
             <Section className="text-center">
               <Img
-                src="https://picsum.photos/120/120"
-                alt="1up Logo"
+                src="https://potentialhealth.io/apple-icon.png"
+                alt="Potential Health Logo"
                 width="120"
                 height="120"
                 className="mx-auto my-[16px]"
               />
               <Heading className="my-[16px] font-serif text-[32px] font-bold text-[#e5484d]">
-                1up Health
+                Potential Health
               </Heading>
             </Section>
 
             <Section className="my-[32px]">
               <Text className="mb-[24px] font-serif text-[16px] text-[#eeeeec]">
-                Your 1up verification code
+                Your verification code
               </Text>
 
               <Section className="my-[32px] text-center">
@@ -63,19 +63,15 @@ export const AuthOtpEmail = ({ otpCode }: { otpCode: string }) => {
                 email.
               </Text>
 
-              <Text className="mb-[24px] font-serif text-[16px] text-[#eeeeec]">
-                Level up your health journey!
-              </Text>
-
               <Text className="mb-[8px] font-serif text-[16px] text-[#eeeeec]">
-                The 1up Team
+                The Potential Health Team
               </Text>
             </Section>
 
             <Section className="mt-[32px] border-t-[1px] border-[#2a2a28] pt-[24px]">
               <Text className="m-0 font-serif text-[14px] text-[#b5b3ad]">
-                © {new Date().getFullYear()} 1up - Unproprietary Corporation.
-                All rights reserved.
+                © {new Date().getFullYear()} Potential Health - Unproprietary
+                Corporation. All rights reserved.
               </Text>
               {/* <Text className="m-0 font-serif text-[14px] text-[#eeeeec]">
                 Torstraße 123, 10119 Berlin, Germany
