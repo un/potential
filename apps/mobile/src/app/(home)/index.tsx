@@ -4,7 +4,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 
-import { ExperimentsDemo } from "~/components/app/experimentsDemo";
 import { TrackablesContainer } from "~/components/trackables/TrackablesContainer";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
@@ -15,9 +14,12 @@ export default function DashboardHome() {
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
       <View className="flex h-full flex-1 flex-col gap-2">
-        <ScrollView className="flex-1 p-6 pb-0">
-          <View className="mb-6 flex flex-1 flex-col gap-6">
-            <ExperimentsDemo />
+        <ScrollView
+          className="flex flex-1 flex-col gap-8 p-6 pb-0"
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
+          <View className="mb-6 flex flex-1 flex-col items-center gap-6">
+            {/* <ExperimentsDemo /> */}
             <TrackablesContainer />
           </View>
         </ScrollView>

@@ -1,12 +1,18 @@
 import React, { useMemo } from "react";
 import { View } from "react-native";
 import { useQuery } from "@tanstack/react-query";
+import {
+  ArrowBendLeftUp,
+  ArrowBendRightUp,
+  ArrowDown,
+} from "phosphor-react-native";
 
 import type { ConstsTypes } from "@potential/consts";
 import { CONSTS } from "@potential/consts";
 
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
+import { iconColor } from "~/utils/ui";
 import { Card } from "../ui/card";
 import { TrackableSection } from "./TrackableSection";
 
@@ -65,7 +71,7 @@ export function TrackablesContainer() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center font-serif">
+      <View className="flex-1 items-center justify-center">
         <Text>Loading trackables...</Text>
       </View>
     );
@@ -87,13 +93,42 @@ export function TrackablesContainer() {
 
   if (totalTrackables === 0) {
     return (
-      <View className="flex-1 items-center justify-center p-4">
-        <Text className="text-center font-serif text-lg">
-          No trackables found
-        </Text>
-        <Text className="text-center text-sm text-gray-500">
-          Add some trackables to start tracking your progress
-        </Text>
+      <View className="flex flex-1 flex-col items-center justify-between gap-2">
+        <View className="flex w-full flex-row items-center justify-between gap-2">
+          <View className="flex flex-row items-end gap-2">
+            <ArrowBendLeftUp size={24} color={iconColor()} />
+            <Text className="text-sand-11 -mb-1 text-xs">
+              Access your settings
+            </Text>
+          </View>
+          <View className="flex flex-row items-end gap-2">
+            <Text className="text-sand-11 -mb-1 text-xs">Check your stats</Text>
+
+            <ArrowBendRightUp size={24} color={iconColor()} />
+          </View>
+        </View>
+        <View className="flex flex-col items-center gap-2">
+          <Text className="text-center font-serif text-2xl italic">
+            Welcome to Potential Health
+          </Text>
+          <Text className="text-center text-sm">
+            Let&apos;s get started by tracking something new.
+          </Text>
+        </View>
+        <View className="flex flex-row items-center justify-center gap-8">
+          <View className="flex flex-col items-center gap-2">
+            <Text className="text-sand-11 -mb-1 text-xs">
+              Start tracking something new
+            </Text>
+            <ArrowDown size={24} color={iconColor()} />
+          </View>
+          <View className="flex flex-col items-center gap-2 px-4 pl-8">
+            <Text className="text-sand-11 -mb-1 text-xs">
+              Run your first experiment
+            </Text>
+            <ArrowDown size={24} color={iconColor()} />
+          </View>
+        </View>
       </View>
     );
   }
