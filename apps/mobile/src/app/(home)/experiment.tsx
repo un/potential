@@ -82,7 +82,7 @@ function BubbleHuman({ text }: { text: string }) {
   return (
     <View className="flex flex-row items-center gap-2">
       <View className="flex-1" />
-      <View className="bg-blue-5 ml-10 flex flex-row items-center gap-2 rounded-lg rounded-br-none px-3 py-2">
+      <View className="bg-sand-3 ml-10 flex flex-row items-center gap-2 rounded-lg rounded-br-none px-3 py-2">
         <Text className="text-sm">{text}</Text>
       </View>
     </View>
@@ -91,7 +91,7 @@ function BubbleHuman({ text }: { text: string }) {
 function BubbleAi({ text }: { text: string }) {
   return (
     <View className="flex w-full flex-row items-center gap-2">
-      <View className="bg-sand-5 mr-10 rounded-lg rounded-bl-none px-3 py-2">
+      <View className="mr-10 rounded-lg rounded-bl-none">
         <Text className="text-sm">{text}</Text>
       </View>
       <View className="bg-red-5 min-w-10 flex-1" />
