@@ -45,7 +45,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
           content: AuthOtpEmail({
             otpCode: (props as AuthEmailOTPProps).otpCode,
           }),
-          subject: "1up Login Code 🔑",
+          subject: "Potential Health Login Code 🔑",
         };
       case "bug-report":
         return {
@@ -53,7 +53,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
             message: (props as BugReportEmailProps).message,
             userEmail: (props as BugReportEmailProps).userEmail,
           }),
-          subject: "🚨 Bug Report from 1up Health",
+          subject: "🚨 Bug Report from Potential Health",
         };
       // case "welcome":
       //   return {
@@ -81,7 +81,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
 
   if (type === "bug-report") {
     const { error } = await resend.emails.send({
-      from: "1up Health Auth <no-reply@potential.xyz>",
+      from: "Potential Health Bugs <no-reply@potentialhealth.io>",
       to: "omar@mcadam.io",
       cc: to,
       replyTo: to,
@@ -99,7 +99,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
     return true;
   }
   const { error } = await resend.emails.send({
-    from: "1up Health Auth <no-reply@potential.xyz>",
+    from: "Potential Health Auth <no-reply@potentialhealth.io>",
     to,
     subject: template.subject,
     react: template.content,
