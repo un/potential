@@ -26,12 +26,14 @@ export function getValueFromLog({
   config,
   size = "sm",
   trackable,
+  short,
 }: {
   log: unknown;
   type: TrackableType;
   config: Record<string, unknown>;
   size?: "sm" | "md" | "lg";
   trackable: Trackable;
+  short?: boolean;
 }): React.ReactNode {
   if (!log) return null;
 
@@ -96,7 +98,7 @@ export function getValueFromLog({
       return getTextValueFromLog(safeLog, false, size);
 
     case "longText":
-      return getTextValueFromLog(safeLog, true, size);
+      return getTextValueFromLog(safeLog, true, size, short);
 
     default:
       return null;

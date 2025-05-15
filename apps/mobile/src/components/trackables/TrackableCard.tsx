@@ -51,6 +51,7 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
       type: trackableType,
       config: trackable.customConfig,
       trackable,
+      ...{ short: trackableType === "longText" },
     });
   };
 
