@@ -5,10 +5,11 @@
       "destination": "/api"
     }
   ],
-  "functions": {
-    "api/*.ts": {
-      "runtime": "nodejs22.x"
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/api",
+      "permanent": false
     }
-  },
-  "buildCommand": "pnpm build"
+  ]
 }
