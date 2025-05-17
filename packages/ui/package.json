@@ -43,7 +43,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "esbuild src/index.ts src/button.ts src/dropdown-menu.ts src/form.ts src/input.ts src/label.ts src/theme.ts src/toast.ts --outdir=dist --platform=browser --format=esm --bundle --external:@hookform/resolvers --external:@radix-ui/react-icons --external:class-variance-authority --external:next-themes --external:radix-ui --external:react-hook-form --external:sonner --external:tailwind-merge --external:react --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
@@ -66,6 +66,7 @@
     "@potential/tailwind-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
+    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:react19",

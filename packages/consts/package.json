@@ -15,13 +15,14 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc -p tsconfig.json",
+        "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
         "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
         "@potential/prettier-config": "workspace:*",
         "@potential/tsconfig": "workspace:*",
         "@potential/utils": "workspace:*",
+        "esbuild": "^0.25.4",
         "eslint": "catalog:",
         "prettier": "catalog:",
         "typescript": "catalog:",

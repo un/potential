@@ -19,7 +19,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "esbuild src/index.ts src/emails/*.ts --outdir=dist --platform=node --format=esm --bundle --external:@potential/consts --external:@potential/env --external:@react-email/components --external:dotenv --external:react --external:react-dom --external:resend && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
     "dev:package": "email dev --port 3001 --dir ./src/emails",
     "check": "tsc --noEmit"
   },
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@potential/prettier-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
+    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react-email": "^4.0.11",

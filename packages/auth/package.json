@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle --external:@better-auth/expo --external:@potential/consts --external:@potential/db --external:@potential/email --external:@potential/env --external:@potential/utils --external:@potential/validators --external:better-auth --external:dotenv --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
     "check": "tsc --noEmit",
     "auth:generate": "drizzle-kit push"
   },
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@potential/prettier-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
+    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "tsx": "^4.19.4",

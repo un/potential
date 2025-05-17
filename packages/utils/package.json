@@ -9,7 +9,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc -p tsconfig.json",
+        "build": "esbuild src/index.ts src/typeid.ts src/uiColors.ts src/ms.ts src/types/*.ts src/convert.ts src/storage.ts --outdir=dist --platform=node --format=esm --bundle --external:@potential/tsconfig --external:convert-units --external:itty-time --external:nanoid --external:typeid-js --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
         "check": "tsc --noEmit"
     },
     "exports": {
@@ -58,6 +58,7 @@
         "zod": "catalog:"
     },
     "devDependencies": {
-        "@potential/eslint-config": "workspace:*"
+        "@potential/eslint-config": "workspace:*",
+        "esbuild": "^0.25.4"
     }
 }

@@ -20,7 +20,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle --external:@aws-sdk/client-s3 --external:@aws-sdk/s3-request-presigner --external:@potential/env --external:@potential/tsconfig --external:date-fns --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev:package": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -36,6 +36,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@potential/eslint-config": "workspace:*"
+    "@potential/eslint-config": "workspace:*",
+    "esbuild": "^0.25.4"
   }
 }
