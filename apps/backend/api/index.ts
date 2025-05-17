@@ -253,9 +253,6 @@ if (process.env.NODE_ENV === "development") {
 
 // For Vercel serverless environment
 export default handle(app);
-export const config = {
-  runtime: "nodejs",
-};
 
 // Edge compatibility exports
 export const GET = handle(app);
