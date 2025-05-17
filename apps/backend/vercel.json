@@ -1,18 +1,23 @@
 {
-  "functions": {
-    "apps/backend/api/index.ts": {
-      "memory": 1024,
-      "maxDuration": 10
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "../../packages/**"
+        ]
+      }
     }
-  },
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/apps/backend/api/index.ts"
+      "destination": "/api/index.ts"
     },
     {
       "source": "/api",
-      "destination": "/apps/backend/api/index.ts"
+      "destination": "/api/index.ts"
     }
   ],
   "redirects": [
