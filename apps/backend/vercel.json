@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": "../../../packages/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
