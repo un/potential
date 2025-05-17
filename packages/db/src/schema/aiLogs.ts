@@ -1,8 +1,8 @@
 import { relations } from "drizzle-orm";
 import { json, mysqlEnum, mysqlTable, text } from "drizzle-orm/mysql-core";
 
-import type { CloudTypeId } from "@potential/utils/typeid";
-import { cloudTypeIdGenerator } from "@potential/utils/typeid";
+import type { CloudTypeId } from "@potential/utils";
+import { cloudTypeIdGenerator } from "@potential/utils";
 
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";

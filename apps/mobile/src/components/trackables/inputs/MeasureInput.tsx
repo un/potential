@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 
 import type { ConstsTypes } from "@potential/consts";
-import { convert } from "@potential/utils/convert";
+import { convert } from "@potential/utils";
 
 import { NumberInput } from "~/components/ui/number-input";
 

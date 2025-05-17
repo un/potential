@@ -5,7 +5,7 @@ import { z } from "zod";
 import type { TrackableCustomConfig } from "@potential/consts";
 import { CONSTS } from "@potential/consts";
 import { and, eq, trackables } from "@potential/db";
-import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@potential/utils/typeid";
+import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@potential/utils";
 
 import { protectedProcedure } from "../trpc";
 import { awardXpPoints } from "../utils/xpPoints";
