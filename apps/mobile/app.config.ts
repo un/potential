@@ -14,7 +14,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     env,
     onboardingVersion: "0.0.1",
     eas: {
-      projectId: "473dc1d3-c667-41e9-a543-508b4ec62250",
+      projectId: "f406fd9a-e9b0-4fd9-93f0-d2533b773a05",
     },
   },
   slug: "potential",
@@ -24,11 +24,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: "./assets/app/icon-light.png",
   userInterfaceStyle: "automatic",
   updates: {
-    fallbackToCacheTimeout: 0,
+    url: "https://u.expo.dev/f406fd9a-e9b0-4fd9-93f0-d2533b773a05",
   },
   newArchEnabled: true,
   assetBundlePatterns: ["**/*"],
   ios: {
+    runtimeVersion: "1.0.0",
     bundleIdentifier: "io.potentialhealth",
     supportsTablet: true,
     icon: {
@@ -42,6 +43,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     adaptiveIcon: {
       foregroundImage: "./assets/app/icon-light.png",
       backgroundColor: "#1F104A",
+    },
+    runtimeVersion: {
+      policy: "appVersion",
     },
   },
   experiments: {
