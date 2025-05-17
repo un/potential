@@ -10,7 +10,8 @@
     "plugins": [{ "name": "next" }],
     "module": "esnext",
     "outDir": "dist",
-    "rootDir": "api"
+    "rootDir": "api",
+    "noEmit": false
   },
   "include": ["api/**/*", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "dist"]
