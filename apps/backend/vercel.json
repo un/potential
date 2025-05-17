@@ -7,7 +7,7 @@
   ],
   "functions": {
     "api/*.ts": {
-      "runtime": "nodejs"
+      "runtime": "nodejs22.x"
     }
   },
   "buildCommand": "pnpm build"
