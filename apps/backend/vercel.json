@@ -4,5 +4,11 @@
       "source": "/api/(.*)",
       "destination": "/api"
     }
-  ]
+  ],
+  "functions": {
+    "api/*.ts": {
+      "runtime": "nodejs"
+    }
+  },
+  "buildCommand": "pnpm build"
 }

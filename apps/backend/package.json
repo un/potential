@@ -1,5 +1,6 @@
 {
   "name": "@potential/backend",
+  "type": "module",
   "scripts": {
     "dev": "ENVIRONMENT=development pnpm with-env tsx watch api/index.ts",
     "build": "tsc",

@@ -231,9 +231,6 @@ const shutdownServer = async (signal: string) => {
   }
 };
 
-// Start the server
-void startServer();
-
 // Handle graceful shutdown
 process.once("SIGINT", () => void shutdownServer("SIGINT"));
 process.once("SIGTERM", () => void shutdownServer("SIGTERM"));
@@ -249,11 +246,20 @@ process.on("unhandledRejection", (reason, promise) => {
   // Don't exit the process, just log the error
 });
 
-export default app;
+// For local development
+if (process.env.NODE_ENV === "development") {
+  void startServer();
+}
 
-const handler = handle(app);
-export const GET = handler;
-export const POST = handler;
-export const PATCH = handler;
-export const PUT = handler;
-export const OPTIONS = handler;
+// For Vercel serverless environment
+export default handle(app);
+export const config = {
+  runtime: "nodejs",
+};
+
+// Edge compatibility exports
+export const GET = handle(app);
+export const POST = handle(app);
+export const PATCH = handle(app);
+export const PUT = handle(app);
+export const OPTIONS = handle(app);
