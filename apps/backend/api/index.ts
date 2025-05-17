@@ -6,6 +6,7 @@ import { betterAuth } from "better-auth";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { handle } from "hono/vercel";
 import { customAlphabet } from "nanoid";
 import { z } from "zod";
 
@@ -249,3 +250,10 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 export default app;
+
+const handler = handle(app);
+export const GET = handler;
+export const POST = handler;
+export const PATCH = handler;
+export const PUT = handler;
+export const OPTIONS = handler;
