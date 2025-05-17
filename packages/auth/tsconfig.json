@@ -1,5 +1,13 @@
 {
   "extends": "@potential/tsconfig/internal-package.json",
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "emitDeclarationOnly": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

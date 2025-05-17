@@ -2,14 +2,24 @@
   "name": "@potential/email",
   "private": true,
   "type": "module",
-  "main": "./src/index.ts",
-  "module": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./emails/*": "./src/emails/*"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./emails/*": {
+      "import": "./dist/emails/*.js",
+      "types": "./dist/emails/*.d.ts"
+    }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "dev:package": "email dev --port 3001 --dir ./src/emails",
     "check": "tsc --noEmit"
   },

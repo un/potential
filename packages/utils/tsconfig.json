@@ -12,7 +12,10 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["eslint"]
+    "types": ["eslint"],
+    "rootDir": ".",
+    "emitDeclarationOnly": false,
+    "noEmit": false
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist"]

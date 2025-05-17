@@ -5,12 +5,12 @@ import type {
   ControllerProps,
   FieldPath,
   FieldValues,
+  Resolver,
   UseFormProps,
 } from "react-hook-form";
 import type { ZodType, ZodTypeDef } from "zod";
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cn } from "@potential/ui";
 import { Slot } from "radix-ui";
 import {
   useForm as __useForm,
@@ -19,20 +19,28 @@ import {
   useFormContext,
 } from "react-hook-form";
 
+import { cn } from "@potential/ui";
+
 import { Label } from "./label";
 
 const useForm = <
   TOut extends FieldValues,
   TDef extends ZodTypeDef,
-  TIn extends FieldValues,
+  TIn extends TOut,
 >(
   props: Omit<UseFormProps<TIn>, "resolver"> & {
     schema: ZodType<TOut, TDef, TIn>;
   },
 ) => {
+  const typedSchema = props.schema as ZodType<TIn, TDef, TIn>;
+  const resolverInstance: Resolver<TIn, unknown> = zodResolver(
+    typedSchema,
+    undefined,
+  );
+
   const form = __useForm<TIn, unknown, TOut>({
     ...props,
-    resolver: zodResolver(props.schema, undefined),
+    resolver: resolverInstance,
   });
 
   return form;

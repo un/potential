@@ -3,17 +3,47 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./button": "./src/button.tsx",
-    "./dropdown-menu": "./src/dropdown-menu.tsx",
-    "./form": "./src/form.tsx",
-    "./input": "./src/input.tsx",
-    "./label": "./src/label.tsx",
-    "./theme": "./src/theme.tsx",
-    "./toast": "./src/toast.tsx"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./button": {
+      "import": "./dist/button.js",
+      "types": "./dist/button.d.ts"
+    },
+    "./dropdown-menu": {
+      "import": "./dist/dropdown-menu.js",
+      "types": "./dist/dropdown-menu.d.ts"
+    },
+    "./form": {
+      "import": "./dist/form.js",
+      "types": "./dist/form.d.ts"
+    },
+    "./input": {
+      "import": "./dist/input.js",
+      "types": "./dist/input.d.ts"
+    },
+    "./label": {
+      "import": "./dist/label.js",
+      "types": "./dist/label.d.ts"
+    },
+    "./theme": {
+      "import": "./dist/theme.js",
+      "types": "./dist/theme.d.ts"
+    },
+    "./toast": {
+      "import": "./dist/toast.js",
+      "types": "./dist/toast.d.ts"
+    }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",

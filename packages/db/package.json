@@ -3,22 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
+      "import": "./dist/index.js"
     },
     "./client": {
       "types": "./dist/client.d.ts",
-      "default": "./src/client.ts"
+      "import": "./dist/client.js"
     },
     "./schema": {
       "types": "./dist/schema.d.ts",
-      "default": "./src/schema.ts"
+      "import": "./dist/schema.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json",
     "dev:package": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",

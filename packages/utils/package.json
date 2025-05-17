@@ -3,18 +3,44 @@
     "version": "1.0.0",
     "description": "",
     "type": "module",
-    "main": "./index.ts",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
+        "build": "tsc -p tsconfig.json",
         "check": "tsc --noEmit"
     },
     "exports": {
-        ".": "./index.ts",
-        "./typeid": "./typeid.ts",
-        "./uiColors": "./uiColors.ts",
-        "./ms": "./ms.ts",
-        "./types/*": "./types/*.ts",
-        "./convert": "./convert.ts",
-        "./storage": "./storage.ts"
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./typeid": {
+            "import": "./dist/typeid.js",
+            "types": "./dist/typeid.d.ts"
+        },
+        "./uiColors": {
+            "import": "./dist/uiColors.js",
+            "types": "./dist/uiColors.d.ts"
+        },
+        "./ms": {
+            "import": "./dist/ms.js",
+            "types": "./dist/ms.d.ts"
+        },
+        "./types/*": {
+            "import": "./dist/types/*.js",
+            "types": "./dist/types/*.d.ts"
+        },
+        "./convert": {
+            "import": "./dist/convert.js",
+            "types": "./dist/convert.d.ts"
+        },
+        "./storage": {
+            "import": "./dist/storage.js",
+            "types": "./dist/storage.d.ts"
+        }
     },
     "keywords": [],
     "author": "",

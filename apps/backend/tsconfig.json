@@ -8,8 +8,10 @@
       "~/*": ["./src/*"]
     },
     "plugins": [{ "name": "next" }],
-    "module": "esnext"
+    "module": "esnext",
+    "outDir": "dist",
+    "rootDir": "api"
   },
-  "include": [".", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["api/**/*", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
