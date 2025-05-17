@@ -13,10 +13,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["eslint"],
-    "rootDir": ".",
+    "rootDir": "src",
     "emitDeclarationOnly": false,
     "noEmit": false
   },
-  "include": ["**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
