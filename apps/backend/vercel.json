@@ -5,7 +5,7 @@
       "use": "@vercel/node",
       "config": {
         "includeFiles": [
-          "../../packages/**"
+          "../../../packages/**"
         ]
       }
     }
