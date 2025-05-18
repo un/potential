@@ -3,7 +3,7 @@ import { ScrollView, View } from "react-native";
 import { useLocales } from "expo-localization";
 import { router } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
-import { Plus } from "phosphor-react-native/lib/module";
+import { Plus } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";

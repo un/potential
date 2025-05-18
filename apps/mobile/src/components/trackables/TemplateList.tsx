@@ -1,21 +1,16 @@
-import { ArrowLeft } from "phosphor-react-native/lib/module";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
-
-
+import { ArrowLeft } from "phosphor-react-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
 import { filterTemplatesByType } from "@potential/templates";
 
-
-
 import { Text } from "~/components/ui/text";
 import { iconColor } from "~/utils/ui";
 import { Button } from "../ui/button";
 import { NewTrackable } from "./new";
-
 
 // Define the NewTrackableFormData type to match the one in new.tsx
 interface NewTrackableFormData {

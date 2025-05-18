@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { Star } from "phosphor-react-native/lib/module";
+import { Star } from "phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";

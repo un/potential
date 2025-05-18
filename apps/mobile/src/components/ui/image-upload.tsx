@@ -7,7 +7,7 @@ import {
   View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { XCircle } from "phosphor-react-native/lib/module";
+import { XCircle } from "phosphor-react-native";
 
 // Import our utility functions and components
 import type { ProcessedImage } from "~/utils/images/image-processing";

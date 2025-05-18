@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ArrowLeft } from "phosphor-react-native/lib/module";
+import { ArrowLeft } from "phosphor-react-native";
 
 import { Text } from "~/components/ui/text";
 import { cn, iconColor } from "~/utils/ui";

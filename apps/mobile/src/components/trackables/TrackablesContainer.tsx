@@ -5,7 +5,7 @@ import {
   ArrowBendLeftUp,
   ArrowBendRightUp,
   ArrowDown,
-} from "phosphor-react-native/lib/module";
+} from "phosphor-react-native";
 
 import type { ConstsTypes } from "@potential/consts";
 import { CONSTS } from "@potential/consts";
