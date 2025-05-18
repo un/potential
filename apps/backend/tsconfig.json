@@ -1,17 +1,22 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@potential/tsconfig/base.json",
   "compilerOptions": {
-    "lib": ["ES2022", "dom", "dom.iterable"],
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
     },
-    "plugins": [{ "name": "next" }],
-    "module": "esnext",
-    "outDir": "dist",
-    "rootDir": "api",
-    "noEmit": false
+    "noUncheckedIndexedAccess": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "lib": ["ESNext"],
+    "moduleResolution": "Bundler",
+    "alwaysStrict": true,
+    "strict": true,
+    "module": "ESNext",
+    "target": "ESNext"
   },
   "include": ["api/**/*", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "dist"]

@@ -2,12 +2,12 @@
   "name": "@potential/backend",
   "type": "module",
   "scripts": {
-    "dev": "ENVIRONMENT=development pnpm with-env tsx watch api/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "dev": "ENVIRONMENT=development pnpm with-env tsx watch api/index.ts --clear-screen=false",
+    "build": "tsup",
+    "start": "node .output/index.js",
+    "start:local": "pnpm with-env node .output/index.js",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "deploy": "vercel",
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
@@ -28,6 +28,6 @@
   "devDependencies": {
     "@potential/eslint-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
-    "vercel": "^41.7.0"
+    "tsup": "^8.2.4"
   }
 }

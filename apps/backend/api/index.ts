@@ -6,16 +6,16 @@ import { betterAuth } from "better-auth";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { handle } from "hono/vercel";
 import { customAlphabet } from "nanoid";
 import { z } from "zod";
 
+import type { CloudTypeId } from "@potential/utils";
 import { authOptions } from "@potential/auth";
 import { db } from "@potential/db";
 import { clientEnv, serverEnv } from "@potential/env";
 import { GetObjectCommand, getSignedUrl, s3Client } from "@potential/storage";
 import { appRouter } from "@potential/trpc";
-import { CloudTypeId, cloudTypeIdValidator } from "@potential/utils";
+import { cloudTypeIdValidator } from "@potential/utils";
 
 // Initialize auth with error handling
 const auth = betterAuth({
@@ -52,8 +52,10 @@ const app = new Hono<{
   };
 }>();
 
+let PORT = 8080;
 if (serverEnv.shared.NODE_ENV === "development") {
   app.use(logger());
+  PORT = 3100;
 }
 
 // Add error handling middleware
@@ -192,7 +194,7 @@ const startServer = async () => {
     server = serve(
       {
         fetch: app.fetch,
-        port: 3100,
+        port: PORT,
       },
       (info) => {
         console.log("✅ Server is running on http://localhost:" + info.port);
@@ -246,17 +248,4 @@ process.on("unhandledRejection", (reason, promise) => {
   // Don't exit the process, just log the error
 });
 
-// For local development
-if (process.env.NODE_ENV === "development") {
-  void startServer();
-}
-
-// For Vercel serverless environment
-export default handle(app);
-
-// Edge compatibility exports
-// export const GET = handle(app);
-// export const POST = handle(app);
-// export const PATCH = handle(app);
-// export const PUT = handle(app);
-// export const OPTIONS = handle(app);
+void startServer();
