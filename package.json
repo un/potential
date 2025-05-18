@@ -26,7 +26,8 @@
     "lint:ws": "pnpm dlx sherif@latest",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
-    "ui-add": "turbo run ui-add"
+    "ui-add": "turbo run ui-add",
+    "start:backend": "pnpm -F @potential/backend start"
   },
   "devDependencies": {
     "@babel/runtime": "7.27.1",
