@@ -7,9 +7,11 @@ const env: ExpoEnv = Object.fromEntries(
   Object.entries(process.env).filter(([key]) => key.startsWith("EXPO_")),
 );
 
+const IS_DEV = process.env.APP_VARIANT === "development";
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "Potential",
+  name: IS_DEV ? "Potential Dev" : "Potential",
   extra: {
     env,
     onboardingVersion: "0.0.1",
@@ -17,8 +19,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: "f406fd9a-e9b0-4fd9-93f0-d2533b773a05",
     },
   },
-  slug: "potential",
-  scheme: "potential",
+  slug: IS_DEV ? "potential-dev" : "potential",
+  scheme: IS_DEV ? "potential-dev" : "potential",
   version: "0.1.0",
   orientation: "portrait",
   icon: "./assets/app/icon-light.png",
@@ -30,7 +32,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   assetBundlePatterns: ["**/*"],
   ios: {
     runtimeVersion: "1.0.0",
-    bundleIdentifier: "io.potentialhealth",
+    bundleIdentifier: IS_DEV ? "io.potentialhealth.dev" : "io.potentialhealth",
     supportsTablet: true,
     icon: {
       light: "./assets/app/icon-light.png",
@@ -39,7 +41,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
   },
   android: {
-    package: "io.potentialhealth",
+    package: IS_DEV ? "io.potentialhealth.dev" : "io.potentialhealth",
     adaptiveIcon: {
       foregroundImage: "./assets/app/icon-light.png",
       backgroundColor: "#1F104A",

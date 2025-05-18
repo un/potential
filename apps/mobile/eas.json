@@ -1,7 +1,8 @@
 {
   "cli": {
     "version": ">= 4.1.2",
-    "appVersionSource": "remote"
+    "appVersionSource": "remote",
+    "requireCommit": true
   },
   "build": {
     "base": {
@@ -16,15 +17,28 @@
       "extends": "base",
       "developmentClient": true,
       "distribution": "internal",
-      "channel": "development"
+      "channel": "development",
+      "env": {
+        "APP_VARIANT": "development"
+      }
     },
     "preview": {
       "extends": "base",
       "distribution": "internal",
+      "env": {
+        "APP_VARIANT": "development"
+      },
       "ios": {
         "simulator": true
       },
       "channel": "preview"
+    },
+    "prod-dev": {
+      "extends": "base",
+      "channel": "production",
+      "env": {
+        "APP_VARIANT": "development"
+      }
     },
     "production": {
       "extends": "base",
