@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { Bug, Fire, Gear, Star } from "phosphor-react-native";
+import { Bug, Fire, Gear, Star } from "phosphor-react-native/lib/module";
 
 import { trpc } from "~/utils/api";
 import { iconColor } from "~/utils/ui";

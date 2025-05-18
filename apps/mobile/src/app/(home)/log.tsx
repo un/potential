@@ -12,7 +12,7 @@ import {
   PersonSimpleRun,
   Pill,
   Virus,
-} from "phosphor-react-native";
+} from "phosphor-react-native/lib/module";
 
 import { TrackableLogStep } from "~/components/app/trackableLogStep";
 import { Text } from "~/components/ui/text";

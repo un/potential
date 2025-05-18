@@ -2,7 +2,7 @@ import type { VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { Pressable } from "react-native";
 import { cva } from "class-variance-authority";
-import { Check } from "phosphor-react-native";
+import { Check } from "phosphor-react-native/lib/module";
 
 import { Loading } from "~/components/loading";
 import { cn, iconColor } from "~/utils/ui";

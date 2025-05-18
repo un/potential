@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import { Image, Modal, Pressable, ScrollView, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { Camera, Images, X, XCircle } from "phosphor-react-native";
+import { Camera, Images, X, XCircle } from "phosphor-react-native/lib/module";
 
 import type { CloudTypeId } from "@potential/utils";
 

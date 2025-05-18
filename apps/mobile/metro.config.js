@@ -16,9 +16,9 @@ const config = withTurborepoManagedCache(
 // https://github.com/expo/expo/issues/26926
 config.resolver.unstable_enablePackageExports = true;
 config.resolver.unstable_conditionNames = ["require", "default", "browser"];
-// config.resolver.unstable_disablePackageExportsForPackage = [
-//   "phosphor-react-native",
-// ];
+config.resolver.unstable_disablePackageExportsForPackage = [
+  "phosphor-react-native",
+];
 // Fix _interopRequireDefault helper by forcing the correct resolution path
 config.resolver.extraNodeModules = {
   "@babel/runtime/helpers/interopRequireDefault": require.resolve(

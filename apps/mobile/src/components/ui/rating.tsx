@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Pressable, View } from "react-native";
-import { Star } from "phosphor-react-native";
+import { Star } from "phosphor-react-native/lib/module";
 
 import { cn } from "~/utils/ui";
 import { Text } from "./text";
