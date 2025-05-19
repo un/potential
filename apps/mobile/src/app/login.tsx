@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Constants from "expo-constants";
 import { Stack, useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import { useForm } from "@tanstack/react-form";
@@ -13,6 +14,7 @@ import { Checkbox } from "~/components/ui/checkbox";
 import { Input } from "~/components/ui/input";
 import { Text } from "~/components/ui/text";
 import { authClient } from "~/utils/auth-client";
+import { getApiUrl } from "~/utils/base-url";
 
 const loginSignupSchema = z.object({
   email: z.string().min(4, { message: "Email is required" }).email(),
@@ -174,6 +176,12 @@ export default function Login() {
           </View>
         )}
       </KeyboardAvoidingView>
+      <Text className="text-sand-11 text-center text-xs">
+        Version: {Constants.expoVersion}
+      </Text>
+      <Text className="text-sand-11 text-center text-xs">
+        Server: {getApiUrl()}
+      </Text>
     </SafeAreaView>
   );
 }

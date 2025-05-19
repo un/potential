@@ -47,6 +47,10 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "companyName": "Unproprietary Corporation"
+      }
+    }
   }
 }
