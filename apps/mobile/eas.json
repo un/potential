@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "cd ../.. && pnpm install && cd apps/mobile && pnpm add --save-dev @types/react@19.0.10 && cd ../.. && pnpm build"
+      "prebuildCommand": "pnpm prebuild"
     },
     "development": {
       "extends": "base",

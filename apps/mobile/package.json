@@ -15,7 +15,8 @@
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path .prettierignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "prebuild": "cd ../.. && pnpm install && pnpm build"
   },
   "dependencies": {
     "@better-auth/expo": "catalog:",
