@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "./prebuild.sh"
+      "prebuildCommand": "node prebuild.js"
     },
     "development": {
       "extends": "base",
