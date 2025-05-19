@@ -90,6 +90,7 @@
     "@potential/tsconfig": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/react": "~19.0.10",
+    "dotenv-cli": "^8.0.0",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",

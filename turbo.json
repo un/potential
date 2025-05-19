@@ -52,6 +52,15 @@
         "dist/**"
       ]
     },
+    "build:ios": {
+      "dependsOn": [
+        "^build:ios"
+      ],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**"
+      ]
+    },
     "dev:package": {
       "dependsOn": [],
       "cache": false,
