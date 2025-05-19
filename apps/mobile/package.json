@@ -8,7 +8,7 @@
     "dev:mobile": "pnpm with-env expo start",
     "dev:android": "pnpm with-env expo start --android",
     "dev:ios": "pnpm with-env expo start --ios",
-    "build:ios": "pnpm build && NODE_ENV=production eas build --profile production --platform ios --message \"First Proper Build?\" --local",
+    "build:ios": "NODE_ENV=production eas build --profile production --platform ios --message \"First Proper Build?\" --local",
     "android": "pnpm with-env expo run:android",
     "ios": "pnpm with-env expo run:ios",
     "device": "pnpm with-env expo run:ios --device",
