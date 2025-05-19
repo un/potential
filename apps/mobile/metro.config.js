@@ -5,16 +5,12 @@ const { withNativeWind } = require("nativewind/metro");
 
 const path = require("node:path");
 
-let config = getDefaultConfig(__dirname);
-
-// Apply withNativeWind
-config = withNativeWind(config, {
-  input: "./src/styles.css",
-  configPath: "./tailwind.config.ts",
-});
-
-// Apply withTurborepoManagedCache
-config = withTurborepoManagedCache(config);
+const config = withTurborepoManagedCache(
+  withNativeWind(getDefaultConfig(__dirname), {
+    input: "./src/styles.css",
+    configPath: "./tailwind.config.ts",
+  }),
+);
 
 // Add workspace package resolution
 config.resolver.nodeModulesPaths = [
@@ -42,10 +38,6 @@ config.resolver.unstable_conditionNames = ["require", "default", "browser"];
 config.resolver.unstable_disablePackageExportsForPackage = (
   config.resolver.unstable_disablePackageExportsForPackage || []
 ).filter((pkg) => pkg !== "phosphor-react-native");
-// If unstable_disablePackageExportsForPackage becomes empty, you might remove the key itself.
-// Example: if (config.resolver.unstable_disablePackageExportsForPackage.length === 0) {
-//   delete config.resolver.unstable_disablePackageExportsForPackage;
-// }
 
 // Custom resolver for phosphor-react-native
 const originalResolveRequest = config.resolver.resolveRequest;
