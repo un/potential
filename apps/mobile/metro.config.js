@@ -16,6 +16,21 @@ config = withNativeWind(config, {
 // Apply withTurborepoManagedCache
 config = withTurborepoManagedCache(config);
 
+// Add workspace package resolution
+config.resolver.nodeModulesPaths = [
+  path.resolve(__dirname, "node_modules"),
+  path.resolve(__dirname, "../../node_modules"),
+];
+
+// Make sure we can resolve workspace packages
+config.watchFolders = [
+  path.resolve(__dirname, "../../packages/consts"),
+  path.resolve(__dirname, "../../packages/utils"),
+  path.resolve(__dirname, "../../packages/templates"),
+  path.resolve(__dirname, "../../packages/auth"),
+  path.resolve(__dirname, "../../packages/storage"),
+];
+
 // XXX: Resolve our exports in workspace packages
 // https://github.com/expo/expo/issues/26926
 config.resolver.unstable_enablePackageExports = true;
