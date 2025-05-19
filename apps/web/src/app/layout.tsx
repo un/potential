@@ -1,15 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Ephesis, IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 
-import { cn } from "@potential/ui";
-import { ThemeProvider, ThemeToggle } from "@potential/ui/theme";
-import { Toaster } from "@potential/ui/toast";
-
-import { TRPCReactProvider } from "~/trpc/react";
+import { ThemeProvider, ThemeToggle } from "~/app/components/theme";
+import { Toaster } from "~/app/components/toast";
 
 import "~/app/globals.css";
 
 import { env } from "~/env";
+import { cn } from "~/lib/utils";
 import { NavMenu } from "./ui/NavMenu";
 
 export const metadata: Metadata = {
@@ -61,7 +59,7 @@ const ephesis = Ephesis({
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={cn(
           "text-sand-12 bg-sand-3 h-full px-12 font-sans text-sm font-light antialiased",
@@ -72,7 +70,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NavMenu className="mb-16" />
-          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          {props.children}
           <div className="fixed bottom-4 right-4">
             <ThemeToggle />
           </div>

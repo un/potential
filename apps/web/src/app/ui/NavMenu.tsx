@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-import { cn } from "@potential/ui";
-
+import { cn } from "~/lib/utils";
 import { Logo } from "../_components/branding/logo";
 import { Button } from "../components/button";
 
