@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle --external:@better-auth/expo --external:@potential/consts --external:@potential/db --external:@potential/email --external:@potential/env --external:@potential/utils --external:@potential/validators --external:better-auth --external:dotenv --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+    "build": "tsup",
     "check": "tsc --noEmit",
     "auth:generate": "drizzle-kit push"
   },

@@ -23,7 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts src/client.ts src/schema.ts --outdir=dist --platform=node --format=esm --bundle --external:drizzle-orm --external:drizzle-zod --external:@planetscale/database --external:@potential/consts --external:@potential/env --external:@potential/utils --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+    "build": "tsup",
     "dev:package": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",

@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle --external:@t3-oss/env-core --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+    "build": "tsup",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",

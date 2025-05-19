@@ -1,9 +1,6 @@
-import { Resend } from "resend";
+// import { Resend } from "resend";
 
-import { serverEnv } from "@potential/env";
-
-import AuthOtpEmail from "./emails/auth-otp";
-import BugReportEmail from "./emails/bug-report";
+// import { serverEnv } from "@potential/env";
 
 type StandardEmailProps = {
   to: string;
@@ -28,6 +25,8 @@ type EmailProps = StandardEmailProps &
   (AuthEmailOTPProps | WelcomeEmailProps | BugReportEmailProps);
 
 export async function sendEmail({ to, type, ...props }: EmailProps) {
+  const { Resend } = await import("resend");
+  const { serverEnv } = await import("@potential/env");
   // TODO: FIX react import to HONO to send emails
   const resendApiKey = serverEnv.email.RESEND_API_KEY;
   if (!resendApiKey) {
@@ -38,16 +37,19 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
     console.log("💌========================================💌");
     return true;
   }
-  const fetchTemplate = () => {
+  const fetchTemplate = async () => {
     switch (type) {
-      case "auth-otp":
+      case "auth-otp": {
+        const { default: AuthOtpEmail } = await import("./emails/auth-otp");
         return {
           content: AuthOtpEmail({
             otpCode: (props as AuthEmailOTPProps).otpCode,
           }),
           subject: "Potential Health Login Code 🔑",
         };
-      case "bug-report":
+      }
+      case "bug-report": {
+        const { default: BugReportEmail } = await import("./emails/bug-report");
         return {
           content: BugReportEmail({
             message: (props as BugReportEmailProps).message,
@@ -55,6 +57,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
           }),
           subject: "🚨 Bug Report from Potential Health",
         };
+      }
       // case "welcome":
       //   return {
       //     content: WelcomeEmail({
@@ -71,7 +74,7 @@ export async function sendEmail({ to, type, ...props }: EmailProps) {
     }
   };
 
-  const template = fetchTemplate();
+  const template = await fetchTemplate();
 
   if (!template) {
     return false;

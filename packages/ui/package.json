@@ -43,7 +43,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts src/button.tsx src/dropdown-menu.tsx src/form.tsx src/input.tsx src/label.tsx src/theme.tsx src/toast.tsx --outdir=dist --platform=browser --format=esm --bundle --external:@hookform/resolvers --external:@radix-ui/react-icons --external:class-variance-authority --external:next-themes --external:radix-ui --external:react-hook-form --external:sonner --external:tailwind-merge --external:react --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+    "build": "tsup",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
