@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "cd ../.. && pnpm install && pnpm build && cd apps/mobile"
+      "prebuildCommand": "./prebuild.sh"
     },
     "development": {
       "extends": "base",
