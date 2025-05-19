@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && cd apps/mobile && pnpm add -D @types/react@19.0.10 && cd ../.. && pnpm build"
+      "prebuildCommand": "cd ../.. && pnpm install && cd apps/mobile && pnpm add -D @types/react@19.0.10 && cd ../.. && pnpm build"
     },
     "development": {
       "extends": "base",
