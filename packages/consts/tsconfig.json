@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig/internal-package.json",
+  "extends": "@potential/tsconfig/internal-package.json",
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
