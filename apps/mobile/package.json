@@ -16,7 +16,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --",
-    "prebuild": "cd ../.. && pnpm install && pnpm build && cd apps/mobile"
+    "prebuild": "cd ../.. && pnpm install && pnpm turbo build && cd apps/mobile"
   },
   "dependencies": {
     "@better-auth/expo": "catalog:",

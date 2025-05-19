@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "cd ../.. && pnpm build"
+      "prebuildCommand": "pnpm prebuild"
     },
     "development": {
       "extends": "base",
