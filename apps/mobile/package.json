@@ -99,8 +99,19 @@
     "doctor": {
       "reactNativeDirectoryCheck": {
         "enabled": true,
-        "exclude": [],
-        "listUnknownPackages": true
+        "exclude": [
+          "@potential/auth",
+          "@potential/consts",
+          "@potential/storage",
+          "@potential/templates",
+          "@potential/utils",
+          "@tanstack/react-form",
+          "@trpc/client",
+          "@trpc/server",
+          "@trpc/tanstack-react-query",
+          "react-native-element-dropdown"
+        ],
+        "listUnknownPackages": false
       }
     }
   }
