@@ -98,6 +98,8 @@
   "expo": {
     "doctor": {
       "reactNativeDirectoryCheck": {
+        "enabled": true,
+        "exclude": [],
         "listUnknownPackages": true
       }
     }
