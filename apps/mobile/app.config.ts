@@ -39,6 +39,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       dark: "./assets/app/icon-light.png",
       // tinted: "",
     },
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
   },
   android: {
     package: IS_DEV ? "io.potentialhealth.dev" : "io.potentialhealth",
