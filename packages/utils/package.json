@@ -9,7 +9,7 @@
         "dist"
     ],
     "scripts": {
-        "build": "esbuild src/index.ts src/typeid.ts src/ms.ts src/convert.ts --outdir=dist --platform=node --format=esm --bundle --external:@potential/tsconfig --external:convert-units --external:itty-time --external:nanoid --external:typeid-js --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+        "build": "tsup src/index.ts src/typeid.ts src/ms.ts src/convert.ts --format esm --dts --external @potential/tsconfig --external convert-units --external itty-time --external nanoid --external typeid-js --external zod",
         "check": "tsc --noEmit"
     },
     "exports": {
@@ -59,6 +59,6 @@
     },
     "devDependencies": {
         "@potential/eslint-config": "workspace:*",
-        "esbuild": "^0.25.4"
+        "tsup": "^8.2.4"
     }
 }

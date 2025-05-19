@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle --external:@potential/consts --external:@potential/utils --external:zod && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+    "build": "tsup src/index.ts --format esm --dts --external @potential/consts --external @potential/utils --external zod",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -31,9 +31,9 @@
     "@potential/eslint-config": "workspace:*",
     "@potential/prettier-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
-    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "tsup": "^8.2.4",
     "typescript": "catalog:"
   },
   "prettier": "@potential/prettier-config"

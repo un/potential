@@ -1,8 +1,14 @@
 {
   "extends": "@potential/tsconfig/internal-package.json",
   "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "rootDir": "src"
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "strict": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

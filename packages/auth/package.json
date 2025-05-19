@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "check": "tsc --noEmit",
     "auth:generate": "drizzle-kit push"
   },
@@ -37,6 +38,7 @@
     "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
+    "tsup": "^8.2.4",
     "tsx": "^4.19.4",
     "typescript": "catalog:"
   },

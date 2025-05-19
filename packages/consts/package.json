@@ -15,7 +15,8 @@
         "dist"
     ],
     "scripts": {
-        "build": "esbuild src/index.ts --outfile=dist/index.js --platform=node --format=esm --bundle && tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir dist",
+        "build": "tsup",
+        "clean": "git clean -xdf .cache .turbo dist node_modules",
         "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
@@ -25,6 +26,7 @@
         "esbuild": "^0.25.4",
         "eslint": "catalog:",
         "prettier": "catalog:",
+        "tsup": "^8.2.4",
         "typescript": "catalog:",
         "zod": "catalog:"
     },

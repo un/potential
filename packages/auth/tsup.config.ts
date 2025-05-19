@@ -22,4 +22,6 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   bundle: true,
+  minify: false,
+  treeshake: true,
 });
