@@ -11,7 +11,8 @@
       "ios": {
         "resourceClass": "m-medium"
       },
-      "channel": "base"
+      "channel": "base",
+      "prebuildCommand": "cd ../.. && pnpm build"
     },
     "development": {
       "extends": "base",
