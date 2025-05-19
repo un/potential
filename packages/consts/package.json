@@ -18,6 +18,7 @@
     ],
     "scripts": {
         "build": "tsup",
+        "prepare": "pnpm run build",
         "clean": "git clean -xdf .cache .turbo dist node_modules",
         "typecheck": "tsc --noEmit"
     },
