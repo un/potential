@@ -1,5 +1,6 @@
 import * as React from "react";
-import { cn } from "@potential/ui";
+
+import { cn } from "./index";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 

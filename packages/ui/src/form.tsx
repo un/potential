@@ -19,8 +19,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 
-import { cn } from "@potential/ui";
-
+import { cn } from "./index";
 import { Label } from "./label";
 
 const useForm = <
