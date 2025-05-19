@@ -2,12 +2,14 @@
   "name": "@potential/templates",
   "private": true,
   "version": "0.1.0",
-  "type": "module",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "react-native": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -15,7 +17,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --external @potential/consts --external @potential/utils --external zod",
+    "build": "tsup",
+    "prepare": "pnpm exec tsup",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -24,16 +27,16 @@
   },
   "dependencies": {
     "@potential/consts": "workspace:*",
+    "@potential/tsconfig": "workspace:*",
     "@potential/utils": "workspace:*",
+    "tsup": "^8.2.4",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@potential/eslint-config": "workspace:*",
     "@potential/prettier-config": "workspace:*",
-    "@potential/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "tsup": "^8.2.4",
     "typescript": "catalog:"
   },
   "prettier": "@potential/prettier-config"
