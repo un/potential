@@ -22,7 +22,11 @@ try {
 
   // Run commands
   console.log("📦 Installing dependencies...");
-  execSync("pnpm install", { stdio: "inherit" });
+  execSync("pnpm install --frozen-lockfile", { stdio: "inherit" });
+
+  // Ensure workspace dependencies are properly linked
+  console.log("🔗 Linking workspace dependencies...");
+  execSync("pnpm install -r", { stdio: "inherit" });
 
   console.log("🔨 Building workspace packages...");
   execSync("pnpm build", { stdio: "inherit" });
