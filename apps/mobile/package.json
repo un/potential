@@ -8,15 +8,14 @@
     "dev:mobile": "pnpm with-env expo start",
     "dev:android": "pnpm with-env expo start --android",
     "dev:ios": "pnpm with-env expo start --ios",
-    "build:ios": "pnpm with-env eas build --platform ios --local",
+    "build:ios": "eas build --profile production --platform ios --message \"First Proper Build?\" --local",
     "android": "pnpm with-env expo run:android",
     "ios": "pnpm with-env expo run:ios",
     "device": "pnpm with-env expo run:ios --device",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path .prettierignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --",
-    "postinstall": "cd ../.. && pnpm run build"
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@better-auth/expo": "catalog:",
