@@ -5,6 +5,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Get command line arguments
+const args = process.argv.slice(2);
+console.log("📝 Received arguments:", args);
+
 console.log("🚀 Starting prebuild process...");
 
 try {

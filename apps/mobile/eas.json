@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "node prebuild.js"
+      "prebuildCommand": "bash -c 'cd ../.. && pnpm install && pnpm build && cd apps/mobile'"
     },
     "development": {
       "extends": "base",
