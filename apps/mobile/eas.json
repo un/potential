@@ -12,7 +12,7 @@
         "resourceClass": "m-medium"
       },
       "channel": "base",
-      "prebuildCommand": "cd ../.. && pnpm install && pnpm build"
+      "prebuildCommand": "cd ../.. && pnpm install --no-frozen-lockfile && pnpm build"
     },
     "development": {
       "extends": "base",

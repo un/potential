@@ -88,7 +88,7 @@
     "@potential/trpc": "workspace:*",
     "@potential/tsconfig": "workspace:*",
     "@types/babel__core": "^7.20.5",
-    "@types/react": "19.0.10",
+    "@types/react": "~19.0.10",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
