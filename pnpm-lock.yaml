@@ -551,13 +551,20 @@ importers:
         version: 5.8.3
 
   packages/consts:
+    dependencies:
+      '@potential/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      tsup:
+        specifier: ^8.2.4
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
+      zod:
+        specifier: 'catalog:'
+        version: 3.24.3
     devDependencies:
       '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@potential/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@potential/utils':
         specifier: workspace:*
         version: link:../utils
@@ -570,15 +577,9 @@ importers:
       prettier:
         specifier: 'catalog:'
         version: 3.5.3
-      tsup:
-        specifier: ^8.2.4
-        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
-      zod:
-        specifier: 'catalog:'
-        version: 3.24.3
 
   packages/db:
     dependencies:
@@ -747,9 +748,15 @@ importers:
       '@potential/consts':
         specifier: workspace:*
         version: link:../consts
+      '@potential/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@potential/utils':
         specifier: workspace:*
         version: link:../utils
+      tsup:
+        specifier: ^8.2.4
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
       zod:
         specifier: 'catalog:'
         version: 3.24.3
@@ -760,18 +767,12 @@ importers:
       '@potential/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@potential/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
       prettier:
         specifier: 'catalog:'
         version: 3.5.3
-      tsup:
-        specifier: ^8.2.4
-        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
@@ -842,6 +843,8 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
+
+  packages/tsconfig: {}
 
   packages/ui:
     dependencies:
@@ -918,6 +921,9 @@ importers:
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
+      tsup:
+        specifier: ^8.2.4
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
       typeid-js:
         specifier: ^1.2.0
         version: 1.2.0
@@ -928,9 +934,6 @@ importers:
       '@potential/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      tsup:
-        specifier: ^8.2.4
-        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
 
   packages/validators:
     dependencies:

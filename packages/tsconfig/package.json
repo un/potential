@@ -1,12 +1,8 @@
 {
     "name": "@potential/tsconfig",
-    "version": "0.1.0",
     "private": true,
+    "version": "0.1.0",
     "files": [
-        "base.json",
-        "expo.json",
-        "internal-package.json",
-        "nextjs.json",
-        "react-library.json"
+        "*.json"
     ]
 }
