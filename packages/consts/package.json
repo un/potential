@@ -2,12 +2,13 @@
     "name": "@potential/consts",
     "private": true,
     "version": "0.3.0",
-    "type": "module",
     "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/index.js",
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs",
             "types": "./dist/index.d.ts"
         }
     },
