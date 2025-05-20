@@ -285,9 +285,9 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       const configType = template.defaultConfig.type;
 
       // Get the correct subType using our mapping function
-      const subType = mapTemplateIdToSubType(template.id);
+      const subType = template.subType;
       // Extract the main type from the subType
-      const type = extractTypeFromSubType(subType);
+      const type = template.type;
 
       console.log(
         `Template ID: ${template.id} -> Type: ${type}, SubType: ${subType}`,
