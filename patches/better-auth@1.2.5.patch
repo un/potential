@@ -87,25 +87,25 @@ index 67c8ca4e40f0c03c488de0753a4e507709d0ef21..f62f9353fac55abad507c753d2747061
 -        const res = await db.select().from(schemaModel).where(eq(schemaModel.id, tId));
 -        return res[0];
 +             const tId = builderVal[0]?.id?.value;  
-+     // const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.id, tId));
++     // const res = await db.select().from(schemaModel).where(eq(schemaModel.id, tId));
 +     // return res[0];
 +     if (tId) {
-+       const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.id, tId));
++       const res = await db.select().from(schemaModel).where(eq(schemaModel.id, tId));
 +       return res[0];
 +     }
 +     const email = builderVal[0]?.email?.value;
 +     if (email) {
-+       const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.email, email));
++       const res = await db.select().from(schemaModel).where(eq(schemaModel.email, email));
 +       return res[0];
 +     }
 +     const identifier = builderVal[0]?.identifier?.value;
 +     if (identifier) {
-+       const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.identifier, identifier));
++       const res = await db.select().from(schemaModel).where(eq(schemaModel.identifier, identifier));
 +       return res[0];
 +     }
 +     const token = builderVal[0]?.token?.value;
 +     if (token) {
-+       const res = await db.select().from(schemaModel).where(drizzleOrm.eq(schemaModel.token, token));
++       const res = await db.select().from(schemaModel).where(eq(schemaModel.token, token));
 +       return res[0];
 +     }
 +     console.error("🚨 couldnt find the id column for the BetterAuth model", { builderVal: builderVal[0] });
