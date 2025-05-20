@@ -33,6 +33,12 @@
     "dotenv": "^16.5.0",
     "zod": "catalog:"
   },
+  "peerDependencies": {
+    "@react-email/components": "^0.0.38",
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19",
+    "resend": "^4.5.0"
+  },
   "devDependencies": {
     "@potential/prettier-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
