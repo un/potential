@@ -1,8 +1,9 @@
 {
   "extends": "@potential/tsconfig/internal-package.json",
   "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "rootDir": "src"
+    "rootDir": "src",
+    "outDir": "dist",
+    "composite": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

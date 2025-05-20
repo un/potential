@@ -12,7 +12,8 @@
     "scripts": {
         "build": "tsup",
         "prepare": "pnpm exec tsup",
-        "check": "tsc --noEmit"
+        "check": "tsc --noEmit",
+        "dev:package": "tsup --watch"
     },
     "exports": {
         ".": {

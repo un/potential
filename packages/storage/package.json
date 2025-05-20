@@ -22,7 +22,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --external @aws-sdk/client-s3 --external @aws-sdk/s3-request-presigner --external @potential/env --external @potential/tsconfig --external date-fns --external zod",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev:package": "tsc",
+    "dev:package": "tsup --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"

@@ -152,7 +152,7 @@ importers:
         version: link:../../tooling/eslint
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../../packages/tsconfig
       tsup:
         specifier: ^8.2.4
         version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
@@ -360,7 +360,7 @@ importers:
         version: link:../../packages/trpc
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../../packages/tsconfig
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -463,7 +463,7 @@ importers:
         version: link:../../tooling/tailwind
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../../packages/tsconfig
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -530,7 +530,7 @@ importers:
         version: link:../../tooling/prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       esbuild:
         specifier: ^0.25.4
         version: 0.25.4
@@ -554,7 +554,7 @@ importers:
     dependencies:
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       tsup:
         specifier: ^8.2.4
         version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.7.1)
@@ -613,7 +613,7 @@ importers:
         version: link:../../tooling/prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       dotenv-cli:
         specifier: ^8.0.0
         version: 8.0.0
@@ -662,7 +662,7 @@ importers:
         version: link:../../tooling/prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       esbuild:
         specifier: ^0.25.4
         version: 0.25.4
@@ -699,7 +699,7 @@ importers:
         version: link:../../tooling/prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       esbuild:
         specifier: ^0.25.4
         version: 0.25.4
@@ -728,7 +728,7 @@ importers:
         version: link:../env
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -750,7 +750,7 @@ importers:
         version: link:../consts
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       '@potential/utils':
         specifier: workspace:*
         version: link:../utils
@@ -830,7 +830,7 @@ importers:
         version: link:../../tooling/prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -884,7 +884,7 @@ importers:
         version: link:../../tooling/tailwind
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       '@types/react':
         specifier: catalog:react19
         version: 19.1.2
@@ -911,7 +911,7 @@ importers:
     dependencies:
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       convert-units:
         specifier: 3.0.0-beta.7
         version: 3.0.0-beta.7
@@ -949,7 +949,7 @@ importers:
         version: link:../../tooling/prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../../tooling/typescript
+        version: link:../tsconfig
       esbuild:
         specifier: ^0.25.4
         version: 0.25.4
@@ -998,7 +998,7 @@ importers:
         version: link:../prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../typescript
+        version: link:../../packages/tsconfig
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -1025,7 +1025,7 @@ importers:
     devDependencies:
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../typescript
+        version: link:../../packages/tsconfig
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -1053,7 +1053,7 @@ importers:
         version: link:../prettier
       '@potential/tsconfig':
         specifier: workspace:*
-        version: link:../typescript
+        version: link:../../packages/tsconfig
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -1066,8 +1066,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.8.3
-
-  tooling/typescript: {}
 
 packages:
 

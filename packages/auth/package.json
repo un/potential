@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "dev:package": "tsup --watch",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "check": "tsc --noEmit",
     "auth:generate": "drizzle-kit push"

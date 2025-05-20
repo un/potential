@@ -22,7 +22,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --external @ai-sdk/anthropic --external @potential/auth --external @potential/consts --external @potential/db --external @potential/email --external @potential/env --external @potential/storage --external @potential/utils --external @potential/validators --external @trpc/server --external ai --external better-auth --external superjson --external zod",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev:package": "tsc",
+    "dev:package": "tsup --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"

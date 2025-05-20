@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useForm } from "@tanstack/react-form";
 import Constants from "expo-constants";
 import { Stack, useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
-import { useForm } from "@tanstack/react-form";
+import React, { useState } from "react";
+import { KeyboardAvoidingView, Platform, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { z } from "zod";
 
 import { Logo } from "~/components/branding/logo";

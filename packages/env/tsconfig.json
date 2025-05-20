@@ -1,9 +1,25 @@
 {
-  "extends": "@potential/tsconfig/internal-package.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "rootDir": "src"
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    
+    "declaration": true,
+    "declarationMap": true,
+    "rootDir": "src",
+    "outDir": "dist"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.ts"],
+  "files": ["src/index.ts", "src/client.ts", "src/server.ts"],
+  "exclude": ["node_modules", "dist", ".cache"]
 }

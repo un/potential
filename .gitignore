@@ -48,6 +48,7 @@ yarn-error.log*
 # typescript
 dist/
 .cache
+tsup.config.bundled_*.*
 
 # turbo
 .turbo

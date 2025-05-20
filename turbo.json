@@ -62,9 +62,11 @@
       ]
     },
     "dev:package": {
-      "dependsOn": [],
+      "dependsOn": [
+        "^build"
+      ],
       "cache": false,
-      "persistent": false
+      "persistent": true
     },
     "dev": {
       "dependsOn": [
