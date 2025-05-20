@@ -615,10 +615,10 @@ export const TrackableLogStep = ({
   };
 
   // Handler for saving a new trackable
-  const handleSaveNewTrackable = (data: NewTrackableFormData) => {
-    // Handle the new trackable data
-    console.log("New trackable saved:", data);
-    toast.success("New trackable added successfully");
+  const handleSaveNewTrackable = () => {
+    toast.success("New trackable added successfully", {
+      id: "new-trackable-saved",
+    });
     setSelectedTemplate(null); // Return to main screen after saving
   };
 

@@ -4,6 +4,7 @@ import { useLocales } from "expo-localization";
 import { router } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import { Plus } from "phosphor-react-native";
+import { toast } from "sonner-native";
 
 import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
@@ -148,8 +149,6 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   const mutation = useMutation(
     trpc.trackables.createTrackable.mutationOptions({
       onSuccess: async ({ id }) => {
-        console.log("Trackable created successfully");
-
         // Invalidate the query for the parent type
         const queryKey = trpc.trackables.getTrackablesForParentType.queryKey({
           trackableParentType: formData.type,
@@ -162,6 +161,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
         }
       },
       onError: (error) => {
+        toast.error("Error creating trackable");
         console.error("Error creating trackable:", error);
       },
     }),
