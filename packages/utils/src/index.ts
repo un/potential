@@ -1,4 +1,5 @@
 // Main exports
+export * from "itty-time";
 export * from "./convert";
 export * from "./ms";
 export * from "./typeid";

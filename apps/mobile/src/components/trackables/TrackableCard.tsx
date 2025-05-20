@@ -73,7 +73,7 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
     <Pressable onPress={handlePress}>
       <View
         className={cn(
-          "flex flex-row justify-between gap-2 py-2",
+          "flex w-full flex-row justify-between gap-2 py-2",
           shouldUseColumnLayout() ? "flex-col" : "flex-row gap-0",
         )}
       >

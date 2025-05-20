@@ -134,7 +134,7 @@ export function TrackablesContainer() {
   }
 
   return (
-    <View className="flex-1 flex-col gap-6">
+    <View className="w-full flex-1 flex-col gap-6">
       {Object.entries(organizedData).map(([type, typeData]) => {
         const typeName = typeData._typeName;
         const subTypes = Object.entries(typeData).filter(
@@ -144,7 +144,7 @@ export function TrackablesContainer() {
         if (subTypes.length === 0) return null;
 
         return (
-          <View key={type} className="flex flex-col gap-2">
+          <View key={type} className="flex w-full flex-col gap-2">
             <Text className="text-2xl" type={"title"}>
               {typeName}
             </Text>
