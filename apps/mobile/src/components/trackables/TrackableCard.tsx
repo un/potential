@@ -41,7 +41,8 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
 
   // Render latest value based on trackable type
   const renderLatestValue = () => {
-    if (!logs || logs.length === 0) return null;
+    if (!logs || logs.length === 0)
+      return <Text className="text-sand-10 text-xs">No logs yet</Text>;
 
     const latestLog = logs[0];
     const trackableType = getTrackableType();
@@ -58,6 +59,7 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
   // Determine if we should use column layout for the latest value
   const shouldUseColumnLayout = () => {
     const trackableType = getTrackableType();
+    if (!logs || logs.length === 0) return false;
     return trackableType === "shortText" || trackableType === "longText";
   };
 
