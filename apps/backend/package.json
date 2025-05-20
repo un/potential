@@ -23,6 +23,10 @@
     "better-auth": "catalog:",
     "hono": "^4.7.8",
     "nanoid": "^5.1.5",
+    "react": "catalog:react19",
+    "react-dom": "catalog:react19",
+    "@react-email/components": "^0.0.38",
+    "resend": "^4.5.0",
     "zod": "catalog:"
   },
   "devDependencies": {

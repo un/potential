@@ -5,7 +5,15 @@ export default defineConfig({
   outDir: "dist",
   platform: "node",
   format: ["esm"],
-  external: ["@potential/consts", "@potential/env", "dotenv"],
+  external: [
+    "@potential/consts",
+    "@potential/env",
+    "@react-email/components",
+    "dotenv",
+    "react",
+    "react-dom",
+    "resend",
+  ],
   dts: true, // Generate .d.ts files
   splitting: false, // Usually better for libraries, but can be true if preferred
   sourcemap: true,
