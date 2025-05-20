@@ -76,7 +76,7 @@ catalogs:
 
 patchedDependencies:
   better-auth@1.2.5:
-    hash: 7wxzuyjjow46tk7zg3nhglpr5e
+    hash: bhl7ek5s5n2ly53qinlprc7hvy
     path: patches/better-auth@1.2.5.patch
 
 importers:
@@ -136,7 +136,7 @@ importers:
         version: link:../../packages/utils
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3)
+        version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
       hono:
         specifier: ^4.7.8
         version: 4.7.8
@@ -161,7 +161,7 @@ importers:
     dependencies:
       '@better-auth/expo':
         specifier: 'catalog:'
-        version: 1.2.5(better-auth@1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3))
+        version: 1.2.5(better-auth@1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3))
       '@expo-google-fonts/ibm-plex-sans':
         specifier: 0.3.0
         version: 0.3.0
@@ -224,7 +224,7 @@ importers:
         version: 11.1.2(@tanstack/react-query@5.75.1(react@19.0.0))(@trpc/client@11.1.2(@trpc/server@11.1.2(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.2(typescript@5.8.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3)
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3)
+        version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -496,7 +496,7 @@ importers:
     dependencies:
       '@better-auth/expo':
         specifier: 'catalog:'
-        version: 1.2.5(better-auth@1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3))
+        version: 1.2.5(better-auth@1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3))
       '@potential/consts':
         specifier: workspace:*
         version: link:../consts
@@ -517,7 +517,7 @@ importers:
         version: link:../validators
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3)
+        version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
       dotenv:
         specifier: ^16.5.0
         version: 16.5.0
@@ -814,7 +814,7 @@ importers:
         version: 4.3.13(react@19.0.0)(zod@3.24.3)
       better-auth:
         specifier: 'catalog:'
-        version: 1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3)
+        version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
       superjson:
         specifier: 2.2.2
         version: 2.2.2
@@ -10366,10 +10366,10 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@better-auth/expo@1.2.5(better-auth@1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3))':
+  '@better-auth/expo@1.2.5(better-auth@1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3))':
     dependencies:
       '@better-fetch/fetch': 1.1.18
-      better-auth: 1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3)
+      better-auth: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
       better-call: 1.0.9
       zod: 3.24.3
 
@@ -13556,7 +13556,7 @@ snapshots:
 
   basic-ftp@5.0.5: {}
 
-  better-auth@1.2.5(patch_hash=7wxzuyjjow46tk7zg3nhglpr5e)(typescript@5.8.3):
+  better-auth@1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3):
     dependencies:
       '@better-auth/utils': 0.2.4
       '@better-fetch/fetch': 1.1.18
