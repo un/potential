@@ -2,7 +2,7 @@
   "name": "@potential/backend",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=ENVIRONMENT=development ENVIRONMENT=development pnpm with-env tsx watch api/index.ts --clear-screen=false",
+    "dev": "NODE_ENV=development ENVIRONMENT=development pnpm with-env tsx watch api/index.ts --clear-screen=false",
     "build": "tsup",
     "start": "node .output/index.js",
     "start:local": "pnpm with-env node .output/index.js",

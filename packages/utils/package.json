@@ -13,7 +13,7 @@
         "build": "tsup",
         "prepare": "pnpm exec tsup",
         "check": "tsc --noEmit",
-        "dev:package": "tsup --watch"
+        "dev": "tsup --watch"
     },
     "exports": {
         ".": {

@@ -70,7 +70,7 @@
     },
     "dev": {
       "dependsOn": [
-        "^dev:package"
+        "^build"
       ],
       "cache": false,
       "persistent": true,
