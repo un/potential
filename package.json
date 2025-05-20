@@ -42,7 +42,7 @@
   "prettier": "@potential/prettier-config",
   "pnpm": {
     "patchedDependencies": {
-      "better-auth": "patches/better-auth.patch"
+      "better-auth@1.2.5": "patches/better-auth@1.2.5.patch"
     }
   }
 }
