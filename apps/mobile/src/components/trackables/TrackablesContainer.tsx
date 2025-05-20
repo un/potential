@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { View } from "react-native";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import {
   ArrowBendLeftUp,
   ArrowBendRightUp,
@@ -24,22 +24,32 @@ export function TrackablesContainer() {
     CONSTS.TRACKABLE.TYPES,
   ) as TrackableParentType[];
 
-  // Create query results for each parent type
-  const results = trackableParentTypes.map((type) => {
-    const { data, isLoading, error } = useQuery(
-      trpc.trackables.getTrackablesForParentType.queryOptions({
+  // Use useQueries to fetch data for all parent types
+  const queryHookResults = useQueries({
+    queries: trackableParentTypes.map((type) => {
+      return trpc.trackables.getTrackablesForParentType.queryOptions({
         trackableParentType: type,
-      }),
-    );
-
-    return {
-      type,
-      typeName: CONSTS.TRACKABLE.TYPES[type],
-      data,
-      isLoading,
-      error,
-    };
+      });
+    }),
   });
+
+  // Adapt the queryHookResults to the structure expected by the existing organizedData logic
+  const results = useMemo(() => {
+    return queryHookResults.map((queryResult, index) => {
+      const type = trackableParentTypes[index];
+      // Ensure 'type' is valid before using it as an index for CONSTS.TRACKABLE.TYPES
+      // Providing a fallback if type were somehow undefined, though it shouldn't be here.
+      const typeName = type ? CONSTS.TRACKABLE.TYPES[type] : "Unknown Type";
+
+      return {
+        type, // The parent type string, e.g., "consumption"
+        typeName, // The display name for the parent type
+        data: queryResult.data, // Data from the query
+        isLoading: queryResult.isLoading, // Loading state
+        error: queryResult.error, // Error object
+      };
+    });
+  }, [queryHookResults, trackableParentTypes]);
 
   // Organize data by parent type and then sub type
   const organizedData = useMemo(() => {
