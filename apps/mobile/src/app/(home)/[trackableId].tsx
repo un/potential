@@ -314,7 +314,7 @@ export default function TrackableDetailsPage() {
           )}
 
           {/* Data Entry Section */}
-          {showNewLog ? (
+          {showNewLog || (logs && logs.length === 0) ? (
             <View className="border-sand-6 bg-sand-1 flex flex-col gap-4 rounded-lg border px-6 py-4">
               {/* Trackable Input - Use our new input components */}
               <View className="flex flex-col gap-2">
@@ -376,13 +376,15 @@ export default function TrackableDetailsPage() {
                 onSubmit={handleSubmit}
                 submitting={isFormSubmitting}
               />
-              <Button
-                variant={"outline"}
-                onPress={() => setShowNewLog(false)}
-                className="w-full"
-              >
-                <Text>Cancel</Text>
-              </Button>
+              {!(logs && logs.length === 0) && (
+                <Button
+                  variant={"outline"}
+                  onPress={() => setShowNewLog(false)}
+                  className="w-full"
+                >
+                  <Text>Cancel</Text>
+                </Button>
+              )}
             </View>
           ) : (
             <Button onPress={() => setShowNewLog(true)}>

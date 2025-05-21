@@ -26,16 +26,17 @@ export default function DashboardHome() {
         <View className="flex w-full flex-row gap-2 px-6 py-0">
           <Button
             onPress={() => router.push("/(home)/log")}
-            className="flex w-[49%] flex-row gap-2"
+            // className="flex w-[49%] flex-row gap-2"
+            className="flex w-full flex-row gap-2"
           >
             <Text>Log</Text>
           </Button>
-          <Button
+          {/* <Button
             onPress={() => router.push("/(home)/experiment")}
             className="flex w-[49%] flex-row gap-2"
           >
             <Text>Experiment</Text>
-          </Button>
+          </Button> */}
         </View>
       </View>
     </SafeAreaView>

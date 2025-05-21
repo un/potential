@@ -190,6 +190,7 @@ export default function Logger() {
               <LogButton
                 icon={<ForkKnife size={24} weight="bold" color={iconColor()} />}
                 label="Food/Drink"
+                soon={true}
                 onPress={() => setCurrentStep("food")}
               />
               <LogButton
