@@ -12,6 +12,7 @@ import {
   sessions,
   trackableLogs,
   trackables,
+  userNotificationTokens,
   userProfiles,
   users,
   userXpLogs,
@@ -20,6 +21,48 @@ import {
 import { protectedProcedure } from "../../trpc";
 
 export const accountRouter = {
+  setNotificationToken: protectedProcedure
+    .input(
+      z.object({
+        token: z.string().max(255),
+        previousToken: z.string().max(255),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { db, auth } = ctx;
+      const user = auth.user;
+
+      // delete previous token
+      if (input.previousToken && input.previousToken.length > 0) {
+        await db
+          .delete(userNotificationTokens)
+          .where(eq(userNotificationTokens.token, input.previousToken));
+      }
+
+      // create new token
+      await db.insert(userNotificationTokens).values({
+        ownerId: user.id,
+        token: input.token,
+        lastSeenAt: new Date(),
+      });
+
+      return {
+        success: true,
+      };
+    }),
+  deleteNotificationToken: protectedProcedure
+    .input(z.object({ token: z.string().max(255) }))
+    .mutation(async ({ ctx, input }) => {
+      const { db } = ctx;
+
+      await db
+        .delete(userNotificationTokens)
+        .where(eq(userNotificationTokens.token, input.token));
+
+      return {
+        success: true,
+      };
+    }),
   deleteAccount: protectedProcedure
     .input(
       z.object({

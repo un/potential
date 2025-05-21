@@ -7,10 +7,13 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Loading } from "~/components/loading";
 import { Text } from "~/components/ui/text";
+import { useAuth } from "~/hooks/useAuth";
+import { usePushNotificationSync } from "~/hooks/usePushNotificationSync";
 import { trpc } from "~/utils/api";
 
 export default function Login() {
   const router = useRouter();
+  const { user } = useAuth();
 
   // get user profile
   const {
@@ -18,6 +21,8 @@ export default function Login() {
     isLoading: profileLoading,
     error: profileError,
   } = useQuery(trpc.user.profile.getUserProfileOverview.queryOptions());
+
+  usePushNotificationSync(user?.id);
 
   const latestOnboardingVersion = Constants.expoConfig?.extra
     ?.onboardingVersion as string;

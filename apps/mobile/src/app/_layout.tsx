@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useFonts } from "expo-font";
+import * as ExpoNotifications from "expo-notifications";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 // Fonts
@@ -59,9 +60,61 @@ SplashScreen.setOptions({
   fade: true,
 });
 
+ExpoNotifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
+
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
+  const notificationListener = useRef<
+    ExpoNotifications.EventSubscription | undefined
+  >(undefined);
+  const responseListener = useRef<
+    ExpoNotifications.EventSubscription | undefined
+  >(undefined);
+
+  useEffect(() => {
+    notificationListener.current =
+      ExpoNotifications.addNotificationReceivedListener((notification) => {
+        console.log(
+          "Notification received while app is foregrounded:",
+          notification,
+        );
+      });
+
+    responseListener.current =
+      ExpoNotifications.addNotificationResponseReceivedListener((response) => {
+        console.log("User interacted with notification:", response);
+        // Handle navigation or other actions based on the notification content
+        const data = response.notification.request.content.data as {
+          screen?: string;
+          [key: string]: unknown;
+        };
+        if (data?.screen) {
+          router.push(data.screen as `/${string}`);
+        }
+      });
+
+    return () => {
+      if (notificationListener.current) {
+        ExpoNotifications.removeNotificationSubscription(
+          notificationListener.current,
+        );
+      }
+      if (responseListener.current) {
+        ExpoNotifications.removeNotificationSubscription(
+          responseListener.current,
+        );
+      }
+    };
+  }, []);
   const { colorScheme } = useColorScheme();
 
   const [fontsLoaded, error] = useFonts({

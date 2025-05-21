@@ -23,6 +23,7 @@ export const cloudIdTypesMapNameToPrefix = {
   userProfile: "up",
   userXpLog: "uxp",
   userUpload: "upl",
+  userNotificationToken: "unt",
 
   // tracking TXX
   trackable: "t",

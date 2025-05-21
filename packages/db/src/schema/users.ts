@@ -87,3 +87,12 @@ export const userXpLogsRelations = relations(userXpLogs, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const userNotificationTokens = mysqlTable("userNotificationTokens", {
+  id: typeIdColumn("userNotificationToken", "id")
+    .primaryKey()
+    .$default(() => cloudTypeIdGenerator("userNotificationToken")),
+  ownerId: typeIdColumn("user", "ownerId").notNull(),
+  token: varchar("token", { length: 255 }).notNull(),
+  lastSeenAt: timestamp("lastSeenAt").notNull(),
+});
