@@ -2,10 +2,10 @@
     "name": "@potential/utils",
     "version": "1.0.0",
     "description": "",
+    "types": "./dist/index.d.ts",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
     "react-native": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "files": [
         "dist"
     ],
@@ -17,34 +17,34 @@
     },
     "exports": {
         ".": {
+            "types": "./dist/index.d.ts",
             "require": "./dist/index.js",
-            "import": "./dist/index.mjs",
-            "types": "./dist/index.d.ts"
+            "import": "./dist/index.mjs"
         },
         "./typeid": {
+            "types": "./dist/typeid.d.ts",
             "require": "./dist/typeid.js",
-            "import": "./dist/typeid.mjs",
-            "types": "./dist/typeid.d.ts"
+            "import": "./dist/typeid.mjs"
         },
         "./uiColors": {
+            "types": "./dist/uiColors.d.ts",
             "require": "./dist/uiColors.js",
-            "import": "./dist/uiColors.mjs",
-            "types": "./dist/uiColors.d.ts"
+            "import": "./dist/uiColors.mjs"
         },
         "./ms": {
+            "types": "./dist/ms.d.ts",
             "require": "./dist/ms.js",
-            "import": "./dist/ms.mjs",
-            "types": "./dist/ms.d.ts"
+            "import": "./dist/ms.mjs"
         },
         "./convert": {
+            "types": "./dist/convert.d.ts",
             "require": "./dist/convert.js",
-            "import": "./dist/convert.mjs",
-            "types": "./dist/convert.d.ts"
+            "import": "./dist/convert.mjs"
         },
         "./storage": {
+            "types": "./dist/storage.d.ts",
             "require": "./dist/storage.js",
-            "import": "./dist/storage.mjs",
-            "types": "./dist/storage.d.ts"
+            "import": "./dist/storage.mjs"
         }
     },
     "keywords": [],
