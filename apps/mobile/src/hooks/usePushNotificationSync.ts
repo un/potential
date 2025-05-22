@@ -4,6 +4,7 @@ import Constants from "expo-constants";
 import * as Device from "expo-device";
 import * as ExpoNotifications from "expo-notifications";
 import * as SecureStore from "expo-secure-store";
+import { useMutation } from "@tanstack/react-query";
 
 import { trpc } from "~/utils/api";
 
@@ -22,12 +23,12 @@ async function getPushToken(): Promise<string | null> {
     await ExpoNotifications.getPermissionsAsync();
   let finalStatus = existingStatus;
 
-  if (existingStatus !== "granted") {
+  if (existingStatus !== ExpoNotifications.PermissionStatus.GRANTED) {
     const { status } = await ExpoNotifications.requestPermissionsAsync();
     finalStatus = status;
   }
 
-  if (finalStatus !== "granted") {
+  if (finalStatus !== ExpoNotifications.PermissionStatus.GRANTED) {
     console.warn("Permission for push notifications not granted.");
     return null;
   }
@@ -46,9 +47,8 @@ async function getPushToken(): Promise<string | null> {
   }
 
   try {
-    const projectId =
-      Constants.expoConfig?.extra?.eas?.projectId ??
-      Constants.easConfig?.projectId;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const projectId = Constants.expoConfig?.extra?.eas.projectId as string;
     if (!projectId) {
       console.error("Project ID not found. Cannot get Expo Push Token.");
       return null;
@@ -68,10 +68,13 @@ export function usePushNotificationSync(userId: string | undefined) {
   >(null);
   const previousTokenRef = useRef<string | null>(null); // To store the token that was last sent to backend
 
-  const setNotificationTokenMutation =
-    trpc.user.account.setNotificationToken.useMutation();
-  const deleteNotificationTokenMutation =
-    trpc.user.account.deleteNotificationToken.useMutation();
+  // Setup the mutation for creating logs
+  const { mutateAsync: setNotificationTokenMutation } = useMutation(
+    trpc.user.account.setNotificationToken.mutationOptions({}),
+  );
+  const { mutateAsync: deleteNotificationTokenMutation } = useMutation(
+    trpc.user.account.deleteNotificationToken.mutationOptions({}),
+  );
 
   // Function to register or update token with backend
   const syncTokenWithBackend = useCallback(
@@ -82,7 +85,7 @@ export function usePushNotificationSync(userId: string | undefined) {
       }
       console.log("Attempting to sync token with backend:", tokenToSync);
       try {
-        await setNotificationTokenMutation.mutateAsync({
+        await setNotificationTokenMutation({
           token: tokenToSync,
           previousToken: previousTokenRef.current ?? "", // Send the previously synced token
         });
@@ -109,28 +112,8 @@ export function usePushNotificationSync(userId: string | undefined) {
 
       const newToken = await getPushToken();
       setCurrentExpoPushToken(newToken);
-
-      if (newToken && newToken !== storedToken) {
-        console.log(
-          "New or different push token obtained:",
-          newToken,
-          "Stored token:",
-          storedToken,
-        );
+      if (newToken && userId) {
         await syncTokenWithBackend(newToken);
-      } else if (newToken && !storedToken) {
-        console.log(
-          "Push token obtained, no token was previously stored:",
-          newToken,
-        );
-        await syncTokenWithBackend(newToken);
-      } else if (newToken && newToken === storedToken) {
-        console.log(
-          "Current push token is the same as stored. No sync needed initially.",
-        );
-        // Optionally, you might still want to "touch" the token on the backend
-        // to update last_seen_at by calling syncTokenWithBackend(newToken)
-        // For now, we only sync if it's different or new.
       }
     }
 
@@ -150,14 +133,12 @@ export function usePushNotificationSync(userId: string | undefined) {
         tokenToUnregister,
       );
       try {
-        await deleteNotificationTokenMutation.mutateAsync({
+        await deleteNotificationTokenMutation({
           token: tokenToUnregister,
         });
         console.log("Push token unregistered from backend.");
       } catch (error) {
         console.error("Failed to unregister push token from backend:", error);
-        // Decide if you still want to delete locally if backend fails.
-        // For now, we proceed to delete locally.
       }
       await SecureStore.deleteItemAsync(SECURE_STORE_PUSH_TOKEN_KEY);
       previousTokenRef.current = null;

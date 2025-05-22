@@ -61,6 +61,7 @@ SplashScreen.setOptions({
 });
 
 ExpoNotifications.setNotificationHandler({
+  // eslint-disable-next-line @typescript-eslint/require-await
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
@@ -97,24 +98,20 @@ export default function RootLayout() {
           screen?: string;
           [key: string]: unknown;
         };
-        if (data?.screen) {
+        if (data.screen) {
           router.push(data.screen as `/${string}`);
         }
       });
 
     return () => {
       if (notificationListener.current) {
-        ExpoNotifications.removeNotificationSubscription(
-          notificationListener.current,
-        );
+        notificationListener.current.remove();
       }
       if (responseListener.current) {
-        ExpoNotifications.removeNotificationSubscription(
-          responseListener.current,
-        );
+        responseListener.current.remove();
       }
     };
-  }, []);
+  });
   const { colorScheme } = useColorScheme();
 
   const [fontsLoaded, error] = useFonts({
