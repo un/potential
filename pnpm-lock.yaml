@@ -561,9 +561,6 @@ importers:
       '@potential/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -598,9 +595,6 @@ importers:
       '@potential/utils':
         specifier: workspace:*
         version: link:../utils
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -650,9 +644,6 @@ importers:
       drizzle-kit:
         specifier: 'catalog:'
         version: 0.30.6
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -693,9 +684,6 @@ importers:
       '@potential/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -730,9 +718,6 @@ importers:
       '@potential/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -918,9 +903,6 @@ importers:
       '@types/react':
         specifier: catalog:react19
         version: 19.1.2
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
@@ -980,9 +962,6 @@ importers:
       '@potential/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      esbuild:
-        specifier: ^0.25.4
-        version: 0.25.4
       eslint:
         specifier: 'catalog:'
         version: 9.25.1(jiti@2.4.2)
