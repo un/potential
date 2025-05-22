@@ -48,7 +48,6 @@
     "@potential/tsconfig": "workspace:*",
     "dotenv-cli": "^8.0.0",
     "drizzle-kit": "catalog:",
-    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

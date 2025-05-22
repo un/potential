@@ -26,7 +26,6 @@
     "@potential/eslint-config": "workspace:*",
     "@potential/prettier-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
-    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

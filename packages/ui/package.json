@@ -67,7 +67,6 @@
     "@potential/tailwind-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
-    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "react": "catalog:react19",

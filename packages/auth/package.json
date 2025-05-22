@@ -42,7 +42,6 @@
   "devDependencies": {
     "@potential/prettier-config": "workspace:*",
     "@potential/tsconfig": "workspace:*",
-    "esbuild": "^0.25.4",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "tsup": "^8.2.4",
