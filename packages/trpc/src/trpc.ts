@@ -3,12 +3,16 @@ import { betterAuth } from "better-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import { authOptions } from "@potential/auth";
 import type { db } from "@potential/db";
-import type { CloudTypeId } from "@potential/utils";
+import type { CloudTypeId } from "@potential/utils/typeid";
+import { authOptions } from "@potential/auth";
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
   ...authOptions,
+  advanced: {
+    ...authOptions.advanced,
+    generateId: false,
+  },
 });
 
 // SYNC WITH CHANGES in apps/backend/api/index.ts
@@ -50,7 +54,6 @@ export const createTRPCRouter = t.router;
 
 /**
  * Middleware for timing procedure execution and adding an articifial delay in development.
- *
  * You can remove this if you don't like it, but it can help catch unwanted waterfalls by simulating
  * network latency that would occur in production but not in local development.
  */

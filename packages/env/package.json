@@ -15,9 +15,9 @@
     "dist"
   ],
   "scripts": {
+    "dev": "tsup src/index.ts --out-dir dist --platform node --format esm --external @t3-oss/env-core --external zod --dts --no-splitting --sourcemap --watch",
     "build": "tsup src/index.ts --out-dir dist --platform node --format esm --external @t3-oss/env-core --external zod --dts --no-splitting --sourcemap --clean",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsup src/index.ts --out-dir dist --platform node --format esm --external @t3-oss/env-core --external zod --dts --no-splitting --sourcemap --clean --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"

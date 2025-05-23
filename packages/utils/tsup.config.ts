@@ -13,7 +13,7 @@ export default defineConfig({
   dts: true,
   splitting: false, // Recommended for packages to avoid chunks
   sourcemap: true,
-  clean: true,
+  clean: false,
   treeshake: true,
   external: [
     "@potential/tsconfig",

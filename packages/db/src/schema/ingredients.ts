@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import { mysqlTable, text, varchar } from "drizzle-orm/mysql-core";
 
-import { cloudTypeIdGenerator } from "@potential/utils";
+import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";

@@ -11,21 +11,25 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./": {
-      "import": "./dist/",
-      "types": "./dist/"
+    "./root": {
+      "types": "./dist/root.d.ts",
+      "import": "./dist/root.js"
+    },
+    "./trpc": {
+      "types": "./dist/trpc.d.ts",
+      "import": "./dist/trpc.js"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --external @ai-sdk/anthropic --external @potential/auth --external @potential/consts --external @potential/db --external @potential/email --external @potential/env --external @potential/storage --external @potential/utils --external @potential/validators --external @trpc/server --external ai --external better-auth --external superjson --external zod",
+    "dev": "tsup --watch",
+    "build": "tsup --clean",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsup src/index.ts --format esm --dts --external @ai-sdk/anthropic --external @potential/auth --external @potential/consts --external @potential/db --external @potential/email --external @potential/env --external @potential/storage --external @potential/utils --external @potential/validators --external @trpc/server --external ai --external better-auth --external superjson --external zod --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+    "typecheck": "tsc --noEmit --project tsconfig.json"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.2.10",

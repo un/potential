@@ -26,11 +26,6 @@
             "require": "./dist/typeid.js",
             "import": "./dist/typeid.mjs"
         },
-        "./uiColors": {
-            "types": "./dist/uiColors.d.ts",
-            "require": "./dist/uiColors.js",
-            "import": "./dist/uiColors.mjs"
-        },
         "./ms": {
             "types": "./dist/ms.d.ts",
             "require": "./dist/ms.js",
@@ -40,11 +35,6 @@
             "types": "./dist/convert.d.ts",
             "require": "./dist/convert.js",
             "import": "./dist/convert.mjs"
-        },
-        "./storage": {
-            "types": "./dist/storage.d.ts",
-            "require": "./dist/storage.js",
-            "import": "./dist/storage.mjs"
         }
     },
     "keywords": [],

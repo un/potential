@@ -8,7 +8,7 @@ import {
   varchar,
 } from "drizzle-orm/mysql-core";
 
-import { cloudTypeIdGenerator } from "@potential/utils";
+import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 
 import { typeIdColumn } from "../columns/custom/typeId";
 import { genderAtBirthColumn } from "../columns/custom/user";

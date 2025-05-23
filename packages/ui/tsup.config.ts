@@ -29,7 +29,7 @@ export default defineConfig({
   dts: true,
   splitting: false, // Keep components bundled per entry point
   sourcemap: true,
-  clean: true,
+  clean: false,
   bundle: true,
   // esbuildOptions(options) { // If Radix UI components need 'use client'
   //   options.banner = {
