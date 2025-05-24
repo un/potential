@@ -21,31 +21,33 @@ export const queryClient = new QueryClient({
   },
 });
 
+export const trpcClient = createTRPCClient<AppRouter>({
+  links: [
+    loggerLink({
+      enabled: (opts) =>
+        process.env.NODE_ENV === "development" ||
+        (opts.direction === "down" && opts.result instanceof Error),
+      colorMode: "ansi",
+    }),
+    httpBatchLink({
+      transformer: superjson,
+      url: `${getApiUrl()}/trpc`,
+      headers() {
+        const headers = new Map<string, string>();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+        const cookies = authClient.getCookie();
+        if (cookies) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          headers.set("Cookie", cookies);
+        }
+        return Object.fromEntries(headers);
+      },
+    }),
+  ],
+});
+
 export const trpc = createTRPCOptionsProxy<AppRouter>({
-  client: createTRPCClient({
-    links: [
-      loggerLink({
-        enabled: (opts) =>
-          process.env.NODE_ENV === "development" ||
-          (opts.direction === "down" && opts.result instanceof Error),
-        colorMode: "ansi",
-      }),
-      httpBatchLink({
-        transformer: superjson,
-        url: `${getApiUrl()}/trpc`,
-        headers() {
-          const headers = new Map<string, string>();
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-          const cookies = authClient.getCookie();
-          if (cookies) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            headers.set("Cookie", cookies);
-          }
-          return Object.fromEntries(headers);
-        },
-      }),
-    ],
-  }),
+  client: trpcClient,
   queryClient,
 });
 

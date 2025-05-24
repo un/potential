@@ -18,7 +18,7 @@ import {
   userXpLogs,
 } from "@potential/db";
 
-import { protectedProcedure } from "../../trpc";
+import { protectedProcedure, publicProcedure } from "../../trpc";
 
 export const accountRouter = {
   setNotificationToken: protectedProcedure
@@ -122,5 +122,20 @@ export const accountRouter = {
         .where(eq(userXpLogs.ownerId, user.id));
       console.log("👋 userXpLogsDeleted", userXpLogsDeleted);
       return;
+    }),
+  checkEmailRegistered: publicProcedure
+    .input(
+      z.object({
+        email: z.string().email(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const { db } = ctx;
+
+      const user = await db.query.users.findFirst({
+        where: eq(users.email, input.email),
+      });
+
+      return !!user;
     }),
 } satisfies TRPCRouterRecord;

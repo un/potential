@@ -109,6 +109,22 @@ export default function Login() {
             />
           </View>
         </View>
+
+        <View className="flex w-full max-w-sm flex-col gap-4">
+          <Text className="text-sand-11 text-center text-sm">
+            No email? Ensure you're using the correct email address and check
+            your spam folder or{" "}
+            <Text
+              className="text-sand-11 underline"
+              onPress={() => {
+                router.navigate("/login");
+              }}
+            >
+              press here to go back to login
+            </Text>
+          </Text>
+        </View>
+
         {/* </View> */}
       </KeyboardAvoidingView>
     </SafeAreaView>

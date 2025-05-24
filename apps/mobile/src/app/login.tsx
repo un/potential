@@ -13,6 +13,7 @@ import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 import { Input } from "~/components/ui/input";
 import { Text } from "~/components/ui/text";
+import { trpcClient } from "~/utils/api";
 import { authClient } from "~/utils/auth-client";
 import { getApiUrl } from "~/utils/base-url";
 
@@ -36,14 +37,22 @@ export default function Login() {
     },
     onSubmit: async ({ value }) => {
       setIsLoading(true);
-      const { error } = await authClient.emailOtp.sendVerificationOtp({
-        email: value.email,
-        type: "sign-in",
-      });
-      if (error) {
-        setIsLoading(false);
-        console.error(error);
-        return;
+
+      const isEmailRegistered =
+        await trpcClient.user.account.checkEmailRegistered.query({
+          email: value.email,
+        });
+
+      if (isEmailRegistered) {
+        const { error } = await authClient.emailOtp.sendVerificationOtp({
+          email: value.email,
+          type: "sign-in",
+        });
+        if (error) {
+          setIsLoading(false);
+          console.error(error);
+          return;
+        }
       }
       router.push({
         pathname: "/otp",
