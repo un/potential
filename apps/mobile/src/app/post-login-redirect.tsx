@@ -5,18 +5,15 @@ import Constants from "expo-constants";
 import { Stack, useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
-
-
 import { Loading } from "~/components/loading";
 import { Text } from "~/components/ui/text";
 import { usePushNotificationSync } from "~/hooks/usePushNotificationSync";
 import { trpc } from "~/utils/api";
 import { authClient } from "~/utils/auth-client";
 
-
 export default function Login() {
   const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session } = authClient.useSession();
   const { user } = session ?? {};
 
   // get user profile
