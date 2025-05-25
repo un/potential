@@ -38,7 +38,7 @@ export default function UserHeader() {
             </Text>
             <Fire size={18} color={iconColor()} />
           </View>
-          <View className="flex flex-row items-center justify-end gap-1">
+          <View className="flex flex-row items-center justify-end pr-1">
             <Bug size={18} color={iconColor()} />
           </View>
         </View>

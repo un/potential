@@ -109,6 +109,18 @@ export default function DashboardLayout() {
         }}
       />
       <Stack.Screen
+        name="new"
+        options={{
+          title: "Track something new",
+          presentation: "modal",
+          headerRight: () => (
+            <Button variant="link" size="icon" onPress={() => router.back()}>
+              <X size={24} color={iconColor()} />
+            </Button>
+          ),
+        }}
+      />
+      <Stack.Screen
         name="[trackableId]"
         options={{
           title: "Title too long, or error",
