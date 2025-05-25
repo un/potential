@@ -119,7 +119,7 @@ export const trackablesRouter = {
 
       try {
         const { object } = await generateObject({
-          model: openai("o3-mini"),
+          model: openai("gpt-4o-mini"),
           // schemaName: "NewTrackable",
           // schemaDescription:
           //   "A trackable health item thats used to track a specific health metric for a user.",
