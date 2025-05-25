@@ -197,7 +197,83 @@ export type TrackableCustomConfigMeasureAggregationKey =
 export type TrackableCustomConfigMeasureAggregationValues =
   TrackableCustomConfigMeasureAggregationMap[TrackableCustomConfigMeasureAggregationKey];
 
-export type TrackableCustomConfig =
+export const trackableCustomConfigMeasureUnitsSchema = z.enum(
+  Object.keys(TRACKABLE_CONFIG_MEASURE_UNITS) as [
+    TrackableCustomConfigMeasureUnitsKey,
+    ...TrackableCustomConfigMeasureUnitsKey[],
+  ],
+);
+
+export const trackableCustomConfigMeasureCumulationSchema = z.enum(
+  Object.keys(TRACKABLE_CONFIG_MEASURE_CUMULATION) as [
+    TrackableCustomConfigMeasureCumulationKey,
+    ...TrackableCustomConfigMeasureCumulationKey[],
+  ],
+);
+
+export const trackableCustomConfigMeasureAggregationSchema = z.enum(
+  Object.keys(TRACKABLE_CONFIG_MEASURE_AGGREGATION) as [
+    TrackableCustomConfigMeasureAggregationKey,
+    ...TrackableCustomConfigMeasureAggregationKey[],
+  ],
+);
+
+const trackableMeasureSchema = z.object({
+  type: z.literal("measure"),
+  measureUnitType: trackableCustomConfigMeasureUnitsSchema,
+  measureUnitSource: z.string(),
+  measureUnitDisplay: z.string(),
+  measureTarget: z.number().nullable(),
+  measureMin: z.number().optional(),
+  measureMax: z.number().optional(),
+  cumulative: z.boolean(),
+  cumulation: trackableCustomConfigMeasureCumulationSchema.optional(),
+  aggregationType: trackableCustomConfigMeasureAggregationSchema.optional(),
+});
+
+const trackableCheckboxSchema = z.object({
+  type: z.literal("checkbox"),
+  checkboxName: z.string(),
+});
+
+const trackableRangeSchema = z.object({
+  type: z.literal("range"),
+  rangeMin: z.number(),
+  rangeMax: z.number(),
+  rangeUnit: z.string().optional(),
+  rangeMinLabel: z.string().optional(),
+  rangeMaxLabel: z.string().optional(),
+  rangeStepLabels: z.array(z.record(z.string())).optional(), // Record<number, string>[] translates to array of objects with string keys
+});
+
+const trackableRatingSchema = z.object({
+  type: z.literal("rating"),
+  ratingMax: z.union([
+    z.literal(1),
+    z.literal(2),
+    z.literal(3),
+    z.literal(4),
+    z.literal(5),
+    z.literal(6),
+    z.literal(7),
+    z.literal(8),
+    z.literal(9),
+    z.literal(10),
+  ]),
+  ratingUnit: z.string().optional(),
+  ratingIcon: z.string().optional(),
+  ratingEmoji: z.string().optional(),
+});
+
+const trackableShortTextSchema = z.object({
+  type: z.literal("shortText"),
+});
+
+const trackableLongTextSchema = z.object({
+  type: z.literal("longText"),
+});
+
+export type TrackableCustomConfigDataFields =
   | {
       type: "measure";
       // used to display input and logs
@@ -212,11 +288,10 @@ export type TrackableCustomConfig =
       cumulative: boolean;
       cumulation?: TrackableCustomConfigMeasureCumulationKey;
       aggregationType?: TrackableCustomConfigMeasureAggregationKey;
-      limitOnePerDay: boolean;
     }
   | {
       type: "checkbox";
-      limitOnePerDay: boolean;
+
       // used to display input and logs
       checkboxName: string;
     }
@@ -231,7 +306,6 @@ export type TrackableCustomConfig =
       rangeMaxLabel?: string;
       // Step for input control
       rangeStepLabels: Record<number, string>[];
-      limitOnePerDay: boolean;
     }
   | {
       type: "rating";
@@ -240,13 +314,36 @@ export type TrackableCustomConfig =
       ratingUnit?: string;
       ratingIcon?: string;
       ratingEmoji?: string;
-      limitOnePerDay: boolean;
     }
   | {
       type: "shortText";
-      limitOnePerDay: boolean;
     }
   | {
       type: "longText";
-      limitOnePerDay: boolean;
     };
+
+export type TrackableCustomConfig = TrackableCustomConfigDataFields & {
+  limitOnePerDay: boolean;
+};
+
+// export const trackableCustomConfigSchema = z.intersection(
+//   z.object({
+//     limitOnePerDay: z.boolean(),
+//   }),
+//   z.discriminatedUnion("type", [
+//     trackableMeasureSchema,
+//     trackableCheckboxSchema,
+//     trackableRangeSchema,
+//     trackableRatingSchema,
+//     trackableShortTextSchema,
+//     trackableLongTextSchema,
+//   ]),
+// );
+export const trackableCustomConfigSchema = z.discriminatedUnion("type", [
+  trackableMeasureSchema,
+  trackableCheckboxSchema,
+  trackableRangeSchema,
+  trackableRatingSchema,
+  trackableShortTextSchema,
+  trackableLongTextSchema,
+]);

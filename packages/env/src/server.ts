@@ -11,6 +11,12 @@ const shared = createEnv({
   runtimeEnv: process.env,
 });
 
+const ai = createEnv({
+  server: {
+    OPENAI_API_KEY: z.string().min(1),
+  },
+  runtimeEnv: process.env,
+});
 const auth = createEnv({
   server: {
     AUTH_SECRET: z.string().min(1),
@@ -50,6 +56,7 @@ const storage = createEnv({
 
 export const serverEnv = {
   auth,
+  ai,
   database,
   email,
   shared,

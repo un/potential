@@ -39,6 +39,7 @@ import {
   TrackableCustomConfigMeasureUnitsKey,
   TrackableCustomConfigMeasureUnitsMap,
   TrackableCustomConfigMeasureUnitsValues,
+  trackableCustomConfigSchema,
   TrackableCustomConfigTypesKey,
   TrackableCustomConfigTypesMap,
   trackableCustomConfigTypesSchema,
@@ -86,6 +87,7 @@ export const CONSTS = {
       TYPES: TRACKABLE_CUSTOM_CONFIG_TYPES,
       getCustomConfigTypeDisplayValue,
       TYPES_SCHEMA: trackableCustomConfigTypesSchema,
+      CONFIG_SCHEMA: trackableCustomConfigSchema,
     },
   },
   COLORS: {

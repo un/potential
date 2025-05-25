@@ -94,7 +94,8 @@
         "STORAGE_S3_ACCESS_KEY_ID",
         "STORAGE_S3_SECRET_ACCESS_KEY",
         "RESEND_API_KEY",
-        "RESEND_AUDIENCE_ID"
+        "RESEND_AUDIENCE_ID",
+        "OPENAI_API_KEY"
       ]
     },
     "format": {
@@ -164,7 +165,8 @@
     "CLOUDFLARE_IMAGES_DELIVERY_URL",
     "CLOUDFLARE_IMAGES_PRIVATE_KEY",
     "RESEND_API_KEY",
-    "RESEND_AUDIENCE_ID"
+    "RESEND_AUDIENCE_ID",
+    "OPENAI_API_KEY"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
