@@ -119,6 +119,7 @@ export const trackablesRouter = {
 
       try {
         const { object } = await generateObject({
+          // issue with thinking models and optional fields in structured output: https://github.com/vercel/ai/issues/4662
           model: openai("gpt-4o-mini"),
           // schemaName: "NewTrackable",
           // schemaDescription:
@@ -128,7 +129,7 @@ export const trackablesRouter = {
           system:
             "You design systems for users to track health items with the aim of improving them. Users will tell you what they want to improve, and you will create a system with multiple trackable data types for them to track. You will also create a name and description for each trackable. The system should be a list of trackable data types that the user should track to achieve their goal. As an example, if the user wants to improve their mood, you should create a trackable data type for mood, and a trackable data type for anxiety, and a trackable data type for depression, and a trackable data type for journaling. It is important to set the trackableConfig for each trackable. Type Rating is a type that allows the user to rate something on a scale of 1 to 5 wither using the defualt of STARs respresentation, or a standard emoji. Type Measure is a type that allows the user to measure something and provides a UI to increment or decrement a number. Type Range is a type that allows the user to set a range for something and set it using a slider in the UI. Type Checkbox is a type that allows the user to check a box. Type ShortText is a type that allows the user to enter a short text. Type LongText is a type that allows the user to enter a long text.",
           prompt:
-            "I want to improve my overall mood. I have high anxiety and depression. I want to improve these.",
+            "I have some sore skin on my face. I want to find out whats causing it and how to fix it.",
         });
         // const { object } = await generateObject({
         //   model: openai("gpt-4-turbo"),
