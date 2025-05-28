@@ -9,6 +9,17 @@ import type { AppRouter } from "@potential/trpc";
 import { authClient } from "./auth-client";
 import { getApiUrl } from "./base-url";
 
+export const getAuthHeaders = () => {
+  const headers = new Map<string, string>();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const cookies = authClient.getCookie();
+  if (cookies) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    headers.set("Cookie", cookies);
+  }
+  return Object.fromEntries(headers);
+};
+
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -32,16 +43,7 @@ export const trpcClient = createTRPCClient<AppRouter>({
     httpBatchLink({
       transformer: superjson,
       url: `${getApiUrl()}/trpc`,
-      headers() {
-        const headers = new Map<string, string>();
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-        const cookies = authClient.getCookie();
-        if (cookies) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          headers.set("Cookie", cookies);
-        }
-        return Object.fromEntries(headers);
-      },
+      headers: getAuthHeaders,
     }),
   ],
 });

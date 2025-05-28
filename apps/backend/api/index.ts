@@ -22,6 +22,8 @@ import aiRoutes from "./ai/chat"; // Import the AI routes
 // Middleware to check for authenticated user
 const authMiddleware = async (c: any, next: any) => {
   const { user } = c.get("auth");
+
+  console.log("🔥", { user });
   if (!user) {
     return c.json({ error: "Unauthorized" }, 401);
   }

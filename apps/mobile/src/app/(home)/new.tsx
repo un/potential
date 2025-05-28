@@ -1,3 +1,4 @@
+import type { Message } from "@ai-sdk/react";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,13 +8,41 @@ import { useChat } from "@ai-sdk/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Text as UIText } from "~/components/ui/text";
+import { getAuthHeaders } from "~/utils/api";
 import { getApiUrl } from "~/utils/base-url";
+
+interface MessageProps {
+  message: Message;
+}
+
+function UserMessage({ message }: MessageProps) {
+  return (
+    <View key={message.id} className="max-w-[80%] self-end">
+      <View className="bg-sand-5 flex flex-col items-end gap-1 rounded-xl p-3">
+        <UIText className="font-bold">You</UIText>
+        <UIText className="">{message.content}</UIText>
+      </View>
+    </View>
+  );
+}
+
+function AIMessage({ message }: MessageProps) {
+  return (
+    <View key={message.id} className="max-w-[80%] self-start">
+      <View className="flex flex-col gap-1 rounded-xl p-3">
+        <UIText className="font-bold">AI</UIText>
+        <UIText className="">{message.content}</UIText>
+      </View>
+    </View>
+  );
+}
 
 export default function NewTrackableScreen() {
   const { messages, input, handleSubmit, error, isLoading, setInput } = useChat(
     {
       fetch: expoFetch as unknown as typeof globalThis.fetch,
       api: `${getApiUrl()}/ai/chat`,
+      headers: getAuthHeaders(),
       onError: (err) => console.error(err, "ERROR_CHAT"),
     },
   );
@@ -24,54 +53,34 @@ export default function NewTrackableScreen() {
 
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
-      <View className="flex flex-1 flex-col px-4 pb-4">
+      <View className="flex flex-1 flex-col p-6">
         <ScrollView
-          className="flex-1"
+          className="flex flex-1 flex-col gap-4"
           contentContainerClassName="pb-4"
           keyboardShouldPersistTaps="handled"
         >
-          {messages.map((m) => (
-            <View
-              key={m.id}
-              className={`my-2 max-w-[80%] ${
-                m.role === "user" ? "self-end" : "self-start"
-              }`}
-            >
-              <View
-                className={`rounded-xl p-3 ${
-                  m.role === "user" ? "bg-blue-500" : "bg-gray-200"
-                }`}
-              >
-                <UIText
-                  className={`mb-1 font-bold ${
-                    m.role === "user" ? "text-white" : "text-black"
-                  }`}
-                >
-                  {m.role === "user" ? "You" : "AI"}
-                </UIText>
-                <UIText
-                  className={m.role === "user" ? "text-white" : "text-black"}
-                >
-                  {m.content}
-                </UIText>
-              </View>
-            </View>
-          ))}
+          {messages.map((m) =>
+            m.role === "user" ? (
+              <UserMessage key={m.id} message={m} />
+            ) : (
+              <AIMessage key={m.id} message={m} />
+            ),
+          )}
           {isLoading && (
-            <View className="my-2 items-center">
-              <UIText>Thinking...</UIText>
+            <View className="items-center">
+              <UIText type={"title"}>Thinking...</UIText>
             </View>
           )}
           {error && (
-            <View className="my-2 items-center">
-              <UIText className="text-red-500">Error: {error.message}</UIText>
+            <View className="items-center">
+              <UIText className="text-red-9">Error: {error.message}</UIText>
             </View>
           )}
         </ScrollView>
 
-        <View className="mt-3 flex flex-row items-center border-t border-gray-200 pt-3">
+        <View className="flex flex-row items-center pt-3">
           <Input
-            className="mr-3 flex-1 rounded-[20px] border border-gray-300 bg-white px-4 py-3 text-black"
+            className="flex-1"
             value={input}
             onChangeText={setInput}
             placeholder="Type your message..."
@@ -84,7 +93,7 @@ export default function NewTrackableScreen() {
             disabled={isLoading || !input.trim()}
             className="rounded-[20px] px-4"
           >
-            <UIText className="font-bold text-white">Send</UIText>
+            <UIText className="font-bold">Send</UIText>
           </Button>
         </View>
       </View>
