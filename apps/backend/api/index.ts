@@ -19,6 +19,15 @@ import { cloudTypeIdValidator } from "@potential/utils";
 
 import aiRoutes from "./ai/chat"; // Import the AI routes
 
+// Middleware to check for authenticated user
+const authMiddleware = async (c: any, next: any) => {
+  const { user } = c.get("auth");
+  if (!user) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+  await next();
+};
+
 // Initialize auth with error handling
 const auth = betterAuth({
   ...authOptions,
@@ -140,6 +149,7 @@ app.use(
 );
 
 // Add the AI routes
+app.use("/ai/*", authMiddleware);
 app.route("/ai", aiRoutes);
 
 // Redirect to image uploads
