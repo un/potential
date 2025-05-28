@@ -16,6 +16,7 @@
     "@hono/trpc-server": "^0.3.4",
     "@hono/zod-validator": "^0.5.0",
     "@potential/auth": "workspace:*",
+    "@potential/consts": "workspace:*",
     "@potential/db": "workspace:*",
     "@potential/env": "workspace:*",
     "@potential/storage": "workspace:*",

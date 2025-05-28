@@ -128,6 +128,9 @@ importers:
       '@potential/auth':
         specifier: workspace:*
         version: link:../../packages/auth
+      '@potential/consts':
+        specifier: workspace:*
+        version: link:../../packages/consts
       '@potential/db':
         specifier: workspace:*
         version: link:../../packages/db

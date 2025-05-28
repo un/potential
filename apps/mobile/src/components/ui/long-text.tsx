@@ -24,7 +24,7 @@ const LongText = React.forwardRef<
         <TextInput
           ref={ref}
           className={cn(
-            "border-sand-7 bg-sand-1 text-sand-12 placeholder:text-sand-10 min-h-[80px] w-full rounded-md border px-3 py-3 font-['MartianMono-Regular']",
+            "border-sand-7 bg-sand-1 text-sand-12 placeholder:text-sand-10 min-h-[40px] w-full rounded-md border px-3 py-3 font-['MartianMono-Regular']",
             props.editable === false && "opacity-50",
             className,
           )}

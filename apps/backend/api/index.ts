@@ -53,8 +53,8 @@ type InferredAuthSession = Omit<
   userId: CloudTypeId<"user">;
 };
 
-// Hono App
-const app = new Hono<{
+// Export the app context type for reuse in other files
+export type AppContext = {
   Variables: {
     reqId: string;
     db: typeof db;
@@ -63,7 +63,10 @@ const app = new Hono<{
       session: InferredAuthSession | null;
     };
   };
-}>();
+};
+
+// Hono App
+export const app = new Hono<AppContext>();
 
 let PORT = 8080;
 if (serverEnv.shared.NODE_ENV === "development") {
