@@ -42,7 +42,7 @@
     "@potential/utils": "workspace:*",
     "@potential/validators": "workspace:*",
     "@trpc/server": "catalog:",
-    "ai": "^4.3.13",
+    "ai": "catalog:",
     "better-auth": "catalog:",
     "superjson": "2.2.2",
     "zod": "catalog:"

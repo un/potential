@@ -8,7 +8,7 @@ export const newTrackablesSchema = z.object({
   trackableConfig: CONSTS.TRACKABLE.CONFIG.CONFIG_SCHEMA,
   name: z.string().max(32),
   description: z.string().max(255),
-  color: CONSTS.COLORS.SCHEMA,
+  color: z.union([CONSTS.COLORS.SCHEMA, z.string()]),
   type: CONSTS.TRACKABLE.TYPES_SCHEMA,
   subType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
   subTypeCustomName: z.string().max(64),

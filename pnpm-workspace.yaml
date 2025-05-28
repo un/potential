@@ -4,6 +4,10 @@ packages:
   - tooling/*
 
 catalog:
+  # AI
+  "ai": ^4.3.16
+  "@ai-sdk/openai": ^1.3.22
+
   # Auth
   "better-auth": 1.2.5
   "@better-auth/expo": 1.2.5

@@ -17,6 +17,8 @@ import { GetObjectCommand, getSignedUrl, s3Client } from "@potential/storage";
 import { appRouter } from "@potential/trpc";
 import { cloudTypeIdValidator } from "@potential/utils";
 
+import aiRoutes from "./ai/chat"; // Import the AI routes
+
 // Initialize auth with error handling
 const auth = betterAuth({
   ...authOptions,
@@ -136,6 +138,9 @@ app.use(
     }),
   }),
 );
+
+// Add the AI routes
+app.route("/ai", aiRoutes);
 
 // Redirect to image uploads
 app.get(

@@ -49,6 +49,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 
 import { queryClient } from "~/utils/api";
 
+import "../../polyfills"; // Import polyfills
+
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync().catch(() => {
   /* ignore error */

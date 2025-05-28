@@ -6,6 +6,9 @@ settings:
 
 catalogs:
   default:
+    '@ai-sdk/openai':
+      specifier: ^1.3.22
+      version: 1.3.22
     '@better-auth/expo':
       specifier: 1.2.5
       version: 1.2.5
@@ -27,6 +30,9 @@ catalogs:
     '@trpc/tanstack-react-query':
       specifier: ^11.0.0-rc.824
       version: 11.1.2
+    ai:
+      specifier: ^4.3.16
+      version: 4.3.16
     better-auth:
       specifier: 1.2.5
       version: 1.2.5
@@ -107,6 +113,9 @@ importers:
 
   apps/backend:
     dependencies:
+      '@ai-sdk/openai':
+        specifier: 'catalog:'
+        version: 1.3.22(zod@3.24.3)
       '@hono/node-server':
         specifier: ^1.14.1
         version: 1.14.1(hono@4.7.8)
@@ -137,6 +146,9 @@ importers:
       '@react-email/components':
         specifier: ^0.0.38
         version: 0.0.38(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      ai:
+        specifier: 'catalog:'
+        version: 4.3.16(react@19.0.0)(zod@3.24.3)
       better-auth:
         specifier: 'catalog:'
         version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
@@ -171,6 +183,9 @@ importers:
 
   apps/mobile:
     dependencies:
+      '@ai-sdk/react':
+        specifier: ^1.2.12
+        version: 1.2.12(react@19.0.0)(zod@3.24.3)
       '@better-auth/expo':
         specifier: 'catalog:'
         version: 1.2.5(better-auth@1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3))
@@ -219,6 +234,9 @@ importers:
       '@shopify/flash-list':
         specifier: 1.7.6
         version: 1.7.6(@babel/runtime@7.27.1)(react-native@0.79.2(@babel/core@7.27.1)(@types/react@19.0.10)(react@19.0.0))(react@19.0.0)
+      '@stardazed/streams-text-encoding':
+        specifier: ^1.0.2
+        version: 1.0.2
       '@tanstack/react-form':
         specifier: 'catalog:'
         version: 1.9.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -234,6 +252,9 @@ importers:
       '@trpc/tanstack-react-query':
         specifier: 'catalog:'
         version: 11.1.2(@tanstack/react-query@5.75.1(react@19.0.0))(@trpc/client@11.1.2(@trpc/server@11.1.2(typescript@5.8.3))(typescript@5.8.3))(@trpc/server@11.1.2(typescript@5.8.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.8.3)
+      '@ungap/structured-clone':
+        specifier: ^1.3.0
+        version: 1.3.0
       better-auth:
         specifier: 'catalog:'
         version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
@@ -825,8 +846,8 @@ importers:
         specifier: 'catalog:'
         version: 11.1.2(typescript@5.8.3)
       ai:
-        specifier: ^4.3.13
-        version: 4.3.13(react@19.0.0)(zod@3.24.3)
+        specifier: 'catalog:'
+        version: 4.3.16(react@19.0.0)(zod@3.24.3)
       better-auth:
         specifier: 'catalog:'
         version: 1.2.5(patch_hash=bhl7ek5s5n2ly53qinlprc7hvy)(typescript@5.8.3)
@@ -1092,12 +1113,6 @@ packages:
     peerDependencies:
       zod: ^3.0.0
 
-  '@ai-sdk/provider-utils@2.2.7':
-    resolution: {integrity: sha512-kM0xS3GWg3aMChh9zfeM+80vEZfXzR3JEUBdycZLtbRZ2TRT8xOj3WodGHPb06sUK5yD7pAXC/P7ctsi2fvUGQ==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.23.8
-
   '@ai-sdk/provider-utils@2.2.8':
     resolution: {integrity: sha512-fqhG+4sCVv8x7nFzYnFo19ryhAa3w096Kmc3hWxMQfW/TubPOmt3A6tYZhl4mUfQWWQMsuSkLrtjlWuXBVSGQA==}
     engines: {node: '>=18'}
@@ -1108,8 +1123,8 @@ packages:
     resolution: {integrity: sha512-qZMxYJ0qqX/RfnuIaab+zp8UAeJn/ygXXAffR5I4N0n1IrvA6qBsjc8hXLmBiMV2zoXlifkacF7sEFnYnjBcqg==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/react@1.2.11':
-    resolution: {integrity: sha512-+kPqLkJ3TWP6czaJPV+vzAKSUcKQ1598BUrcLHt56sH99+LhmIIW3ylZp0OfC3O6TR3eO1Lt0Yzw4R0mK6g9Gw==}
+  '@ai-sdk/react@1.2.12':
+    resolution: {integrity: sha512-jK1IZZ22evPZoQW3vlkZ7wvjYGYF+tRBKXtrcolduIkQ/m/sOAVcVeVDUDvh1T91xCnWCdUGCPZg2avZ90mv3g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18 || ^19 || ^19.0.0-rc
@@ -1118,8 +1133,8 @@ packages:
       zod:
         optional: true
 
-  '@ai-sdk/ui-utils@1.2.10':
-    resolution: {integrity: sha512-GUj+LBoAlRQF1dL/M49jtufGqtLOMApxTpCmVjoRpIPt/dFALVL9RfqfvxwztyIwbK+IxGzcYjSGRsrWrj+86g==}
+  '@ai-sdk/ui-utils@1.2.11':
+    resolution: {integrity: sha512-3zcwCc8ezzFlwp3ZD15wAPjf2Au4s3vAbKsXQVyhxODHcmu0iyPO2Eua6D/vicq/AUm/BAo60r97O6HU+EI0+w==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.23.8
@@ -4356,6 +4371,9 @@ packages:
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
+  '@stardazed/streams-text-encoding@1.0.2':
+    resolution: {integrity: sha512-f2Z15BId3t44a/u21yYSGXFAkCyKocmAyduoAy7swnZ4xIfbaZlOWsgly/jDNNOuj6hYQN72UaBRe3Z/tOHfqg==}
+
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
 
@@ -4594,6 +4612,9 @@ packages:
     resolution: {integrity: sha512-I+/rgqOVBn6f0o7NDTmAPWWC6NuqhV174lfYvAm9fUaWeiefLdux9/YI3/nLugEn9L8fcSi0XmpKi/r5u0nmpw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@ungap/structured-clone@1.3.0':
+    resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+
   '@urql/core@5.1.1':
     resolution: {integrity: sha512-aGh024z5v2oINGD/In6rAtVKTm4VmQ2TxKQBAtk2ZSME5dunZFcjltw4p5ENQg+5CBhZ3FHMzl0Oa+rwqiWqlg==}
 
@@ -4636,8 +4657,8 @@ packages:
     resolution: {integrity: sha512-4I7Td01quW/RpocfNayFdFVk1qSuoh0E7JrbRJ16nH01HhKFQ88INq9Sd+nd72zqRySlr9BmDA8xlEJ6vJMrYA==}
     engines: {node: '>=8'}
 
-  ai@4.3.13:
-    resolution: {integrity: sha512-cC5HXItuOwGykSMacCPzNp6+NMTxeuTjOenztVgSJhdC9Z4OrzBxwkyeDAf4h1QP938ZFi7IBdq3u4lxVoVmvw==}
+  ai@4.3.16:
+    resolution: {integrity: sha512-KUDwlThJ5tr2Vw0A1ZkbDKNME3wzWhuVfAOwIvFUzl1TPVDFAXDFTXio3p+jaKneB+dKNCvFFlolYmmgHttG1g==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18 || ^19 || ^19.0.0-rc
@@ -9045,13 +9066,6 @@ snapshots:
       '@ai-sdk/provider-utils': 2.2.8(zod@3.24.3)
       zod: 3.24.3
 
-  '@ai-sdk/provider-utils@2.2.7(zod@3.24.3)':
-    dependencies:
-      '@ai-sdk/provider': 1.1.3
-      nanoid: 3.3.11
-      secure-json-parse: 2.7.0
-      zod: 3.24.3
-
   '@ai-sdk/provider-utils@2.2.8(zod@3.24.3)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
@@ -9063,20 +9077,20 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/react@1.2.11(react@19.0.0)(zod@3.24.3)':
+  '@ai-sdk/react@1.2.12(react@19.0.0)(zod@3.24.3)':
     dependencies:
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
-      '@ai-sdk/ui-utils': 1.2.10(zod@3.24.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.24.3)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.24.3)
       react: 19.0.0
       swr: 2.3.3(react@19.0.0)
       throttleit: 2.1.0
     optionalDependencies:
       zod: 3.24.3
 
-  '@ai-sdk/ui-utils@1.2.10(zod@3.24.3)':
+  '@ai-sdk/ui-utils@1.2.11(zod@3.24.3)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.24.3)
       zod: 3.24.3
       zod-to-json-schema: 3.24.5(zod@3.24.3)
 
@@ -12984,6 +12998,8 @@ snapshots:
 
   '@standard-schema/utils@0.3.0': {}
 
+  '@stardazed/streams-text-encoding@1.0.2': {}
+
   '@swc/counter@0.1.3': {}
 
   '@swc/helpers@0.5.15':
@@ -13268,6 +13284,8 @@ snapshots:
       '@typescript-eslint/types': 8.31.1
       eslint-visitor-keys: 4.2.0
 
+  '@ungap/structured-clone@1.3.0': {}
+
   '@urql/core@5.1.1':
     dependencies:
       '@0no-co/graphql.web': 1.1.2
@@ -13308,12 +13326,12 @@ snapshots:
       clean-stack: 2.2.0
       indent-string: 4.0.0
 
-  ai@4.3.13(react@19.0.0)(zod@3.24.3):
+  ai@4.3.16(react@19.0.0)(zod@3.24.3):
     dependencies:
       '@ai-sdk/provider': 1.1.3
-      '@ai-sdk/provider-utils': 2.2.7(zod@3.24.3)
-      '@ai-sdk/react': 1.2.11(react@19.0.0)(zod@3.24.3)
-      '@ai-sdk/ui-utils': 1.2.10(zod@3.24.3)
+      '@ai-sdk/provider-utils': 2.2.8(zod@3.24.3)
+      '@ai-sdk/react': 1.2.12(react@19.0.0)(zod@3.24.3)
+      '@ai-sdk/ui-utils': 1.2.11(zod@3.24.3)
       '@opentelemetry/api': 1.9.0
       jsondiffpatch: 0.6.0
       zod: 3.24.3
