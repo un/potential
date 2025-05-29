@@ -18,9 +18,14 @@ export type TrackableTypesMap = typeof TRACKABLE_TYPES;
 export type TrackableTypesKey = keyof TrackableTypesMap;
 export type TrackableTypesValues = TrackableTypesMap[TrackableTypesKey];
 
-export const trackableTypesSchema = z.enum(
-  Object.keys(TRACKABLE_TYPES) as [TrackableTypesKey, ...TrackableTypesKey[]],
-);
+export const trackableTypesSchema = z
+  .enum(
+    Object.keys(TRACKABLE_TYPES) as [TrackableTypesKey, ...TrackableTypesKey[]],
+  )
+  .describe(
+    "The system type of the trackable item. This will be used to group similar trackable items together. It is also used to show some visual representation of the trackable item in the UI. Possible values are: " +
+      Object.keys(TRACKABLE_TYPES).join(", "),
+  );
 export type TrackableTypesSchema = z.infer<typeof trackableTypesSchema>;
 
 export function getTypeDisplayValue(key: TrackableTypesKey): string {
@@ -108,12 +113,17 @@ export type TrackableSubTypesKey = keyof TrackableSubTypesMap;
 export type TrackableSubTypesValues =
   TrackableSubTypesMap[TrackableSubTypesKey];
 
-export const trackableSubTypesSchema = z.enum(
-  Object.keys(TRACKABLE_SUB_TYPES) as [
-    TrackableSubTypesKey,
-    ...TrackableSubTypesKey[],
-  ],
-);
+export const trackableSubTypesSchema = z
+  .enum(
+    Object.keys(TRACKABLE_SUB_TYPES) as [
+      TrackableSubTypesKey,
+      ...TrackableSubTypesKey[],
+    ],
+  )
+  .describe(
+    "The sub type of the trackable item. This will be used to group similar trackable items together and ensure no duplicates. It is also used to show some visual representation of the trackable item in the UI. It is made up of a string of the form 'type.parent.sub' not all have a sub. Possible values are: " +
+      Object.keys(TRACKABLE_SUB_TYPES).join(", "),
+  );
 export type TrackableSubTypesSchema = z.infer<typeof trackableSubTypesSchema>;
 
 export function getSubTypeDisplayValue(key: TrackableSubTypesKey): string {
@@ -137,12 +147,17 @@ export type TrackableCustomConfigTypesKey = keyof TrackableCustomConfigTypesMap;
 export type TrackableCustomConfigTypesValues =
   TrackableCustomConfigTypesMap[TrackableCustomConfigTypesKey];
 
-export const trackableCustomConfigTypesSchema = z.enum(
-  Object.keys(TRACKABLE_CUSTOM_CONFIG_TYPES) as [
-    TrackableCustomConfigTypesKey,
-    ...TrackableCustomConfigTypesKey[],
-  ],
-);
+export const trackableCustomConfigTypesSchema = z
+  .enum(
+    Object.keys(TRACKABLE_CUSTOM_CONFIG_TYPES) as [
+      TrackableCustomConfigTypesKey,
+      ...TrackableCustomConfigTypesKey[],
+    ],
+  )
+  .describe(
+    "The config type of the trackable item. This will be used to visually display entered data and provide a UI for the user to enter data. Possible values are: " +
+      Object.keys(TRACKABLE_CUSTOM_CONFIG_TYPES).join(", "),
+  );
 export type TrackableCustomConfigTypesSchema = z.infer<
   typeof trackableCustomConfigTypesSchema
 >;
@@ -169,6 +184,18 @@ export type TrackableCustomConfigMeasureUnitsKey =
 export type TrackableCustomConfigMeasureUnitsValues =
   TrackableCustomConfigMeasureUnitsMap[TrackableCustomConfigMeasureUnitsKey];
 
+export const trackableCustomConfigMeasureUnitsSchema = z
+  .enum(
+    Object.keys(TRACKABLE_CONFIG_MEASURE_UNITS) as [
+      TrackableCustomConfigMeasureUnitsKey,
+      ...TrackableCustomConfigMeasureUnitsKey[],
+    ],
+  )
+  .describe(
+    "The unit of measure for the trackable item. This will be used to display the unit of measure in the UI and to act as the conversion factor for the measure. Possible values are: " +
+      Object.keys(TRACKABLE_CONFIG_MEASURE_UNITS).join(", "),
+  );
+
 export const TRACKABLE_CONFIG_MEASURE_CUMULATION = {
   hourly: "Hourly",
   daily: "Daily",
@@ -184,6 +211,18 @@ export type TrackableCustomConfigMeasureCumulationKey =
 export type TrackableCustomConfigMeasureCumulationValues =
   TrackableCustomConfigMeasureCumulationMap[TrackableCustomConfigMeasureCumulationKey];
 
+export const trackableCustomConfigMeasureCumulationSchema = z
+  .enum(
+    Object.keys(TRACKABLE_CONFIG_MEASURE_CUMULATION) as [
+      TrackableCustomConfigMeasureCumulationKey,
+      ...TrackableCustomConfigMeasureCumulationKey[],
+    ],
+  )
+  .describe(
+    "The cumulation type for the trackable item. This will be used to determine how the data is aggregated over time. Possible values are: " +
+      Object.keys(TRACKABLE_CONFIG_MEASURE_CUMULATION).join(", "),
+  );
+
 export const TRACKABLE_CONFIG_MEASURE_AGGREGATION = {
   sum: "Sum",
   average: "Average",
@@ -197,72 +236,141 @@ export type TrackableCustomConfigMeasureAggregationKey =
 export type TrackableCustomConfigMeasureAggregationValues =
   TrackableCustomConfigMeasureAggregationMap[TrackableCustomConfigMeasureAggregationKey];
 
-export const trackableCustomConfigMeasureUnitsSchema = z.enum(
-  Object.keys(TRACKABLE_CONFIG_MEASURE_UNITS) as [
-    TrackableCustomConfigMeasureUnitsKey,
-    ...TrackableCustomConfigMeasureUnitsKey[],
-  ],
-);
-
-export const trackableCustomConfigMeasureCumulationSchema = z.enum(
-  Object.keys(TRACKABLE_CONFIG_MEASURE_CUMULATION) as [
-    TrackableCustomConfigMeasureCumulationKey,
-    ...TrackableCustomConfigMeasureCumulationKey[],
-  ],
-);
-
-export const trackableCustomConfigMeasureAggregationSchema = z.enum(
-  Object.keys(TRACKABLE_CONFIG_MEASURE_AGGREGATION) as [
-    TrackableCustomConfigMeasureAggregationKey,
-    ...TrackableCustomConfigMeasureAggregationKey[],
-  ],
-);
+export const trackableCustomConfigMeasureAggregationSchema = z
+  .enum(
+    Object.keys(TRACKABLE_CONFIG_MEASURE_AGGREGATION) as [
+      TrackableCustomConfigMeasureAggregationKey,
+      ...TrackableCustomConfigMeasureAggregationKey[],
+    ],
+  )
+  .describe(
+    "The aggregation type for the trackable item. This will be used to determine how the data is aggregated over time. Possible values are: " +
+      Object.keys(TRACKABLE_CONFIG_MEASURE_AGGREGATION).join(", "),
+  );
 
 const trackableMeasureSchema = z.object({
   type: z.literal("measure"),
   measureUnitType: trackableCustomConfigMeasureUnitsSchema,
-  measureUnitSource: z.string(),
-  measureUnitDisplay: z.string(),
-  measureTarget: z.number().nullable(),
-  measureMin: z.number().optional(),
-  measureMax: z.number().optional(),
-  cumulative: z.boolean(),
+  measureUnitSource: z
+    .string()
+    .describe(
+      "The source of the unit of measure for the trackable item. This will be used to display the unit of measure in the UI and to act as the conversion factor for the measure. e.g. 'grams'",
+    ),
+  measureUnitDisplay: z
+    .string()
+    .describe(
+      "The display name of the unit of measure for the trackable item. This will be used to display the unit of measure in the UI and to run conversions. e.g. 'lbs'.",
+    ),
+  measureTarget: z
+    .number()
+    .nullable()
+    .describe(
+      "The target value for the trackable item. This will be used to display the target value in the UI and to run conversions. e.g. '100'",
+    ),
+  measureMin: z
+    .number()
+    .optional()
+    .describe(
+      "The minimum value for the trackable item. This will be used to limit the input range.",
+    ),
+  measureMax: z
+    .number()
+    .optional()
+    .describe(
+      "The maximum value for the trackable item. This will be used to limit the input range.",
+    ),
+  cumulative: z
+    .boolean()
+    .describe(
+      "Whether the data is cumulative over time. If true, the data will be aggregated over time. If false, the data will be displayed as a single value.",
+    ),
   cumulation: trackableCustomConfigMeasureCumulationSchema.optional(),
   aggregationType: trackableCustomConfigMeasureAggregationSchema.optional(),
 });
 
 const trackableCheckboxSchema = z.object({
   type: z.literal("checkbox"),
-  checkboxName: z.string(),
+  checkboxName: z
+    .string()
+    .describe(
+      "The name of the checkbox for the trackable item. This will be used to add a label to the display of the checkbox in the UI.",
+    ),
 });
 
 const trackableRangeSchema = z.object({
   type: z.literal("range"),
-  rangeMin: z.number(),
-  rangeMax: z.number(),
-  rangeUnit: z.string().optional(),
-  rangeMinLabel: z.string().optional(),
-  rangeMaxLabel: z.string().optional(),
-  rangeStepLabels: z.array(z.record(z.string())).optional(), // Record<number, string>[] translates to array of objects with string keys
+  rangeMin: z
+    .number()
+    .describe(
+      "The minimum value for the trackable item. This will be used to limit the input range.",
+    ),
+  rangeMax: z
+    .number()
+    .describe(
+      "The maximum value for the trackable item. This will be used to limit the input range.",
+    ),
+  rangeUnit: z
+    .string()
+    .optional()
+    .describe(
+      "The unit of measure for the trackable item. This will be used to display the unit of measure in the UI and to run conversions. e.g. '%'.",
+    ),
+  rangeMinLabel: z
+    .string()
+    .optional()
+    .describe(
+      "The label for the minimum value for the trackable item. This will be used to display the label in the UI.",
+    ),
+  rangeMaxLabel: z
+    .string()
+    .optional()
+    .describe(
+      "The label for the maximum value for the trackable item. This will be used to display the label in the UI.",
+    ),
+  rangeStepLabels: z
+    .array(z.record(z.string()))
+    .optional()
+    .describe(
+      "An array of objects with string keys and values. The keys are the values for where to place the item on the range input slider and the values are the labels for the steps for the trackable item. This will be used to display the labels in the UI. e.g. [{'1': '100%'}, {'2': '90%'}, {'3': '80%'}, {'4': '70%'}, {'5': '60%'}, {'6': '50%'}, {'7': '40%'}, {'8': '30%'}, {'9': '20%'}, {'10': '10%'}]",
+    ), // Record<number, string>[] translates to array of objects with string keys
 });
 
 const trackableRatingSchema = z.object({
   type: z.literal("rating"),
-  ratingMax: z.union([
-    z.literal(1),
-    z.literal(2),
-    z.literal(3),
-    z.literal(4),
-    z.literal(5),
-    z.literal(6),
-    z.literal(7),
-    z.literal(8),
-    z.literal(9),
-    z.literal(10),
-  ]),
-  ratingUnit: z.string().optional(),
-  ratingIcon: z.string().optional(),
-  ratingEmoji: z.string().optional(),
+  ratingMax: z
+    .union([
+      z.literal(1),
+      z.literal(2),
+      z.literal(3),
+      z.literal(4),
+      z.literal(5),
+      z.literal(6),
+      z.literal(7),
+      z.literal(8),
+      z.literal(9),
+      z.literal(10),
+    ])
+    .describe(
+      "The maximum number of stars for the trackable item. This will be used to limit the input range. accepted values are: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
+    ),
+  ratingUnit: z
+    .string()
+    .optional()
+    .describe(
+      "The unit of measure for the trackable item. This will be used to display the unit of measure in the UI and to run conversions. e.g. '%'.",
+    ),
+  ratingIcon: z
+    .string()
+    .optional()
+    .describe(
+      "The icon for the trackable item. this is not yet implemented and should be ignored.",
+    ),
+  ratingEmoji: z
+    .string()
+    .optional()
+    .describe(
+      "The emoji for the trackable item. This will be used to display the emoji in the UI as the input and display value. e.g. '🌟' with a value of 4 will be displayed as '🌟🌟🌟🌟'.",
+    ),
 });
 
 const trackableShortTextSchema = z.object({
