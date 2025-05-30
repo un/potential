@@ -80,9 +80,9 @@ export const TRACKABLE_SUB_TYPES = {
   "consumption.vitamins.D": "D",
   "consumption.vitamins.E": "E",
   "consumption.vitamins.K": "K",
-  "energy.calories.net": "Calories Net",
-  "energy.calories.intake": "Calories Intake",
-  "energy.calories.burn": "Calories Burn",
+  "calories.net": "Calories Net",
+  "calories.intake": "Calories Intake",
+  "calories.burn": "Calories Burn",
   "supplement.generic": "Supplement",
   "symptom.generic": "Custom Symptom",
   "blood.generic": "Custom Blood",
@@ -91,6 +91,7 @@ export const TRACKABLE_SUB_TYPES = {
   "body.fat": "Fat",
   "body.muscle": "Muscle",
   "body.measurement": "Measurement",
+  "body.energy": "Energy",
   "body.generic": "Custom Body",
   "custom.generic": "Custom",
   "mind.journal": "Daily Journal",
@@ -122,7 +123,8 @@ export const trackableSubTypesSchema = z
   )
   .describe(
     "The sub type of the trackable item. This will be used to group similar trackable items together and ensure no duplicates. It is also used to show some visual representation of the trackable item in the UI. It is made up of a string of the form 'type.parent.sub' not all have a sub. Possible values are: " +
-      Object.keys(TRACKABLE_SUB_TYPES).join(", "),
+      Object.keys(TRACKABLE_SUB_TYPES).join(", ") +
+      "be sure to only use values from this list and not make up any others",
   );
 export type TrackableSubTypesSchema = z.infer<typeof trackableSubTypesSchema>;
 

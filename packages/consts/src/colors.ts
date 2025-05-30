@@ -28,12 +28,49 @@ export type ColorsKey = keyof ColorsMap;
 export type ColorsValues = ColorsMap[ColorsKey];
 
 export const colorsArray = Object.values(COLORS);
-
 export const colorsSchema = z
   .enum(Object.keys(COLORS) as [ColorsKey, ...ColorsKey[]])
   .describe(
-    "The color of the trackable item. This might change the color of the trackable item in the UI. Possible values are: " +
-      Object.values(colorsArray).join(", "),
+    "The color of the trackable item. This might change the color of the trackable item in the UI. Possible values are:" +
+      "Bronze" +
+      " " +
+      "Gold" +
+      " " +
+      "Brown" +
+      " " +
+      "Orange" +
+      " " +
+      "Tomato" +
+      " " +
+      "Red" +
+      " " +
+      "Ruby" +
+      " " +
+      "Crimson" +
+      " " +
+      "Pink" +
+      " " +
+      "Plum" +
+      " " +
+      "Purple" +
+      " " +
+      "Violet" +
+      " " +
+      "Iris" +
+      " " +
+      "Indigo" +
+      " " +
+      "Blue" +
+      " " +
+      "Cyan" +
+      " " +
+      "Teal" +
+      " " +
+      "Jade" +
+      " " +
+      "Green" +
+      " " +
+      "Grass",
   );
 export type ColorsSchema = z.infer<typeof colorsSchema>;
 

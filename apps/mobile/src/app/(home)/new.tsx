@@ -5,7 +5,13 @@ import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetch as expoFetch } from "expo/fetch";
 import { useChat } from "@ai-sdk/react";
-import { Database, Gear, PaperPlane, Sparkle } from "phosphor-react-native";
+import {
+  Database,
+  ForkKnife,
+  Gear,
+  PaperPlane,
+  Sparkle,
+} from "phosphor-react-native";
 
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
@@ -52,8 +58,10 @@ function ToolInvocationComponent({
     switch (toolName) {
       case "getUserExistingTrackables":
         return <Database size={16} color={iconColor()} />;
-      case "generateNewTrackable":
+      case "generateNewNonConsumptionTrackable":
         return <Sparkle size={16} color={iconColor()} />;
+      case "generateConsumptionTrackables":
+        return <ForkKnife size={16} color={iconColor()} />;
       default:
         return <Gear size={16} color={iconColor()} />;
     }
@@ -63,8 +71,10 @@ function ToolInvocationComponent({
     switch (toolName) {
       case "getUserExistingTrackables":
         return "Checking existing trackables";
-      case "generateNewTrackable":
-        return "Generating new trackable";
+      case "generateNewNonConsumptionTrackable":
+        return "Designing new tracker";
+      case "generateConsumptionTrackables":
+        return "Preparing food & drink trackers";
       default:
         return toolName;
     }
@@ -131,10 +141,21 @@ function ToolInvocationComponent({
             </Card>
           );
         }
+        default:
+          return (
+            <Card key={callId} className="bg-gray-2 border-gray-6 p-3">
+              <View className="flex flex-row items-center gap-2">
+                <Gear size={16} color={iconColor()} />
+                <UIText className="text-gray-11 font-medium">
+                  Processing tool call...
+                </UIText>
+              </View>
+            </Card>
+          );
       }
     }
 
-    case "generateNewTrackable": {
+    case "generateNewNonConsumptionTrackable": {
       switch (toolInvocation.state) {
         case "partial-call":
           return (
@@ -178,7 +199,7 @@ function ToolInvocationComponent({
                 <View className="flex flex-row items-center gap-2">
                   {getToolIcon(toolInvocation.toolName)}
                   <UIText className="text-green-11 font-medium">
-                    Generated {newTrackables.length} new trackable
+                    Designed {newTrackables.length} new trackable
                     {newTrackables.length !== 1 ? "s" : ""}
                   </UIText>
                 </View>
@@ -195,6 +216,72 @@ function ToolInvocationComponent({
             </Card>
           );
         }
+        default:
+          return (
+            <Card key={callId} className="bg-gray-2 border-gray-6 p-3">
+              <View className="flex flex-row items-center gap-2">
+                <Gear size={16} color={iconColor()} />
+                <UIText className="text-gray-11 font-medium">
+                  Processing tool call...
+                </UIText>
+              </View>
+            </Card>
+          );
+      }
+    }
+    case "generateConsumptionTrackables": {
+      switch (toolInvocation.state) {
+        case "partial-call":
+          return (
+            <Card key={callId} className="bg-purple-2 border-purple-6 p-3">
+              <View className="flex flex-row items-center gap-2">
+                {getToolIcon(toolInvocation.toolName)}
+                <UIText className="text-purple-11 font-medium">
+                  {getToolDisplayName(toolInvocation.toolName)}...
+                </UIText>
+              </View>
+            </Card>
+          );
+        case "call": {
+          const args = toolInvocation.args as
+            | { description?: string }
+            | undefined;
+          return (
+            <Card key={callId} className="bg-purple-2 border-purple-6 p-3">
+              <View className="flex flex-row items-center gap-2">
+                {getToolIcon(toolInvocation.toolName)}
+                <UIText className="text-purple-11 font-medium">
+                  {getToolDisplayName(toolInvocation.toolName)}...
+                </UIText>
+              </View>
+            </Card>
+          );
+        }
+        case "result": {
+          return (
+            <Card key={callId} className="bg-green-2 border-green-6 p-3">
+              <View className="flex flex-col gap-2">
+                <View className="flex flex-row items-center gap-2">
+                  {getToolIcon(toolInvocation.toolName)}
+                  <UIText className="text-green-11 font-medium">
+                    Prepared food & drink trackers
+                  </UIText>
+                </View>
+              </View>
+            </Card>
+          );
+        }
+        default:
+          return (
+            <Card key={callId} className="bg-gray-2 border-gray-6 p-3">
+              <View className="flex flex-row items-center gap-2">
+                <Gear size={16} color={iconColor()} />
+                <UIText className="text-gray-11 font-medium">
+                  Processing tool call...
+                </UIText>
+              </View>
+            </Card>
+          );
       }
     }
 
@@ -276,6 +363,35 @@ export default function NewTrackableScreen() {
     handleSubmit();
   };
 
+  const getAllGeneratedTrackables = (): {
+    name: string;
+    description: string;
+  }[] => {
+    const allTrackables: { name: string; description: string }[] = [];
+    for (const message of messages) {
+      if (message.role === "assistant") {
+        for (const part of message.parts) {
+          if (
+            part.type === "tool-invocation" &&
+            part.toolInvocation.toolName ===
+              "generateNewNonConsumptionTrackable" &&
+            part.toolInvocation.state === "result"
+          ) {
+            const result = part.toolInvocation.result as
+              | { trackable?: { name: string; description: string }[] }
+              | undefined;
+            if (result?.trackable) {
+              allTrackables.push(...result.trackable);
+            }
+          }
+        }
+      }
+    }
+    return allTrackables;
+  };
+
+  const latestTrackables = getAllGeneratedTrackables();
+
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
       <View className="flex flex-1 flex-col gap-4 p-6">
@@ -286,24 +402,37 @@ export default function NewTrackableScreen() {
           keyboardShouldPersistTaps="handled"
           scrollToOverflowEnabled
         >
-          {messages.map((m) =>
-            m.role === "user" ? (
-              <UserMessage key={m.id} message={m} />
-            ) : (
-              <AIMessage key={m.id} message={m} />
-            ),
-          )}
-          {isLoading && (
-            <View className="items-center">
-              <UIText type={"title"}>Thinking...</UIText>
-            </View>
-          )}
-          {error && (
-            <View className="items-center">
-              <UIText className="text-red-9">Error: {error.message}</UIText>
-            </View>
-          )}
+          <View className="flex flex-col gap-4">
+            {messages.map((m) =>
+              m.role === "user" ? (
+                <UserMessage key={m.id} message={m} />
+              ) : (
+                <AIMessage key={m.id} message={m} />
+              ),
+            )}
+            {isLoading && (
+              <View className="items-center">
+                <UIText type={"title"} className="text-sand-11 text-sm">
+                  Thinking...
+                </UIText>
+              </View>
+            )}
+            {error && (
+              <View className="items-center">
+                <UIText className="text-red-9">Error: {error.message}</UIText>
+              </View>
+            )}
+          </View>
         </ScrollView>
+        {latestTrackables.length > 0 && (
+          <View className="flex flex-row flex-wrap gap-4">
+            {latestTrackables.map((trackable, index) => (
+              <Button key={index} variant={"secondary"} size={"sm"}>
+                <UIText className="text-sm">Add {trackable.name}</UIText>
+              </Button>
+            ))}
+          </View>
+        )}
 
         <View className="flex w-full flex-row items-end gap-4">
           <View className="flex-1">

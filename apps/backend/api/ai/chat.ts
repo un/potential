@@ -45,6 +45,15 @@ ai.post("/chat", async (c: Context<AppContext>) => {
             execute: async () => {
               const userTrackables = await db.query.trackables.findMany({
                 where: eq(trackables.ownerId, user!.id),
+
+                columns: {
+                  id: true,
+                  name: true,
+                  description: true,
+                  type: true,
+                  subType: true,
+                  subTypeCustomName: true,
+                },
                 with: {
                   logs: {
                     limit: 1,
@@ -55,30 +64,52 @@ ai.post("/chat", async (c: Context<AppContext>) => {
                   },
                 },
               });
-              return { trackables: userTrackables };
+              const consumptionTrackables = userTrackables.filter(
+                (trackable) => trackable.type === "consumption",
+              );
+              const nonConsumptionTrackables = userTrackables.filter(
+                (trackable) => trackable.type !== "consumption",
+              );
+              return {
+                trackables: nonConsumptionTrackables,
+                hasConsumptionTrackables: consumptionTrackables.length > 0,
+              };
             },
           },
-          generateNewTrackable: {
-            description: PROMPTS.TOOLS.GENERATE_NEW_TRACKABLE.DESCRIPTION,
-            parameters: PROMPTS.TOOLS.GENERATE_NEW_TRACKABLE.PARAMETERS,
+          generateNewNonConsumptionTrackable: {
+            description:
+              PROMPTS.TOOLS.GENERATE_NEW_NON_CONSUMPTION_TRACKABLE.DESCRIPTION,
+            parameters:
+              PROMPTS.TOOLS.GENERATE_NEW_NON_CONSUMPTION_TRACKABLE.PARAMETERS,
             execute: async ({ description }: { description: string }) => {
               const { object: newTrackable } = await generateObject({
                 // issue with thinking models and optional fields in structured output: https://github.com/vercel/ai/issues/4662
                 model: openai("gpt-4o-mini"),
                 output: "array",
                 schema:
-                  PROMPTS.TOOLS.GENERATE_NEW_TRACKABLE.EXECUTE.PROMPT.SCHEMA,
+                  PROMPTS.TOOLS.GENERATE_NEW_NON_CONSUMPTION_TRACKABLE.EXECUTE
+                    .PROMPT.SCHEMA,
                 system:
-                  PROMPTS.TOOLS.GENERATE_NEW_TRACKABLE.EXECUTE.PROMPT.SYSTEM,
+                  PROMPTS.TOOLS.GENERATE_NEW_NON_CONSUMPTION_TRACKABLE.EXECUTE
+                    .PROMPT.SYSTEM,
                 prompt: description,
               });
               newTrackable.forEach((trackable) => {
                 console.log("TRACKABLE", {
                   trackable,
-                  config: trackable.trackableConfig,
                 });
               });
               return { trackable: newTrackable };
+            },
+          },
+          generateConsumptionTrackables: {
+            description:
+              PROMPTS.TOOLS.GENERATE_CONSUMPTION_TRACKABLES.DESCRIPTION,
+            parameters:
+              PROMPTS.TOOLS.GENERATE_CONSUMPTION_TRACKABLES.PARAMETERS,
+            execute: async () => {
+              console.log("🍕 GENERATE CONSUMPTION TRACKABLES");
+              return { completed: true };
             },
           },
         },
