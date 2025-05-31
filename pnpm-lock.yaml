@@ -140,6 +140,9 @@ importers:
       '@potential/storage':
         specifier: workspace:*
         version: link:../../packages/storage
+      '@potential/templates':
+        specifier: workspace:*
+        version: link:../../packages/templates
       '@potential/trpc':
         specifier: workspace:*
         version: link:../../packages/trpc

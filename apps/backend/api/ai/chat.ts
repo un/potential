@@ -7,6 +7,7 @@ import { PROMPTS } from "@potential/consts";
 import { desc, eq, trackableLogs, trackables } from "@potential/db";
 
 import type { AppContext } from "../index";
+import { createConsumptionTrackables } from "./functions";
 
 const ai = new Hono<AppContext>();
 
@@ -109,6 +110,7 @@ ai.post("/chat", async (c: Context<AppContext>) => {
               PROMPTS.TOOLS.GENERATE_CONSUMPTION_TRACKABLES.PARAMETERS,
             execute: async () => {
               console.log("🍕 GENERATE CONSUMPTION TRACKABLES");
+              await createConsumptionTrackables({ userId: user!.id });
               return { completed: true };
             },
           },

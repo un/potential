@@ -17,7 +17,7 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { LongText } from "~/components/ui/long-text";
 import { Text as UIText } from "~/components/ui/text";
-import { getAuthHeaders } from "~/utils/api";
+import { getAuthHeaders, queryClient, trpc } from "~/utils/api";
 import { getApiUrl } from "~/utils/base-url";
 import { iconColor } from "~/utils/ui";
 
@@ -243,7 +243,7 @@ function ToolInvocationComponent({
             </Card>
           );
         case "call": {
-          const args = toolInvocation.args as
+          const _args = toolInvocation.args as
             | { description?: string }
             | undefined;
           return (
@@ -353,9 +353,39 @@ export default function NewTrackableScreen() {
     },
   );
 
+  const processedToolCallIds = useRef(new Set<string>());
+
   useEffect(() => {
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage) {
+      for (const part of lastMessage.parts) {
+        if (
+          part.type === "tool-invocation" &&
+          part.toolInvocation.toolName === "generateConsumptionTrackables" &&
+          part.toolInvocation.state === "result" &&
+          !processedToolCallIds.current.has(part.toolInvocation.toolCallId)
+        ) {
+          queryClient
+            .invalidateQueries({
+              queryKey: trpc.trackables.getTrackablesForParentType.queryKey({
+                trackableParentType: "consumption",
+              }),
+            })
+            .then(() => {
+              processedToolCallIds.current.add(part.toolInvocation.toolCallId);
+            })
+            .catch((error: Error) => {
+              console.error(
+                "Failed to invalidate consumption trackables queries:",
+                error,
+              );
+            });
+        }
+      }
     }
   }, [messages]);
 
