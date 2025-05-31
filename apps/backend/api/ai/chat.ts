@@ -2,6 +2,7 @@ import type { Context } from "hono";
 import { createDataStreamResponse } from "ai";
 import { Hono } from "hono";
 
+import type { CloudTypeId } from "@potential/utils";
 import { createNewTrackableChatStream } from "@potential/ai";
 
 import type { AppContext } from "../index";
@@ -13,7 +14,7 @@ async function saveToDatabase({
   chatId,
 }: {
   content: string;
-  chatId: string | undefined;
+  chatId: CloudTypeId<"chat"> | undefined;
 }) {
   console.log("Saving to database:", content);
 

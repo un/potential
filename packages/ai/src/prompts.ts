@@ -25,55 +25,34 @@ export const PROMPTS = {
       "You should provide the name of the trackable items you have generated and ask them if they want to add any more or change anything.",
   },
   TOOLS: {
-    // GET_USER_EXISTING_TRACKABLES: {
-    //   DESCRIPTION:
-    //     "Get a list of existing data items the user is already tracking and the last time they entered data for it.",
-    //   PARAMETERS: z.object({ userId: cloudTypeIdValidator("user") }),
-    // },
-    GENERATE_CONSUMPTION_TRACKABLES: {
-      DESCRIPTION:
-        "Generate a list of trackable items related to food and drink consumption. This is a special tool that should only be called if the user does not already have trackables of type 'consumption'.",
-      PARAMETERS: z.object({}),
-    },
     GENERATE_NEW_NON_CONSUMPTION_TRACKABLE: {
-      DESCRIPTION:
-        "Generate a new trackable data schema for the user. DO NOT CALL THIS TOOL IF YOU WANT TO GENERATE TRACKABLES RELATED TO CONSUMPTION. INSTEAD CALL generateConsumptionTrackables TOOL.",
-      PARAMETERS: z.object({
-        description: z
-          .string()
-          .describe(
-            "A description of the trackable to generate with a single goal in mind.",
-          ),
-      }),
       EXECUTE: {
         PROMPT: {
-          SCHEMA:
-            // z.union([
-            z.object({
-              name: z
-                .string()
-                .max(32)
-                .describe(
-                  "The name of the trackable item. This will be displayed to the user in the UI",
-                ),
-              description: z
-                .string()
-                .max(255)
-                .describe(
-                  "The description of the trackable item. This will be displayed to the user in the UI when the user expands the trackable item.",
-                ),
-              // trackableConfig: CONSTS.TRACKABLE.CONFIG.CONFIG_SCHEMA,
-              color: CONSTS.COLORS.SCHEMA,
-              type: CONSTS.TRACKABLE.TYPES_SCHEMA,
-              subType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
-              subTypeCustomName: z
-                .string()
-                .max(64)
-                .describe(
-                  "A possible custom name of the sub type of the trackable item. This is only used if the sub type is CUSTOM.",
-                ),
-              configType: CONSTS.TRACKABLE.CONFIG.TYPES_SCHEMA,
-            }),
+          SCHEMA: z.object({
+            name: z
+              .string()
+              .max(32)
+              .describe(
+                "The name of the trackable item. This will be displayed to the user in the UI",
+              ),
+            description: z
+              .string()
+              .max(255)
+              .describe(
+                "The description of the trackable item. This will be displayed to the user in the UI when the user expands the trackable item.",
+              ),
+            // trackableConfig: CONSTS.TRACKABLE.CONFIG.CONFIG_SCHEMA,
+            color: CONSTS.COLORS.SCHEMA,
+            type: CONSTS.TRACKABLE.TYPES_SCHEMA,
+            subType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
+            subTypeCustomName: z
+              .string()
+              .max(64)
+              .describe(
+                "A possible custom name of the sub type of the trackable item. This is only used if the sub type is CUSTOM.",
+              ),
+            configType: CONSTS.TRACKABLE.CONFIG.TYPES_SCHEMA,
+          }),
           SYSTEM:
             "DO NOT CALL THIS TOOL IF YOU WANT TO GENERATE TRACKABLES RELATED TO CONSUMPTION. INSTEAD CALL generateConsumptionTrackables TOOL." +
             "You design systems for users to track health items with the aim of improving them." +
