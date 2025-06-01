@@ -43,7 +43,8 @@ export default function Login() {
           email: value.email,
         });
 
-      if (isEmailRegistered) {
+      console.log("👀 isEmailRegistered", isEmailRegistered);
+      if (isEmailRegistered || formMode === "join") {
         const { error } = await authClient.emailOtp.sendVerificationOtp({
           email: value.email,
           type: "sign-in",
