@@ -7,7 +7,7 @@ import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";
 import { users } from "./auth";
-import { trackerLogs } from "./logs";
+import { trackerLogs } from "./trackers";
 
 export const aiInputLogs = mysqlTable("ai_input_logs", {
   id: typeIdColumn("aiInputLog", "id")

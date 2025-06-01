@@ -47,6 +47,7 @@ export const trackersRelations = relations(trackers, ({ one, many }) => ({
     references: [users.id],
   }),
   logs: many(trackerLogs),
+  trackerGroups: many(trackerGroupTrackers),
 }));
 
 export type TrackerLogJsonValue = {
@@ -90,3 +91,51 @@ export const trackerLogsRelations = relations(trackerLogs, ({ one, many }) => ({
   }),
   ingredientLogs: many(ingredientLogs),
 }));
+
+export const trackerGroups = mysqlTable("tracker_groups", {
+  id: typeIdColumn("trackerGroup", "id")
+    .primaryKey()
+    .$default(() => cloudTypeIdGenerator("trackerGroup")),
+  ownerId: typeIdColumn("user", "userId").notNull(),
+  name: varchar("name", { length: 32 }).notNull(),
+  description: varchar("description", { length: 255 }),
+  color: colorsColumn("color"),
+  public: boolean("public").default(false),
+  ...timestamps.createUpdate,
+});
+
+export const trackerGroupRelations = relations(
+  trackerGroups,
+  ({ one, many }) => ({
+    owner: one(users, {
+      fields: [trackerGroups.ownerId],
+      references: [users.id],
+    }),
+    trackers: many(trackerGroupTrackers),
+  }),
+);
+
+export const trackerGroupTrackers = mysqlTable("tracker_group_trackers", {
+  trackerId: typeIdColumn("tracker", "trackerId").notNull(),
+  trackerGroupId: typeIdColumn("trackerGroup", "trackerGroupId").notNull(),
+  ownerId: typeIdColumn("user", "userId").notNull(),
+  ...timestamps.createUpdate,
+});
+
+export const trackerGroupTrackersRelations = relations(
+  trackerGroupTrackers,
+  ({ one }) => ({
+    tracker: one(trackers, {
+      fields: [trackerGroupTrackers.trackerId],
+      references: [trackers.id],
+    }),
+    trackerGroup: one(trackerGroups, {
+      fields: [trackerGroupTrackers.trackerGroupId],
+      references: [trackerGroups.id],
+    }),
+    owner: one(users, {
+      fields: [trackerGroupTrackers.ownerId],
+      references: [users.id],
+    }),
+  }),
+);
