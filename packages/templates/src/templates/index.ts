@@ -2,15 +2,15 @@
 import { bodyTemplates } from "./body";
 import { consumptionTemplates } from "./consumption";
 import { mindTemplates } from "./mind";
-import { TRACKABLE_TEMPLATES } from "./templates-registry";
+import { TRACKER_TEMPLATES } from "./templates-registry";
 
 // Populate the registry
-TRACKABLE_TEMPLATES.body = bodyTemplates;
-TRACKABLE_TEMPLATES.mind = mindTemplates;
-TRACKABLE_TEMPLATES.consumption = consumptionTemplates;
+TRACKER_TEMPLATES.body = bodyTemplates;
+TRACKER_TEMPLATES.mind = mindTemplates;
+TRACKER_TEMPLATES.consumption = consumptionTemplates;
 
 export * from "./body";
 export * from "./consumption";
 export * from "./mind";
 
-export { TRACKABLE_TEMPLATES };
+export { TRACKER_TEMPLATES };

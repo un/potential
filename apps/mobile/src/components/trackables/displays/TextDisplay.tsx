@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { Log } from "~/types/trackables";
+import type { Log } from "~/types/trackers";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
 

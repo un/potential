@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-import type { Log } from "~/types/trackables";
+import type { Log } from "~/types/trackers";
 import { Text } from "~/components/ui/text";
 
 interface RangeDisplayProps {

@@ -1,6 +1,6 @@
 import { View } from "react-native";
 
-import type { BaseTemplate, TrackableConfigWithMeta } from "@potential/templates";
+import type { BaseTemplate, TrackerConfigWithMeta } from "@potential/templates";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -11,7 +11,7 @@ interface TemplateConfigFormProps {
   onSubmit: (data: {
     name: string;
     description?: string;
-    customConfig: TrackableConfigWithMeta;
+    customConfig: TrackerConfigWithMeta;
   }) => void;
   onCancel: () => void;
 }

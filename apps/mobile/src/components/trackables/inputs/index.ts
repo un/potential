@@ -2,7 +2,7 @@ import type React from "react";
 
 import type { ConstsTypes } from "@potential/consts";
 
-import type { TrackableType } from "~/types/trackables";
+import type { TrackerType } from "~/types/trackers";
 import { getCheckboxInputForLog } from "./CheckboxInput";
 import { getMeasureInputForLog } from "./MeasureInput";
 import { getRangeInputForLog } from "./RangeInput";
@@ -14,16 +14,16 @@ export {
   getMeasureInputForLog,
   getRangeInputForLog,
   getRatingInputForLog,
-  getTextInputForLog
+  getTextInputForLog,
 };
 
-type UnitType = ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
+type UnitType = ConstsTypes["TRACKER"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
 
 /**
- * Get an input component for a specific trackable type
+ * Get an input component for a specific tracker type
  */
-export function getInputForTrackableType(
-  type: TrackableType,
+export function getInputForTrackerType(
+  type: TrackerType,
   value: unknown,
   onChange: (value: unknown) => void,
   config: Record<string, unknown>,

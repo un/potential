@@ -1,6 +1,6 @@
-import type { TrackableCustomConfig } from "@potential/consts";
+import type { TrackerCustomConfig } from "@potential/consts";
 
-export type TrackableType =
+export type TrackerType =
   | "measure"
   | "checkbox"
   | "range"
@@ -14,7 +14,7 @@ export interface Log {
   updatedAt?: Date | string;
   loggedAt?: Date | string;
   ownerId?: string;
-  trackableId?: string;
+  trackerId?: string;
   parentLogId?: string | null;
   checked: boolean | null;
   numericValue: number | null;
@@ -25,9 +25,9 @@ export interface Log {
   source?: string;
 }
 
-export interface Trackable {
+export interface Tracker {
   id: string;
   name: string;
   configType: string;
-  customConfig: TrackableCustomConfig;
+  customConfig: TrackerCustomConfig;
 }

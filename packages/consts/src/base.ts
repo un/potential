@@ -28,35 +28,35 @@ import {
   getCustomConfigTypeDisplayValue,
   getSubTypeDisplayValue,
   getTypeDisplayValue,
-  TRACKABLE_CUSTOM_CONFIG_TYPES,
-  TRACKABLE_SUB_TYPES,
-  TRACKABLE_TYPES,
-  TrackableCustomConfigMeasureAggregationKey,
-  TrackableCustomConfigMeasureAggregationMap,
-  TrackableCustomConfigMeasureAggregationValues,
-  TrackableCustomConfigMeasureCumulationKey,
-  TrackableCustomConfigMeasureCumulationMap,
-  TrackableCustomConfigMeasureCumulationValues,
-  TrackableCustomConfigMeasureUnitsKey,
-  TrackableCustomConfigMeasureUnitsMap,
-  TrackableCustomConfigMeasureUnitsValues,
-  trackableCustomConfigSchema,
-  TrackableCustomConfigTypesKey,
-  TrackableCustomConfigTypesMap,
-  trackableCustomConfigTypesSchema,
-  TrackableCustomConfigTypesSchema,
-  TrackableCustomConfigTypesValues,
-  TrackableSubTypesKey,
-  TrackableSubTypesMap,
-  trackableSubTypesSchema,
-  TrackableSubTypesSchema,
-  TrackableSubTypesValues,
-  TrackableTypesKey,
-  TrackableTypesMap,
-  TrackableTypesSchema,
-  trackableTypesSchema,
-  TrackableTypesValues,
-} from "./trackables";
+  TRACKER_CUSTOM_CONFIG_TYPES,
+  TRACKER_SUB_TYPES,
+  TRACKER_TYPES,
+  TrackerCustomConfigMeasureAggregationKey,
+  TrackerCustomConfigMeasureAggregationMap,
+  TrackerCustomConfigMeasureAggregationValues,
+  TrackerCustomConfigMeasureCumulationKey,
+  TrackerCustomConfigMeasureCumulationMap,
+  TrackerCustomConfigMeasureCumulationValues,
+  TrackerCustomConfigMeasureUnitsKey,
+  TrackerCustomConfigMeasureUnitsMap,
+  TrackerCustomConfigMeasureUnitsValues,
+  trackerCustomConfigSchema,
+  TrackerCustomConfigTypesKey,
+  TrackerCustomConfigTypesMap,
+  trackerCustomConfigTypesSchema,
+  TrackerCustomConfigTypesSchema,
+  TrackerCustomConfigTypesValues,
+  TrackerSubTypesKey,
+  TrackerSubTypesMap,
+  trackerSubTypesSchema,
+  TrackerSubTypesSchema,
+  TrackerSubTypesValues,
+  TrackerTypesKey,
+  TrackerTypesMap,
+  trackerTypesSchema,
+  TrackerTypesSchema,
+  TrackerTypesValues,
+} from "./trackers";
 import {
   GENDER_AT_BIRTH,
   GenderAtBirthKey,
@@ -75,18 +75,18 @@ export const CONSTS = {
     getAccessModeDisplayValue: getIntegrationAccessModeDisplayValue,
     SCHEMA: integrationsSchema,
   },
-  TRACKABLE: {
-    TYPES: TRACKABLE_TYPES,
-    SUB_TYPES: TRACKABLE_SUB_TYPES,
+  TRACKER: {
+    TYPES: TRACKER_TYPES,
+    SUB_TYPES: TRACKER_SUB_TYPES,
     getTypeDisplayValue,
     getSubTypeDisplayValue,
-    TYPES_SCHEMA: trackableTypesSchema,
-    SUB_TYPES_SCHEMA: trackableSubTypesSchema,
+    TYPES_SCHEMA: trackerTypesSchema,
+    SUB_TYPES_SCHEMA: trackerSubTypesSchema,
     CONFIG: {
-      TYPES: TRACKABLE_CUSTOM_CONFIG_TYPES,
+      TYPES: TRACKER_CUSTOM_CONFIG_TYPES,
       getCustomConfigTypeDisplayValue,
-      TYPES_SCHEMA: trackableCustomConfigTypesSchema,
-      CONFIG_SCHEMA: trackableCustomConfigSchema,
+      TYPES_SCHEMA: trackerCustomConfigTypesSchema,
+      CONFIG_SCHEMA: trackerCustomConfigSchema,
     },
   },
   COLORS: {
@@ -122,51 +122,51 @@ export type ConstsTypes = {
       SCHEMA: IntegrationAccessModeSchema;
     };
   };
-  TRACKABLE: {
+  TRACKER: {
     TYPES: {
-      KEY: TrackableTypesKey;
-      VALUES: TrackableTypesValues;
-      MAP: TrackableTypesMap;
-      DISPLAY_VALUE: (key: TrackableTypesKey) => string;
-      SCHEMA: TrackableTypesSchema;
+      KEY: TrackerTypesKey;
+      VALUES: TrackerTypesValues;
+      MAP: TrackerTypesMap;
+      DISPLAY_VALUE: (key: TrackerTypesKey) => string;
+      SCHEMA: TrackerTypesSchema;
     };
     SUB_TYPES: {
-      KEY: TrackableSubTypesKey;
-      VALUES: TrackableSubTypesValues;
-      MAP: TrackableSubTypesMap;
-      DISPLAY_VALUE: (key: TrackableSubTypesKey) => string;
-      SCHEMA: TrackableSubTypesSchema;
+      KEY: TrackerSubTypesKey;
+      VALUES: TrackerSubTypesValues;
+      MAP: TrackerSubTypesMap;
+      DISPLAY_VALUE: (key: TrackerSubTypesKey) => string;
+      SCHEMA: TrackerSubTypesSchema;
     };
     CONFIG: {
       TYPES: {
-        KEY: TrackableCustomConfigTypesKey;
-        VALUES: TrackableCustomConfigTypesValues;
-        MAP: TrackableCustomConfigTypesMap;
-        DISPLAY_VALUE: (key: TrackableCustomConfigTypesKey) => string;
-        SCHEMA: TrackableCustomConfigTypesSchema;
+        KEY: TrackerCustomConfigTypesKey;
+        VALUES: TrackerCustomConfigTypesValues;
+        MAP: TrackerCustomConfigTypesMap;
+        DISPLAY_VALUE: (key: TrackerCustomConfigTypesKey) => string;
+        SCHEMA: TrackerCustomConfigTypesSchema;
       };
 
       UNITS: {
         MEASURE: {
-          KEY: TrackableCustomConfigMeasureUnitsKey;
-          VALUES: TrackableCustomConfigMeasureUnitsValues;
-          MAP: TrackableCustomConfigMeasureUnitsMap;
-          DISPLAY_VALUE: (key: TrackableCustomConfigMeasureUnitsKey) => string;
+          KEY: TrackerCustomConfigMeasureUnitsKey;
+          VALUES: TrackerCustomConfigMeasureUnitsValues;
+          MAP: TrackerCustomConfigMeasureUnitsMap;
+          DISPLAY_VALUE: (key: TrackerCustomConfigMeasureUnitsKey) => string;
         };
         CUMULATION: {
-          KEY: TrackableCustomConfigMeasureCumulationKey;
-          VALUES: TrackableCustomConfigMeasureCumulationValues;
-          MAP: TrackableCustomConfigMeasureCumulationMap;
+          KEY: TrackerCustomConfigMeasureCumulationKey;
+          VALUES: TrackerCustomConfigMeasureCumulationValues;
+          MAP: TrackerCustomConfigMeasureCumulationMap;
           DISPLAY_VALUE: (
-            key: TrackableCustomConfigMeasureCumulationKey,
+            key: TrackerCustomConfigMeasureCumulationKey,
           ) => string;
         };
         AGGREGATION: {
-          KEY: TrackableCustomConfigMeasureAggregationKey;
-          VALUES: TrackableCustomConfigMeasureAggregationValues;
-          MAP: TrackableCustomConfigMeasureAggregationMap;
+          KEY: TrackerCustomConfigMeasureAggregationKey;
+          VALUES: TrackerCustomConfigMeasureAggregationValues;
+          MAP: TrackerCustomConfigMeasureAggregationMap;
           DISPLAY_VALUE: (
-            key: TrackableCustomConfigMeasureAggregationKey,
+            key: TrackerCustomConfigMeasureAggregationKey,
           ) => string;
         };
       };

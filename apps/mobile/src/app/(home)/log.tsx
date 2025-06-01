@@ -14,7 +14,7 @@ import {
   Virus,
 } from "phosphor-react-native";
 
-import { TrackableLogStep } from "~/components/app/trackableLogStep";
+import { TrackerLogStep } from "~/components/app/trackerLogStep";
 import { Text } from "~/components/ui/text";
 import { cn, iconColor } from "~/utils/ui";
 
@@ -95,82 +95,82 @@ export default function Logger() {
     switch (currentStep) {
       case "food":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="consumption"
-            trackableSubType="consumption.parent.food"
+            trackerParentType="consumption"
+            trackerSubType="consumption.parent.food"
           />
         );
       case "activities":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="activity"
-            trackableSubType="custom.generic"
+            trackerParentType="activity"
+            trackerSubType="custom.generic"
           />
         );
       case "energy":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="energy"
-            trackableSubType="energy.calories.net"
+            trackerParentType="energy"
+            trackerSubType="energy.calories.net"
           />
         );
       case "sleep":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="sleep"
-            trackableSubType="custom.generic"
+            trackerParentType="sleep"
+            trackerSubType="custom.generic"
           />
         );
       case "supplements":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="supplement"
-            trackableSubType="supplement.generic"
+            trackerParentType="supplement"
+            trackerSubType="supplement.generic"
           />
         );
       case "cycles":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="body"
-            trackableSubType="body.generic"
+            trackerParentType="body"
+            trackerSubType="body.generic"
           />
         );
       case "mind":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="mind"
-            trackableSubType="custom.generic"
+            trackerParentType="mind"
+            trackerSubType="custom.generic"
           />
         );
       case "symptoms":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="symptom"
-            trackableSubType="symptom.generic"
+            trackerParentType="symptom"
+            trackerSubType="symptom.generic"
           />
         );
       case "blood":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="blood"
-            trackableSubType="blood.generic"
+            trackerParentType="blood"
+            trackerSubType="blood.generic"
           />
         );
       case "body":
         return (
-          <TrackableLogStep
+          <TrackerLogStep
             onBack={handleBack}
-            trackableParentType="body"
-            trackableSubType="body.generic"
+            trackerParentType="body"
+            trackerSubType="body.generic"
           />
         );
       default:

@@ -1,19 +1,19 @@
 // packages/templates/src/types/templates.ts
 import { z } from "zod";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { ConstsTypes, TrackerCustomConfig } from "@potential/consts";
 
-type TrackableSubTypesKey = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
-type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
+type TrackerSubTypesKey = ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
+type TrackerTypesKey = ConstsTypes["TRACKER"]["TYPES"]["KEY"];
 
-export interface TrackableConfigMetadata {
+export interface TrackerConfigMetadata {
   templateId?: string;
   templateVersion?: number;
   isCustomized?: boolean;
 }
 
-export type TrackableConfigWithMeta = TrackableCustomConfig & {
-  _meta?: TrackableConfigMetadata;
+export type TrackerConfigWithMeta = TrackerCustomConfig & {
+  _meta?: TrackerConfigMetadata;
 };
 
 export const baseTemplateSchema = z.object({
@@ -23,12 +23,12 @@ export const baseTemplateSchema = z.object({
   description: z.string().optional(),
   icon: z.string().optional(),
   recommended: z.boolean().default(false),
-  defaultConfig: z.custom<TrackableConfigWithMeta>(),
+  defaultConfig: z.custom<TrackerConfigWithMeta>(),
 });
 
 export type BaseTemplate = z.infer<typeof baseTemplateSchema>;
 
-export type TrackableTemplateRegistry = Record<
-  TrackableTypesKey,
-  Partial<Record<TrackableSubTypesKey, BaseTemplate[]>>
+export type TrackerTemplateRegistry = Record<
+  TrackerTypesKey,
+  Partial<Record<TrackerSubTypesKey, BaseTemplate[]>>
 >;

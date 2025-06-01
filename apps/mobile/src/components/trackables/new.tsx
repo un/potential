@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Plus } from "phosphor-react-native";
 import { toast } from "sonner-native";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { ConstsTypes, TrackerCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
 import { CONSTS } from "@potential/consts";
 
@@ -23,10 +23,9 @@ import { queryClient, trpc } from "~/utils/api";
 import { iconColor } from "~/utils/ui";
 import { Dropdown } from "../ui/dropdown";
 
-type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
-type TrackableSubTypesKey = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
-type TrackableConfigTypesKey =
-  ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
+type TrackerTypesKey = ConstsTypes["TRACKER"]["TYPES"]["KEY"];
+type TrackerSubTypesKey = ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
+type TrackerConfigTypesKey = ConstsTypes["TRACKER"]["CONFIG"]["TYPES"]["KEY"];
 
 // Define the steps for the wizard
 enum Step {
@@ -44,7 +43,7 @@ interface ConfigStepDef {
   component: React.ReactNode;
 }
 
-// Default templates for each trackable type
+// Default templates for each tracker type
 const DEFAULT_TEMPLATES = {
   measure: {
     name: "Measurement Tracker",
@@ -113,21 +112,21 @@ const DEFAULT_TEMPLATES = {
   },
 };
 
-interface NewTrackableFormData {
+interface NewTrackerFormData {
   name: string;
   description: string;
-  type: TrackableTypesKey;
-  subType: TrackableSubTypesKey;
-  configType: TrackableConfigTypesKey;
-  config: TrackableCustomConfig;
+  type: TrackerTypesKey;
+  subType: TrackerSubTypesKey;
+  configType: TrackerConfigTypesKey;
+  config: TrackerCustomConfig;
 }
 
-interface NewTrackableProps {
+interface NewTrackerProps {
   template?: BaseTemplate;
-  onSave?: (data: NewTrackableFormData) => void;
+  onSave?: (data: NewTrackerFormData) => void;
 }
 
-export function NewTrackable({ template, onSave }: NewTrackableProps) {
+export function NewTracker({ template, onSave }: NewTrackerProps) {
   const locales = useLocales();
   const userMeasurementSystem = locales[0]?.measurementSystem ?? "metric";
   const [step, setStep] = useState<Step>(
@@ -136,7 +135,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   const [configStep, setConfigStep] = useState(0);
   const [showDescription, setShowDescription] = useState(false);
 
-  const [formData, setFormData] = useState<NewTrackableFormData>({
+  const [formData, setFormData] = useState<NewTrackerFormData>({
     name: template?.name ?? "",
     description: template?.description ?? "",
     type: template?.type ?? "custom",
@@ -147,11 +146,11 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
 
   // Setup the mutation at component level
   const mutation = useMutation(
-    trpc.trackables.createTrackable.mutationOptions({
+    trpc.tracker.createTracker.mutationOptions({
       onSuccess: async ({ id }) => {
         // Invalidate the query for the parent type
-        const queryKey = trpc.trackables.getTrackablesForParentType.queryKey({
-          trackableParentType: formData.type,
+        const queryKey = trpc.tracker.getTrackersForParentType.queryKey({
+          trackerParentType: formData.type,
         });
         await queryClient.invalidateQueries({ queryKey });
 
@@ -161,8 +160,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
         }
       },
       onError: (error) => {
-        toast.error("Error creating trackable");
-        console.error("Error creating trackable:", error);
+        toast.error("Error creating tracker");
+        console.error("Error creating tracker:", error);
       },
     }),
   );
@@ -173,7 +172,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       const configType = template.defaultConfig.type;
 
       // Create a copy of the template's config
-      const configCopy = { ...template.defaultConfig } as TrackableCustomConfig;
+      const configCopy = { ...template.defaultConfig } as TrackerCustomConfig;
 
       // Update display unit based on user's locale if it's a measure config
       if (configType === "measure" && configCopy.type === "measure") {
@@ -204,21 +203,21 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   }, [formData.configType]);
 
   // Extract main type from subtype (e.g., "mind.stress" -> "mind")
-  const extractTypeFromSubType = (subType: string): TrackableTypesKey => {
+  const extractTypeFromSubType = (subType: string): TrackerTypesKey => {
     const parts = subType.split(".");
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    return (parts[0] as TrackableTypesKey) ?? "custom";
+    return (parts[0] as TrackerTypesKey) ?? "custom";
   };
 
   // Map template ID to valid subType (e.g., "weight" -> "body.weight")
-  const mapTemplateIdToSubType = (templateId: string): TrackableSubTypesKey => {
+  const mapTemplateIdToSubType = (templateId: string): TrackerSubTypesKey => {
     // Check if this is already a valid subType format (contains dots)
     if (templateId.includes(".")) {
-      return templateId as TrackableSubTypesKey;
+      return templateId as TrackerSubTypesKey;
     }
 
     // Special case mappings for template IDs
-    const mappings: Record<string, TrackableSubTypesKey> = {
+    const mappings: Record<string, TrackerSubTypesKey> = {
       weight: "body.weight",
       "body-fat-percentage": "body.fat",
       "body-muscle-percentage": "body.muscle",
@@ -229,12 +228,12 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   };
 
   // Handle form field changes
-  const handleChange = (field: keyof NewTrackableFormData, value: unknown) => {
+  const handleChange = (field: keyof NewTrackerFormData, value: unknown) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   // Handle config type change
-  const handleConfigTypeChange = (configType: TrackableConfigTypesKey) => {
+  const handleConfigTypeChange = (configType: TrackerConfigTypesKey) => {
     setFormData((prev) => ({
       ...prev,
       configType,
@@ -299,12 +298,12 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
         type: type,
         subType: subType,
         configType: configType,
-        config: template.defaultConfig as TrackableCustomConfig,
+        config: template.defaultConfig as TrackerCustomConfig,
       };
 
       console.log("Using template directly:", newFormData);
 
-      // Create the trackable in the database
+      // Create the tracker in the database
       mutation.mutate({
         name: newFormData.name,
         description: newFormData.description,
@@ -406,16 +405,16 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
   };
 
   // Create type options for picker
-  const typeOptions: PickerOption[] = Object.entries(
-    CONSTS.TRACKABLE.TYPES,
-  ).map(([key, label]) => ({
-    value: key,
-    label: label as string,
-  }));
+  const typeOptions: PickerOption[] = Object.entries(CONSTS.TRACKER.TYPES).map(
+    ([key, label]) => ({
+      value: key,
+      label: label as string,
+    }),
+  );
 
   // Create subtype options for picker based on selected type
   const subtypeOptions: PickerOption[] = Object.entries(
-    CONSTS.TRACKABLE.SUB_TYPES,
+    CONSTS.TRACKER.SUB_TYPES,
   )
     .filter(([key]) => key.startsWith(formData.type))
     .map(([key, label]) => ({
@@ -425,7 +424,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
 
   // Create config type options for picker
   const configTypeOptions: PickerOption[] = Object.entries(
-    CONSTS.TRACKABLE.CONFIG.TYPES,
+    CONSTS.TRACKER.CONFIG.TYPES,
   ).map(([key, label]) => ({
     value: key,
     label: label as string,
@@ -479,7 +478,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
                 {template && (
                   <ConfigTypePreview
                     type={template.defaultConfig.type}
-                    config={template.defaultConfig as TrackableCustomConfig}
+                    config={template.defaultConfig as TrackerCustomConfig}
                     name={template.name}
                     description={template.description}
                   />
@@ -507,7 +506,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
               <Input
                 value={formData.name}
                 onChangeText={(text) => handleChange("name", text)}
-                placeholder="Enter trackable name"
+                placeholder="Enter tracker name"
               />
             </View>
 
@@ -552,7 +551,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
                 items={configTypeOptions}
                 value={formData.configType}
                 onChange={(value) =>
-                  handleConfigTypeChange(value as TrackableConfigTypesKey)
+                  handleConfigTypeChange(value as TrackerConfigTypesKey)
                 }
               />
             </View>
@@ -693,7 +692,7 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
       <View className="flex flex-col gap-6">
         <View className="flex flex-row items-center justify-between">
           <Text type="title" className="text-xl">
-            Create New Trackable
+            Create New Tracker
           </Text>
           <Text className="text-sand-11 text-xs">
             Step {currentDisplayStep} of {totalSteps}
@@ -729,8 +728,8 @@ export function NewTrackable({ template, onSave }: NewTrackableProps) {
 
 // Function to get config steps for a given type
 function getConfigStepsForType(
-  type: TrackableConfigTypesKey,
-  config: TrackableCustomConfig,
+  type: TrackerConfigTypesKey,
+  config: TrackerCustomConfig,
   onChange: (field: string, value: unknown) => void,
   onMeasureUnitTypeChange?: (unitType: string) => void,
 ): ConfigStepDef[] {
@@ -1069,8 +1068,8 @@ function ConfigTypePreview({
   name,
   description,
 }: {
-  type: TrackableConfigTypesKey;
-  config: TrackableCustomConfig;
+  type: TrackerConfigTypesKey;
+  config: TrackerCustomConfig;
   name?: string;
   description?: string;
 }) {
@@ -1217,9 +1216,7 @@ function ConfigTypePreview({
 }
 
 // Helper function to create empty config based on type
-function createEmptyConfig(
-  type: TrackableConfigTypesKey,
-): TrackableCustomConfig {
+function createEmptyConfig(type: TrackerConfigTypesKey): TrackerCustomConfig {
   switch (type) {
     case "measure": {
       const defaultConfig = { ...DEFAULT_TEMPLATES.measure.config };

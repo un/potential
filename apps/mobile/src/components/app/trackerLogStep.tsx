@@ -5,7 +5,7 @@ import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner-native";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { ConstsTypes, TrackerCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
 import { filterTemplatesByType } from "@potential/templates";
 
@@ -21,44 +21,44 @@ import { Slider } from "~/components/ui/slider";
 import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { trpc } from "~/utils/api";
-import { NewTrackable } from "../trackables/new";
+import { NewTracker } from "../trackers/new";
 import { LogStepWrapper } from "./logStepWrapper";
 
 // Use the proper type from consts
-type TrackableParentType = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
-type TrackableSubType = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
-type TrackableConfigType = ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
+type TrackerParentType = ConstsTypes["TRACKER"]["TYPES"]["KEY"];
+type TrackerSubType = ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
+type TrackerConfigType = ConstsTypes["TRACKER"]["CONFIG"]["TYPES"]["KEY"];
 
-// Define the Trackable interface to use instead of 'any'
-interface Trackable {
+// Define the Tracker interface to use instead of 'any'
+interface Tracker {
   id: string;
   name: string;
   description: string | null;
-  type: TrackableParentType;
-  subType: TrackableSubType;
-  configType: TrackableConfigType;
-  customConfig: TrackableCustomConfig;
+  type: TrackerParentType;
+  subType: TrackerSubType;
+  configType: TrackerConfigType;
+  customConfig: TrackerCustomConfig;
 }
 
-// Define types for the trackable values based on different input types
-type TrackableValueType =
+// Define types for the tracker values based on different input types
+type TrackerValueType =
   | number // for measure, rating, range
   | boolean // for checkbox
   | string // for shortText, longText
   | null; // when no value is set yet
 
-// Define NewTrackableFormData to match the one in new.tsx
-interface NewTrackableFormData {
+// Define NewTrackerFormData to match the one in new.tsx
+interface NewTrackerFormData {
   name: string;
   description: string;
-  type: ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
-  subType: ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
-  configType: ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
-  config: TrackableCustomConfig;
+  type: ConstsTypes["TRACKER"]["TYPES"]["KEY"];
+  subType: ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
+  configType: ConstsTypes["TRACKER"]["CONFIG"]["TYPES"]["KEY"];
+  config: TrackerCustomConfig;
 }
 
-// Lookup data for different trackable types
-interface TrackableOptions {
+// Lookup data for different tracker types
+interface TrackerOptions {
   textAreaPlaceholders: string[];
   generalName: string;
   textAreaLabel: string;
@@ -66,7 +66,7 @@ interface TrackableOptions {
   title: string;
 }
 
-const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
+const trackerLookup: Record<TrackerParentType, TrackerOptions> = {
   consumption: {
     textAreaPlaceholders: [
       "Ate a BrandName protein bar",
@@ -221,11 +221,11 @@ const trackableLookup: Record<TrackableParentType, TrackableOptions> = {
 
 // Helper function to get lookup values with defaults
 const getLookupValues = (
-  trackableParentType: TrackableParentType,
-): TrackableOptions => {
+  trackerParentType: TrackerParentType,
+): TrackerOptions => {
   return (
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    trackableLookup[trackableParentType] || {
+    trackerLookup[trackerParentType] || {
       textAreaPlaceholders: ["Enter details here..."],
       generalName: "item",
       textAreaLabel: "What would you like to log?",
@@ -235,34 +235,32 @@ const getLookupValues = (
   );
 };
 
-interface TrackableLogStepProps {
+interface TrackerLogStepProps {
   onBack: () => void;
-  trackableParentType: TrackableParentType;
-  trackableSubType: TrackableSubType;
+  trackerParentType: TrackerParentType;
+  trackerSubType: TrackerSubType;
 }
 
-// Component to render trackable input based on its config type
-function TrackableInputComponent({
-  trackable,
+// Component to render tracker input based on its config type
+function TrackerInputComponent({
+  tracker,
   onValueChange,
   value,
 }: {
-  trackable: Trackable;
-  onValueChange: (value: TrackableValueType) => void;
-  value: TrackableValueType;
+  tracker: Tracker;
+  onValueChange: (value: TrackerValueType) => void;
+  value: TrackerValueType;
 }) {
-  const config = trackable.customConfig;
+  const config = tracker.customConfig;
 
   switch (config.type) {
     case "measure": {
       const numberValue = typeof value === "number" ? value : 0;
       return (
         <View className="flex flex-col gap-2">
-          {/* <Text type="title">{trackable.name}</Text> */}
-          {trackable.description && (
-            <Text className="text-sand-11 text-sm">
-              {trackable.description}
-            </Text>
+          {/* <Text type="title">{tracker.name}</Text> */}
+          {tracker.description && (
+            <Text className="text-sand-11 text-sm">{tracker.description}</Text>
           )}
           <NumberInput
             value={numberValue}
@@ -280,11 +278,9 @@ function TrackableInputComponent({
       const boolValue = typeof value === "boolean" ? value : false;
       return (
         <View className="flex flex-col gap-2">
-          <Text type="title">{trackable.name}</Text>
-          {trackable.description && (
-            <Text className="text-sand-11 text-sm">
-              {trackable.description}
-            </Text>
+          <Text type="title">{tracker.name}</Text>
+          {tracker.description && (
+            <Text className="text-sand-11 text-sm">{tracker.description}</Text>
           )}
           <View className="flex-row items-center">
             <Checkbox
@@ -301,11 +297,9 @@ function TrackableInputComponent({
         typeof value === "number" ? value : config.rangeMin || 0;
       return (
         <View className="flex flex-col gap-2">
-          <Text type="title">{trackable.name}</Text>
-          {trackable.description && (
-            <Text className="text-sand-11 text-sm">
-              {trackable.description}
-            </Text>
+          <Text type="title">{tracker.name}</Text>
+          {tracker.description && (
+            <Text className="text-sand-11 text-sm">{tracker.description}</Text>
           )}
           <Slider
             value={numberValue}
@@ -334,11 +328,9 @@ function TrackableInputComponent({
 
       return (
         <View className="flex flex-col gap-2">
-          <Text type="title">{trackable.name}</Text>
-          {trackable.description && (
-            <Text className="text-sand-11 text-sm">
-              {trackable.description}
-            </Text>
+          <Text type="title">{tracker.name}</Text>
+          {tracker.description && (
+            <Text className="text-sand-11 text-sm">{tracker.description}</Text>
           )}
           <Rating
             value={numberValue}
@@ -355,11 +347,9 @@ function TrackableInputComponent({
       const stringValue = typeof value === "string" ? value : "";
       return (
         <View className="flex flex-col gap-2">
-          <Text type="title">{trackable.name}</Text>
-          {trackable.description && (
-            <Text className="text-sand-11 text-sm">
-              {trackable.description}
-            </Text>
+          <Text type="title">{tracker.name}</Text>
+          {tracker.description && (
+            <Text className="text-sand-11 text-sm">{tracker.description}</Text>
           )}
           <Input
             value={stringValue}
@@ -373,11 +363,9 @@ function TrackableInputComponent({
       const stringValue = typeof value === "string" ? value : "";
       return (
         <View className="flex flex-col gap-2">
-          <Text type="title">{trackable.name}</Text>
-          {trackable.description && (
-            <Text className="text-sand-11 text-sm">
-              {trackable.description}
-            </Text>
+          <Text type="title">{tracker.name}</Text>
+          {tracker.description && (
+            <Text className="text-sand-11 text-sm">{tracker.description}</Text>
           )}
           <LongText
             value={stringValue}
@@ -390,7 +378,7 @@ function TrackableInputComponent({
     default:
       return (
         <View className="p-2">
-          <Text>Unsupported trackable type</Text>
+          <Text>Unsupported tracker type</Text>
         </View>
       );
   }
@@ -400,47 +388,44 @@ function TrackableInputComponent({
 interface CreateLogPayload {
   text: string;
   imageIds: string[];
-  trackableParentType: TrackableParentType;
-  trackableSubType: TrackableSubType;
-  trackableId?: string;
-  trackableValue?: TrackableValueType;
+  trackerParentType: TrackerParentType;
+  trackerSubType: TrackerSubType;
+  trackerId?: string;
+  trackerValue?: TrackerValueType;
 }
 
-export const TrackableLogStep = ({
+export const TrackerLogStep = ({
   onBack,
-  trackableParentType,
-  trackableSubType,
-}: TrackableLogStepProps) => {
-  const lookupValues = getLookupValues(trackableParentType);
+  trackerParentType,
+  trackerSubType,
+}: TrackerLogStepProps) => {
+  const lookupValues = getLookupValues(trackerParentType);
   const router = useRouter();
 
-  // Template and NewTrackable state
+  // Template and NewTracker state
   const [selectedTemplate, setSelectedTemplate] = useState<BaseTemplate | null>(
     null,
   );
   const [templates, setTemplates] = useState<BaseTemplate[]>([]);
 
-  // Add state for the selected trackable
-  const [selectedTrackable, setSelectedTrackable] = useState<Trackable | null>(
-    null,
-  );
-  const [trackableValue, setTrackableValue] =
-    useState<TrackableValueType>(null);
+  // Add state for the selected tracker
+  const [selectedTracker, setSelectedTracker] = useState<Tracker | null>(null);
+  const [trackerValue, setTrackerValue] = useState<TrackerValueType>(null);
 
-  // Fetch templates based on trackableParentType
+  // Fetch templates based on trackerParentType
   useEffect(() => {
-    const typeTemplates = filterTemplatesByType(trackableParentType);
+    const typeTemplates = filterTemplatesByType(trackerParentType);
     setTemplates(typeTemplates);
-  }, [trackableParentType]);
+  }, [trackerParentType]);
 
   // get user profile
   const {
-    data: parentTrackableTypes,
-    // isLoading: parentTrackableTypesLoading,
-    // error: parentTrackableTypesError,
+    data: parentTrackerTypes,
+    // isLoading: parentTrackerTypesLoading,
+    // error: parentTrackerTypesError,
   } = useQuery(
-    trpc.trackables.getTrackablesForParentType.queryOptions({
-      trackableParentType,
+    trpc.tracker.getTrackersForParentType.queryOptions({
+      trackerParentType,
     }),
   );
 
@@ -507,23 +492,23 @@ export const TrackableLogStep = ({
 
     const textValue = form.getFieldValue("text");
 
-    // Check if we are submitting a trackable value
-    if (selectedTrackable) {
-      if (trackableValue === null) {
-        toast.error(`Please provide a value for ${selectedTrackable.name}`);
+    // Check if we are submitting a tracker value
+    if (selectedTracker) {
+      if (trackerValue === null) {
+        toast.error(`Please provide a value for ${selectedTracker.name}`);
         setIsFormSubmitting(false);
         return;
       }
 
-      // Send trackable data to the backend
+      // Send tracker data to the backend
       try {
         const payload: CreateLogPayload = {
           text: textValue || "",
           imageIds: imageState.imageIds,
-          trackableParentType,
-          trackableSubType,
-          trackableId: selectedTrackable.id,
-          trackableValue: trackableValue,
+          trackerParentType,
+          trackerSubType,
+          trackerId: selectedTracker.id,
+          trackerValue: trackerValue,
         };
 
         // Handle pending image uploads before submitting
@@ -536,12 +521,12 @@ export const TrackableLogStep = ({
 
         await mutateAsync(payload);
 
-        toast.success(`${selectedTrackable.name} logged successfully`);
+        toast.success(`${selectedTracker.name} logged successfully`);
         router.back();
         setIsFormSubmitting(false);
         return;
       } catch (error) {
-        console.error("Error submitting trackable value:", error);
+        console.error("Error submitting tracker value:", error);
         setIsFormSubmitting(false);
         return;
       }
@@ -572,40 +557,40 @@ export const TrackableLogStep = ({
     await mutateAsync({
       text: textValue,
       imageIds,
-      trackableParentType,
-      trackableSubType,
+      trackerParentType,
+      trackerSubType,
     });
     toast.success(`${lookupValues.generalName} logged successfully`);
     router.back();
     setIsFormSubmitting(false);
   }
 
-  // Handle trackable selection
-  const handleTrackableSelect = (trackable: Record<string, unknown>) => {
-    // Cast the API response to our Trackable interface by first converting to unknown
-    const typedTrackable = trackable as unknown as Trackable;
-    setSelectedTrackable(typedTrackable);
+  // Handle tracker selection
+  const handleTrackerSelect = (tracker: Record<string, unknown>) => {
+    // Cast the API response to our Tracker interface by first converting to unknown
+    const typedTracker = tracker as unknown as Tracker;
+    setSelectedTracker(typedTracker);
 
-    // Initialize value based on trackable type - no need to check if .type exists
-    switch (typedTrackable.customConfig.type) {
+    // Initialize value based on tracker type - no need to check if .type exists
+    switch (typedTracker.customConfig.type) {
       case "measure":
-        setTrackableValue(0);
+        setTrackerValue(0);
         break;
       case "checkbox":
-        setTrackableValue(false);
+        setTrackerValue(false);
         break;
       case "range":
-        setTrackableValue(typedTrackable.customConfig.rangeMin || 0);
+        setTrackerValue(typedTracker.customConfig.rangeMin || 0);
         break;
       case "rating":
-        setTrackableValue(0);
+        setTrackerValue(0);
         break;
       case "shortText":
       case "longText":
-        setTrackableValue("");
+        setTrackerValue("");
         break;
       default:
-        setTrackableValue(null);
+        setTrackerValue(null);
     }
   };
 
@@ -614,10 +599,10 @@ export const TrackableLogStep = ({
     setSelectedTemplate(template ?? null);
   };
 
-  // Handler for saving a new trackable
-  const handleSaveNewTrackable = () => {
-    toast.success("New trackable added successfully", {
-      id: "new-trackable-saved",
+  // Handler for saving a new tracker
+  const handleSaveNewTracker = () => {
+    toast.success("New tracker added successfully", {
+      id: "new-tracker-saved",
     });
     setSelectedTemplate(null); // Return to main screen after saving
   };
@@ -651,11 +636,11 @@ export const TrackableLogStep = ({
                     : ""
                 }
                 label={
-                  selectedTrackable
+                  selectedTracker
                     ? "Add a note to this log"
                     : lookupValues.textAreaLabel
                 }
-                placeholder={selectedTrackable ? "" : placeholder}
+                placeholder={selectedTracker ? "" : placeholder}
                 editable={!form.state.isSubmitting}
               />
             );
@@ -665,21 +650,21 @@ export const TrackableLogStep = ({
           Tips: {lookupValues.tipText}
         </Text>
 
-        {/* If a trackable is selected, show it above the image picker */}
-        {selectedTrackable && (
+        {/* If a tracker is selected, show it above the image picker */}
+        {selectedTracker && (
           <View className="border-sand-6 bg-sand-1 flex flex-col items-center gap-4 rounded-lg border p-4">
             <Text className="text-base font-medium" type="title">
-              {selectedTrackable.name}
+              {selectedTracker.name}
             </Text>
 
-            <TrackableInputComponent
-              trackable={selectedTrackable}
-              value={trackableValue}
-              onValueChange={setTrackableValue}
+            <TrackerInputComponent
+              tracker={selectedTracker}
+              value={trackerValue}
+              onValueChange={setTrackerValue}
             />
           </View>
         )}
-        {selectedTrackable && (
+        {selectedTracker && (
           <Text className="text-sand-11 text-xs">
             Tip: You can also attach a photo to this log
           </Text>
@@ -696,17 +681,17 @@ export const TrackableLogStep = ({
     );
   };
 
-  // Render the manual section for selecting trackables
+  // Render the manual section for selecting trackers
   const renderManualSection = () => {
-    // Don't show manual section when Smart AI section already shows the selected trackable
-    if (selectedTrackable) return null;
+    // Don't show manual section when Smart AI section already shows the selected tracker
+    if (selectedTracker) return null;
 
     return (
       <View className="mt-4 flex flex-col gap-6">
         <Text className="text-lg" type="title">
           Existing Trackers
         </Text>
-        {parentTrackableTypes?.length === 0 && (
+        {parentTrackerTypes?.length === 0 && (
           <Text className="text-sand-11 text-sm">
             No existing trackers found
           </Text>
@@ -716,25 +701,25 @@ export const TrackableLogStep = ({
           className="flex flex-col gap-2"
           style={{
             maxHeight:
-              parentTrackableTypes && parentTrackableTypes.length > 3
+              parentTrackerTypes && parentTrackerTypes.length > 3
                 ? 250
                 : "auto",
           }}
         >
-          {parentTrackableTypes?.map((trackable) => (
+          {parentTrackerTypes?.map((tracker) => (
             <Button
               variant={"outline"}
               className="mb-2 flex w-full flex-col gap-2"
-              onPress={() => handleTrackableSelect(trackable)}
-              key={trackable.id}
+              onPress={() => handleTrackerSelect(tracker)}
+              key={tracker.id}
             >
               <View className="flex w-full flex-row items-center justify-between">
                 <Text className="text-base font-medium" type={"title"}>
-                  {trackable.name}
+                  {tracker.name}
                 </Text>
-                {trackable.description && (
+                {tracker.description && (
                   <Text className="text-sand-11 text-sm">
-                    {trackable.description}
+                    {tracker.description}
                   </Text>
                 )}
               </View>
@@ -743,7 +728,7 @@ export const TrackableLogStep = ({
         </ScrollView>
         {/* Template Selection */}
         <View className="flex flex-col gap-2">
-          <Text type={"title"}>New Trackable</Text>
+          <Text type={"title"}>New Tracker</Text>
           <View className="flex flex-col gap-4">
             <Button
               variant={"outline"}
@@ -797,31 +782,28 @@ export const TrackableLogStep = ({
     );
   };
 
-  // Render the main trackable log content
+  // Render the main tracker log content
   const renderMainContent = () => {
     return (
       <LogStepWrapper title={lookupValues.title} onBack={onBack}>
         <View className="mb-12 flex flex-col gap-4">
           {renderSmartAISection()}
-          {trackableParentType !== "consumption" && renderManualSection()}
+          {trackerParentType !== "consumption" && renderManualSection()}
         </View>
       </LogStepWrapper>
     );
   };
 
-  // Render the new trackable view if a template is selected
-  const renderNewTrackable = () => {
+  // Render the new tracker view if a template is selected
+  const renderNewTracker = () => {
     if (!selectedTemplate) return null;
 
     return (
       <LogStepWrapper
-        title={selectedTemplate.name || "New Trackable"}
+        title={selectedTemplate.name || "New Tracker"}
         onBack={() => setSelectedTemplate(null)}
       >
-        <NewTrackable
-          template={selectedTemplate}
-          onSave={handleSaveNewTrackable}
-        />
+        <NewTracker template={selectedTemplate} onSave={handleSaveNewTracker} />
       </LogStepWrapper>
     );
   };
@@ -831,7 +813,7 @@ export const TrackableLogStep = ({
   return (
     <>
       {renderMainContent()}
-      {selectedTemplate && renderNewTrackable()}
+      {selectedTemplate && renderNewTracker()}
     </>
   );
 };

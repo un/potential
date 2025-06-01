@@ -11,5 +11,5 @@
   },
 
   "eslint.useFlatConfig": true,
-  "cSpell.words": ["mediumint", "monocraft", "Pressable", "trackables"]
+  "cSpell.words": ["mediumint", "monocraft", "Pressable", "trackers"]
 }

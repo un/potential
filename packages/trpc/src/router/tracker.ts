@@ -2,27 +2,27 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { openai } from "@ai-sdk/openai";
 import { TRPCError } from "@trpc/server";
 import { generateObject } from "ai";
-import { newTrackablesSchema } from "src/utils/ai/generateNewTrackables";
+import { newTrackersSchema } from "src/utils/ai/generateNewTracker";
 import { z } from "zod";
 
-import type { TrackableCustomConfig } from "@potential/consts";
+import type { TrackerCustomConfig } from "@potential/consts";
 import { CONSTS } from "@potential/consts";
-import { and, eq, trackables } from "@potential/db";
+import { and, eq, trackers } from "@potential/db";
 import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@potential/utils";
 
 import { protectedProcedure } from "../trpc";
 import { awardXpPoints } from "../utils/xpPoints";
 
-export const trackablesRouter = {
-  createTrackable: protectedProcedure
+export const trackerRouter = {
+  createTracker: protectedProcedure
     .input(
       z.object({
         name: z.string().min(1).max(32),
         description: z.string().max(255).optional(),
-        type: CONSTS.TRACKABLE.TYPES_SCHEMA,
-        subType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
-        configType: CONSTS.TRACKABLE.CONFIG.TYPES_SCHEMA,
-        config: z.custom<TrackableCustomConfig>((val) => {
+        type: CONSTS.TRACKER.TYPES_SCHEMA,
+        subType: CONSTS.TRACKER.SUB_TYPES_SCHEMA,
+        configType: CONSTS.TRACKER.CONFIG.TYPES_SCHEMA,
+        config: z.custom<TrackerCustomConfig>((val) => {
           // At minimum, ensure it has a type
           return typeof val === "object" && val !== null && "type" in val;
         }),
@@ -34,10 +34,10 @@ export const trackablesRouter = {
       console.log("input", input);
 
       try {
-        const newTrackableId = cloudTypeIdGenerator("trackable");
+        const newTrackerId = cloudTypeIdGenerator("tracker");
 
-        await db.insert(trackables).values({
-          id: newTrackableId,
+        await db.insert(trackers).values({
+          id: newTrackerId,
           ownerId: user.id,
           name: input.name,
           description: input.description ?? null,
@@ -49,68 +49,65 @@ export const trackablesRouter = {
 
         await awardXpPoints({
           userId: user.id,
-          action: "newTrackable",
-          actionId: newTrackableId,
+          action: "newTracker",
+          actionId: newTrackerId,
         });
 
         return {
           success: true,
-          id: newTrackableId,
+          id: newTrackerId,
         };
       } catch (error: unknown) {
-        console.error("Error creating trackable:", error);
+        console.error("Error creating tracker:", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Failed to create trackable",
+          message: "Failed to create tracker",
         });
       }
     }),
-  getTrackablesForParentType: protectedProcedure
+  getTrackersForParentType: protectedProcedure
     .input(
       z.object({
-        trackableParentType: CONSTS.TRACKABLE.TYPES_SCHEMA,
+        trackerParentType: CONSTS.TRACKER.TYPES_SCHEMA,
       }),
     )
     .query(async ({ ctx, input }) => {
       const { db, auth } = ctx;
       const user = auth.user;
 
-      const logTypeTrackables = await db.query.trackables.findMany({
+      const logTypeTrackers = await db.query.trackers.findMany({
         where: and(
-          eq(trackables.ownerId, user.id),
-          eq(trackables.type, input.trackableParentType),
+          eq(trackers.ownerId, user.id),
+          eq(trackers.type, input.trackerParentType),
         ),
       });
 
-      return logTypeTrackables;
+      return logTypeTrackers;
     }),
-  getTrackableById: protectedProcedure
+  getTrackerById: protectedProcedure
     .input(
       z.object({
-        id: cloudTypeIdValidator("trackable"),
+        id: cloudTypeIdValidator("tracker"),
       }),
     )
     .query(async ({ ctx, input }) => {
       const { db, auth } = ctx;
       const user = auth.user;
 
-      const trackable = await db.query.trackables.findFirst({
-        where: and(
-          eq(trackables.id, input.id),
-          eq(trackables.ownerId, user.id),
-        ),
+      const tracker = await db.query.trackers.findFirst({
+        where: and(eq(trackers.id, input.id), eq(trackers.ownerId, user.id)),
       });
 
-      if (!trackable) {
+      if (!tracker) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Trackable not found",
+          message: "Tracker not found",
         });
       }
 
-      return trackable;
+      return tracker;
     }),
-  promptAiForNewTrackables: protectedProcedure
+  promptAiForNewTrackers: protectedProcedure
     .input(z.object({}))
     .mutation(async ({ ctx, input }) => {
       const { db, auth } = ctx;
@@ -121,13 +118,13 @@ export const trackablesRouter = {
         const { object } = await generateObject({
           // issue with thinking models and optional fields in structured output: https://github.com/vercel/ai/issues/4662
           model: openai("gpt-4o-mini"),
-          // schemaName: "NewTrackable",
+          // schemaName: "NewTracker",
           // schemaDescription:
-          //   "A trackable health item thats used to track a specific health metric for a user.",
+          //   "A tracker health item thats used to track a specific health metric for a user.",
           output: "array",
-          schema: newTrackablesSchema,
+          schema: newTrackersSchema,
           system:
-            "You design systems for users to track health items with the aim of improving them. Users will tell you what they want to improve, and you will create a system with multiple trackable data types for them to track. You will also create a name and description for each trackable. The system should be a list of trackable data types that the user should track to achieve their goal. As an example, if the user wants to improve their mood, you should create a trackable data type for mood, and a trackable data type for anxiety, and a trackable data type for depression, and a trackable data type for journaling. It is important to set the trackableConfig for each trackable. Type Rating is a type that allows the user to rate something on a scale of 1 to 5 wither using the defualt of STARs respresentation, or a standard emoji. Type Measure is a type that allows the user to measure something and provides a UI to increment or decrement a number. Type Range is a type that allows the user to set a range for something and set it using a slider in the UI. Type Checkbox is a type that allows the user to check a box. Type ShortText is a type that allows the user to enter a short text. Type LongText is a type that allows the user to enter a long text.",
+            "You design systems for users to track health items with the aim of improving them. Users will tell you what they want to improve, and you will create a system with multiple tracker data types for them to track. You will also create a name and description for each tracker. The system should be a list of tracker data types that the user should track to achieve their goal. As an example, if the user wants to improve their mood, you should create a tracker data type for mood, and a tracker data type for anxiety, and a tracker data type for depression, and a tracker data type for journaling. It is important to set the trackerConfig for each tracker. Type Rating is a type that allows the user to rate something on a scale of 1 to 5 wither using the defualt of STARs respresentation, or a standard emoji. Type Measure is a type that allows the user to measure something and provides a UI to increment or decrement a number. Type Range is a type that allows the user to set a range for something and set it using a slider in the UI. Type Checkbox is a type that allows the user to check a box. Type ShortText is a type that allows the user to enter a short text. Type LongText is a type that allows the user to enter a long text.",
           prompt:
             "I wake up super tired and crash by early afternoon. If i have a coffee i can survive a bit longer, but by evening i am exhausted. I want to find out whats causing this and how to fix it.",
         });
@@ -148,18 +145,18 @@ export const trackablesRouter = {
         //   prompt: "Generate a lasagna recipe.",
         // });
 
-        object.forEach((trackable) => {
-          console.log("TRACKABLE", {
-            trackable,
-            config: trackable.trackableConfig,
+        object.forEach((tracker) => {
+          console.log("TRACKER", {
+            tracker,
+            config: tracker.trackerConfig,
           });
         });
         return;
       } catch (error: unknown) {
-        console.error("Error creating trackable:", error);
+        console.error("Error creating tracker:", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Failed to create trackable",
+          message: "Failed to create tracker",
         });
       }
     }),

@@ -6,20 +6,20 @@ import type { CloudTypeId } from "@potential/utils";
 
 import { PROMPTS } from "../prompts";
 import {
-  generateConsumptionTrackables,
-  generateNewNonConsumptionTrackable,
-  getUserTrackablesWithLastLogTimestamp,
+  generateConsumptionTrackers,
+  generateNewNonConsumptionTracker,
+  getUserTrackersWithLastLogTimestamp,
 } from "../tools";
 
-interface CreateNewTrackableChatStreamParams {
+interface CreateNewTrackerChatStreamParams {
   messages: CoreMessage[];
   userId: CloudTypeId<"user">;
 }
 
-export const createNewTrackableChatStream = ({
+export const createNewTrackerChatStream = ({
   messages,
   userId,
-}: CreateNewTrackableChatStreamParams) =>
+}: CreateNewTrackerChatStreamParams) =>
   streamText({
     model: openai("gpt-4o-mini"),
     maxSteps: 10,
@@ -27,11 +27,11 @@ export const createNewTrackableChatStream = ({
     messages,
     system: PROMPTS.CHAT.SYSTEM,
     tools: {
-      getUserExistingTrackables: getUserTrackablesWithLastLogTimestamp({
+      getUserExistingTrackers: getUserTrackersWithLastLogTimestamp({
         userId: userId,
       }),
-      generateNewNonConsumptionTrackable: generateNewNonConsumptionTrackable(),
-      generateConsumptionTrackables: generateConsumptionTrackables({
+      generateNewNonConsumptionTracker: generateNewNonConsumptionTracker(),
+      generateConsumptionTrackers: generateConsumptionTrackers({
         userId: userId,
       }),
     },

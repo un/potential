@@ -16,7 +16,7 @@ interface TextInputProps {
 }
 
 /**
- * Input component for text trackables (both short and long text)
+ * Input component for text trackers (both short and long text)
  */
 export function TextInput({
   value,

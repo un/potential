@@ -11,11 +11,11 @@ import { toast } from "sonner-native";
 import type { ConstsTypes } from "@potential/consts";
 
 import type { ImagePickerUploaderRef } from "~/components/ui/image-picker-uploader";
-// Import TrackableType from our types
-import type { Trackable, TrackableType } from "~/types/trackables";
+// Import TrackerType from our types
+import type { Tracker, TrackerType } from "~/types/trackers";
 // Import our new display components
-import { getValueFromLog } from "~/components/trackables/displays";
-import { getInputForTrackableType } from "~/components/trackables/inputs";
+import { getValueFromLog } from "~/components/trackers/displays";
+import { getInputForTrackerType } from "~/components/trackers/inputs";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { ImagePickerUploader } from "~/components/ui/image-picker-uploader";
@@ -25,33 +25,32 @@ import { queryClient, trpc } from "~/utils/api";
 import { timeAgoText } from "~/utils/date";
 import { cn, iconColor } from "~/utils/ui";
 
-// Define types for the trackable values based on different input types
-type TrackableValueType =
+// Define types for the tracker values based on different input types
+type TrackerValueType =
   | number // for measure, rating, range
   | boolean // for checkbox
   | string // for shortText, longText
   | null;
 
-type TrackableParentType = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
-type TrackableSubType = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
+type TrackerParentType = ConstsTypes["TRACKER"]["TYPES"]["KEY"];
+type TrackerSubType = ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
 // Rename to _UnitType since it's not used directly in this file
-type _UnitType = ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
+type _UnitType = ConstsTypes["TRACKER"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
 
 // Payload for creating a log
 interface CreateLogPayload {
   text: string;
   imageIds: string[];
-  trackableParentType: TrackableParentType;
-  trackableSubType: TrackableSubType;
-  trackableId: string;
-  trackableValue: TrackableValueType;
+  trackerParentType: TrackerParentType;
+  trackerSubType: TrackerSubType;
+  trackerId: string;
+  trackerValue: TrackerValueType;
 }
 
-export default function TrackableDetailsPage() {
+export default function TrackerDetailsPage() {
   const params = useLocalSearchParams();
-  const trackableId = params.trackableId as string;
-  const [trackableValue, setTrackableValue] =
-    useState<TrackableValueType>(null);
+  const trackerId = params.trackerId as string;
+  const [trackerValue, setTrackerValue] = useState<TrackerValueType>(null);
   const [imageState, setImageState] = useState<{
     pendingUpload: boolean;
     imageIds: string[];
@@ -66,15 +65,15 @@ export default function TrackableDetailsPage() {
 
   const router = useRouter();
 
-  const { data: trackable, isLoading: isLoadingTrackable } = useQuery(
-    trpc.trackables.getTrackableById.queryOptions({
-      id: trackableId,
+  const { data: tracker, isLoading: isLoadingTracker } = useQuery(
+    trpc.tracker.getTrackerById.queryOptions({
+      id: trackerId,
     }),
   );
 
   const { data: logs, isLoading: isLoadingLogs } = useQuery(
-    trpc.log.getLogsByTrackableId.queryOptions({
-      trackableId: trackableId,
+    trpc.log.getLogsByTrackerId.queryOptions({
+      trackerId: trackerId,
     }),
   );
 
@@ -89,15 +88,15 @@ export default function TrackableDetailsPage() {
     trpc.log.createLog.mutationOptions({
       onSuccess: async () => {
         // Invalidate queries to update the UI
-        const logsQueryKey = trpc.log.getLogsByTrackableId.queryKey({
-          trackableId: trackableId,
+        const logsQueryKey = trpc.log.getLogsByTrackerId.queryKey({
+          trackerId: trackerId,
         });
 
         await queryClient.invalidateQueries({ queryKey: logsQueryKey });
 
-        toast.success(`${trackable?.name} logged successfully`);
+        toast.success(`${tracker?.name} logged successfully`);
         setIsFormSubmitting(false);
-        setTrackableValue(null);
+        setTrackerValue(null);
         form.reset();
         router.back();
       },
@@ -133,8 +132,8 @@ export default function TrackableDetailsPage() {
   };
 
   async function handleSubmit() {
-    if (!trackable || trackableValue === null) {
-      toast.error(`Please provide a value for ${trackable?.name}`);
+    if (!tracker || trackerValue === null) {
+      toast.error(`Please provide a value for ${tracker?.name}`);
       return;
     }
 
@@ -142,15 +141,15 @@ export default function TrackableDetailsPage() {
     const textValue = form.getFieldValue("text");
 
     try {
-      // Since we have the early return for !trackable above, we know trackable is defined here
+      // Since we have the early return for !tracker above, we know tracker is defined here
       const payload: CreateLogPayload = {
         text: textValue || "",
         imageIds: imageState.imageIds,
         // Use optional chaining instead of non-null assertion
-        trackableParentType: trackable.type ?? "custom",
-        trackableSubType: trackable.subType ?? "custom.generic",
-        trackableId: trackableId,
-        trackableValue: trackableValue,
+        trackerParentType: tracker.type ?? "custom",
+        trackerSubType: tracker.subType ?? "custom.generic",
+        trackerId: trackerId,
+        trackerValue: trackerValue,
       };
 
       // Handle pending image uploads before submitting
@@ -168,8 +167,8 @@ export default function TrackableDetailsPage() {
     }
   }
 
-  // Get the default value based on trackable type and latest log
-  const getDefaultValue = (configType: string): TrackableValueType => {
+  // Get the default value based on tracker type and latest log
+  const getDefaultValue = (configType: string): TrackerValueType => {
     // Use the latest log value if available for measure type
     if (
       configType === "measure" &&
@@ -189,11 +188,11 @@ export default function TrackableDetailsPage() {
         return false;
       case "range":
         if (
-          trackable?.customConfig &&
-          "rangeMin" in trackable.customConfig &&
-          typeof trackable.customConfig.rangeMin === "number"
+          tracker?.customConfig &&
+          "rangeMin" in tracker.customConfig &&
+          typeof tracker.customConfig.rangeMin === "number"
         ) {
-          return trackable.customConfig.rangeMin;
+          return tracker.customConfig.rangeMin;
         }
         return logs?.[0]?.numericValue ?? 0;
       case "rating":
@@ -206,65 +205,62 @@ export default function TrackableDetailsPage() {
     }
   };
 
-  // Set default value based on trackable type when loaded
+  // Set default value based on tracker type when loaded
   useEffect(() => {
-    if (trackable?.customConfig && trackableValue === null && !isLoadingLogs) {
-      const config = trackable.customConfig;
-      setTrackableValue(getDefaultValue(config.type));
+    if (tracker?.customConfig && trackerValue === null && !isLoadingLogs) {
+      const config = tracker.customConfig;
+      setTrackerValue(getDefaultValue(config.type));
     }
-  }, [trackable, trackableValue, logs, isLoadingLogs]);
+  }, [tracker, trackerValue, logs, isLoadingLogs]);
 
   // Early returns for loading and error states
-  if (isLoadingTrackable) {
+  if (isLoadingTracker) {
     return (
       <SafeAreaView className="flex-1">
         <Stack.Screen options={{ title: "Loading..." }} />
         <View className="flex-1 items-center justify-center">
-          <Text>Loading trackable...</Text>
+          <Text>Loading tracker...</Text>
         </View>
       </SafeAreaView>
     );
   }
 
-  if (!trackable) {
+  if (!tracker) {
     return (
       <SafeAreaView className="flex-1">
         <Stack.Screen options={{ title: "Not Found" }} />
         <View className="flex-1 items-center justify-center">
           <Text>
-            Trackable not found. Please try again or select a different
-            trackable.
+            Tracker not found. Please try again or select a different tracker.
           </Text>
         </View>
       </SafeAreaView>
     );
   }
 
-  // Get trackable type from config
-  const getTrackableType = (): TrackableType => {
-    if (!trackable.customConfig) return "measure";
-    return trackable.customConfig.type as TrackableType;
+  // Get tracker type from config
+  const getTrackerType = (): TrackerType => {
+    if (!tracker.customConfig) return "measure";
+    return tracker.customConfig.type as TrackerType;
   };
 
-  const trackableType = getTrackableType();
+  const trackerType = getTrackerType();
 
-  // Ensure trackable.customConfig is not null for the display/input components
-  const safeCustomConfig = trackable.customConfig ?? {};
+  // Ensure tracker.customConfig is not null for the display/input components
+  const safeCustomConfig = tracker.customConfig ?? {};
 
-  // Create a wrapper for setTrackableValue with the right type signature
-  const handleTrackableValueChange = (value: unknown) => {
-    setTrackableValue(value as TrackableValueType);
+  // Create a wrapper for setTrackerValue with the right type signature
+  const handleTrackerValueChange = (value: unknown) => {
+    setTrackerValue(value as TrackerValueType);
   };
 
   return (
     <SafeAreaView className="flex-1" edges={{ bottom: "maximum" }}>
-      <Stack.Screen options={{ title: trackable.name }} />
+      <Stack.Screen options={{ title: tracker.name }} />
       <ScrollView className="flex-1 p-6">
         <View className="mb-6 flex flex-col gap-6">
-          {trackable.description && !showNewLog && (
-            <Text className="text-sand-11 text-xs">
-              {trackable.description}
-            </Text>
+          {tracker.description && !showNewLog && (
+            <Text className="text-sand-11 text-xs">{tracker.description}</Text>
           )}
           {!showNewLog && (
             <Card>
@@ -273,8 +269,8 @@ export default function TrackableDetailsPage() {
                   <View className="flex flex-col items-center justify-center gap-2">
                     {/* Use our display component for the latest log - large size */}
                     {logs[0]?.createdAt &&
-                      (trackableType === "shortText" ||
-                        trackableType === "longText") && (
+                      (trackerType === "shortText" ||
+                        trackerType === "longText") && (
                         <View className="mt-2 flex flex-col items-center gap-0">
                           <Text className="text-sand-11 text-xs">
                             {timeAgoText({ date: new Date(logs[0].createdAt) })}
@@ -287,15 +283,15 @@ export default function TrackableDetailsPage() {
 
                     {getValueFromLog({
                       log: logs[0],
-                      type: trackableType,
+                      type: trackerType,
                       config: safeCustomConfig,
                       size: "lg",
-                      trackable: trackable as Trackable,
+                      tracker: tracker as Tracker,
                     })}
 
                     {logs[0]?.createdAt &&
-                      trackableType !== "shortText" &&
-                      trackableType !== "longText" && (
+                      trackerType !== "shortText" &&
+                      trackerType !== "longText" && (
                         <View className="mt-2 flex flex-col items-center gap-0">
                           <Text className="text-sand-11 text-xs">
                             {timeAgoText({ date: new Date(logs[0].createdAt) })}
@@ -316,12 +312,12 @@ export default function TrackableDetailsPage() {
           {/* Data Entry Section */}
           {showNewLog || (logs && logs.length === 0) ? (
             <View className="border-sand-6 bg-sand-1 flex flex-col gap-4 rounded-lg border px-6 py-4">
-              {/* Trackable Input - Use our new input components */}
+              {/* Tracker Input - Use our new input components */}
               <View className="flex flex-col gap-2">
-                {getInputForTrackableType(
-                  trackableType,
-                  trackableValue,
-                  handleTrackableValueChange,
+                {getInputForTrackerType(
+                  trackerType,
+                  trackerValue,
+                  handleTrackerValueChange,
                   safeCustomConfig,
                 )}
               </View>
@@ -404,8 +400,7 @@ export default function TrackableDetailsPage() {
                 <Card key={log.id} className="border-sand-6 border">
                   <View
                     className={cn(
-                      trackableType === "shortText" ||
-                        trackableType === "longText"
+                      trackerType === "shortText" || trackerType === "longText"
                         ? "border-sand-6 flex-col-reverse border-b pb-2"
                         : "flex-row",
                       "flex items-center justify-between gap-2",
@@ -415,10 +410,10 @@ export default function TrackableDetailsPage() {
                       {/* Use our display component for each log - small size */}
                       {getValueFromLog({
                         log,
-                        type: trackableType,
+                        type: trackerType,
                         config: safeCustomConfig,
                         size: "sm",
-                        trackable: trackable as Trackable,
+                        tracker: tracker as Tracker,
                       })}
                     </View>
 

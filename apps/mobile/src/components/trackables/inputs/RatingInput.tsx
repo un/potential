@@ -15,7 +15,7 @@ interface RatingInputProps {
 }
 
 /**
- * Input component for rating trackables
+ * Input component for rating trackers
  */
 export function RatingInput({
   value,

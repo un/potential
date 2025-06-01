@@ -1,5 +1,5 @@
 // packages/templates/src/upgrades.ts
-import type { TrackableConfigWithMeta } from "./types";
+import type { TrackerConfigWithMeta } from "./types";
 
 // Define upgrade paths for templates
 export const templateUpgradePaths: Record<
@@ -8,7 +8,7 @@ export const templateUpgradePaths: Record<
     number,
     {
       toVersion: number;
-      upgradeFn: (config: TrackableConfigWithMeta) => TrackableConfigWithMeta;
+      upgradeFn: (config: TrackerConfigWithMeta) => TrackerConfigWithMeta;
     }
   >
 > = {

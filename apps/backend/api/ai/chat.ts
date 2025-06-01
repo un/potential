@@ -3,7 +3,7 @@ import { createDataStreamResponse } from "ai";
 import { Hono } from "hono";
 
 import type { CloudTypeId } from "@potential/utils";
-import { createNewTrackableChatStream } from "@potential/ai";
+import { createNewTrackerChatStream } from "@potential/ai";
 
 import type { AppContext } from "../index";
 
@@ -31,7 +31,7 @@ ai.post("/chat", async (c: Context<AppContext>) => {
     execute: (dataStream) => {
       let accumulatedResponse = "";
 
-      const result = createNewTrackableChatStream({
+      const result = createNewTrackerChatStream({
         messages,
         userId: user!.id,
         chatId,

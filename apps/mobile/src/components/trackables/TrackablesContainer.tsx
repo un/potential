@@ -14,21 +14,21 @@ import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
 import { iconColor } from "~/utils/ui";
 import { Card } from "../ui/card";
-import { TrackableSection } from "./TrackableSection";
+import { TrackerSection } from "./TrackerSection";
 
-type TrackableParentType = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
+type TrackerParentType = ConstsTypes["TRACKER"]["TYPES"]["KEY"];
 
-export function TrackablesContainer() {
-  // Get all trackable parent types
-  const trackableParentTypes = Object.keys(
-    CONSTS.TRACKABLE.TYPES,
-  ) as TrackableParentType[];
+export function TrackersContainer() {
+  // Get all tracker parent types
+  const trackerParentTypes = Object.keys(
+    CONSTS.TRACKER.TYPES,
+  ) as TrackerParentType[];
 
   // Use useQueries to fetch data for all parent types
   const queryHookResults = useQueries({
-    queries: trackableParentTypes.map((type) => {
-      return trpc.trackables.getTrackablesForParentType.queryOptions({
-        trackableParentType: type,
+    queries: trackerParentTypes.map((type) => {
+      return trpc.tracker.getTrackersForParentType.queryOptions({
+        trackerParentType: type,
       });
     }),
   });
@@ -36,10 +36,10 @@ export function TrackablesContainer() {
   // Adapt the queryHookResults to the structure expected by the existing organizedData logic
   const results = useMemo(() => {
     return queryHookResults.map((queryResult, index) => {
-      const type = trackableParentTypes[index];
-      // Ensure 'type' is valid before using it as an index for CONSTS.TRACKABLE.TYPES
+      const type = trackerParentTypes[index];
+      // Ensure 'type' is valid before using it as an index for CONSTS.TRACKER.TYPES
       // Providing a fallback if type were somehow undefined, though it shouldn't be here.
-      const typeName = type ? CONSTS.TRACKABLE.TYPES[type] : "Unknown Type";
+      const typeName = type ? CONSTS.TRACKER.TYPES[type] : "Unknown Type";
 
       return {
         type, // The parent type string, e.g., "consumption"
@@ -49,7 +49,7 @@ export function TrackablesContainer() {
         error: queryResult.error, // Error object
       };
     });
-  }, [queryHookResults, trackableParentTypes]);
+  }, [queryHookResults, trackerParentTypes]);
 
   // Organize data by parent type and then sub type
   const organizedData = useMemo(() => {
@@ -61,16 +61,16 @@ export function TrackablesContainer() {
       organized[type] = organized[type] || { _typeName: typeName };
 
       // Group by subType
-      data.forEach((trackable) => {
-        const subType = trackable.subType;
-        const subTypeName = CONSTS.TRACKABLE.SUB_TYPES[subType] || subType;
+      data.forEach((tracker) => {
+        const subType = tracker.subType;
+        const subTypeName = CONSTS.TRACKER.SUB_TYPES[subType] || subType;
 
         organized[type][subType] = organized[type][subType] || {
           _subTypeName: subTypeName,
           items: [],
         };
 
-        organized[type][subType].items.push(trackable);
+        organized[type][subType].items.push(tracker);
       });
     });
 
@@ -82,13 +82,13 @@ export function TrackablesContainer() {
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text>Loading trackables...</Text>
+        <Text>Loading trackers...</Text>
       </View>
     );
   }
 
-  // Count total trackables to show empty state if needed
-  const totalTrackables = Object.values(organizedData).reduce(
+  // Count total trackers to show empty state if needed
+  const totalTrackers = Object.values(organizedData).reduce(
     (acc, typeGroup) => {
       const itemCount = Object.entries(typeGroup)
         .filter(([key]) => key !== "_typeName")
@@ -101,7 +101,7 @@ export function TrackablesContainer() {
     0,
   );
 
-  if (totalTrackables === 0) {
+  if (totalTrackers === 0) {
     return (
       <View className="flex flex-1 flex-col items-center justify-between gap-2">
         <View className="flex w-full flex-row items-center justify-between gap-2">
@@ -160,10 +160,10 @@ export function TrackablesContainer() {
             </Text>
             <Card>
               {subTypes.map(([subType, subTypeData]) => (
-                <TrackableSection
+                <TrackerSection
                   key={subType}
                   title={subTypeData._subTypeName}
-                  trackables={subTypeData.items}
+                  trackers={subTypeData.items}
                 />
               ))}
             </Card>

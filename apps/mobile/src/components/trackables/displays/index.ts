@@ -2,7 +2,7 @@ import type React from "react";
 
 import type { ConstsTypes } from "@potential/consts";
 
-import type { Log, Trackable, TrackableType } from "~/types/trackables";
+import type { Log, Tracker, TrackerType } from "~/types/trackers";
 import { getCheckboxValueFromLog } from "./CheckboxDisplay";
 import { getMeasureValueFromLog } from "./MeasureDisplay";
 import { getRangeValueFromLog } from "./RangeDisplay";
@@ -18,21 +18,21 @@ export {
 };
 
 /**
- * Get a UI element to display a log value based on trackable type
+ * Get a UI element to display a log value based on tracker type
  */
 export function getValueFromLog({
   log,
   type,
   config,
   size = "sm",
-  trackable,
+  tracker,
   short,
 }: {
   log: unknown;
-  type: TrackableType;
+  type: TrackerType;
   config: Record<string, unknown>;
   size?: "sm" | "md" | "lg";
-  trackable: Trackable;
+  tracker: Tracker;
   short?: boolean;
 }): React.ReactNode {
   if (!log) return null;
@@ -43,7 +43,7 @@ export function getValueFromLog({
   // Extract commonly used properties with safe defaults
   const measureUnit = config.measureUnitDisplay as string | undefined;
   const measureUnitType = config.measureUnitType as
-    | ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"]
+    | ConstsTypes["TRACKER"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"]
     | undefined;
   const measureUnitSource = config.measureUnitSource as string | undefined;
   const ratingMax = config.ratingMax as
@@ -62,7 +62,7 @@ export function getValueFromLog({
   const rangeMin = (config.rangeMin as number | undefined) ?? 0;
   const rangeMax = (config.rangeMax as number | undefined) ?? 100;
 
-  // Select component based on trackable type
+  // Select component based on tracker type
   switch (type) {
     case "measure":
       return getMeasureValueFromLog(
@@ -74,7 +74,7 @@ export function getValueFromLog({
       );
 
     case "checkbox":
-      return getCheckboxValueFromLog(safeLog, trackable, size);
+      return getCheckboxValueFromLog(safeLog, tracker, size);
 
     case "rating":
       return getRatingValueFromLog(

@@ -56,11 +56,11 @@ function ToolInvocationComponent({
 }) {
   const getToolIcon = (toolName: string) => {
     switch (toolName) {
-      case "getUserExistingTrackables":
+      case "getUserExistingTrackers":
         return <Database size={16} color={iconColor()} />;
-      case "generateNewNonConsumptionTrackable":
+      case "generateNewNonConsumptionTracker":
         return <Sparkle size={16} color={iconColor()} />;
-      case "generateConsumptionTrackables":
+      case "generateConsumptionTrackers":
         return <ForkKnife size={16} color={iconColor()} />;
       default:
         return <Gear size={16} color={iconColor()} />;
@@ -69,11 +69,11 @@ function ToolInvocationComponent({
 
   const getToolDisplayName = (toolName: string) => {
     switch (toolName) {
-      case "getUserExistingTrackables":
-        return "Checking existing trackables";
-      case "generateNewNonConsumptionTrackable":
+      case "getUserExistingTrackers":
+        return "Checking existing trackers";
+      case "generateNewNonConsumptionTracker":
         return "Designing new tracker";
-      case "generateConsumptionTrackables":
+      case "generateConsumptionTrackers":
         return "Preparing food & drink trackers";
       default:
         return toolName;
@@ -81,7 +81,7 @@ function ToolInvocationComponent({
   };
 
   switch (toolInvocation.toolName) {
-    case "getUserExistingTrackables": {
+    case "getUserExistingTrackers": {
       switch (toolInvocation.state) {
         case "partial-call":
           return (
@@ -108,31 +108,31 @@ function ToolInvocationComponent({
         case "result": {
           const result = toolInvocation.result as
             | {
-                trackables?: { name: string; logs?: { createdAt: string }[] }[];
+                trackers?: { name: string; logs?: { createdAt: string }[] }[];
               }
             | undefined;
-          const trackables = result?.trackables ?? [];
+          const trackers = result?.trackers ?? [];
           return (
             <Card key={callId} className="bg-green-2 border-green-6 p-3">
               <View className="flex flex-col gap-2">
                 <View className="flex flex-row items-center gap-2">
                   {getToolIcon(toolInvocation.toolName)}
                   <UIText className="text-green-11 font-medium">
-                    Found {trackables.length} existing trackables
+                    Found {trackers.length} existing trackers
                   </UIText>
                 </View>
-                {trackables.length > 0 && (
+                {trackers.length > 0 && (
                   <View className="flex flex-col gap-1">
-                    {trackables.slice(0, 3).map((trackable, index: number) => (
+                    {trackers.slice(0, 3).map((tracker, index: number) => (
                       <UIText key={index} className="text-green-11 text-sm">
-                        • {trackable.name}
-                        {trackable.logs?.[0]?.createdAt &&
-                          ` (last: ${new Date(trackable.logs[0].createdAt).toLocaleDateString()})`}
+                        • {tracker.name}
+                        {tracker.logs?.[0]?.createdAt &&
+                          ` (last: ${new Date(tracker.logs[0].createdAt).toLocaleDateString()})`}
                       </UIText>
                     ))}
-                    {trackables.length > 3 && (
+                    {trackers.length > 3 && (
                       <UIText className="text-green-11 text-sm">
-                        ... and {trackables.length - 3} more
+                        ... and {trackers.length - 3} more
                       </UIText>
                     )}
                   </View>
@@ -155,7 +155,7 @@ function ToolInvocationComponent({
       }
     }
 
-    case "generateNewNonConsumptionTrackable": {
+    case "generateNewNonConsumptionTracker": {
       switch (toolInvocation.state) {
         case "partial-call":
           return (
@@ -190,24 +190,24 @@ function ToolInvocationComponent({
         }
         case "result": {
           const result = toolInvocation.result as
-            | { trackable?: { name: string; description: string }[] }
+            | { tracker?: { name: string; description: string }[] }
             | undefined;
-          const newTrackables = result?.trackable ?? [];
+          const newTrackers = result?.tracker ?? [];
           return (
             <Card key={callId} className="bg-green-2 border-green-6 p-3">
               <View className="flex flex-col gap-2">
                 <View className="flex flex-row items-center gap-2">
                   {getToolIcon(toolInvocation.toolName)}
                   <UIText className="text-green-11 font-medium">
-                    Designed {newTrackables.length} new trackable
-                    {newTrackables.length !== 1 ? "s" : ""}
+                    Designed {newTrackers.length} new tracker
+                    {newTrackers.length !== 1 ? "s" : ""}
                   </UIText>
                 </View>
-                {newTrackables.length > 0 && (
+                {newTrackers.length > 0 && (
                   <View className="flex flex-col gap-1">
-                    {newTrackables.map((trackable, index: number) => (
+                    {newTrackers.map((tracker, index: number) => (
                       <UIText key={index} className="text-green-11 text-sm">
-                        • {trackable.name}: {trackable.description}
+                        • {tracker.name}: {tracker.description}
                       </UIText>
                     ))}
                   </View>
@@ -229,7 +229,7 @@ function ToolInvocationComponent({
           );
       }
     }
-    case "generateConsumptionTrackables": {
+    case "generateConsumptionTrackers": {
       switch (toolInvocation.state) {
         case "partial-call":
           return (
@@ -341,7 +341,7 @@ function AIMessage({ message }: MessageProps) {
   );
 }
 
-export default function NewTrackableScreen() {
+export default function NewTrackerScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const { messages, input, handleSubmit, error, isLoading, setInput } = useChat(
     {
@@ -365,14 +365,14 @@ export default function NewTrackableScreen() {
       for (const part of lastMessage.parts) {
         if (
           part.type === "tool-invocation" &&
-          part.toolInvocation.toolName === "generateConsumptionTrackables" &&
+          part.toolInvocation.toolName === "generateConsumptionTrackers" &&
           part.toolInvocation.state === "result" &&
           !processedToolCallIds.current.has(part.toolInvocation.toolCallId)
         ) {
           queryClient
             .invalidateQueries({
-              queryKey: trpc.trackables.getTrackablesForParentType.queryKey({
-                trackableParentType: "consumption",
+              queryKey: trpc.tracker.getTrackersForParentType.queryKey({
+                trackerParentType: "consumption",
               }),
             })
             .then(() => {
@@ -380,7 +380,7 @@ export default function NewTrackableScreen() {
             })
             .catch((error: Error) => {
               console.error(
-                "Failed to invalidate consumption trackables queries:",
+                "Failed to invalidate consumption trackers queries:",
                 error,
               );
             });
@@ -393,34 +393,34 @@ export default function NewTrackableScreen() {
     handleSubmit();
   };
 
-  const getAllGeneratedTrackables = (): {
+  const getAllGeneratedTrackers = (): {
     name: string;
     description: string;
   }[] => {
-    const allTrackables: { name: string; description: string }[] = [];
+    const allTrackers: { name: string; description: string }[] = [];
     for (const message of messages) {
       if (message.role === "assistant") {
         for (const part of message.parts) {
           if (
             part.type === "tool-invocation" &&
             part.toolInvocation.toolName ===
-              "generateNewNonConsumptionTrackable" &&
+              "generateNewNonConsumptionTracker" &&
             part.toolInvocation.state === "result"
           ) {
             const result = part.toolInvocation.result as
-              | { trackable?: { name: string; description: string }[] }
+              | { tracker?: { name: string; description: string }[] }
               | undefined;
-            if (result?.trackable) {
-              allTrackables.push(...result.trackable);
+            if (result?.tracker) {
+              allTrackers.push(...result.tracker);
             }
           }
         }
       }
     }
-    return allTrackables;
+    return allTrackers;
   };
 
-  const latestTrackables = getAllGeneratedTrackables();
+  const latestTrackers = getAllGeneratedTrackers();
 
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
@@ -454,11 +454,11 @@ export default function NewTrackableScreen() {
             )}
           </View>
         </ScrollView>
-        {latestTrackables.length > 0 && (
+        {latestTrackers.length > 0 && (
           <View className="flex flex-row flex-wrap gap-4">
-            {latestTrackables.map((trackable, index) => (
+            {latestTrackers.map((tracker, index) => (
               <Button key={index} variant={"secondary"} size={"sm"}>
-                <UIText className="text-sm">Add {trackable.name}</UIText>
+                <UIText className="text-sm">Add {tracker.name}</UIText>
               </Button>
             ))}
           </View>

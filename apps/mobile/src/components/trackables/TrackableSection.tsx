@@ -1,34 +1,34 @@
 import React from "react";
 import { View } from "react-native";
 
-import type { TrackableCustomConfig } from "@potential/consts";
+import type { TrackerCustomConfig } from "@potential/consts";
 
-import { TrackableCard } from "./TrackableCard";
+import { TrackerCard } from "./TrackerCard";
 
-interface Trackable {
+interface Tracker {
   id: string;
   name: string;
   description: string | null;
   type: string;
   subType: string;
   configType: string;
-  customConfig: TrackableCustomConfig;
+  customConfig: TrackerCustomConfig;
 }
 
-interface TrackableSectionProps {
+interface TrackerSectionProps {
   title: string;
-  trackables: Trackable[];
+  trackers: Tracker[];
 }
 
-export function TrackableSection({ trackables }: TrackableSectionProps) {
-  if (trackables.length === 0) {
+export function TrackerSection({ trackers }: TrackerSectionProps) {
+  if (trackers.length === 0) {
     return null;
   }
 
   return (
     <View className="flex w-full flex-col gap-0">
-      {trackables.map((trackable) => (
-        <TrackableCard key={trackable.id} trackable={trackable} />
+      {trackers.map((tracker) => (
+        <TrackerCard key={tracker.id} tracker={tracker} />
       ))}
     </View>
   );

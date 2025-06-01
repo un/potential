@@ -3,7 +3,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { CONSTS } from "@potential/consts";
-import { and, desc, eq, trackableLogs } from "@potential/db";
+import { and, desc, eq, trackerLogs } from "@potential/db";
 import { cloudTypeIdGenerator, cloudTypeIdValidator } from "@potential/utils";
 
 import { protectedProcedure } from "../trpc";
@@ -15,10 +15,10 @@ export const logRouter = {
       z.object({
         text: z.string(),
         imageIds: z.array(z.string()),
-        trackableParentType: CONSTS.TRACKABLE.TYPES_SCHEMA,
-        trackableSubType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
-        trackableId: cloudTypeIdValidator("trackable").optional(),
-        trackableValue: z
+        trackerParentType: CONSTS.TRACKER.TYPES_SCHEMA,
+        trackerSubType: CONSTS.TRACKER.SUB_TYPES_SCHEMA,
+        trackerId: cloudTypeIdValidator("tracker").optional(),
+        trackerValue: z
           .union([z.number(), z.boolean(), z.string(), z.null()])
           .optional(),
       }),
@@ -26,32 +26,29 @@ export const logRouter = {
     .mutation(async ({ ctx, input }) => {
       const { db, auth } = ctx;
       const user = auth.user;
-      // Check if a trackable was selected
-      if (
-        input.trackableId &&
-        (input.trackableValue || input.trackableValue === 0)
-      ) {
+      // Check if a tracker was selected
+      if (input.trackerId && (input.trackerValue || input.trackerValue === 0)) {
         try {
           // Construct the log data that would be saved to the database
 
-          const newLogId = cloudTypeIdGenerator("trackableLog");
-          await db.insert(trackableLogs).values({
+          const newLogId = cloudTypeIdGenerator("trackerLog");
+          await db.insert(trackerLogs).values({
             id: newLogId,
-            trackableId: input.trackableId,
+            trackerId: input.trackerId,
             ownerId: user.id,
             source: "app",
 
             // Set appropriate value field based on type
-            ...(typeof input.trackableValue === "number"
-              ? { numericValue: input.trackableValue }
-              : typeof input.trackableValue === "boolean"
-                ? { checked: input.trackableValue }
-                : typeof input.trackableValue === "string"
-                  ? { textValue: input.trackableValue }
+            ...(typeof input.trackerValue === "number"
+              ? { numericValue: input.trackerValue }
+              : typeof input.trackerValue === "boolean"
+                ? { checked: input.trackerValue }
+                : typeof input.trackerValue === "string"
+                  ? { textValue: input.trackerValue }
                   : {}),
             // Add note text if provided and not already set as textValue
             ...(input.text.trim() !== "" &&
-            typeof input.trackableValue !== "string"
+            typeof input.trackerValue !== "string"
               ? { textValue: input.text }
               : {}),
             // Add images if provided
@@ -75,10 +72,10 @@ export const logRouter = {
             success: true,
           };
         } catch (error) {
-          console.error("Error processing trackable log:", error);
+          console.error("Error processing tracker log:", error);
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
-            message: "Failed to process trackable log",
+            message: "Failed to process tracker log",
           });
         }
       } else {
@@ -90,7 +87,7 @@ export const logRouter = {
           });
         }
 
-        console.log("Regular log (no trackable selected):", input);
+        console.log("Regular log (no tracker selected):", input);
 
         await Promise.resolve();
 
@@ -100,10 +97,10 @@ export const logRouter = {
       }
     }),
 
-  getLogsByTrackableId: protectedProcedure
+  getLogsByTrackerId: protectedProcedure
     .input(
       z.object({
-        trackableId: cloudTypeIdValidator("trackable"),
+        trackerId: cloudTypeIdValidator("tracker"),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -111,21 +108,21 @@ export const logRouter = {
       const user = auth.user;
 
       try {
-        const logs = await db.query.trackableLogs.findMany({
+        const logs = await db.query.trackerLogs.findMany({
           where: and(
-            eq(trackableLogs.ownerId, user.id),
-            eq(trackableLogs.trackableId, input.trackableId),
+            eq(trackerLogs.ownerId, user.id),
+            eq(trackerLogs.trackerId, input.trackerId),
           ),
-          orderBy: [desc(trackableLogs.createdAt)],
+          orderBy: [desc(trackerLogs.createdAt)],
           limit: 100,
         });
 
         return logs;
       } catch (error) {
-        console.error("Error fetching trackable logs:", error);
+        console.error("Error fetching tracker logs:", error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "Failed to fetch trackable logs",
+          message: "Failed to fetch tracker logs",
         });
       }
     }),

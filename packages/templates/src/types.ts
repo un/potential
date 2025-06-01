@@ -1,21 +1,21 @@
 // packages/templates/src/types.ts
 import { z } from "zod";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { ConstsTypes, TrackerCustomConfig } from "@potential/consts";
 import { CONSTS } from "@potential/consts";
 
-type TrackableSubTypesKey = ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
-type TrackableTypesKey = ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
+type TrackerSubTypesKey = ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
+type TrackerTypesKey = ConstsTypes["TRACKER"]["TYPES"]["KEY"];
 
 // Core template types
-export interface TrackableConfigMetadata {
+export interface TrackerConfigMetadata {
   templateId?: string;
   templateVersion?: number;
   isCustomized?: boolean;
 }
 
-export type TrackableConfigWithMeta = TrackableCustomConfig & {
-  _meta?: TrackableConfigMetadata;
+export type TrackerConfigWithMeta = TrackerCustomConfig & {
+  _meta?: TrackerConfigMetadata;
 };
 
 export const baseTemplateSchema = z.object({
@@ -27,19 +27,19 @@ export const baseTemplateSchema = z.object({
   recommended: z.boolean().default(false),
   featured: z.boolean().default(false),
   uses: z.number().default(0),
-  defaultConfig: z.custom<TrackableConfigWithMeta>(),
-  type: CONSTS.TRACKABLE.TYPES_SCHEMA,
-  subType: CONSTS.TRACKABLE.SUB_TYPES_SCHEMA,
+  defaultConfig: z.custom<TrackerConfigWithMeta>(),
+  type: CONSTS.TRACKER.TYPES_SCHEMA,
+  subType: CONSTS.TRACKER.SUB_TYPES_SCHEMA,
 });
 
 export type BaseTemplate = z.infer<typeof baseTemplateSchema>;
 
-export type TrackableTemplateRegistry = Record<
-  TrackableTypesKey,
-  Partial<Record<TrackableSubTypesKey, BaseTemplate>>
+export type TrackerTemplateRegistry = Record<
+  TrackerTypesKey,
+  Partial<Record<TrackerSubTypesKey, BaseTemplate>>
 >;
 
-export interface TrackableTemplateGroup {
+export interface TrackerTemplateGroup {
   id: string;
   version: number;
   name: string;
@@ -53,7 +53,7 @@ export interface TrackableTemplateGroup {
     overrides?: {
       name?: string;
       description?: string;
-      defaultConfig?: Partial<TrackableConfigWithMeta>;
+      defaultConfig?: Partial<TrackerConfigWithMeta>;
     };
   }[];
   category?: string;

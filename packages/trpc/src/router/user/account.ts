@@ -10,8 +10,8 @@ import {
   integrations,
   passkeys,
   sessions,
-  trackableLogs,
-  trackables,
+  trackerLogs,
+  trackers,
   userNotificationTokens,
   userProfiles,
   users,
@@ -105,14 +105,14 @@ export const accountRouter = {
         .delete(integrations)
         .where(eq(integrations.ownerId, user.id));
       console.log("👋 integrationsDeleted", integrationsDeleted);
-      const trackablesDeleted = await db
-        .delete(trackables)
-        .where(eq(trackables.ownerId, user.id));
-      console.log("👋 trackablesDeleted", trackablesDeleted);
-      const trackableLogsDeleted = await db
-        .delete(trackableLogs)
-        .where(eq(trackableLogs.ownerId, user.id));
-      console.log("👋 trackableLogsDeleted", trackableLogsDeleted);
+      const trackersDeleted = await db
+        .delete(trackers)
+        .where(eq(trackers.ownerId, user.id));
+      console.log("👋 trackersDeleted", trackersDeleted);
+      const trackerLogsDeleted = await db
+        .delete(trackerLogs)
+        .where(eq(trackerLogs.ownerId, user.id));
+      console.log("👋 trackerLogsDeleted", trackerLogsDeleted);
       const userProfilesDeleted = await db
         .delete(userProfiles)
         .where(eq(userProfiles.ownerId, user.id));

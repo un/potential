@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Flask, PlusCircle } from "phosphor-react-native";
 
-import { TrackablesContainer } from "~/components/trackables/TrackablesContainer";
+import { TrackersContainer } from "~/components/trackers/TrackersContainer";
 import { Text } from "~/components/ui/text";
 import { iconColor } from "~/utils/ui";
 
@@ -39,7 +39,7 @@ export default function DashboardHome() {
         >
           <View className="mb-6 flex flex-1 flex-col items-center gap-6">
             {/* <ExperimentsDemo /> */}
-            <TrackablesContainer />
+            <TrackersContainer />
           </View>
         </ScrollView>
         {/* <View className="flex w-full flex-row gap-2 px-6 py-0">

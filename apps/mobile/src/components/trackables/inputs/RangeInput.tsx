@@ -16,7 +16,7 @@ interface RangeInputProps {
 }
 
 /**
- * Input component for range trackables
+ * Input component for range trackers
  */
 export function RangeInput({
   value,

@@ -3,37 +3,37 @@ import { View } from "react-native";
 import Animated, { SlideInRight, SlideOutRight } from "react-native-reanimated";
 import { ArrowLeft } from "phosphor-react-native";
 
-import type { ConstsTypes, TrackableCustomConfig } from "@potential/consts";
+import type { ConstsTypes, TrackerCustomConfig } from "@potential/consts";
 import type { BaseTemplate } from "@potential/templates";
 import { filterTemplatesByType } from "@potential/templates";
 
 import { Text } from "~/components/ui/text";
 import { iconColor } from "~/utils/ui";
 import { Button } from "../ui/button";
-import { NewTrackable } from "./new";
+import { NewTracker } from "./new";
 
-// Define the NewTrackableFormData type to match the one in new.tsx
-interface NewTrackableFormData {
+// Define the NewTrackerFormData type to match the one in new.tsx
+interface NewTrackerFormData {
   name: string;
   description: string;
-  type: ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
-  subType: ConstsTypes["TRACKABLE"]["SUB_TYPES"]["KEY"];
-  configType: ConstsTypes["TRACKABLE"]["CONFIG"]["TYPES"]["KEY"];
-  config: TrackableCustomConfig; // Using the proper type from imports
+  type: ConstsTypes["TRACKER"]["TYPES"]["KEY"];
+  subType: ConstsTypes["TRACKER"]["SUB_TYPES"]["KEY"];
+  configType: ConstsTypes["TRACKER"]["CONFIG"]["TYPES"]["KEY"];
+  config: TrackerCustomConfig; // Using the proper type from imports
 }
 
 export function TemplateList({
   typeFilter,
   onBack: _onBack, // Rename to _onBack to indicate it's not used
 }: {
-  typeFilter: ConstsTypes["TRACKABLE"]["TYPES"]["KEY"];
+  typeFilter: ConstsTypes["TRACKER"]["TYPES"]["KEY"];
   onBack?: () => void;
 }) {
   const [templates, setTemplates] = useState<BaseTemplate[]>([]);
   const [selectedTemplate, setSelectedTemplate] = useState<BaseTemplate | null>(
     null,
   );
-  const [showNewTrackable, setShowNewTrackable] = useState(false);
+  const [showNewTracker, setShowNewTracker] = useState(false);
 
   useEffect(() => {
     const typeTemplates = filterTemplatesByType(typeFilter);
@@ -46,22 +46,22 @@ export function TemplateList({
     } else {
       setSelectedTemplate(null);
     }
-    setShowNewTrackable(true);
+    setShowNewTracker(true);
   };
 
   const handleBack = () => {
-    setShowNewTrackable(false);
+    setShowNewTracker(false);
     setSelectedTemplate(null);
   };
 
-  const handleSave = (data: NewTrackableFormData) => {
-    setShowNewTrackable(false);
+  const handleSave = (data: NewTrackerFormData) => {
+    setShowNewTracker(false);
     setSelectedTemplate(null);
     // Here you would handle the saved data
-    console.log("Trackable saved:", data);
+    console.log("Tracker saved:", data);
   };
 
-  if (showNewTrackable) {
+  if (showNewTracker) {
     return (
       <Animated.View
         entering={SlideInRight}
@@ -80,7 +80,7 @@ export function TemplateList({
             </View>
           </Button>
         </View>
-        <NewTrackable
+        <NewTracker
           template={selectedTemplate ?? undefined}
           onSave={handleSave}
         />
@@ -90,7 +90,7 @@ export function TemplateList({
 
   return (
     <View className="flex flex-col gap-2">
-      <Text type={"title"}>New Trackable</Text>
+      <Text type={"title"}>New Tracker</Text>
       <View className="flex flex-col gap-4">
         <Button
           variant={"outline"}

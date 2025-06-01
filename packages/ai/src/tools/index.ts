@@ -1,3 +1,3 @@
-export * from "./generateConsumptionTrackables";
-export * from "./generateNewNonConsumptionTrackable";
-export * from "./getUserTrackables";
+export * from "./generateConsumptionTrackers";
+export * from "./generateNewNonConsumptionTracker";
+export * from "./getUserTrackers";

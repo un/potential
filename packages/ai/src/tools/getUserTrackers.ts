@@ -2,9 +2,9 @@ import { tool } from "ai";
 import { z } from "zod";
 
 import type { CloudTypeId } from "@potential/utils";
-import { db, desc, eq, trackableLogs, trackables } from "@potential/db";
+import { db, desc, eq, trackerLogs, trackers } from "@potential/db";
 
-export const getUserTrackablesWithLastLogTimestamp = ({
+export const getUserTrackersWithLastLogTimestamp = ({
   userId,
 }: {
   userId: CloudTypeId<"user">;
@@ -14,8 +14,8 @@ export const getUserTrackablesWithLastLogTimestamp = ({
       "Get a list of existing data items the user is already tracking and the last time they entered data for it.",
     parameters: z.object({}),
     execute: async () => {
-      const userTrackables = await db.query.trackables.findMany({
-        where: eq(trackables.ownerId, userId),
+      const userTrackers = await db.query.trackers.findMany({
+        where: eq(trackers.ownerId, userId),
 
         columns: {
           id: true,
@@ -28,22 +28,22 @@ export const getUserTrackablesWithLastLogTimestamp = ({
         with: {
           logs: {
             limit: 1,
-            orderBy: desc(trackableLogs.createdAt),
+            orderBy: desc(trackerLogs.createdAt),
             columns: {
               createdAt: true,
             },
           },
         },
       });
-      const consumptionTrackables = userTrackables.filter(
-        (trackable) => trackable.type === "consumption",
+      const consumptionTrackers = userTrackers.filter(
+        (tracker) => tracker.type === "consumption",
       );
-      const nonConsumptionTrackables = userTrackables.filter(
-        (trackable) => trackable.type !== "consumption",
+      const nonConsumptionTrackers = userTrackers.filter(
+        (tracker) => tracker.type !== "consumption",
       );
       return {
-        trackables: nonConsumptionTrackables,
-        hasConsumptionTrackables: consumptionTrackables.length > 0,
+        trackers: nonConsumptionTrackers,
+        hasConsumptionTrackers: consumptionTrackers.length > 0,
       };
     },
   });

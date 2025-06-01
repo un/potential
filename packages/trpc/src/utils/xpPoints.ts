@@ -7,8 +7,8 @@ export async function awardXpPoints({
   actionId,
 }: {
   userId: CloudTypeId<"user">;
-  action: "newLog" | "newTrackable";
-  actionId: CloudTypeId<"trackable"> | CloudTypeId<"trackableLog">;
+  action: "newLog" | "newTracker";
+  actionId: CloudTypeId<"tracker"> | CloudTypeId<"trackerLog">;
 }) {
   const user = await db.query.userProfiles.findFirst({
     where: eq(userProfiles.ownerId, userId),
@@ -19,7 +19,7 @@ export async function awardXpPoints({
     return;
   }
 
-  const baseXpPoints = action === "newTrackable" ? 25 : 10;
+  const baseXpPoints = action === "newTracker" ? 25 : 10;
 
   const hoursBetweenNowAndStreakEnd = user.streakCurrentEndDate
     ? differenceInHours(new Date(), user.streakCurrentEndDate)
@@ -67,7 +67,7 @@ export async function awardXpPoints({
     originalPoints: baseXpPoints.toString(),
     multiplier: pointsMultiplier.toString(),
     actionId: actionId,
-    friendlyName: action === "newLog" ? "New Log" : "New Trackable",
+    friendlyName: action === "newLog" ? "New Log" : "New Tracker",
     createdAt: new Date(),
   });
   await db

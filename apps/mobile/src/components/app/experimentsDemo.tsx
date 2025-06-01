@@ -5,7 +5,7 @@ import { Text } from "~/components/ui/text";
 import { Card } from "../ui/card";
 
 export function ExperimentsDemo() {
-  // Get all trackable parent types
+  // Get all tracker parent types
 
   const experiments = [
     { name: "Vo2MAX", step1: 100, step2: 33, step3: 0 },

@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Text } from "../ui/text";
 
-export default function TrackablesHeader({
+export default function TrackerHeader({
   props,
 }: {
   props: NativeStackHeaderProps;

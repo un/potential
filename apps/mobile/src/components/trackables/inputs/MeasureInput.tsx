@@ -6,7 +6,7 @@ import { convert } from "@potential/utils";
 
 import { NumberInput } from "~/components/ui/number-input";
 
-type UnitType = ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
+type UnitType = ConstsTypes["TRACKER"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
 
 interface MeasureInputProps {
   value: number;
@@ -91,7 +91,7 @@ function convertValueBack(
 }
 
 /**
- * Input component for measure trackables
+ * Input component for measure trackers
  */
 export function MeasureInput({
   value,
@@ -123,7 +123,7 @@ export function MeasureInput({
 }
 
 /**
- * Input component for measure trackables with unit conversion
+ * Input component for measure trackers with unit conversion
  */
 export function MeasureConversionInput({
   value,

@@ -1,6 +1,6 @@
-import type { TrackableTemplateRegistry } from "../types";
+import type { TrackerTemplateRegistry } from "../types";
 
-export const TRACKABLE_TEMPLATES: TrackableTemplateRegistry = {
+export const TRACKER_TEMPLATES: TrackerTemplateRegistry = {
   body: {}, // We populate this later
   sleep: {},
   consumption: {},

@@ -4,12 +4,12 @@ import { View } from "react-native";
 import type { ConstsTypes } from "@potential/consts";
 import { convert } from "@potential/utils";
 
-import type { Log } from "~/types/trackables";
+import type { Log } from "~/types/trackers";
 import { Text } from "~/components/ui/text";
 import { cn } from "~/utils/ui";
 
 // Define unit types locally to avoid import issues
-type UnitType = ConstsTypes["TRACKABLE"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
+type UnitType = ConstsTypes["TRACKER"]["CONFIG"]["UNITS"]["MEASURE"]["KEY"];
 
 interface MeasureDisplayProps {
   value: number;

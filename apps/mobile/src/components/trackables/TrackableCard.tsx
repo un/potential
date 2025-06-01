@@ -3,64 +3,64 @@ import { Pressable, View } from "react-native";
 import { router } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 
-import type { TrackableCustomConfig } from "@potential/consts";
+import type { TrackerCustomConfig } from "@potential/consts";
 
-import type { TrackableType } from "~/types/trackables";
-import { getValueFromLog } from "~/components/trackables/displays";
+import type { TrackerType } from "~/types/trackers";
+import { getValueFromLog } from "~/components/trackers/displays";
 import { Text } from "~/components/ui/text";
 import { trpc } from "~/utils/api";
 import { timeAgoText } from "~/utils/date";
 import { cn } from "~/utils/ui";
 import { Loading } from "../loading";
 
-interface TrackableCardProps {
-  trackable: {
+interface TrackerCardProps {
+  tracker: {
     id: string;
     name: string;
     configType: string;
-    customConfig: TrackableCustomConfig;
+    customConfig: TrackerCustomConfig;
   };
 }
 
-export function TrackableCard({ trackable }: TrackableCardProps) {
+export function TrackerCard({ tracker }: TrackerCardProps) {
   const { data: logs, isLoading } = useQuery(
-    trpc.log.getLogsByTrackableId.queryOptions({
-      trackableId: trackable.id,
+    trpc.log.getLogsByTrackerId.queryOptions({
+      trackerId: tracker.id,
     }),
   );
 
   const handlePress = () => {
-    router.push(`/${trackable.id}`);
+    router.push(`/${tracker.id}`);
   };
 
-  // Get trackable type
-  const getTrackableType = (): TrackableType => {
-    const config = trackable.customConfig;
-    return config.type as TrackableType;
+  // Get tracker type
+  const getTrackerType = (): TrackerType => {
+    const config = tracker.customConfig;
+    return config.type as TrackerType;
   };
 
-  // Render latest value based on trackable type
+  // Render latest value based on tracker type
   const renderLatestValue = () => {
     if (!logs || logs.length === 0)
       return <Text className="text-sand-10 text-xs">No logs yet</Text>;
 
     const latestLog = logs[0];
-    const trackableType = getTrackableType();
+    const trackerType = getTrackerType();
 
     return getValueFromLog({
       log: latestLog,
-      type: trackableType,
-      config: trackable.customConfig,
-      trackable,
-      ...{ short: trackableType === "longText" },
+      type: trackerType,
+      config: tracker.customConfig,
+      tracker,
+      ...{ short: trackerType === "longText" },
     });
   };
 
   // Determine if we should use column layout for the latest value
   const shouldUseColumnLayout = () => {
-    const trackableType = getTrackableType();
+    const trackerType = getTrackerType();
     if (!logs || logs.length === 0) return false;
-    return trackableType === "shortText" || trackableType === "longText";
+    return trackerType === "shortText" || trackerType === "longText";
   };
 
   const getLatestLogTime = () => {
@@ -80,7 +80,7 @@ export function TrackableCard({ trackable }: TrackableCardProps) {
         )}
       >
         <View className={"flex flex-row items-center gap-2"}>
-          <Text className="">{trackable.name}</Text>
+          <Text className="">{tracker.name}</Text>
           <Text className="text-sand-10 text-xs">{getLatestLogTime()}</Text>
         </View>
 

@@ -3,7 +3,7 @@ import { Stack, useRouter } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { CaretLeft, X } from "phosphor-react-native";
 
-import TrackablesHeader from "~/components/app/trackablesHeader";
+import TrackerHeader from "~/components/app/trackerHeader";
 import UserHeader from "~/components/app/userHeader";
 import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
@@ -121,11 +121,11 @@ export default function DashboardLayout() {
         }}
       />
       <Stack.Screen
-        name="[trackableId]"
+        name="[trackerId]"
         options={{
           title: "Title too long, or error",
           presentation: "card",
-          header: (props) => <TrackablesHeader props={props} />,
+          header: (props) => <TrackerHeader props={props} />,
           headerRight: () => (
             <Button variant="link" size="icon" onPress={() => router.back()}>
               <X size={24} color={iconColor()} />

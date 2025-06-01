@@ -25,11 +25,18 @@ export const cloudIdTypesMapNameToPrefix = {
   userUpload: "upl",
   userNotificationToken: "unt",
 
+  // Experiments eXX
+  experiment: "e",
+  experimentPhase: "ep",
+
   // tracking TXX
-  trackable: "t",
-  trackableLog: "tl",
+  tracker: "t",
+  trackerGroup: "tg",
+  trackerLog: "tl",
+  trackerReminder: "tr",
 
   //ai AXX
+  aiChat: "aic",
   aiInputLog: "ail",
 
   //consumption CXX

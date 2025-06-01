@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { Log } from "~/types/trackables";
+import type { Log } from "~/types/trackers";
 import { RatingDisplay as BaseRatingDisplay } from "~/components/ui/rating-display";
 
 interface RatingDisplayWrapperProps {

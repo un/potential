@@ -31,7 +31,7 @@ export const colorsArray = Object.values(COLORS);
 export const colorsSchema = z
   .enum(Object.keys(COLORS) as [ColorsKey, ...ColorsKey[]])
   .describe(
-    "The color of the trackable item. This might change the color of the trackable item in the UI. Possible values are:" +
+    "The color of the tracker item. This might change the color of the tracker item in the UI. Possible values are:" +
       "Bronze" +
       " " +
       "Gold" +

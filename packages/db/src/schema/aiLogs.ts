@@ -7,7 +7,7 @@ import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";
 import { users } from "./auth";
-import { trackableLogs } from "./logs";
+import { trackerLogs } from "./logs";
 
 export const aiInputLogs = mysqlTable("ai_input_logs", {
   id: typeIdColumn("aiInputLog", "id")
@@ -20,7 +20,7 @@ export const aiInputLogs = mysqlTable("ai_input_logs", {
   imageIds: json("imageIds").$type<CloudTypeId<"userUpload">[]>(),
   resultAiLog: text("resultAiLog"),
   resultFriendlyText: text("resultFriendlyText"),
-  resultLogId: typeIdColumn("trackableLog", "trackableLogId"),
+  resultLogId: typeIdColumn("trackerLog", "trackerLogId"),
   ...timestamps.createUpdateLogged,
 });
 
@@ -29,8 +29,8 @@ export const aiInputLogsRelations = relations(aiInputLogs, ({ one }) => ({
     fields: [aiInputLogs.ownerId],
     references: [users.id],
   }),
-  resultLog: one(trackableLogs, {
+  resultLog: one(trackerLogs, {
     fields: [aiInputLogs.resultLogId],
-    references: [trackableLogs.id],
+    references: [trackerLogs.id],
   }),
 }));

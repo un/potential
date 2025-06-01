@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-import type { Log, Trackable } from "~/types/trackables";
+import type { Log, Tracker } from "~/types/trackers";
 import { Checkbox } from "~/components/ui/checkbox";
 import { Text } from "~/components/ui/text";
 
@@ -32,14 +32,14 @@ export function CheckboxDisplay({
 
 export function getCheckboxValueFromLog(
   log: Log,
-  trackable: Trackable,
+  tracker: Tracker,
   size: "sm" | "md" | "lg" = "sm",
 ): React.ReactNode {
   if (log.checked === null) return null;
 
   let label = "Completed";
-  if (trackable.customConfig.type === "checkbox") {
-    label = trackable.customConfig.checkboxName || "Completed";
+  if (tracker.customConfig.type === "checkbox") {
+    label = tracker.customConfig.checkboxName || "Completed";
   }
 
   return (

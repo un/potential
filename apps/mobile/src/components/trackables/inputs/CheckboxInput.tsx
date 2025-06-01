@@ -12,7 +12,7 @@ interface CheckboxInputProps {
 }
 
 /**
- * Input component for checkbox trackables
+ * Input component for checkbox trackers
  */
 export function CheckboxInput({
   checked,

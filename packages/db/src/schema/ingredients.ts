@@ -6,7 +6,7 @@ import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";
 import { users } from "./auth";
-import { trackableLogs } from "./logs";
+import { trackerLogs } from "./logs";
 
 // Ingredient library
 export const ingredients = mysqlTable("ingredients", {
@@ -32,7 +32,7 @@ export const ingredientLogs = mysqlTable("ingredientLogs", {
     .primaryKey()
     .$default(() => cloudTypeIdGenerator("ingredientLog")),
   ingredientId: typeIdColumn("ingredientLibrary", "id").notNull(),
-  logId: typeIdColumn("trackableLog", "id").notNull(),
+  logId: typeIdColumn("trackerLog", "id").notNull(),
   ownerId: typeIdColumn("user", "user_id").notNull(),
   ...timestamps.createUpdateLogged,
 });
@@ -42,8 +42,8 @@ export const ingredientLogsRelations = relations(ingredientLogs, ({ one }) => ({
     fields: [ingredientLogs.ingredientId],
     references: [ingredients.id],
   }),
-  log: one(trackableLogs, {
+  log: one(trackerLogs, {
     fields: [ingredientLogs.logId],
-    references: [trackableLogs.id],
+    references: [trackerLogs.id],
   }),
 }));
