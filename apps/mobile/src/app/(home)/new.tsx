@@ -1,7 +1,7 @@
 import type { Message } from "@ai-sdk/react";
 import type { ToolInvocation } from "@ai-sdk/ui-utils";
 import React, { useEffect, useRef } from "react";
-import { ScrollView, View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetch as expoFetch } from "expo/fetch";
 import { useChat } from "@ai-sdk/react";
@@ -424,7 +424,12 @@ export default function NewTrackerScreen() {
 
   return (
     <SafeAreaView className="flex-1" edges={["bottom"]}>
-      <View className="flex flex-1 flex-col gap-4 p-6">
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={140}
+        className="flex h-full flex-1 flex-col gap-4 p-6"
+      >
+        {/* <View className="flex flex-1 flex-col gap-4 p-6"> */}
         <ScrollView
           ref={scrollViewRef}
           className="flex flex-1 flex-col gap-4"
@@ -481,7 +486,8 @@ export default function NewTrackerScreen() {
             <PaperPlane size={24} color={iconColor({ lightColor: true })} />
           </Button>
         </View>
-      </View>
+        {/* </View> */}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
