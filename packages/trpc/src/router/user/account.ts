@@ -31,6 +31,10 @@ export const accountRouter = {
     .mutation(async ({ ctx, input }) => {
       const { db, auth } = ctx;
       const user = auth.user;
+      console.log("👋 setNotificationToken", {
+        token: input.token,
+        previousToken: input.previousToken,
+      });
 
       // delete previous token
       if (input.previousToken && input.previousToken.length > 0) {
@@ -54,6 +58,7 @@ export const accountRouter = {
     .input(z.object({ token: z.string().max(255) }))
     .mutation(async ({ ctx, input }) => {
       const { db } = ctx;
+      console.log("👋 deleteNotificationToken", { token: input.token });
 
       await db
         .delete(userNotificationTokens)

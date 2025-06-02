@@ -16,14 +16,17 @@ export default function Login() {
   const { data: session } = authClient.useSession();
   const { user } = session ?? {};
 
+  // Call the hook at the top level
+  usePushNotificationSync(user?.id);
+
   // get user profile
   const {
     data: profileData,
     isLoading: profileLoading,
     error: profileError,
-  } = useQuery(trpc.user.profile.getUserProfileOverview.queryOptions());
-
-  usePushNotificationSync(user?.id);
+  } = useQuery<UserProfileOverviewData, Error>(
+    trpc.user.profile.getUserProfileOverview.queryOptions(),
+  );
 
   const latestOnboardingVersion = Constants.expoConfig?.extra
     ?.onboardingVersion as string;
@@ -33,7 +36,8 @@ export default function Login() {
     if (profileLoading) return;
 
     if (profileError) {
-      console.error(profileError);
+      console.error("Profile fetch error:", profileError.message); // Access message safely
+      // Potentially handle error state, e.g., show error message to user or redirect to error page
       return;
     }
 
