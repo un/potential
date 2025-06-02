@@ -429,7 +429,6 @@ export default function NewTrackerScreen() {
         keyboardVerticalOffset={140}
         className="flex h-full flex-1 flex-col gap-4 p-6"
       >
-        {/* <View className="flex flex-1 flex-col gap-4 p-6"> */}
         <ScrollView
           ref={scrollViewRef}
           className="flex flex-1 flex-col gap-4"
@@ -486,7 +485,6 @@ export default function NewTrackerScreen() {
             <PaperPlane size={24} color={iconColor({ lightColor: true })} />
           </Button>
         </View>
-        {/* </View> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

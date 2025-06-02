@@ -5,6 +5,7 @@ import {
   mediumint,
   mysqlEnum,
   mysqlTable,
+  primaryKey,
   text,
   varchar,
 } from "drizzle-orm/mysql-core";
@@ -47,7 +48,7 @@ export const trackersRelations = relations(trackers, ({ one, many }) => ({
     references: [users.id],
   }),
   logs: many(trackerLogs),
-  trackerGroups: many(trackerGroupTrackers),
+  groups: many(trackerGroupTrackers),
 }));
 
 export type TrackerLogJsonValue = {
@@ -115,12 +116,16 @@ export const trackerGroupRelations = relations(
   }),
 );
 
-export const trackerGroupTrackers = mysqlTable("tracker_group_trackers", {
-  trackerId: typeIdColumn("tracker", "trackerId").notNull(),
-  trackerGroupId: typeIdColumn("trackerGroup", "trackerGroupId").notNull(),
-  ownerId: typeIdColumn("user", "userId").notNull(),
-  ...timestamps.createUpdate,
-});
+export const trackerGroupTrackers = mysqlTable(
+  "tracker_group_trackers",
+  {
+    trackerId: typeIdColumn("tracker", "trackerId").notNull(),
+    trackerGroupId: typeIdColumn("trackerGroup", "trackerGroupId").notNull(),
+    ownerId: typeIdColumn("user", "userId").notNull(),
+    ...timestamps.createUpdate,
+  },
+  (table) => [primaryKey({ columns: [table.trackerId, table.trackerGroupId] })],
+);
 
 export const trackerGroupTrackersRelations = relations(
   trackerGroupTrackers,
