@@ -14,6 +14,7 @@ import { cloudTypeIdGenerator } from "@potential/utils/typeid";
 import { typeIdColumn } from "../columns/custom/typeId";
 import { timestamps } from "../columns/timestamps";
 import { users } from "./auth";
+import { trackerGroupTrackers } from "./trackers";
 
 export const experiments = mysqlTable("experiments", {
   id: typeIdColumn("experiment", "id")
@@ -82,5 +83,6 @@ export const experimentPhaseRelations = relations(
       fields: [experimentPhases.experimentId],
       references: [experiments.id],
     }),
+    trackerGroups: many(trackerGroupTrackers),
   }),
 );
