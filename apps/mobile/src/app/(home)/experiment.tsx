@@ -15,7 +15,7 @@ export default function NewExperiment() {
       <View className="w-full flex-1 flex-col gap-4 p-6">
         <ScrollView className="w-full grow">
           <View className="flex w-full flex-1 grow flex-col items-center gap-6">
-            <BubbleHuman text="I've got chronic dry skin on my face, the dermatologist suggested some anti-fungal cream but it didnt work. This is the third dermatologist I've seen and I'm still not better. Heres a picture of my skin" />
+            <BubbleHuman text="I've got chronic dry skin on my face, the dermatologist suggested some anti-fungal cream but it didn't work. This is the third dermatologist I've seen and I'm still not better. Here's a picture of my skin" />
             <ImageUpload />
             <NoteAi marginTop text="Analyzing images" />
             <NoteAi text="Pulling data from Apple Health and Whoop" />
@@ -25,7 +25,7 @@ export default function NewExperiment() {
             <BubbleHuman text="Yes, it's worse when I eat out" />
             <NoteAi marginTop text="Analyzing diet ingredients" />
             <BubbleAi text="Does it appear on other parts of your body?" />
-            <BubbleHuman text="Yes, it's can also be on my arm and lower legs." />
+            <BubbleHuman text="Yes, it can also be on my arm and lower legs." />
             <NoteAi text="Checking medical journal articles" />
             <BubbleAi text="Based on your previous tests, health data and diet ingredients, I suspect this is an autoimmune reaction to something you're eating" />
             <BubbleAi text="We can confirm this by doing some elimination diet experiments" />
